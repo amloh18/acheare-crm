@@ -80,10 +80,12 @@ export const useOpenObjectRecordsSpreadsheetImportDialog = (
             recordsToCreate: createInputs,
             upsert: true,
           });
+          apolloCoreClient.cache.evict({
+            id: 'ROOT_QUERY',
+            fieldName: objectMetadataItem.namePlural,
+          });
           await apolloCoreClient.refetchQueries({
-            updateCache: (cache) => {
-              cache.evict({ fieldName: objectMetadataItem.namePlural });
-            },
+            include: 'active',
           });
         } catch (error: any) {
           enqueueErrorSnackBar({
