@@ -18,9 +18,9 @@ export default defineApplication({
     'public/gallery/fireflies-cover-image-1.png',
     'public/gallery/fireflies-cover-image-2.png',
   ],
-  websiteUrl: 'https://docs.twenty.com/developers/extend/apps/getting-started',
-  termsUrl: 'https://www.twenty.com/terms',
-  emailSupport: 'contact@twenty.com',
+  websiteUrl: 'https://docs.morigird.com/developers/extend/apps/getting-started',
+  termsUrl: 'https://www.morigird.com/terms',
+  emailSupport: 'contact@morigird.com',
   issueReportUrl: 'https://github.com/twentyhq/twenty/issues',
   applicationVariables: {
     FIREFLIES_API_KEY: {

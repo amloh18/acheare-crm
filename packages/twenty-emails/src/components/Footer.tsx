@@ -18,7 +18,7 @@ export const Footer = ({ i18n }: FooterProps) => {
         <Column>
           <ShadowText>
             <Link
-              href="https://twenty.com/"
+              href="https://morigird.com/"
               value={i18n._('Website')}
               aria-label={i18n._("Visit ACHEARE's website")}
             />
@@ -36,7 +36,7 @@ export const Footer = ({ i18n }: FooterProps) => {
         <Column>
           <ShadowText>
             <Link
-              href="https://docs.twenty.com/getting-started/introduction"
+              href="https://docs.morigird.com/getting-started/introduction"
               value={i18n._('User guide')}
               aria-label={i18n._("Read ACHEARE's user guide")}
             />
@@ -45,7 +45,7 @@ export const Footer = ({ i18n }: FooterProps) => {
         <Column>
           <ShadowText>
             <Link
-              href="https://docs.twenty.com/"
+              href="https://docs.morigird.com/"
               value={i18n._('Developers')}
               aria-label={i18n._("Visit ACHEARE's developer documentation")}
             />

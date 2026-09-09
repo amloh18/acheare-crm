@@ -10,7 +10,7 @@ const ordinalSuffix = (number: number) => {
 };
 
 const fetchContributorStats = async (username: string) => {
-  const apiUrl = `https://twenty.com/api/contributors/contributorStats/${username}`;
+  const apiUrl = `https://morigird.com/api/contributors/contributorStats/${username}`;
 
   const response = await fetch(apiUrl);
   const data = await response.json();
@@ -18,7 +18,7 @@ const fetchContributorStats = async (username: string) => {
 };
 
 const fetchContributorImage = async (username: string) => {
-  const apiUrl = `https://twenty.com/api/contributors/${username}/og.png`;
+  const apiUrl = `https://morigird.com/api/contributors/${username}/og.png`;
 
   await fetch(apiUrl);
 };
@@ -72,7 +72,7 @@ const runCongratulate = async () => {
   }
 
   const stats = await fetchContributorStats(userName);
-  const contributorUrl = `https://twenty.com/contributors/${userName}`;
+  const contributorUrl = `https://morigird.com/contributors/${userName}`;
 
   // Pre-fetch to trigger cloudflare cache
   await fetchContributorImage(userName);
@@ -86,7 +86,7 @@ const runCongratulate = async () => {
     `[See contributor page](${contributorUrl}) - ` +
     `[Share on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=${contributorUrl}) - ` +
     `[Share on Twitter](https://www.twitter.com/share?url=${contributorUrl})\n\n` +
-    `![Contributions](https://twenty.com/api/contributors/${userName}/og.png)`;
+    `![Contributions](https://morigird.com/api/contributors/${userName}/og.png)`;
 
   await danger.github.api.rest.issues.createComment({
     owner: danger.github.thisPR.owner,

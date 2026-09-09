@@ -59,11 +59,11 @@ export function TermsDocument() {
       </p>
       <ul>
         <li>
-          our websites at twenty.com and its subdomains (the
+          our websites at morigird.com and its subdomains (the
           &ldquo;Site&rdquo;);
         </li>
         <li>
-          our hosted CRM product, available at app.twenty.com, including its
+          our hosted CRM product, available at app.morigird.com, including its
           applications and APIs (the &ldquo;Cloud Service&rdquo;); and
         </li>
         <li>
@@ -87,7 +87,7 @@ export function TermsDocument() {
         &ldquo;you&rdquo; refers to it. If you do not agree with these Terms, do
         not use the Service; if you think something in them is wrong or unfair,
         we genuinely want to hear about it at{' '}
-        <a href="mailto:contact@twenty.com">contact@twenty.com</a>.
+        <a href="mailto:contact@morigird.com">contact@morigird.com</a>.
       </p>
 
       <h2>2. Open source and self-hosting</h2>
@@ -139,7 +139,7 @@ export function TermsDocument() {
       <p>
         You agree to provide accurate account information and keep it up to
         date, to keep your credentials confidential, and to notify us promptly
-        at <a href="mailto:contact@twenty.com">contact@twenty.com</a> if you
+        at <a href="mailto:contact@morigird.com">contact@morigird.com</a> if you
         suspect unauthorized use of your account. You are responsible for
         activity that occurs under your account.
       </p>
@@ -227,7 +227,7 @@ export function TermsDocument() {
         and email you a warning before deleting it. During that period you can
         restore full access, including export, by reactivating your
         subscription, or write to{' '}
-        <a href="mailto:contact@twenty.com">contact@twenty.com</a> and we will
+        <a href="mailto:contact@morigird.com">contact@morigird.com</a> and we will
         provide you with an export. After that period, we delete your Customer
         Data as described in our Privacy Policy.
       </p>
@@ -239,15 +239,15 @@ export function TermsDocument() {
         such as the GDPR apply to Customer Data, we process it as your processor
         under our Data Processing Agreement, which you can review and sign in
         your workspace settings, at
-        your-workspace.twenty.com/settings/legal/dpa. For any privacy question,
-        contact <a href="mailto:privacy@twenty.com">privacy@twenty.com</a>.
+        your-workspace.morigird.com/settings/legal/dpa. For any privacy question,
+        contact <a href="mailto:privacy@morigird.com">privacy@morigird.com</a>.
       </p>
       <p>
         We protect the Service with technical and organizational measures
         including encryption in transit and at rest, access controls, and
         monitoring. Details about our security practices and the list of
         subprocessors we use are available in our{' '}
-        <ExternalLink href="https://trust.twenty.com/">
+        <ExternalLink href="https://trust.morigird.com/">
           Trust Center
         </ExternalLink>
         . If a breach of security affects your Customer Data, we will notify you
@@ -438,7 +438,7 @@ export function TermsDocument() {
         We may identify you or your organization as a Twenty customer and
         display your name and logo alongside other customers on our website and
         in our marketing materials. If you would rather not appear there, tell
-        us at <a href="mailto:contact@twenty.com">contact@twenty.com</a> and we
+        us at <a href="mailto:contact@morigird.com">contact@morigird.com</a> and we
         will remove you. We will ask for your consent before publishing anything
         more substantial about you, such as a case study or a quote.
       </p>
@@ -553,7 +553,7 @@ export function TermsDocument() {
         These Terms are governed by the laws of the State of Delaware, United
         States, without regard to its conflict of law rules. Before starting any
         formal proceeding, you agree to first raise the issue with us at{' '}
-        <a href="mailto:contact@twenty.com">contact@twenty.com</a> and give us
+        <a href="mailto:contact@morigird.com">contact@morigird.com</a> and give us
         30 days to try to resolve it with you in good faith.
       </p>
       <p>
@@ -611,7 +611,7 @@ export function TermsDocument() {
         We will send notices to your account email address or through the
         Service, and you agree to receive them electronically. You can send
         notices to us at{' '}
-        <a href="mailto:contact@twenty.com">contact@twenty.com</a>.
+        <a href="mailto:contact@morigird.com">contact@morigird.com</a>.
       </p>
       <p>
         Neither party is liable for delay or failure caused by events beyond its
@@ -630,9 +630,9 @@ export function TermsDocument() {
       <h2>22. Contact us</h2>
       <p>
         Questions, concerns, or feedback about these Terms are welcome at{' '}
-        <a href="mailto:contact@twenty.com">contact@twenty.com</a>. For privacy
+        <a href="mailto:contact@morigird.com">contact@morigird.com</a>. For privacy
         matters, contact{' '}
-        <a href="mailto:privacy@twenty.com">privacy@twenty.com</a>.
+        <a href="mailto:privacy@morigird.com">privacy@morigird.com</a>.
       </p>
     </>
   );

@@ -153,11 +153,11 @@ export const PLANS_DATA: Record<PlansTierId, PlansTier> = {
     },
     cta: {
       cloud: {
-        href: 'https://app.twenty.com/welcome',
+        href: 'https://app.morigird.com/welcome',
         label: msg`Start for free`,
       },
       selfHost: {
-        href: 'https://app.twenty.com/welcome',
+        href: 'https://app.morigird.com/welcome',
         label: msg`Start for free`,
       },
     },
@@ -192,11 +192,11 @@ export const PLANS_DATA: Record<PlansTierId, PlansTier> = {
     },
     cta: {
       cloud: {
-        href: 'https://app.twenty.com/welcome',
+        href: 'https://app.morigird.com/welcome',
         label: msg`Start for free`,
       },
       selfHost: {
-        href: 'https://app.twenty.com/welcome',
+        href: 'https://app.morigird.com/welcome',
         label: msg`Start for free`,
       },
     },

@@ -22,7 +22,7 @@ export default {
       label: 'Api Key',
       type: 'string',
       helpText:
-        'Create an API key in [your twenty workspace](https://app.twenty.com/settings/apis)',
+        'Create an API key in [your ACHEARE workspace](https://app.morigird.com/settings/apis)',
     },
     {
       computed: false,

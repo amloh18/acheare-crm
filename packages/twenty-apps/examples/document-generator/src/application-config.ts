@@ -22,8 +22,8 @@ export default defineApplication({
   author: 'Twenty',
   category: 'Productivity',
   websiteUrl:
-    'https://docs.twenty.com/developers/extend/apps/tutorials/document-generator/overview',
-  termsUrl: 'https://www.twenty.com/terms',
-  emailSupport: 'contact@twenty.com',
+    'https://docs.morigird.com/developers/extend/apps/tutorials/document-generator/overview',
+  termsUrl: 'https://www.morigird.com/terms',
+  emailSupport: 'contact@morigird.com',
   issueReportUrl: 'https://github.com/twentyhq/twenty/issues',
 });

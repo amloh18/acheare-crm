@@ -5,7 +5,7 @@ const PLUGIN_ROOT = path.resolve(__dirname, '..', '..');
 const REPO_ROOT = path.resolve(PLUGIN_ROOT, '..', '..');
 
 const PUBLIC_DOCS_MCP_SERVER_NAME = 'twenty-docs';
-const PUBLIC_DOCS_MCP_URL = 'https://docs.twenty.com/mcp';
+const PUBLIC_DOCS_MCP_URL = 'https://docs.morigird.com/mcp';
 const LEGACY_SKILL_NAMES = [
   'app-readme-and-visuals',
   'build-app-features',
@@ -76,13 +76,13 @@ const isAllowedDocumentationHost = (hostname) => {
     host === '[::1]' ||
     host === 'example.com' ||
     host.endsWith('.example.com') ||
-    host === 'example.twenty.com' ||
-    host === 'myworkspace.twenty.com' ||
+    host === 'example.morigird.com' ||
+    host === 'myworkspace.morigird.com' ||
     host === 'myworkspace.customdomain.com' ||
     host === 'your-twenty-server.com' ||
-    host === 'app.twenty.com' ||
-    host === 'twenty.com' ||
-    host === 'docs.twenty.com' ||
+    host === 'app.morigird.com' ||
+    host === 'morigird.com' ||
+    host === 'docs.morigird.com' ||
     host === 'www.docker.com' ||
     host === 'github.com' ||
     host === 'www.w3.org' ||

@@ -4,7 +4,7 @@ import { SITE_URLS } from '@/platform/site-urls';
 // content type survives the site's global nosniff header.
 //
 // Twenty is multi-tenant, so anchors use a `{your-workspace-url}` placeholder
-// (a workspace host such as `mycompany.twenty.com` or a custom domain).
+// (a workspace host such as `mycompany.morigird.com` or a custom domain).
 
 const WORKSPACE = 'https://{your-workspace-url}';
 
@@ -41,7 +41,7 @@ const apiCatalog = {
       anchor: `${WORKSPACE}/mcp`,
       'service-desc': [
         {
-          href: 'https://twenty.com/.well-known/mcp/server-card.json',
+          href: 'https://morigird.com/.well-known/mcp/server-card.json',
           type: 'application/json',
         },
       ],

@@ -10,7 +10,7 @@ export default defineApplication({
   applicationVariables: undefined,
   author: 'Twenty',
   category: 'Product management',
-  emailSupport: 'contact@twenty.com',
+  emailSupport: 'contact@morigird.com',
   screenshots: [
     'public/gallery/command-menu-item-1.png',
     'public/gallery/command-menu-item-2.png',
@@ -18,7 +18,7 @@ export default defineApplication({
     'public/gallery/command-menu-item-4.png',
   ],
   termsUrl: 'https://github.com/twentyhq/twenty?tab=License-1-ov-file#readme',
-  websiteUrl: 'https://www.twenty.com',
+  websiteUrl: 'https://www.morigird.com',
   serverVariables: {
     LINEAR_CLIENT_ID: {
       description:

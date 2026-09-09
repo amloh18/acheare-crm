@@ -13,7 +13,7 @@ import {
   MAIN_PAGE_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER,
 } from 'src/constants/universal-identifiers';
 
-const DOCS_BASE_URL = 'https://docs.twenty.com/developers/extend/apps';
+const DOCS_BASE_URL = 'https://docs.morigird.com/developers/extend/apps';
 
 const CATEGORIES = [
   {

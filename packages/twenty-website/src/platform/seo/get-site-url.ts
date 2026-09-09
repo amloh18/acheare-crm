@@ -1,4 +1,4 @@
-const DEFAULT_SITE_URL = 'https://twenty.com';
+const DEFAULT_SITE_URL = 'https://morigird.com';
 
 export const getSiteUrl = (): string => {
   const configured = process.env.NEXT_PUBLIC_WEBSITE_URL;

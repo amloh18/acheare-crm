@@ -48,18 +48,9 @@ export class SubdomainManagerService {
   }
 
   async getWorkspaceCreationDefaults(
-    email?: string,
+    _email?: string,
   ): Promise<WorkspaceCreationDefaultsDTO> {
-    const subdomainBase = getSubdomainFromEmail(email);
-
-    if (!isDefined(subdomainBase)) {
-      return { displayName: '', subdomain: '' };
-    }
-
-    return {
-      displayName: capitalize(subdomainBase),
-      subdomain: await this.findAvailableSubdomain(subdomainBase),
-    };
+    return { displayName: '', subdomain: '' };
   }
 
   async findAvailableSubdomain(desired: string): Promise<string> {

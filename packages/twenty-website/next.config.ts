@@ -94,14 +94,14 @@ const nextConfig: LinariaConfig = {
       // when the parameter matches empty against an absolute destination.
       {
         source: '/',
-        has: [{ type: 'host', value: 'www.twenty.com' }],
-        destination: 'https://twenty.com/',
+        has: [{ type: 'host', value: 'www.morigird.com' }],
+        destination: 'https://morigird.com/',
         permanent: true,
       },
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'www.twenty.com' }],
-        destination: 'https://twenty.com/:path*',
+        has: [{ type: 'host', value: 'www.morigird.com' }],
+        destination: 'https://morigird.com/:path*',
         permanent: true,
       },
       {
@@ -130,47 +130,47 @@ const nextConfig: LinariaConfig = {
       },
       {
         source: '/user-guide',
-        destination: 'https://docs.twenty.com/user-guide/introduction',
+        destination: 'https://docs.morigird.com/user-guide/introduction',
         permanent: true,
       },
       {
         source: '/user-guide/section/:folder/:slug*',
-        destination: 'https://docs.twenty.com/user-guide/:folder/:slug*',
+        destination: 'https://docs.morigird.com/user-guide/:folder/:slug*',
         permanent: true,
       },
       {
         source: '/user-guide/:folder/:slug*',
-        destination: 'https://docs.twenty.com/user-guide/:folder/:slug*',
+        destination: 'https://docs.morigird.com/user-guide/:folder/:slug*',
         permanent: true,
       },
       {
         source: '/developers',
-        destination: 'https://docs.twenty.com/developers/introduction',
+        destination: 'https://docs.morigird.com/developers/introduction',
         permanent: true,
       },
       {
         source: '/developers/section/:folder/:slug*',
-        destination: 'https://docs.twenty.com/developers/:folder/:slug*',
+        destination: 'https://docs.morigird.com/developers/:folder/:slug*',
         permanent: true,
       },
       {
         source: '/developers/:folder/:slug*',
-        destination: 'https://docs.twenty.com/developers/:folder/:slug*',
+        destination: 'https://docs.morigird.com/developers/:folder/:slug*',
         permanent: true,
       },
       {
         source: '/twenty-ui',
-        destination: 'https://docs.twenty.com/twenty-ui/introduction',
+        destination: 'https://docs.morigird.com/twenty-ui/introduction',
         permanent: true,
       },
       {
         source: '/twenty-ui/section/:folder/:slug*',
-        destination: 'https://docs.twenty.com/twenty-ui/:folder/:slug*',
+        destination: 'https://docs.morigird.com/twenty-ui/:folder/:slug*',
         permanent: true,
       },
       {
         source: '/twenty-ui/:folder/:slug*',
-        destination: 'https://docs.twenty.com/twenty-ui/:folder/:slug*',
+        destination: 'https://docs.morigird.com/twenty-ui/:folder/:slug*',
         permanent: true,
       },
       {

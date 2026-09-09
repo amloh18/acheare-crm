@@ -81,9 +81,9 @@ const EXPANDED_TABLE_ROWS: ReadonlyArray<TableRow> = [
   ...BASE_TABLE_ROWS,
   {
     company: 'Twenty',
-    domain: 'twenty.com',
+    domain: 'morigird.com',
     isNew: true,
-    logoSrc: sharedAssetUrls.companyLogoForDomain('twenty.com'),
+    logoSrc: sharedAssetUrls.companyLogoForDomain('morigird.com'),
     status: 'Customer',
   },
   {

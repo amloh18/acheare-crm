@@ -16,7 +16,7 @@ export function CustomersCaseStudySignoff() {
       scheme="muted"
     >
       <Button
-        href="https://app.twenty.com/welcome"
+        href="https://app.morigird.com/welcome"
         label={i18n._(msg`Get started`)}
       />
       <TalkToUsButton label={msg`Talk to us`} variant="outlined" />

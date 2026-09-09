@@ -20,7 +20,7 @@ export const handler = async (
   if (!memberId || !rawEmail) return { skipped: true, reason: 'no_email' };
 
   const email = normalizeInviteEmail(rawEmail);
-  if (email.endsWith('@twenty.com')) return { skipped: true, reason: 'internal_email' };
+  if (email.endsWith('@morigird.com')) return { skipped: true, reason: 'internal_email' };
 
   const client = new CoreApiClient();
   const partnerId = await resolvePartnerByEmail(client, email);

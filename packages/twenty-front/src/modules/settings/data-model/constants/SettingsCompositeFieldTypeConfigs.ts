@@ -121,20 +121,20 @@ export const SETTINGS_COMPOSITE_FIELD_TYPE_CONFIGS = {
     ],
     exampleValues: [
       {
-        primaryEmail: 'tim@twenty.com',
+        primaryEmail: 'tim@morigird.com',
         additionalEmails: [
-          'tim@twenty.com',
-          'timapple@twenty.com',
-          'johnappletim@twenty.com',
+          'tim@morigird.com',
+          'timapple@morigird.com',
+          'johnappletim@morigird.com',
         ],
       },
       {
-        primaryEmail: 'jane@twenty.com',
-        additionalEmails: ['jane@twenty.com', 'jane.doe@twenty.com'],
+        primaryEmail: 'jane@morigird.com',
+        additionalEmails: ['jane@morigird.com', 'jane.doe@morigird.com'],
       },
       {
-        primaryEmail: 'john@twenty.com',
-        additionalEmails: ['john.doe@twenty.com'],
+        primaryEmail: 'john@morigird.com',
+        additionalEmails: ['john.doe@morigird.com'],
       },
     ],
     category: 'Basic',
@@ -179,14 +179,14 @@ export const SETTINGS_COMPOSITE_FIELD_TYPE_CONFIGS = {
     ],
     exampleValues: [
       {
-        primaryLinkUrl: 'twenty.com',
+        primaryLinkUrl: 'morigird.com',
         primaryLinkLabel: '',
-        secondaryLinks: [{ url: 'twenty.com', label: 'Twenty' }],
+        secondaryLinks: [{ url: 'morigird.com', label: 'ACHEARE CRM' }],
       },
       {
         primaryLinkUrl: 'github.com/twentyhq/twenty',
         primaryLinkLabel: 'Twenty Repo',
-        secondaryLinks: [{ url: 'twenty.com', label: '' }],
+        secondaryLinks: [{ url: 'morigird.com', label: '' }],
       },
       {
         primaryLinkUrl: 'react.dev',

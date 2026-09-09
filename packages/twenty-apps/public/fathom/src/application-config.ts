@@ -13,9 +13,9 @@ export default defineApplication({
   logo: 'public/logo.svg',
   author: 'Twenty',
   category: 'Productivity',
-  websiteUrl: 'https://docs.twenty.com/developers/extend/apps/getting-started',
-  termsUrl: 'https://www.twenty.com/terms',
-  emailSupport: 'contact@twenty.com',
+  websiteUrl: 'https://docs.morigird.com/developers/extend/apps/getting-started',
+  termsUrl: 'https://www.morigird.com/terms',
+  emailSupport: 'contact@morigird.com',
   issueReportUrl: 'https://github.com/twentyhq/twenty/issues',
   galleryImages: [
     'public/gallery/fathom-cover-image-1.png',

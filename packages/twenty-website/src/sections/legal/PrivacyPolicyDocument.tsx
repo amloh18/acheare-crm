@@ -23,8 +23,8 @@ export function PrivacyPolicyDocument() {
 
       <p>
         {'Twenty operates the website '}
-        <ExternalLink href="https://twenty.com">
-          https://twenty.com
+        <ExternalLink href="https://morigird.com">
+          https://morigird.com
         </ExternalLink>
         {' and related cloud services (collectively, the “'}
         <strong>Service</strong>
@@ -59,8 +59,8 @@ export function PrivacyPolicyDocument() {
           <p>
             <strong>Service</strong>
             {' – means the Twenty website ('}
-            <ExternalLink href="https://twenty.com">
-              https://twenty.com
+            <ExternalLink href="https://morigird.com">
+              https://morigird.com
             </ExternalLink>
             ) and any related services or applications operated by Twenty.com
             PBC.
@@ -340,7 +340,7 @@ export function PrivacyPolicyDocument() {
             {
               ' for error tracking. A comprehensive list of subprocessors is available in our '
             }
-            <ExternalLink href="https://trust.twenty.com/">
+            <ExternalLink href="https://trust.morigird.com/">
               Trust Center
             </ExternalLink>
             .
@@ -803,7 +803,7 @@ export function PrivacyPolicyDocument() {
         <li>
           <p>
             <strong>By Email:</strong>{' '}
-            <a href="mailto:privacy@twenty.com">privacy@twenty.com</a>
+            <a href="mailto:privacy@morigird.com">privacy@morigird.com</a>
           </p>
         </li>
       </ul>

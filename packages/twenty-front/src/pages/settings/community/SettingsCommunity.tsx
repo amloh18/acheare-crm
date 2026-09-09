@@ -3,9 +3,10 @@ import { SettingsDiscoveryHeroCard } from '@/settings/components/SettingsDiscove
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import { SettingsLabContent } from '@/settings/lab/components/SettingsLabContent';
 import { SettingsPageLayout } from '@/settings/components/layout/SettingsPageLayout';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { styled } from '@linaria/react';
 import { t } from '@lingui/core/macro';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import {
   IconBrandX,
   IconBriefcase,
@@ -27,9 +28,13 @@ import coverLight from '~/pages/settings/community/assets/cover-light.png';
 
 const SETTINGS_COMMUNITY_HERO_INSTANCE_ID_PREFIX = 'settings-community-hero';
 
-const StyledCardLink = styled.a`
+const StyledCardLink = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
   display: block;
   min-width: 0;
+  padding: 0;
   text-decoration: none;
 `;
 
@@ -48,30 +53,33 @@ const StyledFeaturesContent = styled.div`
   gap: ${themeCssVariables.spacing[4]};
 `;
 
-type SettingsCommunityLink = {
-  href: string;
-  Icon: IconComponent;
-  iconColor: string;
-  cardTitle: string;
-};
-
 export const SettingsCommunity = () => {
   const { theme } = useContext(ThemeContext);
   const { getIcon } = useIcons();
   const IconBrandDiscord = getIcon('IconBrandDiscord');
+  const { enqueueInfoSnackBar } = useSnackBar();
 
-  const socialLinks: SettingsCommunityLink[] = [
+  const showComingSoon = useCallback(() => {
+    enqueueInfoSnackBar({ message: t`Coming soon` });
+  }, [enqueueInfoSnackBar]);
+
+  const socialLinks: {
+    Icon: IconComponent;
+    iconColor: string;
+    cardTitle: string;
+    onClick: () => void;
+  }[] = [
     {
-      href: 'https://discord.com/invite/cx5n4Jzs57',
       Icon: IconBrandDiscord,
       iconColor: themeCssVariables.color.blue9,
       cardTitle: t`Join our Discord`,
+      onClick: showComingSoon,
     },
     {
-      href: 'https://x.com/twentycrm',
       Icon: IconBrandX,
       iconColor: themeCssVariables.font.color.primary,
       cardTitle: t`Follow us on X`,
+      onClick: showComingSoon,
     },
   ];
 
@@ -102,12 +110,10 @@ export const SettingsCommunity = () => {
             description={t`Stay up to date with product news and community updates.`}
           />
           <StyledCardsGrid>
-            {socialLinks.map(({ href, Icon, iconColor, cardTitle }) => (
+            {socialLinks.map(({ onClick, Icon, iconColor, cardTitle }) => (
               <StyledCardLink
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                key={cardTitle}
+                onClick={onClick}
               >
                 <SettingsCard
                   Icon={
@@ -130,7 +136,7 @@ export const SettingsCommunity = () => {
             description={t`Hire a partner to help you implement and customize ACHEARE.`}
           />
           <StyledCardLink
-            href="https://twenty.com/partners/list"
+            href="https://morigird.com/partners/list"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -154,7 +160,7 @@ export const SettingsCommunity = () => {
           <StyledFeaturesContent>
             <SettingsLabContent />
             <StyledCardLink
-              href="https://twenty.com/releases"
+              href="https://morigird.com/releases"
               target="_blank"
               rel="noopener noreferrer"
             >

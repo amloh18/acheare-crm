@@ -9,7 +9,7 @@ export const mockedPublicWorkspaceDataBySubdomain: GetPublicWorkspaceDataByDomai
     workspaceUrls: {
       __typename: 'WorkspaceUrls',
       customUrl: 'https://twenty-eng.com',
-      subdomainUrl: 'https://custom.twenty.com',
+      subdomainUrl: 'https://custom.morigird.com',
     },
     authProviders: {
       __typename: 'AuthProviders',

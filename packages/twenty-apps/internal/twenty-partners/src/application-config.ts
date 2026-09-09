@@ -26,7 +26,7 @@ export default defineApplication({
     PARTNER_APP_FRONTEND_URL: {
       universalIdentifier: '746e7bd8-8934-414e-95f5-cc266a624616',
       description:
-        'Workspace front-end base URL (e.g. https://partners.twenty.com), used to build the clickable Partner and Opportunity record links in Discord notifications. When empty, notifications are still sent but carry no links. Set per-workspace in Settings → Apps → Twenty Partners → Variables.',
+        'Workspace front-end base URL (e.g. https://partners.morigird.com), used to build the clickable Partner and Opportunity record links in Discord notifications. When empty, notifications are still sent but carry no links. Set per-workspace in Settings → Apps → Twenty Partners → Variables.',
       isSecret: false,
     },
   },

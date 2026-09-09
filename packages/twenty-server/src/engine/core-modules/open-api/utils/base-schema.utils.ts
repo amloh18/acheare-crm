@@ -128,7 +128,7 @@ curl -H 'Authorization: Bearer <token>' \\
       termsOfService:
         'https://github.com/twentyhq/twenty?tab=coc-ov-file#readme',
       contact: {
-        email: 'felix@twenty.com',
+        email: 'support@morigird.com',
       },
       license: {
         name: 'AGPL-3.0',
@@ -159,8 +159,8 @@ curl -H 'Authorization: Bearer <token>' \\
       },
     ],
     externalDocs: {
-      description: 'Find out more about **Twenty**',
-      url: 'https://twenty.com',
+      description: 'Find out more about **ACHEARE CRM**',
+      url: 'https://morigird.com',
     },
     paths: { [`/open-api/${schemaName}`]: computeOpenApiPath(serverUrl) },
   };

@@ -13,9 +13,9 @@ export default defineApplication({
   logoUrl: 'public/twenty-discord.svg',
   author: 'Twenty',
   category: 'Communication',
-  websiteUrl: 'https://docs.twenty.com/developers/extend/apps/getting-started',
-  termsUrl: 'https://www.twenty.com/terms',
-  emailSupport: 'contact@twenty.com',
+  websiteUrl: 'https://docs.morigird.com/developers/extend/apps/getting-started',
+  termsUrl: 'https://www.morigird.com/terms',
+  emailSupport: 'contact@morigird.com',
   issueReportUrl: 'https://github.com/twentyhq/twenty/issues',
   applicationVariables: {
     DISCORD_BOT_TOKEN: {

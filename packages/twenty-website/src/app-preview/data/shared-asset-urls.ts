@@ -43,6 +43,7 @@ const COMPANY_LOGOS_BY_DOMAIN: Record<string, string> = {
   // Exported from src/icons/twenty-logo.tsx (the data layer loads
   // brand images by URL; the component stays the vector's home).
   'twenty.com': '/images/shared/companies/logos/twenty.svg',
+  'morigird.com': '/images/shared/companies/logos/acheare.svg',
   'anthropic.com': '/images/shared/companies/logos/anthropic.webp',
   'figma.com': '/images/shared/companies/logos/figma.webp',
   'github.com': '/images/shared/companies/logos/github.webp',

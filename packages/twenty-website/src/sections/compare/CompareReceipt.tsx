@@ -298,7 +298,7 @@ export function CompareReceipt({
           <PerUserLine>{i18n._(receipt.twentyPerUser)}</PerUserLine>
           <CtaRow>
             <Button
-              href="https://app.twenty.com/welcome"
+              href="https://app.morigird.com/welcome"
               label={i18n._(msg`Start for free`)}
               variant="filled"
             />

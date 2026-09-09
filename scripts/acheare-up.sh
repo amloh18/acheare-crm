@@ -16,7 +16,7 @@ PG_BIN="/opt/homebrew/opt/postgresql@16/bin"
 PG_DATA="/opt/homebrew/var/postgresql@16"
 PG_LOG="/tmp/acheare-pg16.log"
 
-echo "== [1/4] PostgreSQL 16 =="
+echo "== [1/5] PostgreSQL 16 =="
 if "$PG_BIN/pg_isready" -q; then
   echo "   already running: $("$PG_BIN/pg_isready")"
 else
@@ -25,7 +25,7 @@ else
   "$PG_BIN/pg_isready"
 fi
 
-echo "== [2/4] Redis =="
+echo "== [2/5] Redis =="
 if redis-cli ping 2>/dev/null | grep -q PONG; then
   echo "   already running"
 else
@@ -34,7 +34,10 @@ else
   redis-cli ping
 fi
 
-echo "== [3/4] ACHEARE server (screen: acheare-server, port 3000) =="
+echo "== [3/5] Reset database (fresh onboarding) =="
+cd "$ROOT" && npx nx database:reset twenty-server 2>&1 | tail -5
+
+echo "== [4/5] ACHEARE server (screen: acheare-server, port 3000) =="
 if lsof -nP -iTCP:3000 -sTCP:LISTEN >/dev/null 2>&1; then
   echo "   already listening on 3000"
 else
@@ -42,7 +45,7 @@ else
   echo "   started"
 fi
 
-echo "== [4/4] ACHEARE front (screen: acheare-front, port 3001) =="
+echo "== [5/5] ACHEARE front (screen: acheare-front, port 3001) =="
 if lsof -nP -iTCP:3001 -sTCP:LISTEN >/dev/null 2>&1; then
   echo "   already listening on 3001"
 else

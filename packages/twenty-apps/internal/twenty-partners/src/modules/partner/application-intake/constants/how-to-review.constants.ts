@@ -8,4 +8,4 @@ export const HOW_TO_REVIEW_PAGE_WIDGET_ID =
 export const HOW_TO_REVIEW_NAV_ITEM_ID = '3306c356-d4f1-4582-80f0-b38e37b41dc4';
 
 export const WELCOME_EMAIL_WORKFLOW_URL =
-  'https://partners.twenty.com/object/workflow/6306ce62-8aa2-4edb-bb8e-033b6524ebef';
+  'https://partners.morigird.com/object/workflow/6306ce62-8aa2-4edb-bb8e-033b6524ebef';

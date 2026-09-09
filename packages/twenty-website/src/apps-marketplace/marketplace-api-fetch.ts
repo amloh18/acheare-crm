@@ -1,6 +1,6 @@
 const REVALIDATE_SECONDS = 300;
 
-const DEFAULT_MARKETPLACE_API_URL = 'https://api.twenty.com';
+const DEFAULT_MARKETPLACE_API_URL = 'https://api.morigird.com';
 
 export async function marketplaceGraphqlRequest<TData>(
   query: string,

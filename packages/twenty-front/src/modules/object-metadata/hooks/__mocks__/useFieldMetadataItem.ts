@@ -167,7 +167,7 @@ export const responseData = {
         customDomain: null,
         workspaceUrls: {
           customUrl: undefined,
-          subdomainUrl: 'https://test.twenty.com/',
+          subdomainUrl: 'https://test.morigird.com/',
         },
         featureFlags: [],
         metadataVersion: 1,

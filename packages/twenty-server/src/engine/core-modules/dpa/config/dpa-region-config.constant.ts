@@ -16,7 +16,7 @@ const DPA_COMMON_VALUES = {
     'a société par actions simplifiée under the laws of France',
   EU_AFFILIATE_ADDRESS: '9 Rue des Colonnes, 75002 Paris, France',
   GOVERNING_LAW: 'the State of Delaware, USA',
-  DPO_NAME_AND_CONTACT: 'Stéphanie Joly, privacy@twenty.com',
+  DPO_NAME_AND_CONTACT: 'Stéphanie Joly, privacy@morigird.com',
 };
 
 export const DPA_REGION_CONFIGS: Record<DpaRegion, DpaRegionConfig> = {

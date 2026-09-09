@@ -311,7 +311,7 @@ export const PLAN_TABLE_DATA: PlanTableDataType = {
     },
     {
       appliesTo: 'cloud',
-      featureLabel: msg`Subdomain (yourco.twenty.com)`,
+      featureLabel: msg`Subdomain (yourco.morigird.com)`,
       tiers: {
         organization: { kind: 'yes', label: msg`Yes` },
         pro: { kind: 'yes', label: msg`Yes` },

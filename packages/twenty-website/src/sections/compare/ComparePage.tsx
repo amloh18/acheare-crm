@@ -90,7 +90,7 @@ export function ComparePage({
           </HeadingPair>
           <CtaRow>
             <Button
-              href="https://app.twenty.com/welcome"
+              href="https://app.morigird.com/welcome"
               label={i18n._(msg`Start for free`)}
               variant="filled"
             />
@@ -124,7 +124,7 @@ export function ComparePage({
       <EngagementBand
         actions={
           <Button
-            href="https://app.twenty.com/welcome"
+            href="https://app.morigird.com/welcome"
             label={i18n._(msg`Get started`)}
             variant="filled"
           />

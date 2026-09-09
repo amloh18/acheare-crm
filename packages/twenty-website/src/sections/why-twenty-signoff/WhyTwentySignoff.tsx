@@ -14,7 +14,7 @@ export function WhyTwentySignoff() {
       scheme="dark"
     >
       <Button
-        href="https://app.twenty.com/welcome"
+        href="https://app.morigird.com/welcome"
         label={i18n._(msg`Get started`)}
       />
     </Signoff>

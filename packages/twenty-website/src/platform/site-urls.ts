@@ -15,16 +15,16 @@ export const SITE_URLS: Record<
   | 'x',
   string
 > = {
-  appWelcome: 'https://app.twenty.com/welcome',
+  appWelcome: 'https://app.morigird.com/welcome',
   calBooking: 'https://cal.com/forms/f7841033-0a20-4958-8c92-4e34ec128a81',
   discord: 'https://discord.gg/cx5n4Jzs57',
-  docsApi: 'https://docs.twenty.com/developers/extend/api',
-  docsDevelopers: 'https://docs.twenty.com/developers/introduction',
-  docsGettingStarted: 'https://docs.twenty.com/getting-started/introduction',
-  docsMcp: 'https://docs.twenty.com/user-guide/ai/capabilities/mcp',
-  docsUserGuide: 'https://docs.twenty.com/user-guide/introduction',
+  docsApi: 'https://docs.morigird.com/developers/extend/api',
+  docsDevelopers: 'https://docs.morigird.com/developers/introduction',
+  docsGettingStarted: 'https://docs.morigird.com/getting-started/introduction',
+  docsMcp: 'https://docs.morigird.com/user-guide/ai/capabilities/mcp',
+  docsUserGuide: 'https://docs.morigird.com/user-guide/introduction',
   github: 'https://github.com/twentyhq/twenty',
   linkedin: 'https://www.linkedin.com/company/twenty',
-  trustCenter: 'https://trust.twenty.com',
+  trustCenter: 'https://trust.morigird.com',
   x: 'https://x.com/twentycrm',
 };
