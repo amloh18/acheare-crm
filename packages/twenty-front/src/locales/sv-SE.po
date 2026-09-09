@@ -403,6 +403,11 @@ msgstr "{appDisplayName} vill göra följande:"
 msgid "{appName} would like to:"
 msgstr "{appName} vill göra följande:"
 
+#. js-lingui-id: wXviUj
+#: src/modules/settings/admin-panel/health-status/components/SettingsAdminJobStateBadge.tsx
+msgid "{attemptsMade, plural, one {{attemptsMade} attempt} other {{attemptsMade} attempts}}"
+msgstr ""
+
 #. js-lingui-id: y9covz
 #: src/modules/settings/admin-panel/utils/getWorkspacesUpgradeHealthText.ts
 #: src/pages/settings/admin-panel/SettingsAdminWorkspacesStatus.tsx
@@ -557,6 +562,11 @@ msgstr "{memberCount, plural, one {{memberCount} medlem} other {{memberCount} me
 msgid "{messagesLength} emails"
 msgstr "{messagesLength, plural, one {# e-postmeddelande} other {# e-postmeddelanden}}"
 
+#. js-lingui-id: Pfatg8
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{minutes, plural, one {# minute} other {# minutes}}"
+msgstr ""
+
 #. js-lingui-id: Koe99p
 #: src/modules/settings/data-model/object-details/components/SettingsObjectFieldItemTableRow.tsx
 #: src/modules/settings/data-model/object-details/components/SettingsObjectRelationItemTableRow.tsx
@@ -631,6 +641,11 @@ msgstr "{roleTargetName} kommer att tilldelas rollen \"{newRoleName}\"."
 msgid "{scopeCount} scopes"
 msgstr "{scopeCount} behörigheter"
 
+#. js-lingui-id: iL/HBr
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{seconds, plural, one {# second} other {# seconds}}"
+msgstr ""
+
 #. js-lingui-id: kvVMdH
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobsTable.tsx
 msgid "{selectedCount, plural, one {Delete {selectedCount} Job} other {Delete {selectedCount} Jobs}}"
@@ -650,6 +665,11 @@ msgstr "{selectedCount} källtyper"
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminJsonDataIndicatorHealthStatus.tsx
 msgid "{serviceLabel} service is unreachable"
 msgstr "Tjänsten {serviceLabel} kan inte nås"
+
+#. js-lingui-id: CQxE7h
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{spokenMinutes} {spokenSeconds}"
+msgstr ""
 
 #. js-lingui-id: 8vJ+2V
 #: src/modules/ai/components/ThinkingStepsDisplay.tsx
@@ -1086,6 +1106,11 @@ msgstr "Kontoradering"
 msgid "Accounts"
 msgstr "Konton"
 
+#. js-lingui-id: aMWfLO
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ACHEARE fields"
+msgstr ""
+
 #. js-lingui-id: BXMLsb
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
 msgid "Acme GmbH"
@@ -1212,6 +1237,12 @@ msgstr "Lägg till"
 #: src/modules/settings/data-model/fields/forms/select/components/AddSelectOptionMenuItem.tsx
 msgid "Add \"{trimmedName}\" to options"
 msgstr "Lägg till \"{trimmedName}\" i alternativ"
+
+#. js-lingui-id: AOKHWb
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add a {0}"
+msgstr ""
 
 #. js-lingui-id: 9CHcSG
 #: src/modules/object-record/record-index/components/RecordIndexEmptyState.tsx
@@ -1403,6 +1434,11 @@ msgstr "Lägg till information för gäster"
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Add email channel"
 msgstr "Lägg till e-postkanal"
+
+#. js-lingui-id: Va3xJe
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Add field"
+msgstr ""
 
 #. js-lingui-id: DpV70M
 #: src/modules/settings/data-model/object-details/components/tabs/ObjectFields.tsx
@@ -1703,6 +1739,12 @@ msgstr "Lägg till ditt kreditkort"
 #: src/modules/settings/billing/components/AddCreditCardModal.tsx
 msgid "Add your credit card below. Once added, your subscription will start automatically."
 msgstr "Lägg till ditt kreditkort nedan. När det har lagts till startar din prenumeration automatiskt."
+
+#. js-lingui-id: K2c8dN
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add your first {0}"
+msgstr ""
 
 #. js-lingui-id: m2qDV8
 #: src/modules/object-record/record-table/empty-state/utils/getEmptyStateTitle.ts
@@ -2801,7 +2843,6 @@ msgid "Ascending"
 msgstr "Stigande"
 
 #. js-lingui-id: xWEvuo
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/command-menu-item/engine-command/constants/EngineComponentKeyHeadlessComponentMap.tsx
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useActionRolePermissionFlagConfig.ts
 #: src/modules/side-panel/components/SidePanelAskAiInfo.tsx
@@ -3011,6 +3052,11 @@ msgstr "Autentisering"
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 msgid "Auth failed at"
 msgstr "Autentisering misslyckades klockan"
+
+#. js-lingui-id: sgXsd0
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Auth failure reason"
+msgstr ""
 
 #. js-lingui-id: P8fBlG
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
@@ -3300,10 +3346,10 @@ msgstr "Faktureringsintervall"
 msgid "Billing period"
 msgstr "Faktureringsperiod"
 
-#. js-lingui-id: xF/NXI
+#. js-lingui-id: ACP71c
 #: src/modules/settings/billing/hooks/useBillingPortalSession.ts
-msgid "Billing portal session error. Please retry or contact Twenty team"
-msgstr "Fel i sessionen för faktureringsportalen. Försök igen eller kontakta Twenty-teamet"
+msgid "Billing portal session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: 8kIU+G
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -3491,10 +3537,10 @@ msgstr "Knapp"
 msgid "by {author}"
 msgstr "av {author}"
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: +1c/HD
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
-msgid "By using Twenty, you agree to the"
-msgstr "Genom att använda Twenty godkänner du"
+msgid "By using ACHEARE, you agree to the"
+msgstr ""
 
 #. js-lingui-id: Yx41df
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
@@ -3937,16 +3983,6 @@ msgstr "Ändra till Pro Plan?"
 msgid "Change to Yearly?"
 msgstr "Byt till årligen?"
 
-#. js-lingui-id: LhVon3
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Change visibility?"
-msgstr "Ändra synlighet?"
-
-#. js-lingui-id: rnTfap
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Changing visibility requires reconnecting this OAuth connection. You will be redirected to authorize it again."
-msgstr "Om du ändrar synligheten måste du ansluta den här OAuth-anslutningen på nytt. Du kommer att omdirigeras för att godkänna den igen."
-
 #. js-lingui-id: lfFsZ4
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Channels"
@@ -3959,6 +3995,7 @@ msgid "Chart"
 msgstr "Diagram"
 
 #. js-lingui-id: rlwve5
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/AiChatThreadItemMenu.tsx
 msgid "Chat actions"
 msgstr "Chattåtgärder"
@@ -3969,6 +4006,7 @@ msgid "Chat conversation"
 msgstr "Chattkonversation"
 
 #. js-lingui-id: tDlhkF
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "Chat name"
 msgstr "Chattnamn"
@@ -4026,11 +4064,11 @@ msgstr "Kontrollera dina mejl"
 msgid "Check your inbox to verify your new email address."
 msgstr "Kontrollera din inkorg för att verifiera din nya e-postadress."
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: S0lXrz
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
-msgid "Checkout session error. Please retry or contact Twenty team"
-msgstr "Fel under betalningssession. Försök igen eller kontakta Twenty-teamet"
+msgid "Checkout session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: SviKkE
 #: src/localization/hooks/useLocaleOptions.ts
@@ -4371,11 +4409,6 @@ msgstr "Fäll ihop mapp"
 #: src/modules/navigation/hooks/useNavigationDrawerTogglePresentation.ts
 msgid "Collapse sidebar"
 msgstr "Fäll ihop sidofältet"
-
-#. js-lingui-id: OQTRMK
-#: src/modules/ai/components/AiChatCollapseButton.tsx
-msgid "Collapse to side panel"
-msgstr "Fäll in i sidopanelen"
 
 #. js-lingui-id: jZlrte
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -5060,6 +5093,11 @@ msgstr "Kopierad till urklipp"
 msgid "Copy"
 msgstr "Kopiera"
 
+#. js-lingui-id: 6gAr5+
+#: src/modules/page-layout/widgets/call-recording-transcript/components/WidgetActionCallRecordingTranscript.tsx
+msgid "Copy audio download link"
+msgstr ""
+
 #. js-lingui-id: NmPNJJ
 #: src/modules/ai/components/CodeExecutionDisplay.tsx
 #: src/modules/ai/components/MarkdownCodeBlock.tsx
@@ -5390,6 +5428,12 @@ msgstr "skapa"
 #: src/modules/views/view-picker/components/ViewPickerEditButton.tsx
 msgid "Create"
 msgstr "Skapa"
+
+#. js-lingui-id: QMLXwt
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Create a {0} to automate your work."
+msgstr ""
 
 #. js-lingui-id: fQFALn
 #: src/modules/ai/components/suggested-prompts/default-suggested-prompts.ts
@@ -8257,10 +8301,10 @@ msgstr "Fel vid avbrytning av intervallbyte."
 msgid "Error while cancelling plan switching."
 msgstr "Fel vid avbrytning av planbyte."
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: 8EzH+4
 #: src/modules/settings/billing/hooks/useEndSubscriptionTrialPeriod.ts
-msgid "Error while ending trial period. Please contact Twenty team."
-msgstr "Fel vid avslutning av provperioden. Vänligen kontakta Twenty-teamet."
+msgid "Error while ending trial period. Please contact ACHEARE team."
+msgstr ""
 
 #. js-lingui-id: 5g78zo
 #: src/pages/settings/members/SettingsWorkspaceMember.tsx
@@ -8686,6 +8730,11 @@ msgstr "Det gick inte att skapa posten"
 msgid "Failed to create unsubscribe topic."
 msgstr "Det gick inte att skapa avregistreringsämne."
 
+#. js-lingui-id: atCmiF
+#: src/modules/object-core/workflows/hooks/useCreateCoreWorkflow.ts
+msgid "Failed to create workflow"
+msgstr ""
+
 #. js-lingui-id: AXveCw
 #: src/pages/settings/communications/SettingsWorkspaceCommunicationGroupChannelDetail.tsx
 msgid "Failed to delete email channel."
@@ -9093,6 +9142,11 @@ msgstr "fält"
 msgid "Field"
 msgstr "Fält"
 
+#. js-lingui-id: 0Ractl
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field added to search"
+msgstr ""
+
 #. js-lingui-id: LX8Pu1
 #: src/pages/settings/data-model/SettingsObjectFieldEdit.tsx
 msgid "Field deleted"
@@ -9112,6 +9166,11 @@ msgstr "Fält på destinationen"
 #: src/modules/metadata-error-handler/hooks/useMetadataErrorHandler.ts
 msgid "field permission"
 msgstr "fältbehörighet"
+
+#. js-lingui-id: YZK9mj
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field removed from search"
+msgstr ""
 
 #. js-lingui-id: lcNTiF
 #: src/modules/side-panel/hooks/useOpenWidgetSettingsInSidePanel.ts
@@ -10125,10 +10184,10 @@ msgstr "Dölj etiketten"
 msgid "Hide system indexes"
 msgstr "Dölj systemindex"
 
-#. js-lingui-id: 1ETc0T
+#. js-lingui-id: u+LEOY
 #: src/pages/settings/community/SettingsCommunity.tsx
-msgid "Hire a partner to help you implement and customize Twenty."
-msgstr "Anlita en partner som hjälper dig att implementera och anpassa Twenty."
+msgid "Hire a partner to help you implement and customize ACHEARE."
+msgstr ""
 
 #. js-lingui-id: i0qMbr
 #: src/modules/navigation/hooks/useMobileNavigationBarItems.ts
@@ -11248,7 +11307,6 @@ msgstr "Hoppa till aktuell"
 #. js-lingui-id: UpNpMK
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Just for me"
 msgstr "Endast för mig"
 
@@ -12120,11 +12178,6 @@ msgstr "Underhållsläge"
 msgid "Make HTTP requests to external APIs"
 msgstr ""
 
-#. js-lingui-id: icpEdc
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Make private"
-msgstr "Gör privat"
-
 #. js-lingui-id: wckWOP
 #: src/modules/settings/billing/components/internal/ResourceCreditPriceSelector.tsx
 #: src/modules/side-panel/pages/page-layout/components/RegularTabSettingsContent.tsx
@@ -12984,6 +13037,7 @@ msgstr "Ny"
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/side-panel/hooks/useOpenRecordInSidePanel.ts
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "New {0}"
 msgstr "Ny {0}"
 
@@ -13028,6 +13082,9 @@ msgid "New calendar event"
 msgstr "Ny kalenderhändelse"
 
 #. js-lingui-id: hIQkLb
+#: src/modules/ai/components/AiChatPageHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "New chat"
 msgstr "Ny chatt"
@@ -13038,7 +13095,6 @@ msgid "New Company"
 msgstr "Nytt företag"
 
 #. js-lingui-id: +HY5kX
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/side-panel/components/SidePanelTopBarRightCornerIcon.tsx
 msgid "New conversation"
 msgstr "Ny konversation"
@@ -13248,6 +13304,18 @@ msgstr "Nionde"
 #: src/pages/settings/applications/tabs/SettingsApplicationFrontComponentSettingsTab.tsx
 msgid "No"
 msgstr "Nej"
+
+#. js-lingui-id: AZa0Mm
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} found"
+msgstr ""
+
+#. js-lingui-id: uZ8YLp
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} match your filters. Try removing some of them."
+msgstr ""
 
 #. js-lingui-id: 7YGRoE
 #: src/modules/ui/input/components/SelectInput.tsx
@@ -13886,9 +13954,9 @@ msgstr "Inget valfält"
 msgid "No sender"
 msgstr "Ingen avsändare"
 
-#. js-lingui-id: 5UEIxk
+#. js-lingui-id: dRi20n
 #: src/modules/activities/emails/components/CampaignDetailsFields.tsx
-msgid "No sending address is available. Connect a verified sending domain in Settings before this campaign can go out."
+msgid "No sending address. Connect a verified domain in Settings."
 msgstr ""
 
 #. js-lingui-id: JkPTT8
@@ -14527,10 +14595,10 @@ msgstr "Introduktionsbelöning"
 msgid "One or more filters reference deactivated or deleted fields and will be automatically removed on save."
 msgstr "Ett eller flera filter hänvisar till inaktiverade eller raderade fält och kommer automatiskt att tas bort vid sparande."
 
-#. js-lingui-id: 2l4SGU
+#. js-lingui-id: OvvEsG
 #: src/pages/settings/enterprise/SettingsEnterprise.tsx
-msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install Twenty on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
-msgstr "Ett abonnemang ger en enterprise-nyckel som driver en produktionsinstans och en eventuell staging- eller testinstans. För att köra en staging- eller testmiljö installerar du Twenty på en andra server, aktiverar den med samma enterprise-nyckel och registrerar sedan den servern som en utvecklingsinstans. Utvecklingsinstanser låser upp enterprise-funktioner utan extra fakturering och räknas inte mot dina produktionsplatser."
+msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install ACHEARE on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
+msgstr ""
 
 #. js-lingui-id: oFTo3P
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
@@ -14998,10 +15066,10 @@ msgstr "Sidlayouter"
 msgid "Page name"
 msgstr "Sidnamn"
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: mkndso
 #: src/pages/not-found/NotFound.tsx
-msgid "Page Not Found | Twenty"
-msgstr "Sidan kunde inte hittas | Twenty"
+msgid "Page Not Found | ACHEARE"
+msgstr ""
 
 #. js-lingui-id: oIhFvf
 #: src/modules/side-panel/pages/email-block-settings/components/EmailPageStyleSection.tsx
@@ -15093,6 +15161,7 @@ msgid "Path"
 msgstr "Sökväg"
 
 #. js-lingui-id: IgrLD/
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
 msgid "Pause"
 msgstr "Pausa"
@@ -15362,7 +15431,13 @@ msgstr "Planerat till {formattedStartDate}"
 msgid "Plans"
 msgstr "Planer"
 
+#. js-lingui-id: T91vKp
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Play"
+msgstr ""
+
 #. js-lingui-id: XdRQm7
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 msgid "Playback failed"
 msgstr "Uppspelningen misslyckades"
@@ -15979,10 +16054,10 @@ msgstr "Rekommenderade modeller"
 msgid "Reconnect"
 msgstr "Återanslut"
 
-#. js-lingui-id: NSOx3j
+#. js-lingui-id: PrI9jr
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Reconnect and change visibility"
-msgstr "Återanslut och ändra synlighet"
+msgid "Reconnect and share"
+msgstr ""
 
 #. js-lingui-id: XsIxsL
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
@@ -16657,6 +16732,7 @@ msgstr "Återuppta"
 
 #. js-lingui-id: 6gRgw8
 #: src/modules/ai/components/AiChatErrorMessage.tsx
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobRowDropdownMenu.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminRetryJobsConfirmationModal.tsx
@@ -17114,11 +17190,6 @@ msgstr "Sök en typ"
 msgid "Search a view..."
 msgstr "Sök efter en vy..."
 
-#. js-lingui-id: N7Z3jc
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Search across indexed fields..."
-msgstr "Sök i indexerade fält..."
-
 #. js-lingui-id: +7s4fw
 #: src/modules/settings/roles/role-assignment/components/SettingsRoleAssignmentEntityPickerDropdown.tsx
 msgid "Search agents"
@@ -17236,6 +17307,11 @@ msgstr "sök fältmetadata"
 #: src/modules/views/components/ViewBarFilterDropdownFieldSelectMenu.tsx
 msgid "Search fields"
 msgstr "Sök fält"
+
+#. js-lingui-id: IQAn53
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Search fields..."
+msgstr ""
 
 #. js-lingui-id: rXrG+N
 #: src/modules/settings/accounts/components/message-folders/SettingsAccountsMessageFoldersCard.tsx
@@ -17492,6 +17568,11 @@ msgstr "Visa din datastruktur som ett interaktivt diagram"
 #: src/pages/settings/applications/components/SettingsApplicationTableRow.tsx
 msgid "Seeded"
 msgstr "Fördefinierad"
+
+#. js-lingui-id: AhNP40
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Seek"
+msgstr ""
 
 #. js-lingui-id: 5iyrla
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingTranscriptEntryListItem.tsx
@@ -18032,6 +18113,11 @@ msgstr "Dela denna länk för att bjuda in användare till din arbetsyta"
 msgid "Share with workspace"
 msgstr "Dela med arbetsytan"
 
+#. js-lingui-id: lX0SIS
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Share with workspace?"
+msgstr ""
+
 #. js-lingui-id: gaJRur
 #: src/pages/settings/applications/tabs/SettingsApplicationRegistrationDistributionTab.tsx
 msgid "Share your app to other workspaces without pushing it on the marketplace"
@@ -18046,6 +18132,11 @@ msgstr "Delad e-post"
 #: src/pages/settings/applications/components/SettingsApplicationRegistrationShareLinkButtons.tsx
 msgid "Sharing link copied to clipboard"
 msgstr "Delningslänk kopierad till urklipp"
+
+#. js-lingui-id: Xzq3Vx
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Sharing this connection with the workspace requires reconnecting it. You will be redirected to authorize it again."
+msgstr ""
 
 #. js-lingui-id: RRXpo1
 #: src/modules/settings/data-model/fields/forms/number/constants/NumberDataModelSelectOptions.ts
@@ -18376,6 +18467,7 @@ msgstr "Viss loggdata togs bort för att rymmas inom storleksgränsen ({0} poste
 
 #. js-lingui-id: nwtY4N
 #: src/pages/auth/Authorize.tsx
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "Something went wrong"
 msgstr "Något gick fel"
 
@@ -18835,13 +18927,13 @@ msgstr "Prenumeration"
 msgid "Subscription activated."
 msgstr "Prenumeration aktiverad."
 
-#. js-lingui-id: 0okvpx
+#. js-lingui-id: 73pt+u
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
-msgid "Subscription error. Please retry or contact Twenty team"
-msgstr "Prenumerationsfel. Försök igen eller kontakta Twenty-teamet"
+msgid "Subscription error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: FooJUj
 #. placeholder {0}: getTargetPlanLabel(targetPlanKey)
@@ -20436,11 +20528,6 @@ msgstr ""
 msgid "Turquoise"
 msgstr "Turkos"
 
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "Twenty fields"
-msgstr "Twenty-fält"
-
 #. js-lingui-id: YIjS4q
 #: src/modules/ai/components/SettingsAgentModelCapabilities.tsx
 msgid "Twitter/X Search"
@@ -21884,6 +21971,12 @@ msgstr "Titta på medlemsdemo"
 msgid "We are currently encountering issues with this app, its behavior may be degraded while we work on a fix."
 msgstr "Vi upplever för närvarande problem med den här appen; den kan fungera sämre medan vi arbetar på en lösning."
 
+#. js-lingui-id: Pk5zT3
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "We could not load your {0}. Please try again later."
+msgstr ""
+
 #. js-lingui-id: icGmU/
 #: src/pages/settings/applications/utils/getClaimErrorContent.ts
 msgid "We could not reach the package registry to verify the package provenance. Please try again in a few minutes."
@@ -22032,15 +22125,10 @@ msgstr "Vecka"
 msgid "weeks"
 msgstr ""
 
-#. js-lingui-id: WKHqM+
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Weight"
-msgstr "Vikt"
-
-#. js-lingui-id: nTuObL
+#. js-lingui-id: 17myHM
 #: src/pages/auth/SignInUp.tsx
-msgid "Welcome to Twenty"
-msgstr "Välkommen till Twenty"
+msgid "Welcome to ACHEARE"
+msgstr ""
 
 #. js-lingui-id: t8ZvkC
 #: src/modules/onboarding/constants/WelcomeTitleMessage.ts
@@ -22361,7 +22449,6 @@ msgstr "Arbetsytamedlemmar"
 
 #. js-lingui-id: PHF7zj
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Workspace shared"
 msgstr "Delad arbetsyta"

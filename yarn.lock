@@ -50091,7 +50091,7 @@ __metadata:
     tsx: "npm:^4.19.3"
     type-fest: "npm:^4.10.1"
     typescript: "npm:^5.9.3"
-    vite-plugin-checker: "npm:^0.10.2"
+    vite-plugin-checker: "patch:vite-plugin-checker@npm%3A0.10.2#~/.yarn/patches/vite-plugin-checker-npm-0.10.2-d25c24dd05.patch"
     vite-plugin-dts: "npm:^4.5.4"
     vite-plugin-sass-dts: "npm:^1.3.31"
     vite-plugin-svgr: "npm:^4.3.0"
@@ -51737,7 +51737,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-checker@npm:^0.10.2":
+"vite-plugin-checker@npm:0.10.2":
   version: 0.10.2
   resolution: "vite-plugin-checker@npm:0.10.2"
   dependencies:
@@ -51781,6 +51781,53 @@ __metadata:
     vue-tsc:
       optional: true
   checksum: 10c0/954399927dc7df99e76f32c749e5d40027fd34354a2667ca3c8bd7613d88076f291c66fcd7492aedbd32483e16e5b694881423399ffdf699c6164aaa0298b4b2
+  languageName: node
+  linkType: hard
+
+"vite-plugin-checker@patch:vite-plugin-checker@npm%3A0.10.2#~/.yarn/patches/vite-plugin-checker-npm-0.10.2-d25c24dd05.patch":
+  version: 0.10.2
+  resolution: "vite-plugin-checker@patch:vite-plugin-checker@npm%3A0.10.2#~/.yarn/patches/vite-plugin-checker-npm-0.10.2-d25c24dd05.patch::version=0.10.2&hash=bd4284"
+  dependencies:
+    "@babel/code-frame": "npm:^7.27.1"
+    chokidar: "npm:^4.0.3"
+    npm-run-path: "npm:^6.0.0"
+    picocolors: "npm:^1.1.1"
+    picomatch: "npm:^4.0.3"
+    strip-ansi: "npm:^7.1.0"
+    tiny-invariant: "npm:^1.3.3"
+    tinyglobby: "npm:^0.2.14"
+    vscode-uri: "npm:^3.1.0"
+  peerDependencies:
+    "@biomejs/biome": ">=1.7"
+    eslint: ">=7"
+    meow: ^13.2.0
+    optionator: ^0.9.4
+    stylelint: ">=16"
+    typescript: "*"
+    vite: ">=2.0.0"
+    vls: "*"
+    vti: "*"
+    vue-tsc: ~2.2.10 || ^3.0.0
+  peerDependenciesMeta:
+    "@biomejs/biome":
+      optional: true
+    eslint:
+      optional: true
+    meow:
+      optional: true
+    optionator:
+      optional: true
+    stylelint:
+      optional: true
+    typescript:
+      optional: true
+    vls:
+      optional: true
+    vti:
+      optional: true
+    vue-tsc:
+      optional: true
+  checksum: 10c0/e4aeafd645511878ee5bc04e477270839a624bd74ab17db7aa88700eef0761fdeef196ff40b5c977ffeaf1a90f0a2ea647e65ed26b8419e5cc8cb14ba8945827
   languageName: node
   linkType: hard
 

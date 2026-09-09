@@ -403,6 +403,11 @@ msgstr "{appDisplayName} 请求执行以下操作："
 msgid "{appName} would like to:"
 msgstr "{appName} 请求执行以下操作："
 
+#. js-lingui-id: wXviUj
+#: src/modules/settings/admin-panel/health-status/components/SettingsAdminJobStateBadge.tsx
+msgid "{attemptsMade, plural, one {{attemptsMade} attempt} other {{attemptsMade} attempts}}"
+msgstr ""
+
 #. js-lingui-id: y9covz
 #: src/modules/settings/admin-panel/utils/getWorkspacesUpgradeHealthText.ts
 #: src/pages/settings/admin-panel/SettingsAdminWorkspacesStatus.tsx
@@ -557,6 +562,11 @@ msgstr "{memberCount, plural, one {{memberCount} 名成员} other {{memberCount}
 msgid "{messagesLength} emails"
 msgstr "{messagesLength} 封邮件"
 
+#. js-lingui-id: Pfatg8
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{minutes, plural, one {# minute} other {# minutes}}"
+msgstr ""
+
 #. js-lingui-id: Koe99p
 #: src/modules/settings/data-model/object-details/components/SettingsObjectFieldItemTableRow.tsx
 #: src/modules/settings/data-model/object-details/components/SettingsObjectRelationItemTableRow.tsx
@@ -631,6 +641,11 @@ msgstr "{roleTargetName}将被分配到“{newRoleName}”角色。"
 msgid "{scopeCount} scopes"
 msgstr "{scopeCount} 个权限范围"
 
+#. js-lingui-id: iL/HBr
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{seconds, plural, one {# second} other {# seconds}}"
+msgstr ""
+
 #. js-lingui-id: kvVMdH
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobsTable.tsx
 msgid "{selectedCount, plural, one {Delete {selectedCount} Job} other {Delete {selectedCount} Jobs}}"
@@ -650,6 +665,11 @@ msgstr "{selectedCount} 种来源类型"
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminJsonDataIndicatorHealthStatus.tsx
 msgid "{serviceLabel} service is unreachable"
 msgstr "{serviceLabel} 服务不可访问"
+
+#. js-lingui-id: CQxE7h
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{spokenMinutes} {spokenSeconds}"
+msgstr ""
 
 #. js-lingui-id: 8vJ+2V
 #: src/modules/ai/components/ThinkingStepsDisplay.tsx
@@ -1086,6 +1106,11 @@ msgstr "删除账户"
 msgid "Accounts"
 msgstr "账户"
 
+#. js-lingui-id: aMWfLO
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ACHEARE fields"
+msgstr ""
+
 #. js-lingui-id: BXMLsb
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
 msgid "Acme GmbH"
@@ -1212,6 +1237,12 @@ msgstr "添加"
 #: src/modules/settings/data-model/fields/forms/select/components/AddSelectOptionMenuItem.tsx
 msgid "Add \"{trimmedName}\" to options"
 msgstr "将 \"{trimmedName}\" 添加到选项中"
+
+#. js-lingui-id: AOKHWb
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add a {0}"
+msgstr ""
 
 #. js-lingui-id: 9CHcSG
 #: src/modules/object-record/record-index/components/RecordIndexEmptyState.tsx
@@ -1403,6 +1434,11 @@ msgstr "添加宾客详细信息"
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Add email channel"
 msgstr "添加电子邮件渠道"
+
+#. js-lingui-id: Va3xJe
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Add field"
+msgstr ""
 
 #. js-lingui-id: DpV70M
 #: src/modules/settings/data-model/object-details/components/tabs/ObjectFields.tsx
@@ -1703,6 +1739,12 @@ msgstr "添加您的信用卡"
 #: src/modules/settings/billing/components/AddCreditCardModal.tsx
 msgid "Add your credit card below. Once added, your subscription will start automatically."
 msgstr "在下方添加您的信用卡。添加后，您的订阅将自动开始。"
+
+#. js-lingui-id: K2c8dN
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add your first {0}"
+msgstr ""
 
 #. js-lingui-id: m2qDV8
 #: src/modules/object-record/record-table/empty-state/utils/getEmptyStateTitle.ts
@@ -2801,7 +2843,6 @@ msgid "Ascending"
 msgstr "升序"
 
 #. js-lingui-id: xWEvuo
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/command-menu-item/engine-command/constants/EngineComponentKeyHeadlessComponentMap.tsx
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useActionRolePermissionFlagConfig.ts
 #: src/modules/side-panel/components/SidePanelAskAiInfo.tsx
@@ -3011,6 +3052,11 @@ msgstr "认证"
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 msgid "Auth failed at"
 msgstr "认证失败于"
+
+#. js-lingui-id: sgXsd0
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Auth failure reason"
+msgstr ""
 
 #. js-lingui-id: P8fBlG
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
@@ -3300,10 +3346,10 @@ msgstr "账单间隔"
 msgid "Billing period"
 msgstr "计费周期"
 
-#. js-lingui-id: xF/NXI
+#. js-lingui-id: ACP71c
 #: src/modules/settings/billing/hooks/useBillingPortalSession.ts
-msgid "Billing portal session error. Please retry or contact Twenty team"
-msgstr "计费门户会话错误。请重试或联系 Twenty 团队"
+msgid "Billing portal session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: 8kIU+G
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -3491,10 +3537,10 @@ msgstr "按钮"
 msgid "by {author}"
 msgstr "由 {author} 提供"
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: +1c/HD
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
-msgid "By using Twenty, you agree to the"
-msgstr "使用 Twenty 即表示您同意"
+msgid "By using ACHEARE, you agree to the"
+msgstr ""
 
 #. js-lingui-id: Yx41df
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
@@ -3937,16 +3983,6 @@ msgstr "切换为专业计划？"
 msgid "Change to Yearly?"
 msgstr "更改为年度计划吗？"
 
-#. js-lingui-id: LhVon3
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Change visibility?"
-msgstr "更改可见性？"
-
-#. js-lingui-id: rnTfap
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Changing visibility requires reconnecting this OAuth connection. You will be redirected to authorize it again."
-msgstr "更改可见性需要重新连接此 OAuth 连接。您将被重定向以再次授权。"
-
 #. js-lingui-id: lfFsZ4
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Channels"
@@ -3959,6 +3995,7 @@ msgid "Chart"
 msgstr "图表"
 
 #. js-lingui-id: rlwve5
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/AiChatThreadItemMenu.tsx
 msgid "Chat actions"
 msgstr "聊天操作"
@@ -3969,6 +4006,7 @@ msgid "Chat conversation"
 msgstr "聊天会话"
 
 #. js-lingui-id: tDlhkF
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "Chat name"
 msgstr "聊天名称"
@@ -4026,11 +4064,11 @@ msgstr "检查您的电子邮件"
 msgid "Check your inbox to verify your new email address."
 msgstr "请检查收件箱以验证您的新电子邮件地址。"
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: S0lXrz
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
-msgid "Checkout session error. Please retry or contact Twenty team"
-msgstr "结账会话错误。请重试或联系 Twenty 团队"
+msgid "Checkout session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: SviKkE
 #: src/localization/hooks/useLocaleOptions.ts
@@ -4371,11 +4409,6 @@ msgstr "折叠文件夹"
 #: src/modules/navigation/hooks/useNavigationDrawerTogglePresentation.ts
 msgid "Collapse sidebar"
 msgstr "折叠侧边栏"
-
-#. js-lingui-id: OQTRMK
-#: src/modules/ai/components/AiChatCollapseButton.tsx
-msgid "Collapse to side panel"
-msgstr "折叠到侧边栏"
 
 #. js-lingui-id: jZlrte
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -5060,6 +5093,11 @@ msgstr "已复制到剪贴板"
 msgid "Copy"
 msgstr "复制"
 
+#. js-lingui-id: 6gAr5+
+#: src/modules/page-layout/widgets/call-recording-transcript/components/WidgetActionCallRecordingTranscript.tsx
+msgid "Copy audio download link"
+msgstr ""
+
 #. js-lingui-id: NmPNJJ
 #: src/modules/ai/components/CodeExecutionDisplay.tsx
 #: src/modules/ai/components/MarkdownCodeBlock.tsx
@@ -5390,6 +5428,12 @@ msgstr "创建"
 #: src/modules/views/view-picker/components/ViewPickerEditButton.tsx
 msgid "Create"
 msgstr "创建"
+
+#. js-lingui-id: QMLXwt
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Create a {0} to automate your work."
+msgstr ""
 
 #. js-lingui-id: fQFALn
 #: src/modules/ai/components/suggested-prompts/default-suggested-prompts.ts
@@ -8257,10 +8301,10 @@ msgstr "取消周期切换时出错。"
 msgid "Error while cancelling plan switching."
 msgstr "取消计划切换时出错。"
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: 8EzH+4
 #: src/modules/settings/billing/hooks/useEndSubscriptionTrialPeriod.ts
-msgid "Error while ending trial period. Please contact Twenty team."
-msgstr "结束试用期时发生错误。请联系Twenty团队。"
+msgid "Error while ending trial period. Please contact ACHEARE team."
+msgstr ""
 
 #. js-lingui-id: 5g78zo
 #: src/pages/settings/members/SettingsWorkspaceMember.tsx
@@ -8686,6 +8730,11 @@ msgstr "创建记录失败"
 msgid "Failed to create unsubscribe topic."
 msgstr "创建退订主题失败。"
 
+#. js-lingui-id: atCmiF
+#: src/modules/object-core/workflows/hooks/useCreateCoreWorkflow.ts
+msgid "Failed to create workflow"
+msgstr ""
+
 #. js-lingui-id: AXveCw
 #: src/pages/settings/communications/SettingsWorkspaceCommunicationGroupChannelDetail.tsx
 msgid "Failed to delete email channel."
@@ -9093,6 +9142,11 @@ msgstr "字段"
 msgid "Field"
 msgstr "字段"
 
+#. js-lingui-id: 0Ractl
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field added to search"
+msgstr ""
+
 #. js-lingui-id: LX8Pu1
 #: src/pages/settings/data-model/SettingsObjectFieldEdit.tsx
 msgid "Field deleted"
@@ -9112,6 +9166,11 @@ msgstr "目的地字段"
 #: src/modules/metadata-error-handler/hooks/useMetadataErrorHandler.ts
 msgid "field permission"
 msgstr "字段权限"
+
+#. js-lingui-id: YZK9mj
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field removed from search"
+msgstr ""
 
 #. js-lingui-id: lcNTiF
 #: src/modules/side-panel/hooks/useOpenWidgetSettingsInSidePanel.ts
@@ -10125,10 +10184,10 @@ msgstr "隐藏标签"
 msgid "Hide system indexes"
 msgstr "隐藏系统索引"
 
-#. js-lingui-id: 1ETc0T
+#. js-lingui-id: u+LEOY
 #: src/pages/settings/community/SettingsCommunity.tsx
-msgid "Hire a partner to help you implement and customize Twenty."
-msgstr "聘请合作伙伴帮助你实施并自定义 Twenty。"
+msgid "Hire a partner to help you implement and customize ACHEARE."
+msgstr ""
 
 #. js-lingui-id: i0qMbr
 #: src/modules/navigation/hooks/useMobileNavigationBarItems.ts
@@ -11225,7 +11284,6 @@ msgstr "跳转到当前"
 #. js-lingui-id: UpNpMK
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Just for me"
 msgstr "仅供我使用"
 
@@ -12097,11 +12155,6 @@ msgstr "维护模式"
 msgid "Make HTTP requests to external APIs"
 msgstr ""
 
-#. js-lingui-id: icpEdc
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Make private"
-msgstr "设为私有"
-
 #. js-lingui-id: wckWOP
 #: src/modules/settings/billing/components/internal/ResourceCreditPriceSelector.tsx
 #: src/modules/side-panel/pages/page-layout/components/RegularTabSettingsContent.tsx
@@ -12959,6 +13012,7 @@ msgstr "新"
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/side-panel/hooks/useOpenRecordInSidePanel.ts
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "New {0}"
 msgstr "新建 {0}"
 
@@ -13003,6 +13057,9 @@ msgid "New calendar event"
 msgstr "新建日历事件"
 
 #. js-lingui-id: hIQkLb
+#: src/modules/ai/components/AiChatPageHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "New chat"
 msgstr "新聊天"
@@ -13013,7 +13070,6 @@ msgid "New Company"
 msgstr "新建公司"
 
 #. js-lingui-id: +HY5kX
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/side-panel/components/SidePanelTopBarRightCornerIcon.tsx
 msgid "New conversation"
 msgstr "新会话"
@@ -13223,6 +13279,18 @@ msgstr "第九"
 #: src/pages/settings/applications/tabs/SettingsApplicationFrontComponentSettingsTab.tsx
 msgid "No"
 msgstr "不"
+
+#. js-lingui-id: AZa0Mm
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} found"
+msgstr ""
+
+#. js-lingui-id: uZ8YLp
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} match your filters. Try removing some of them."
+msgstr ""
 
 #. js-lingui-id: 7YGRoE
 #: src/modules/ui/input/components/SelectInput.tsx
@@ -13861,9 +13929,9 @@ msgstr "无选择字段"
 msgid "No sender"
 msgstr "无发件人"
 
-#. js-lingui-id: 5UEIxk
+#. js-lingui-id: dRi20n
 #: src/modules/activities/emails/components/CampaignDetailsFields.tsx
-msgid "No sending address is available. Connect a verified sending domain in Settings before this campaign can go out."
+msgid "No sending address. Connect a verified domain in Settings."
 msgstr ""
 
 #. js-lingui-id: JkPTT8
@@ -14502,10 +14570,10 @@ msgstr "入门奖励"
 msgid "One or more filters reference deactivated or deleted fields and will be automatically removed on save."
 msgstr "一个或多个筛选器引用了已停用或已删除的字段，保存时将自动移除。"
 
-#. js-lingui-id: 2l4SGU
+#. js-lingui-id: OvvEsG
 #: src/pages/settings/enterprise/SettingsEnterprise.tsx
-msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install Twenty on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
-msgstr "一个订阅提供一个企业密钥，该密钥可支持一个生产实例以及一个预备环境或测试实例。要运行预备或测试环境，请在第二台服务器上安装 Twenty，使用同一个企业密钥激活它，然后将该服务器注册为开发实例。开发实例可以在无需额外计费的情况下解锁企业功能，并且不计入你的生产席位数。"
+msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install ACHEARE on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
+msgstr ""
 
 #. js-lingui-id: oFTo3P
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
@@ -14973,10 +15041,10 @@ msgstr "页面布局"
 msgid "Page name"
 msgstr "页面名称"
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: mkndso
 #: src/pages/not-found/NotFound.tsx
-msgid "Page Not Found | Twenty"
-msgstr "页面未找到 | Twenty"
+msgid "Page Not Found | ACHEARE"
+msgstr ""
 
 #. js-lingui-id: oIhFvf
 #: src/modules/side-panel/pages/email-block-settings/components/EmailPageStyleSection.tsx
@@ -15068,6 +15136,7 @@ msgid "Path"
 msgstr "路径"
 
 #. js-lingui-id: IgrLD/
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
 msgid "Pause"
 msgstr "暂停"
@@ -15337,7 +15406,13 @@ msgstr "计划于 {formattedStartDate}"
 msgid "Plans"
 msgstr "方案"
 
+#. js-lingui-id: T91vKp
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Play"
+msgstr ""
+
 #. js-lingui-id: XdRQm7
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 msgid "Playback failed"
 msgstr "播放失败"
@@ -15954,10 +16029,10 @@ msgstr "推荐模型"
 msgid "Reconnect"
 msgstr "重新连接"
 
-#. js-lingui-id: NSOx3j
+#. js-lingui-id: PrI9jr
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Reconnect and change visibility"
-msgstr "重新连接并更改可见性"
+msgid "Reconnect and share"
+msgstr ""
 
 #. js-lingui-id: XsIxsL
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
@@ -16632,6 +16707,7 @@ msgstr "恢复"
 
 #. js-lingui-id: 6gRgw8
 #: src/modules/ai/components/AiChatErrorMessage.tsx
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobRowDropdownMenu.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminRetryJobsConfirmationModal.tsx
@@ -17087,11 +17163,6 @@ msgstr "搜索类型"
 msgid "Search a view..."
 msgstr "搜索视图..."
 
-#. js-lingui-id: N7Z3jc
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Search across indexed fields..."
-msgstr "在已索引的字段中搜索..."
-
 #. js-lingui-id: +7s4fw
 #: src/modules/settings/roles/role-assignment/components/SettingsRoleAssignmentEntityPickerDropdown.tsx
 msgid "Search agents"
@@ -17209,6 +17280,11 @@ msgstr "搜索字段元数据"
 #: src/modules/views/components/ViewBarFilterDropdownFieldSelectMenu.tsx
 msgid "Search fields"
 msgstr "搜索字段"
+
+#. js-lingui-id: IQAn53
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Search fields..."
+msgstr ""
 
 #. js-lingui-id: rXrG+N
 #: src/modules/settings/accounts/components/message-folders/SettingsAccountsMessageFoldersCard.tsx
@@ -17465,6 +17541,11 @@ msgstr "以交互式图表的形式查看你的数据结构"
 #: src/pages/settings/applications/components/SettingsApplicationTableRow.tsx
 msgid "Seeded"
 msgstr "已预置"
+
+#. js-lingui-id: AhNP40
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Seek"
+msgstr ""
 
 #. js-lingui-id: 5iyrla
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingTranscriptEntryListItem.tsx
@@ -18005,6 +18086,11 @@ msgstr "分享此链接以邀请用户加入您的工作区"
 msgid "Share with workspace"
 msgstr "与工作区共享"
 
+#. js-lingui-id: lX0SIS
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Share with workspace?"
+msgstr ""
+
 #. js-lingui-id: gaJRur
 #: src/pages/settings/applications/tabs/SettingsApplicationRegistrationDistributionTab.tsx
 msgid "Share your app to other workspaces without pushing it on the marketplace"
@@ -18019,6 +18105,11 @@ msgstr "共享邮箱"
 #: src/pages/settings/applications/components/SettingsApplicationRegistrationShareLinkButtons.tsx
 msgid "Sharing link copied to clipboard"
 msgstr "分享链接已复制到剪贴板"
+
+#. js-lingui-id: Xzq3Vx
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Sharing this connection with the workspace requires reconnecting it. You will be redirected to authorize it again."
+msgstr ""
 
 #. js-lingui-id: RRXpo1
 #: src/modules/settings/data-model/fields/forms/number/constants/NumberDataModelSelectOptions.ts
@@ -18349,6 +18440,7 @@ msgstr "为满足大小限制，部分日志数据已被丢弃（{0} 条目，{1
 
 #. js-lingui-id: nwtY4N
 #: src/pages/auth/Authorize.tsx
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "Something went wrong"
 msgstr "出了点问题"
 
@@ -18808,13 +18900,13 @@ msgstr "订阅"
 msgid "Subscription activated."
 msgstr "订阅已激活。"
 
-#. js-lingui-id: 0okvpx
+#. js-lingui-id: 73pt+u
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
-msgid "Subscription error. Please retry or contact Twenty team"
-msgstr "订阅错误。请重试或联系 Twenty 团队"
+msgid "Subscription error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: FooJUj
 #. placeholder {0}: getTargetPlanLabel(targetPlanKey)
@@ -20375,11 +20467,6 @@ msgstr ""
 msgid "Turquoise"
 msgstr "绿松石色"
 
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "Twenty fields"
-msgstr "Twenty 字段"
-
 #. js-lingui-id: YIjS4q
 #: src/modules/ai/components/SettingsAgentModelCapabilities.tsx
 msgid "Twitter/X Search"
@@ -21823,6 +21910,12 @@ msgstr "观看成员演示"
 msgid "We are currently encountering issues with this app, its behavior may be degraded while we work on a fix."
 msgstr "该应用目前出现一些问题，我们正在修复，期间其功能可能会受影响。"
 
+#. js-lingui-id: Pk5zT3
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "We could not load your {0}. Please try again later."
+msgstr ""
+
 #. js-lingui-id: icGmU/
 #: src/pages/settings/applications/utils/getClaimErrorContent.ts
 msgid "We could not reach the package registry to verify the package provenance. Please try again in a few minutes."
@@ -21971,15 +22064,10 @@ msgstr "周"
 msgid "weeks"
 msgstr ""
 
-#. js-lingui-id: WKHqM+
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Weight"
-msgstr "权重"
-
-#. js-lingui-id: nTuObL
+#. js-lingui-id: 17myHM
 #: src/pages/auth/SignInUp.tsx
-msgid "Welcome to Twenty"
-msgstr "欢迎来到 Twenty"
+msgid "Welcome to ACHEARE"
+msgstr ""
 
 #. js-lingui-id: t8ZvkC
 #: src/modules/onboarding/constants/WelcomeTitleMessage.ts
@@ -22300,7 +22388,6 @@ msgstr "工作区成员"
 
 #. js-lingui-id: PHF7zj
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Workspace shared"
 msgstr "已在工作区共享"

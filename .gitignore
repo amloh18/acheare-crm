@@ -71,3 +71,9 @@ screenshots/
 /.diag*.mjs
 /.compare*.mjs
 /.narrow*.mjs
+
+# ShipStudio metadata
+.shipstudio/
+
+# ACHEARE local dev
+.acheare-dev-logs/

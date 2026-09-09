@@ -2374,6 +2374,11 @@ msgstr "Connect er ikke tilladt for {connectFieldName} på {objectMetadataNameSi
 msgid "Connected account not found."
 msgstr "Tilknyttet konto ikke fundet."
 
+#. js-lingui-id: lAyVpb
+#: src/engine/core-modules/application/connection-provider/connection-provider.exception.ts
+msgid "Connection not found."
+msgstr ""
+
 #. js-lingui-id: xQ2DfP
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-connection-provider-validator.service.ts
 msgid "Connection provider display name is required"
@@ -3545,6 +3550,11 @@ msgstr "E-mails"
 #: src/engine/metadata-modules/permissions/permissions.exception.ts
 msgid "Empty field permissions are not allowed."
 msgstr "Tomme felttilladelser er ikke tilladt."
+
+#. js-lingui-id: xFJpEE
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Enable search on this object before adding searchable fields"
+msgstr ""
 
 #. js-lingui-id: ovnbNI
 #: src/engine/core-modules/admin-panel/services/admin-panel-server-admin.service.ts
@@ -4815,6 +4825,11 @@ msgctxt "fieldMetadata.label"
 msgid "Id"
 msgstr "Id"
 
+#. js-lingui-id: ZbNFXE
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Id field cannot be searched"
+msgstr ""
+
 #. js-lingui-id: 6cVc+b
 #: src/engine/core-modules/sso/sso.exception.ts
 msgid "Identity provider not found."
@@ -5939,6 +5954,11 @@ msgstr "Etiket kan ikke være tom"
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-field-metadata-validator.service.ts
 msgid "Label identifier field cannot be deactivated"
 msgstr "Etiketidentifikatorfelt kan ikke deaktiveres"
+
+#. js-lingui-id: +LPcfA
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Label identifier field cannot be removed from search"
+msgstr ""
 
 #. js-lingui-id: Qx822J
 #: src/engine/metadata-modules/field-metadata/field-metadata.exception.ts
@@ -10837,6 +10857,11 @@ msgstr "Denne felttilladelse er allerede angivet for rollen"
 msgid "This field references an object that could not be found"
 msgstr "Dette felt refererer til et objekt, der ikke kunne findes"
 
+#. js-lingui-id: CIqMf4
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "This field type cannot be searched"
+msgstr ""
+
 #. js-lingui-id: 5F02zD
 #: src/engine/core-modules/file/file-upload/services/file-upload-completion.service.ts
 msgid "This file format is not supported."
@@ -10919,6 +10944,11 @@ msgstr "Dette objekt har allerede en standardvisning"
 #: src/engine/metadata-modules/object-metadata/object-metadata.exception.ts
 msgid "This object cannot be modified."
 msgstr "Dette objekt kan ikke ændres."
+
+#. js-lingui-id: I8RhBL
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "This object has no search vector"
+msgstr ""
 
 #. js-lingui-id: X2Xp8v
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-object-permission-validator.service.ts
@@ -12316,10 +12346,10 @@ msgstr "Webhook ikke fundet."
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#. js-lingui-id: TVkCrJ
+#. js-lingui-id: 1Ix6nH
 #: src/engine/core-modules/email-verification/services/email-verification.service.ts
-msgid "Welcome to Twenty: Please Confirm Your Email"
-msgstr "Velkommen til Twenty: Bekræft venligst din e-mail"
+msgid "Welcome to ACHEARE: Please Confirm Your Email"
+msgstr ""
 
 #. js-lingui-id: lKboI8
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-record-share-standard-flat-field-metadata.util.ts

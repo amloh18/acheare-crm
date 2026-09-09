@@ -96,7 +96,7 @@ const AddPaymentMethodFormContent = ({
         data?.createBillingPaymentMethodSetupIntent?.clientSecret;
       if (!isDefined(clientSecret)) {
         enqueueErrorSnackBar({
-          message: t`Subscription error. Please retry or contact Twenty team`,
+          message: t`Subscription error. Please retry or contact ACHEARE team`,
         });
         setIsSubmitting(false);
         return;
@@ -127,7 +127,7 @@ const AddPaymentMethodFormContent = ({
         enqueueErrorSnackBar({ apolloError: error });
       } else {
         enqueueErrorSnackBar({
-          message: t`Subscription error. Please retry or contact Twenty team`,
+          message: t`Subscription error. Please retry or contact ACHEARE team`,
         });
       }
       setIsSubmitting(false);

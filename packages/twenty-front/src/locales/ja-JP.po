@@ -403,6 +403,11 @@ msgstr "{appDisplayName} は次の操作を行おうとしています。"
 msgid "{appName} would like to:"
 msgstr "{appName} は次の操作を行おうとしています。"
 
+#. js-lingui-id: wXviUj
+#: src/modules/settings/admin-panel/health-status/components/SettingsAdminJobStateBadge.tsx
+msgid "{attemptsMade, plural, one {{attemptsMade} attempt} other {{attemptsMade} attempts}}"
+msgstr ""
+
 #. js-lingui-id: y9covz
 #: src/modules/settings/admin-panel/utils/getWorkspacesUpgradeHealthText.ts
 #: src/pages/settings/admin-panel/SettingsAdminWorkspacesStatus.tsx
@@ -557,6 +562,11 @@ msgstr "{memberCount, plural, one {{memberCount} 名のメンバー} other {{mem
 msgid "{messagesLength} emails"
 msgstr "{messagesLength} 件のメール"
 
+#. js-lingui-id: Pfatg8
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{minutes, plural, one {# minute} other {# minutes}}"
+msgstr ""
+
 #. js-lingui-id: Koe99p
 #: src/modules/settings/data-model/object-details/components/SettingsObjectFieldItemTableRow.tsx
 #: src/modules/settings/data-model/object-details/components/SettingsObjectRelationItemTableRow.tsx
@@ -631,6 +641,11 @@ msgstr "{roleTargetName}が「{newRoleName}」役割に割り当てられます�
 msgid "{scopeCount} scopes"
 msgstr "{scopeCount} 件のスコープ"
 
+#. js-lingui-id: iL/HBr
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{seconds, plural, one {# second} other {# seconds}}"
+msgstr ""
+
 #. js-lingui-id: kvVMdH
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobsTable.tsx
 msgid "{selectedCount, plural, one {Delete {selectedCount} Job} other {Delete {selectedCount} Jobs}}"
@@ -650,6 +665,11 @@ msgstr "{selectedCount} 種類のソース"
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminJsonDataIndicatorHealthStatus.tsx
 msgid "{serviceLabel} service is unreachable"
 msgstr "{serviceLabel} サービスに到達できません"
+
+#. js-lingui-id: CQxE7h
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "{spokenMinutes} {spokenSeconds}"
+msgstr ""
 
 #. js-lingui-id: 8vJ+2V
 #: src/modules/ai/components/ThinkingStepsDisplay.tsx
@@ -1086,6 +1106,11 @@ msgstr "アカウント削除"
 msgid "Accounts"
 msgstr "アカウント"
 
+#. js-lingui-id: aMWfLO
+#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
+msgid "ACHEARE fields"
+msgstr ""
+
 #. js-lingui-id: BXMLsb
 #: src/pages/settings/legal/SettingsLegalDpaNew.tsx
 msgid "Acme GmbH"
@@ -1212,6 +1237,12 @@ msgstr "追加"
 #: src/modules/settings/data-model/fields/forms/select/components/AddSelectOptionMenuItem.tsx
 msgid "Add \"{trimmedName}\" to options"
 msgstr "「{trimmedName}」をオプションに追加"
+
+#. js-lingui-id: AOKHWb
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add a {0}"
+msgstr ""
 
 #. js-lingui-id: 9CHcSG
 #: src/modules/object-record/record-index/components/RecordIndexEmptyState.tsx
@@ -1403,6 +1434,11 @@ msgstr "ゲストの詳細を追加"
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Add email channel"
 msgstr "メールチャネルを追加"
+
+#. js-lingui-id: Va3xJe
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Add field"
+msgstr ""
 
 #. js-lingui-id: DpV70M
 #: src/modules/settings/data-model/object-details/components/tabs/ObjectFields.tsx
@@ -1703,6 +1739,12 @@ msgstr "クレジットカードを追加"
 #: src/modules/settings/billing/components/AddCreditCardModal.tsx
 msgid "Add your credit card below. Once added, your subscription will start automatically."
 msgstr "下にクレジットカード情報を追加してください。追加されると、サブスクリプションは自動的に開始されます。"
+
+#. js-lingui-id: K2c8dN
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Add your first {0}"
+msgstr ""
 
 #. js-lingui-id: m2qDV8
 #: src/modules/object-record/record-table/empty-state/utils/getEmptyStateTitle.ts
@@ -2801,7 +2843,6 @@ msgid "Ascending"
 msgstr "昇順"
 
 #. js-lingui-id: xWEvuo
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/command-menu-item/engine-command/constants/EngineComponentKeyHeadlessComponentMap.tsx
 #: src/modules/settings/roles/role-permissions/permission-flags/hooks/useActionRolePermissionFlagConfig.ts
 #: src/modules/side-panel/components/SidePanelAskAiInfo.tsx
@@ -3011,6 +3052,11 @@ msgstr "認証"
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 msgid "Auth failed at"
 msgstr "認証失敗日時"
+
+#. js-lingui-id: sgXsd0
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Auth failure reason"
+msgstr ""
 
 #. js-lingui-id: P8fBlG
 #: src/modules/settings/security/components/SettingsSecuritySettings.tsx
@@ -3300,10 +3346,10 @@ msgstr "請求間隔"
 msgid "Billing period"
 msgstr "請求期間"
 
-#. js-lingui-id: xF/NXI
+#. js-lingui-id: ACP71c
 #: src/modules/settings/billing/hooks/useBillingPortalSession.ts
-msgid "Billing portal session error. Please retry or contact Twenty team"
-msgstr "請求ポータルセッションエラー。再試行するか、Twenty チームに連絡してください"
+msgid "Billing portal session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: 8kIU+G
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -3491,10 +3537,10 @@ msgstr "ボタン"
 msgid "by {author}"
 msgstr "提供: {author}"
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: +1c/HD
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
-msgid "By using Twenty, you agree to the"
-msgstr "Twentyを利用することにより、以下の事項に同意したものとみなされます。"
+msgid "By using ACHEARE, you agree to the"
+msgstr ""
 
 #. js-lingui-id: Yx41df
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
@@ -3937,16 +3983,6 @@ msgstr "プロプランに変更しますか？"
 msgid "Change to Yearly?"
 msgstr "年間に変更?"
 
-#. js-lingui-id: LhVon3
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Change visibility?"
-msgstr "公開範囲を変更しますか？"
-
-#. js-lingui-id: rnTfap
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Changing visibility requires reconnecting this OAuth connection. You will be redirected to authorize it again."
-msgstr "公開範囲を変更するには、このOAuth接続を再接続する必要があります。再度承認するためにリダイレクトされます。"
-
 #. js-lingui-id: lfFsZ4
 #: src/modules/settings/workspace/components/SettingsWorkspaceEmailGroupSection.tsx
 msgid "Channels"
@@ -3959,6 +3995,7 @@ msgid "Chart"
 msgstr "チャート"
 
 #. js-lingui-id: rlwve5
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/AiChatThreadItemMenu.tsx
 msgid "Chat actions"
 msgstr "チャットの操作"
@@ -3969,6 +4006,7 @@ msgid "Chat conversation"
 msgstr "チャットの会話"
 
 #. js-lingui-id: tDlhkF
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "Chat name"
 msgstr "チャット名"
@@ -4026,11 +4064,11 @@ msgstr "メールを確認してください"
 msgid "Check your inbox to verify your new email address."
 msgstr "新しいメールアドレスを確認するため、受信トレイを確認してください。"
 
-#. js-lingui-id: SxwQE8
+#. js-lingui-id: S0lXrz
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
 #: src/modules/settings/billing/hooks/useHandleCheckoutSession.ts
-msgid "Checkout session error. Please retry or contact Twenty team"
-msgstr "チェックアウトセッションエラー。再試行するか、Twentyチームに連絡してください"
+msgid "Checkout session error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: SviKkE
 #: src/localization/hooks/useLocaleOptions.ts
@@ -4371,11 +4409,6 @@ msgstr "フォルダーを折りたたむ"
 #: src/modules/navigation/hooks/useNavigationDrawerTogglePresentation.ts
 msgid "Collapse sidebar"
 msgstr "サイドバーを折りたたむ"
-
-#. js-lingui-id: OQTRMK
-#: src/modules/ai/components/AiChatCollapseButton.tsx
-msgid "Collapse to side panel"
-msgstr "サイドパネルに折りたたむ"
 
 #. js-lingui-id: jZlrte
 #: src/modules/advanced-text-editor/constants/AdvancedTextEditorBlockCatalog.ts
@@ -5060,6 +5093,11 @@ msgstr "クリップボードにコピーされました"
 msgid "Copy"
 msgstr "コピー"
 
+#. js-lingui-id: 6gAr5+
+#: src/modules/page-layout/widgets/call-recording-transcript/components/WidgetActionCallRecordingTranscript.tsx
+msgid "Copy audio download link"
+msgstr ""
+
 #. js-lingui-id: NmPNJJ
 #: src/modules/ai/components/CodeExecutionDisplay.tsx
 #: src/modules/ai/components/MarkdownCodeBlock.tsx
@@ -5390,6 +5428,12 @@ msgstr "作成"
 #: src/modules/views/view-picker/components/ViewPickerEditButton.tsx
 msgid "Create"
 msgstr "作成"
+
+#. js-lingui-id: QMLXwt
+#. placeholder {0}: objectMetadataItem.labelSingular
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "Create a {0} to automate your work."
+msgstr ""
 
 #. js-lingui-id: fQFALn
 #: src/modules/ai/components/suggested-prompts/default-suggested-prompts.ts
@@ -8257,10 +8301,10 @@ msgstr "間隔切替のキャンセル中にエラーが発生しました。"
 msgid "Error while cancelling plan switching."
 msgstr "プラン切替のキャンセル中にエラーが発生しました。"
 
-#. js-lingui-id: QmR+2U
+#. js-lingui-id: 8EzH+4
 #: src/modules/settings/billing/hooks/useEndSubscriptionTrialPeriod.ts
-msgid "Error while ending trial period. Please contact Twenty team."
-msgstr "試用期間の終了中にエラーが発生しました。Twentyチームにお問い合わせください。"
+msgid "Error while ending trial period. Please contact ACHEARE team."
+msgstr ""
 
 #. js-lingui-id: 5g78zo
 #: src/pages/settings/members/SettingsWorkspaceMember.tsx
@@ -8686,6 +8730,11 @@ msgstr "レコードの作成に失敗しました"
 msgid "Failed to create unsubscribe topic."
 msgstr "配信停止トピックの作成に失敗しました。"
 
+#. js-lingui-id: atCmiF
+#: src/modules/object-core/workflows/hooks/useCreateCoreWorkflow.ts
+msgid "Failed to create workflow"
+msgstr ""
+
 #. js-lingui-id: AXveCw
 #: src/pages/settings/communications/SettingsWorkspaceCommunicationGroupChannelDetail.tsx
 msgid "Failed to delete email channel."
@@ -9093,6 +9142,11 @@ msgstr "フィールド"
 msgid "Field"
 msgstr "フィールド"
 
+#. js-lingui-id: 0Ractl
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field added to search"
+msgstr ""
+
 #. js-lingui-id: LX8Pu1
 #: src/pages/settings/data-model/SettingsObjectFieldEdit.tsx
 msgid "Field deleted"
@@ -9112,6 +9166,11 @@ msgstr "宛先のフィールド"
 #: src/modules/metadata-error-handler/hooks/useMetadataErrorHandler.ts
 msgid "field permission"
 msgstr "フィールドの権限"
+
+#. js-lingui-id: YZK9mj
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Field removed from search"
+msgstr ""
 
 #. js-lingui-id: lcNTiF
 #: src/modules/side-panel/hooks/useOpenWidgetSettingsInSidePanel.ts
@@ -10125,10 +10184,10 @@ msgstr "ラベルを非表示"
 msgid "Hide system indexes"
 msgstr "システムインデックスを非表示"
 
-#. js-lingui-id: 1ETc0T
+#. js-lingui-id: u+LEOY
 #: src/pages/settings/community/SettingsCommunity.tsx
-msgid "Hire a partner to help you implement and customize Twenty."
-msgstr "パートナーに依頼して、Twenty の導入とカスタマイズを支援してもらいましょう。"
+msgid "Hire a partner to help you implement and customize ACHEARE."
+msgstr ""
 
 #. js-lingui-id: i0qMbr
 #: src/modules/navigation/hooks/useMobileNavigationBarItems.ts
@@ -11248,7 +11307,6 @@ msgstr "現在位置に移動"
 #. js-lingui-id: UpNpMK
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Just for me"
 msgstr "自分専用"
 
@@ -12120,11 +12178,6 @@ msgstr "メンテナンスモード"
 msgid "Make HTTP requests to external APIs"
 msgstr "外部APIへHTTPリクエストを送信"
 
-#. js-lingui-id: icpEdc
-#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Make private"
-msgstr "非公開にする"
-
 #. js-lingui-id: wckWOP
 #: src/modules/settings/billing/components/internal/ResourceCreditPriceSelector.tsx
 #: src/modules/side-panel/pages/page-layout/components/RegularTabSettingsContent.tsx
@@ -12982,6 +13035,7 @@ msgstr "新規"
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/object-record/record-form/components/RecordCreationFormProvider.tsx
 #: src/modules/side-panel/hooks/useOpenRecordInSidePanel.ts
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "New {0}"
 msgstr "新規{0}"
 
@@ -13026,6 +13080,9 @@ msgid "New calendar event"
 msgstr "新しいカレンダーイベント"
 
 #. js-lingui-id: hIQkLb
+#: src/modules/ai/components/AiChatPageHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
+#: src/modules/ai/components/AiChatPageThreadHeader.tsx
 #: src/modules/ai/components/NavigationDrawerAiChatThreadItem.tsx
 msgid "New chat"
 msgstr "新しいチャット"
@@ -13036,7 +13093,6 @@ msgid "New Company"
 msgstr "新規会社"
 
 #. js-lingui-id: +HY5kX
-#: src/modules/ai/components/AiChatPageHeader.tsx
 #: src/modules/side-panel/components/SidePanelTopBarRightCornerIcon.tsx
 msgid "New conversation"
 msgstr "新しい会話"
@@ -13246,6 +13302,18 @@ msgstr "第九"
 #: src/pages/settings/applications/tabs/SettingsApplicationFrontComponentSettingsTab.tsx
 msgid "No"
 msgstr "いいえ"
+
+#. js-lingui-id: AZa0Mm
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} found"
+msgstr ""
+
+#. js-lingui-id: uZ8YLp
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "No {0} match your filters. Try removing some of them."
+msgstr ""
 
 #. js-lingui-id: 7YGRoE
 #: src/modules/ui/input/components/SelectInput.tsx
@@ -13884,9 +13952,9 @@ msgstr "選択フィールドなし"
 msgid "No sender"
 msgstr "送信者なし"
 
-#. js-lingui-id: 5UEIxk
+#. js-lingui-id: dRi20n
 #: src/modules/activities/emails/components/CampaignDetailsFields.tsx
-msgid "No sending address is available. Connect a verified sending domain in Settings before this campaign can go out."
+msgid "No sending address. Connect a verified domain in Settings."
 msgstr ""
 
 #. js-lingui-id: JkPTT8
@@ -14525,10 +14593,10 @@ msgstr "オンボーディング特典"
 msgid "One or more filters reference deactivated or deleted fields and will be automatically removed on save."
 msgstr "1 つ以上のフィルターが、無効化または削除されたフィールドを参照しています。保存時に自動的に削除されます。"
 
-#. js-lingui-id: 2l4SGU
+#. js-lingui-id: OvvEsG
 #: src/pages/settings/enterprise/SettingsEnterprise.tsx
-msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install Twenty on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
-msgstr "1 つのサブスクリプションから、1 つの本番インスタンスと、ステージングまたはテスト用インスタンスを 1 つ利用できるエンタープライズキーが提供されます。ステージングまたはテスト環境を実行するには、2 台目のサーバーに Twenty をインストールし、同じエンタープライズキーで有効化してから、そのサーバーを開発インスタンスとして登録します。開発インスタンスでは追加の請求なしにエンタープライズ機能が有効になり、本番シート数にもカウントされません。"
+msgid "One subscription provides one enterprise key that powers one production instance and one potential staging or test instance. To run a staging or test environment, install ACHEARE on a second server, activate it with this same enterprise key, then register that server as a development instance. Development instances unlock enterprise features without extra billing and do not count toward your production seats."
+msgstr ""
 
 #. js-lingui-id: oFTo3P
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
@@ -14996,10 +15064,10 @@ msgstr "ページレイアウト"
 msgid "Page name"
 msgstr "ページ名"
 
-#. js-lingui-id: NRvxzv
+#. js-lingui-id: mkndso
 #: src/pages/not-found/NotFound.tsx
-msgid "Page Not Found | Twenty"
-msgstr "ページが見つかりません | Twenty"
+msgid "Page Not Found | ACHEARE"
+msgstr ""
 
 #. js-lingui-id: oIhFvf
 #: src/modules/side-panel/pages/email-block-settings/components/EmailPageStyleSection.tsx
@@ -15091,6 +15159,7 @@ msgid "Path"
 msgstr "パス"
 
 #. js-lingui-id: IgrLD/
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/settings/event-logs/components/SettingsLogs.tsx
 msgid "Pause"
 msgstr "一時停止"
@@ -15360,7 +15429,13 @@ msgstr "予定日: {formattedStartDate}"
 msgid "Plans"
 msgstr "プラン"
 
+#. js-lingui-id: T91vKp
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Play"
+msgstr ""
+
 #. js-lingui-id: XdRQm7
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 msgid "Playback failed"
 msgstr "再生に失敗しました"
@@ -15977,10 +16052,10 @@ msgstr "推奨モデル"
 msgid "Reconnect"
 msgstr "再接続"
 
-#. js-lingui-id: NSOx3j
+#. js-lingui-id: PrI9jr
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-msgid "Reconnect and change visibility"
-msgstr "再接続して公開範囲を変更"
+msgid "Reconnect and share"
+msgstr ""
 
 #. js-lingui-id: XsIxsL
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
@@ -16655,6 +16730,7 @@ msgstr "履歴書"
 
 #. js-lingui-id: 6gRgw8
 #: src/modules/ai/components/AiChatErrorMessage.tsx
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingVideoPlayer.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminQueueJobRowDropdownMenu.tsx
 #: src/modules/settings/admin-panel/health-status/components/SettingsAdminRetryJobsConfirmationModal.tsx
@@ -17110,11 +17186,6 @@ msgstr "タイプを検索"
 msgid "Search a view..."
 msgstr "ビューを検索..."
 
-#. js-lingui-id: N7Z3jc
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Search across indexed fields..."
-msgstr "インデックス化されたフィールド全体を検索..."
-
 #. js-lingui-id: +7s4fw
 #: src/modules/settings/roles/role-assignment/components/SettingsRoleAssignmentEntityPickerDropdown.tsx
 msgid "Search agents"
@@ -17232,6 +17303,11 @@ msgstr "検索フィールドのメタデータ"
 #: src/modules/views/components/ViewBarFilterDropdownFieldSelectMenu.tsx
 msgid "Search fields"
 msgstr "フィールドを検索"
+
+#. js-lingui-id: IQAn53
+#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
+msgid "Search fields..."
+msgstr ""
 
 #. js-lingui-id: rXrG+N
 #: src/modules/settings/accounts/components/message-folders/SettingsAccountsMessageFoldersCard.tsx
@@ -17488,6 +17564,11 @@ msgstr "データ構造をインタラクティブなダイアグラムとして
 #: src/pages/settings/applications/components/SettingsApplicationTableRow.tsx
 msgid "Seeded"
 msgstr "シード済み"
+
+#. js-lingui-id: AhNP40
+#: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingAudioPlayer.tsx
+msgid "Seek"
+msgstr ""
 
 #. js-lingui-id: 5iyrla
 #: src/modules/page-layout/widgets/call-recording-transcript/components/CallRecordingTranscriptEntryListItem.tsx
@@ -18028,6 +18109,11 @@ msgstr "このリンクを共有して、ユーザーをワークスペースに
 msgid "Share with workspace"
 msgstr "ワークスペースと共有"
 
+#. js-lingui-id: lX0SIS
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Share with workspace?"
+msgstr ""
+
 #. js-lingui-id: gaJRur
 #: src/pages/settings/applications/tabs/SettingsApplicationRegistrationDistributionTab.tsx
 msgid "Share your app to other workspaces without pushing it on the marketplace"
@@ -18042,6 +18128,11 @@ msgstr "共有メール"
 #: src/pages/settings/applications/components/SettingsApplicationRegistrationShareLinkButtons.tsx
 msgid "Sharing link copied to clipboard"
 msgstr "共有リンクがクリップボードにコピーされました"
+
+#. js-lingui-id: Xzq3Vx
+#: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
+msgid "Sharing this connection with the workspace requires reconnecting it. You will be redirected to authorize it again."
+msgstr ""
 
 #. js-lingui-id: RRXpo1
 #: src/modules/settings/data-model/fields/forms/number/constants/NumberDataModelSelectOptions.ts
@@ -18372,6 +18463,7 @@ msgstr "サイズ上限に合わせるため、一部のログデータが削除
 
 #. js-lingui-id: nwtY4N
 #: src/pages/auth/Authorize.tsx
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
 msgid "Something went wrong"
 msgstr "問題が発生しました"
 
@@ -18831,13 +18923,13 @@ msgstr "サブスクリプション"
 msgid "Subscription activated."
 msgstr "サブスクリプションが有効になりました。"
 
-#. js-lingui-id: 0okvpx
+#. js-lingui-id: 73pt+u
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/components/AddPaymentMethodForm.tsx
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
 #: src/modules/settings/billing/hooks/useSubmitSubscriptionPayment.ts
-msgid "Subscription error. Please retry or contact Twenty team"
-msgstr "サブスクリプションエラー。再試行するか、Twenty チームに連絡してください"
+msgid "Subscription error. Please retry or contact ACHEARE team"
+msgstr ""
 
 #. js-lingui-id: FooJUj
 #. placeholder {0}: getTargetPlanLabel(targetPlanKey)
@@ -20428,11 +20520,6 @@ msgstr "ターンが見つかりません"
 msgid "Turquoise"
 msgstr "ターコイズ"
 
-#. js-lingui-id: JnaRPe
-#: src/modules/spreadsheet-import/steps/components/MatchColumnsStep/components/ColumnGrid.tsx
-msgid "Twenty fields"
-msgstr "Twenty のフィールド"
-
 #. js-lingui-id: YIjS4q
 #: src/modules/ai/components/SettingsAgentModelCapabilities.tsx
 msgid "Twitter/X Search"
@@ -21876,6 +21963,12 @@ msgstr "メンバーのデモを見る"
 msgid "We are currently encountering issues with this app, its behavior may be degraded while we work on a fix."
 msgstr "現在このアプリで問題が発生しており、修正作業中は動作が低下する可能性があります。"
 
+#. js-lingui-id: Pk5zT3
+#. placeholder {0}: objectMetadataItem.labelPlural
+#: src/pages/object-core/WorkflowCoreIndexPage.tsx
+msgid "We could not load your {0}. Please try again later."
+msgstr ""
+
 #. js-lingui-id: icGmU/
 #: src/pages/settings/applications/utils/getClaimErrorContent.ts
 msgid "We could not reach the package registry to verify the package provenance. Please try again in a few minutes."
@@ -22024,15 +22117,10 @@ msgstr "週"
 msgid "weeks"
 msgstr "週間"
 
-#. js-lingui-id: WKHqM+
-#: src/modules/settings/data-model/object-details/components/tabs/SettingsObjectSearchSection.tsx
-msgid "Weight"
-msgstr "重み"
-
-#. js-lingui-id: nTuObL
+#. js-lingui-id: 17myHM
 #: src/pages/auth/SignInUp.tsx
-msgid "Welcome to Twenty"
-msgstr "Twentyへようこそ"
+msgid "Welcome to ACHEARE"
+msgstr ""
 
 #. js-lingui-id: t8ZvkC
 #: src/modules/onboarding/constants/WelcomeTitleMessage.ts
@@ -22353,7 +22441,6 @@ msgstr "ワークスペースメンバー"
 
 #. js-lingui-id: PHF7zj
 #: src/pages/settings/applications/SettingsApplicationConnectionDetail.tsx
-#: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 #: src/pages/settings/applications/tabs/SettingsApplicationConnectionsSection.tsx
 msgid "Workspace shared"
 msgstr "ワークスペースで共有"

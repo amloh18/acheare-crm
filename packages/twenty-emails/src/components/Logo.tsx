@@ -6,9 +6,10 @@ const logoStyle = {
 
 export const Logo = () => {
   return (
+    // TODO(acheare): point to the deployed ACHEARE front URL + final logo asset
     <Img
-      src="https://app.twenty.com/images/icons/windows11/Square150x150Logo.scale-100.png"
-      alt="Twenty logo"
+      src="https://app.acheare.com/images/icons/acheare/icon-192x192.png"
+      alt="ACHEARE logo"
       width="40"
       height="40"
       style={logoStyle}

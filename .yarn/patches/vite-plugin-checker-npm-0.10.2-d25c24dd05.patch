@@ -1,0 +1,30 @@
+diff --git a/dist/main.js b/dist/main.js
+index dd26aedb22f3d0639685cbe53c6e4b9041fb9702..1513e553d651e6f72ae593676ecda8b03ce0be80 100644
+--- a/dist/main.js
++++ b/dist/main.js
+@@ -186,18 +186,15 @@ function spawnChecker(checker2, userConfig, localEnv) {
+     const buildBin = checker2.build.buildBin;
+     const finalBin = typeof buildBin === "function" ? buildBin(userConfig) : buildBin;
+     const [command, args] = finalBin;
+-    const commandWithArgs = [command, ...args].join(" ");
+-    const proc = spawn(commandWithArgs, {
++    // ACHEARE patch: spawn with an args array and no shell so paths
++    // containing spaces (e.g. a workspace directory with a space in its
++    // name) are passed to tsc intact. The upstream code joins the command
++    // and args into a single unquoted shell string, which splits the
++    // tsconfig path at the space and makes tsc fail with TS5042.
++    const proc = spawn(command, args, {
+       cwd: process.cwd(),
+       stdio: "inherit",
+-      env: localEnv,
+-      // shell is necessary on windows to get the process to even start.
+-      // Command line args constructed by checkers therefore need to escape double quotes
+-      // to have them not striped out by cmd.exe. Using shell on all platforms lets us avoid
+-      // having to perform platform-specific logic around escaping quotes since all platform
+-      // shells will strip out unescaped double quotes. E.g. shell=false on linux only would
+-      // result in escaped quotes not being unescaped.
+-      shell: true
++      env: localEnv
+     });
+     proc.on("exit", (code) => {
+       if (code !== null && code !== 0) {

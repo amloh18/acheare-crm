@@ -26,6 +26,7 @@
   "name": "twenty",
   "packageManager": "yarn@4.13.0",
   "resolutions": {
+    "vite-plugin-checker@npm:0.10.2": "patch:vite-plugin-checker@npm%3A0.10.2#~/.yarn/patches/vite-plugin-checker-npm-0.10.2-d25c24dd05.patch",
     "@module-federation/dts-plugin/undici": "^7.29.0",
     "zapier-platform-core/form-data": "4.0.6",
     "@remote-dom/react/@types/react": "^19.2.0",

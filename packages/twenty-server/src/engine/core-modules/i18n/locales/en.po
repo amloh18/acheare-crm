@@ -2369,6 +2369,11 @@ msgstr "Connect is not allowed for {connectFieldName} on {objectMetadataNameSing
 msgid "Connected account not found."
 msgstr "Connected account not found."
 
+#. js-lingui-id: lAyVpb
+#: src/engine/core-modules/application/connection-provider/connection-provider.exception.ts
+msgid "Connection not found."
+msgstr "Connection not found."
+
 #. js-lingui-id: xQ2DfP
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-connection-provider-validator.service.ts
 msgid "Connection provider display name is required"
@@ -3540,6 +3545,11 @@ msgstr "Emails"
 #: src/engine/metadata-modules/permissions/permissions.exception.ts
 msgid "Empty field permissions are not allowed."
 msgstr "Empty field permissions are not allowed."
+
+#. js-lingui-id: xFJpEE
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Enable search on this object before adding searchable fields"
+msgstr "Enable search on this object before adding searchable fields"
 
 #. js-lingui-id: ovnbNI
 #: src/engine/core-modules/admin-panel/services/admin-panel-server-admin.service.ts
@@ -4810,6 +4820,11 @@ msgctxt "fieldMetadata.label"
 msgid "Id"
 msgstr "Id"
 
+#. js-lingui-id: ZbNFXE
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Id field cannot be searched"
+msgstr "Id field cannot be searched"
+
 #. js-lingui-id: 6cVc+b
 #: src/engine/core-modules/sso/sso.exception.ts
 msgid "Identity provider not found."
@@ -5934,6 +5949,11 @@ msgstr "Label cannot be empty"
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-field-metadata-validator.service.ts
 msgid "Label identifier field cannot be deactivated"
 msgstr "Label identifier field cannot be deactivated"
+
+#. js-lingui-id: +LPcfA
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "Label identifier field cannot be removed from search"
+msgstr "Label identifier field cannot be removed from search"
 
 #. js-lingui-id: Qx822J
 #: src/engine/metadata-modules/field-metadata/field-metadata.exception.ts
@@ -10832,6 +10852,11 @@ msgstr "This field permission is already set for the role"
 msgid "This field references an object that could not be found"
 msgstr "This field references an object that could not be found"
 
+#. js-lingui-id: CIqMf4
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "This field type cannot be searched"
+msgstr "This field type cannot be searched"
+
 #. js-lingui-id: 5F02zD
 #: src/engine/core-modules/file/file-upload/services/file-upload-completion.service.ts
 msgid "This file format is not supported."
@@ -10914,6 +10939,11 @@ msgstr "This object already has a default view"
 #: src/engine/metadata-modules/object-metadata/object-metadata.exception.ts
 msgid "This object cannot be modified."
 msgstr "This object cannot be modified."
+
+#. js-lingui-id: I8RhBL
+#: src/engine/metadata-modules/flat-field-metadata/validators/utils/validate-searchable-flat-field-metadata.util.ts
+msgid "This object has no search vector"
+msgstr "This object has no search vector"
 
 #. js-lingui-id: X2Xp8v
 #: src/engine/workspace-manager/workspace-migration/workspace-migration-builder/validators/services/flat-object-permission-validator.service.ts
@@ -12311,10 +12341,10 @@ msgstr "Webhook not found."
 msgid "Wednesday"
 msgstr "Wednesday"
 
-#. js-lingui-id: TVkCrJ
+#. js-lingui-id: 1Ix6nH
 #: src/engine/core-modules/email-verification/services/email-verification.service.ts
-msgid "Welcome to Twenty: Please Confirm Your Email"
-msgstr "Welcome to Twenty: Please Confirm Your Email"
+msgid "Welcome to ACHEARE: Please Confirm Your Email"
+msgstr "Welcome to ACHEARE: Please Confirm Your Email"
 
 #. js-lingui-id: lKboI8
 #: src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-record-share-standard-flat-field-metadata.util.ts
