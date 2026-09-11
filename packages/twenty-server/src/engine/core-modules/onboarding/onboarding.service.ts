@@ -15,6 +15,7 @@ import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queu
 import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
 import { ONBOARDING_INSTALLABLE_APP_UNIVERSAL_IDENTIFIERS } from 'src/engine/core-modules/onboarding/constants/onboarding-installable-app-universal-identifiers';
 import { ACQUIRE_ONBOARDING_STEP_TRANSITION_LOCK_STATEMENT } from 'src/engine/core-modules/onboarding/constants/acquire-onboarding-step-transition-lock-statement';
+import { AchareSetupStepKeys } from 'src/engine/core-modules/onboarding/constants/acheare-setup-step-keys';
 import { buildOnboardingStepTransitionLockName } from 'src/engine/core-modules/onboarding/utils/build-onboarding-step-transition-lock-name.util';
 import { OnboardingStatus } from 'src/engine/core-modules/onboarding/enums/onboarding-status.enum';
 import {
@@ -131,6 +132,47 @@ export class OnboardingService {
 
     if (this.isWorkspaceActivationPending(workspace)) {
       return OnboardingStatus.WORKSPACE_ACTIVATION;
+    }
+
+    const acheareSetupStatus = await this.userVarsService.get({
+      userId,
+      workspaceId: workspace.id,
+      key: AchareSetupStepKeys.ACHARE_SETUP_STATUS as never,
+    });
+
+    if (acheareSetupStatus === 'IN_PROGRESS') {
+      const acheareCurrentStep = await this.userVarsService.get({
+        userId,
+        workspaceId: workspace.id,
+        key: AchareSetupStepKeys.ACHARE_SETUP_CURRENT_STEP as never,
+      });
+
+      const stepToStatusMap: Record<string, OnboardingStatus> = {
+        WELCOME: OnboardingStatus.ACHARE_WELCOME,
+        BASIC_SETUP: OnboardingStatus.ACHARE_BASIC_SETUP,
+        SETUP_CHOICE: OnboardingStatus.ACHARE_SETUP_CHOICE,
+        AGENCY: OnboardingStatus.ACHARE_AGENCY,
+        TEAM: OnboardingStatus.ACHARE_TEAM,
+        CRM_IMPORT: OnboardingStatus.ACHARE_CRM_IMPORT,
+        RECRUITMENT: OnboardingStatus.ACHARE_RECRUITMENT,
+        HR: OnboardingStatus.ACHARE_HR,
+        PAYROLL: OnboardingStatus.ACHARE_PAYROLL,
+        DASHBOARD: OnboardingStatus.ACHARE_DASHBOARD,
+        REVIEW: OnboardingStatus.ACHARE_REVIEW,
+      };
+
+      if (
+        isDefined(acheareCurrentStep) &&
+        acheareCurrentStep in stepToStatusMap
+      ) {
+        return stepToStatusMap[acheareCurrentStep];
+      }
+
+      return OnboardingStatus.ACHARE_WELCOME;
+    }
+
+    if (acheareSetupStatus === 'COMPLETED') {
+      return OnboardingStatus.COMPLETED;
     }
 
     const userVars = await this.userVarsService.getAll({

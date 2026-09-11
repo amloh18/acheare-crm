@@ -657,4 +657,33 @@ export const buildOpportunityStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  requirements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'requirements',
+      label: i18nLabel(
+        msg({ message: `Requirements`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Hiring requirements originated from this opportunity`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTargetArrow',
+      isNullable: true,
+      targetObjectName: 'requirement',
+      targetFieldName: 'deal',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

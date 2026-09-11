@@ -9,6 +9,8 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
   calendarChannelEventAssociation: [
     { name: 'eventExternalId', type: FieldMetadataType.TEXT },
   ],
+  candidate: [{ name: 'name', type: FieldMetadataType.FULL_NAME }],
+  candidateSubmission: [{ name: 'id', type: FieldMetadataType.UUID }],
   calendarEvent: [{ name: 'title', type: FieldMetadataType.TEXT }],
   calendarEventTarget: [{ name: 'id', type: FieldMetadataType.UUID }],
   calendarEventParticipant: [{ name: 'handle', type: FieldMetadataType.TEXT }],
@@ -18,6 +20,10 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
     { name: 'domainName', type: FieldMetadataType.LINKS },
   ],
   dashboard: [{ name: 'title', type: FieldMetadataType.TEXT }],
+  interview: [
+    { name: 'title', type: FieldMetadataType.TEXT },
+    { name: 'meetingLink', type: FieldMetadataType.LINKS },
+  ],
   message: [{ name: 'subject', type: FieldMetadataType.TEXT }],
   messageCampaign: [
     { name: 'name', type: FieldMetadataType.TEXT },
@@ -38,11 +44,30 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
   ],
   noteTarget: [{ name: 'id', type: FieldMetadataType.UUID }],
   opportunity: [{ name: 'name', type: FieldMetadataType.TEXT }],
+  requirement: [
+    { name: 'title', type: FieldMetadataType.TEXT },
+    { name: 'rolePosition', type: FieldMetadataType.TEXT },
+  ],
   person: [
     { name: 'name', type: FieldMetadataType.FULL_NAME },
     { name: 'emails', type: FieldMetadataType.EMAILS },
     { name: 'phones', type: FieldMetadataType.PHONES },
     { name: 'jobTitle', type: FieldMetadataType.TEXT },
+  ],
+  employee: [
+    { name: 'employeeCode', type: FieldMetadataType.TEXT },
+  ],
+  shift: [
+    { name: 'name', type: FieldMetadataType.TEXT },
+  ],
+  leaveType: [
+    { name: 'name', type: FieldMetadataType.TEXT },
+  ],
+  payrollPeriod: [
+    { name: 'name', type: FieldMetadataType.TEXT },
+  ],
+  invoice: [
+    { name: 'invoiceNumber', type: FieldMetadataType.TEXT },
   ],
   recordShare: [],
   task: [
@@ -61,6 +86,23 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
     { name: 'name', type: FieldMetadataType.FULL_NAME },
     { name: 'userEmail', type: FieldMetadataType.TEXT },
   ],
+  team: [{ name: 'name', type: FieldMetadataType.TEXT }],
+  department: [{ name: 'name', type: FieldMetadataType.TEXT }],
+  designation: [{ name: 'title', type: FieldMetadataType.TEXT }],
+  location: [{ name: 'name', type: FieldMetadataType.TEXT }],
+  onboardingItem: [{ name: 'title', type: FieldMetadataType.TEXT }],
+  rosterAssignment: [{ name: 'id', type: FieldMetadataType.UUID }],
+  attendanceEvent: [{ name: 'id', type: FieldMetadataType.UUID }],
+  attendanceDay: [{ name: 'id', type: FieldMetadataType.UUID }],
+  attendanceCorrection: [{ name: 'id', type: FieldMetadataType.UUID }],
+  leaveRequest: [{ name: 'id', type: FieldMetadataType.UUID }],
+  leaveBalance: [{ name: 'id', type: FieldMetadataType.UUID }],
+  salaryStructure: [{ name: 'id', type: FieldMetadataType.UUID }],
+  salaryComponent: [{ name: 'name', type: FieldMetadataType.TEXT }],
+  payslip: [{ name: 'id', type: FieldMetadataType.UUID }],
+  payslipLine: [{ name: 'label', type: FieldMetadataType.TEXT }],
+  payrollAdjustment: [{ name: 'id', type: FieldMetadataType.UUID }],
+  payment: [{ name: 'id', type: FieldMetadataType.UUID }],
 } satisfies {
   [ObjectName in AllStandardObjectName]: {
     name: AllStandardObjectFieldName<ObjectName>;

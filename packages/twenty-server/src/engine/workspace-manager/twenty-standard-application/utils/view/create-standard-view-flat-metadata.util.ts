@@ -6,6 +6,7 @@ import {
   ViewKey,
   ViewOpenRecordIn,
   ViewVisibility,
+  ViewCalendarLayout,
 } from 'twenty-shared/types';
 
 import { type FlatView } from 'src/engine/metadata-modules/flat-view/types/flat-view.type';
@@ -30,6 +31,7 @@ export type CreateStandardViewOptions<O extends AllStandardObjectName> = {
   mainGroupByFieldName?: AllStandardObjectFieldName<O>;
   calendarFieldName?: AllStandardObjectFieldName<O>;
   calendarEndFieldName?: AllStandardObjectFieldName<O>;
+  calendarLayout?: ViewCalendarLayout;
 };
 
 export type CreateStandardViewArgs<
@@ -59,6 +61,7 @@ export const createStandardViewFlatMetadata = <
     mainGroupByFieldName,
     calendarFieldName,
     calendarEndFieldName,
+    calendarLayout,
   },
   standardObjectMetadataRelatedEntityIds,
   twentyStandardApplicationId,
@@ -127,6 +130,13 @@ export const createStandardViewFlatMetadata = <
         .universalIdentifier
     : null;
 
+  // CALENDAR views must define a non-null calendar layout (DB constraint
+  // CHK_VIEW_CALENDAR_INTEGRITY): default to MONTH when not provided.
+  const resolvedCalendarLayout =
+    type === ViewType.CALENDAR
+      ? (calendarLayout ?? ViewCalendarLayout.MONTH)
+      : null;
+
   return {
     calendarFieldMetadataUniversalIdentifier,
     calendarEndFieldMetadataUniversalIdentifier,
@@ -153,7 +163,7 @@ export const createStandardViewFlatMetadata = <
     mainGroupByFieldMetadataId,
     shouldHideEmptyGroups: false,
     kanbanColumnWidth: null,
-    calendarLayout: null,
+    calendarLayout: resolvedCalendarLayout,
     calendarFieldMetadataId,
     calendarEndFieldMetadataId,
     anyFieldFilterValue: null,

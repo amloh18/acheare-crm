@@ -1,0 +1,58 @@
+import { type CurrencyMetadata } from 'twenty-shared/types';
+import { BaseWorkspaceEntity } from 'src/engine/twenty-orm/base.workspace-entity';
+import { type EntityRelation } from 'src/engine/workspace-manager/workspace-migration/types/entity-relation.interface';
+import { type PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { type DepartmentWorkspaceEntity } from 'src/modules/hr/standard-objects/department.workspace-entity';
+import { type TeamWorkspaceEntity } from 'src/modules/hr/standard-objects/team.workspace-entity';
+import { type DesignationWorkspaceEntity } from 'src/modules/hr/standard-objects/designation.workspace-entity';
+import { type LocationWorkspaceEntity } from 'src/modules/hr/standard-objects/location.workspace-entity';
+import { type OnboardingItemWorkspaceEntity } from 'src/modules/hr/standard-objects/onboardingItem.workspace-entity';
+import { type RosterAssignmentWorkspaceEntity } from 'src/modules/hr/standard-objects/rosterAssignment.workspace-entity';
+import { type AttendanceDayWorkspaceEntity } from 'src/modules/hr/standard-objects/attendanceDay.workspace-entity';
+import { type AttendanceEventWorkspaceEntity } from 'src/modules/hr/standard-objects/attendanceEvent.workspace-entity';
+import { type AttendanceCorrectionWorkspaceEntity } from 'src/modules/hr/standard-objects/attendanceCorrection.workspace-entity';
+import { type LeaveRequestWorkspaceEntity } from 'src/modules/hr/standard-objects/leaveRequest.workspace-entity';
+import { type LeaveBalanceWorkspaceEntity } from 'src/modules/hr/standard-objects/leaveBalance.workspace-entity';
+import { type SalaryStructureWorkspaceEntity } from 'src/modules/hr/standard-objects/salaryStructure.workspace-entity';
+import { type PayslipWorkspaceEntity } from 'src/modules/hr/standard-objects/payslip.workspace-entity';
+import { type PayrollAdjustmentWorkspaceEntity } from 'src/modules/hr/standard-objects/payrollAdjustment.workspace-entity';
+import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
+import { type NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
+import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
+import { type TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
+
+export class EmployeeWorkspaceEntity extends BaseWorkspaceEntity {
+  employeeCode: string | null;
+  status: string | null;
+  employmentType: string | null;
+  joiningDate: Date | null;
+  exitDate: Date | null;
+  workLocation: string | null;
+
+  person: EntityRelation<PersonWorkspaceEntity>;
+  personId: string | null;
+  department: EntityRelation<DepartmentWorkspaceEntity>;
+  departmentId: string | null;
+  team: EntityRelation<TeamWorkspaceEntity>;
+  teamId: string | null;
+  designation: EntityRelation<DesignationWorkspaceEntity>;
+  designationId: string | null;
+  location: EntityRelation<LocationWorkspaceEntity>;
+  locationId: string | null;
+  manager: EntityRelation<EmployeeWorkspaceEntity>;
+  managerId: string | null;
+  onboardingItems: EntityRelation<OnboardingItemWorkspaceEntity[]> | null;
+  rosterAssignments: EntityRelation<RosterAssignmentWorkspaceEntity[]> | null;
+  attendanceDays: EntityRelation<AttendanceDayWorkspaceEntity[]> | null;
+  attendanceEvents: EntityRelation<AttendanceEventWorkspaceEntity[]> | null;
+  attendanceCorrections: EntityRelation<AttendanceCorrectionWorkspaceEntity[]> | null;
+  leaveRequests: EntityRelation<LeaveRequestWorkspaceEntity[]> | null;
+  leaveBalances: EntityRelation<LeaveBalanceWorkspaceEntity[]> | null;
+  salaryStructures: EntityRelation<SalaryStructureWorkspaceEntity[]> | null;
+  payslips: EntityRelation<PayslipWorkspaceEntity[]> | null;
+  payrollAdjustments: EntityRelation<PayrollAdjustmentWorkspaceEntity[]> | null;
+  taskTargets: EntityRelation<TaskTargetWorkspaceEntity[]> | null;
+  noteTargets: EntityRelation<NoteTargetWorkspaceEntity[]> | null;
+  attachments: EntityRelation<AttachmentWorkspaceEntity[]> | null;
+  timelineActivities: EntityRelation<TimelineActivityWorkspaceEntity[]> | null;
+}

@@ -9,9 +9,17 @@ import { type DashboardWorkspaceEntity } from 'src/modules/dashboard/standard-ob
 import { type NoteWorkspaceEntity } from 'src/modules/note/standard-objects/note.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { type PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
+import { type CandidateSubmissionWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate-submission.workspace-entity';
+import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
+import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/requirement.workspace-entity';
 import { type TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { type WorkflowWorkspaceEntity } from 'src/modules/workflow/common/standard-objects/workflow.workspace-entity';
 import { type WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { type EmployeeWorkspaceEntity } from 'src/modules/hr/standard-objects/employee.workspace-entity';
+import { type TeamWorkspaceEntity } from 'src/modules/hr/standard-objects/team.workspace-entity';
+import { type LocationWorkspaceEntity } from 'src/modules/hr/standard-objects/location.workspace-entity';
+import { type InvoiceWorkspaceEntity } from 'src/modules/hr/standard-objects/invoice.workspace-entity';
 
 export class AttachmentWorkspaceEntity extends BaseWorkspaceEntity {
   /** @deprecated Use `file[0].label` field instead */
@@ -42,5 +50,21 @@ export class AttachmentWorkspaceEntity extends BaseWorkspaceEntity {
   targetDashboardId: string | null;
   targetWorkflow: EntityRelation<WorkflowWorkspaceEntity> | null;
   targetWorkflowId: string | null;
+  targetRequirement: EntityRelation<RequirementWorkspaceEntity> | null;
+  targetRequirementId: string | null;
+  targetCandidate: EntityRelation<CandidateWorkspaceEntity> | null;
+  targetCandidateId: string | null;
+  targetSubmission: EntityRelation<CandidateSubmissionWorkspaceEntity> | null;
+  targetSubmissionId: string | null;
+  targetInterview: EntityRelation<InterviewWorkspaceEntity> | null;
+  targetInterviewId: string | null;
+  targetTeam: EntityRelation<TeamWorkspaceEntity> | null;
+  targetTeamId: string | null;
+  targetLocation: EntityRelation<LocationWorkspaceEntity> | null;
+  targetLocationId: string | null;
+  targetEmployee: EntityRelation<EmployeeWorkspaceEntity> | null;
+  targetEmployeeId: string | null;
+  targetInvoice: EntityRelation<InvoiceWorkspaceEntity> | null;
+  targetInvoiceId: string | null;
   custom: EntityRelation<CustomWorkspaceEntity>;
 }

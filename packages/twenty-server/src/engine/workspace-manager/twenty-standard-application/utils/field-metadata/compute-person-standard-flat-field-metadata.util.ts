@@ -730,6 +730,64 @@ export const buildPersonStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  candidateProfiles: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'candidateProfiles',
+      label: i18nLabel(
+        msg({ message: `Candidate profiles`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Candidate profiles linked to the person`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserSearch',
+      isNullable: true,
+      targetObjectName: 'candidate',
+      targetFieldName: 'person',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  requirements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'requirements',
+      label: i18nLabel(
+        msg({ message: `Requirements`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Hiring requirements where the person is the client contact`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTargetArrow',
+      isNullable: true,
+      targetObjectName: 'requirement',
+      targetFieldName: 'pointOfContact',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   searchVector: createStandardFieldFlatMetadata({
     objectName,
     workspaceId,

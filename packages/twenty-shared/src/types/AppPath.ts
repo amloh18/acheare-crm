@@ -16,6 +16,19 @@ export enum AppPath {
   PlanRequiredSuccess = '/plan-required/payment-success',
   BookCall = '/book-call',
 
+  // Achare Onboarding
+  AchareWelcome = '/acheare/welcome',
+  AchareBasicSetup = '/acheare/basic-setup',
+  AchareSetupChoice = '/acheare/setup-choice',
+  AchareAgency = '/acheare/agency',
+  AchareTeam = '/acheare/team',
+  AchareCrmImport = '/acheare/crm-import',
+  AchareRecruitment = '/acheare/recruitment',
+  AchareHr = '/acheare/hr',
+  AcharePayroll = '/acheare/payroll',
+  AchareDashboard = '/acheare/dashboard',
+  AchareReview = '/acheare/review',
+
   // Onboarded
   AiChat = '/chat/:threadId?',
   Index = '/',

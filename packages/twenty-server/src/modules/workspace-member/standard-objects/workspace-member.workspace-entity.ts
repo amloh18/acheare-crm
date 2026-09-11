@@ -11,6 +11,10 @@ import { type CalendarEventParticipantWorkspaceEntity } from 'src/modules/calend
 import { type CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
 import { type MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
+import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
+import { type CandidateSubmissionWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate-submission.workspace-entity';
+import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
+import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/requirement.workspace-entity';
 import { type TaskWorkspaceEntity } from 'src/modules/task/standard-objects/task.workspace-entity';
 import { type TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 
@@ -76,6 +80,13 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
   >;
   timelineActivities: Relation<TimelineActivityWorkspaceEntity[]>;
   ownedOpportunities: Relation<OpportunityWorkspaceEntity[]>;
+  ownedRequirements: Relation<RequirementWorkspaceEntity[]>;
+  hrOwnedRequirements: Relation<RequirementWorkspaceEntity[]>;
+  recruiterOwnedRequirements: Relation<RequirementWorkspaceEntity[]>;
+  ownedCandidates: Relation<CandidateWorkspaceEntity[]>;
+  submittedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
+  hrOwnedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
+  ownedInterviews: Relation<InterviewWorkspaceEntity[]>;
   searchVector: string;
   numberFormat: string;
 }

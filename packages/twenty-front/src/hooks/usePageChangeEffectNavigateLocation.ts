@@ -172,6 +172,83 @@ export const usePageChangeEffectNavigateLocation = () => {
     return AppPath.BookCall;
   }
 
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_WELCOME &&
+    !isMatchingLocation(location, AppPath.AchareWelcome)
+  ) {
+    return AppPath.AchareWelcome;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_BASIC_SETUP &&
+    !isMatchingLocation(location, AppPath.AchareBasicSetup)
+  ) {
+    return AppPath.AchareBasicSetup;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_SETUP_CHOICE &&
+    !isMatchingLocation(location, AppPath.AchareSetupChoice)
+  ) {
+    return AppPath.AchareSetupChoice;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_AGENCY &&
+    !isMatchingLocation(location, AppPath.AchareAgency)
+  ) {
+    return AppPath.AchareAgency;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_TEAM &&
+    !isMatchingLocation(location, AppPath.AchareTeam)
+  ) {
+    return AppPath.AchareTeam;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_CRM_IMPORT &&
+    !isMatchingLocation(location, AppPath.AchareCrmImport)
+  ) {
+    return AppPath.AchareCrmImport;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_RECRUITMENT &&
+    !isMatchingLocation(location, AppPath.AchareRecruitment)
+  ) {
+    return AppPath.AchareRecruitment;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_HR &&
+    !isMatchingLocation(location, AppPath.AchareHr)
+  ) {
+    return AppPath.AchareHr;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_PAYROLL &&
+    !isMatchingLocation(location, AppPath.AcharePayroll)
+  ) {
+    return AppPath.AcharePayroll;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_DASHBOARD &&
+    !isMatchingLocation(location, AppPath.AchareDashboard)
+  ) {
+    return AppPath.AchareDashboard;
+  }
+
+  if (
+    onboardingStatus === OnboardingStatus.ACHARE_REVIEW &&
+    !isMatchingLocation(location, AppPath.AchareReview)
+  ) {
+    return AppPath.AchareReview;
+  }
+
   if (isBillingEnabled && onboardingStatus === OnboardingStatus.COMPLETED) {
     if (isMatchingLocation(location, AppPath.InviteTeam)) {
       return AppPath.PlanRequired;

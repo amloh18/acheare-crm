@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { BillingModule } from 'src/engine/core-modules/billing/billing.module';
+import { AchareOnboardingModule } from 'src/engine/core-modules/onboarding/acheare-onboarding.module';
 import { OnboardingResolver } from 'src/engine/core-modules/onboarding/onboarding.resolver';
 import { OnboardingService } from 'src/engine/core-modules/onboarding/onboarding.service';
 import { UserVarsModule } from 'src/engine/core-modules/user/user-vars/user-vars.module';
@@ -14,6 +15,7 @@ import { OnboardingInviteSuggestionsModule } from 'src/modules/onboarding-invite
     BillingModule,
     UserVarsModule,
     OnboardingInviteSuggestionsModule,
+    AchareOnboardingModule,
     TypeOrmModule.forFeature([WorkspaceEntity, UserWorkspaceEntity]),
   ],
   exports: [OnboardingService],

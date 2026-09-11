@@ -881,6 +881,231 @@ export const buildWorkspaceMemberStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  ownedRequirements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'ownedRequirements',
+      label: i18nLabel(
+        msg({
+          message: `BDE owned requirements`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Requirements owned by the workspace member as BDE`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTargetArrow',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'requirement',
+      targetFieldName: 'bdeOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  hrOwnedRequirements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'hrOwnedRequirements',
+      label: i18nLabel(
+        msg({
+          message: `HR owned requirements`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Requirements owned by the workspace member as HR`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCog',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'requirement',
+      targetFieldName: 'hrOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  recruiterOwnedRequirements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'recruiterOwnedRequirements',
+      label: i18nLabel(
+        msg({
+          message: `Recruiter owned requirements`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Requirements owned by the workspace member as recruiter`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserSearch',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'requirement',
+      targetFieldName: 'recruiterOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  ownedCandidates: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'ownedCandidates',
+      label: i18nLabel(
+        msg({ message: `Owned candidates`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Candidates owned by the workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserSearch',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'candidate',
+      targetFieldName: 'recruiterOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  submittedSubmissions: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'submittedSubmissions',
+      label: i18nLabel(
+        msg({
+          message: `Submitted submissions`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Submissions sent by the workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconSend',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'candidateSubmission',
+      targetFieldName: 'recruiter',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  hrOwnedSubmissions: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'hrOwnedSubmissions',
+      label: i18nLabel(
+        msg({
+          message: `HR owned submissions`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Submissions owned by the workspace member as HR`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCog',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'candidateSubmission',
+      targetFieldName: 'hrOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  ownedInterviews: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'ownedInterviews',
+      label: i18nLabel(
+        msg({ message: `Owned interviews`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Interviews owned by the workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconCalendarEvent',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'interview',
+      targetFieldName: 'owner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   createdBy: createStandardFieldFlatMetadata({
     objectName,
     workspaceId,

@@ -18,25 +18,37 @@ export const RecordIndexViewFieldsSSESyncEffect = () => {
     contextStoreCurrentViewIdComponentState,
   );
 
+  const syncViewFields = () => {
+    if (!isDefined(contextStoreCurrentViewId)) {
+      return;
+    }
+
+    const currentView = store.get(
+      viewFromViewIdFamilySelector.selectorFamily({
+        viewId: contextStoreCurrentViewId,
+      }),
+    );
+
+    if (!isDefined(currentView)) {
+      return;
+    }
+
+    syncRecordIndexViewFields(currentView, objectMetadataItem);
+  };
+
   useListenToMetadataOperationBrowserEvent({
     metadataName: AllMetadataName.viewField,
-    onMetadataOperationBrowserEvent: () => {
-      if (!isDefined(contextStoreCurrentViewId)) {
-        return;
-      }
+    onMetadataOperationBrowserEvent: syncViewFields,
+  });
 
-      const currentView = store.get(
-        viewFromViewIdFamilySelector.selectorFamily({
-          viewId: contextStoreCurrentViewId,
-        }),
-      );
+  useListenToMetadataOperationBrowserEvent({
+    metadataName: AllMetadataName.fieldMetadata,
+    onMetadataOperationBrowserEvent: syncViewFields,
+  });
 
-      if (!isDefined(currentView)) {
-        return;
-      }
-
-      syncRecordIndexViewFields(currentView, objectMetadataItem);
-    },
+  useListenToMetadataOperationBrowserEvent({
+    metadataName: AllMetadataName.objectMetadata,
+    onMetadataOperationBrowserEvent: syncViewFields,
   });
 
   return null;

@@ -149,6 +149,86 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.messageCampaign,
       }),
     },
+    targetRequirement: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    targetCandidate: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    targetSubmission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    targetInterview: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    targetTeam: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+      }),
+    },
+    targetLocation: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+      }),
+    },
+    targetEmployee: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    targetInvoice: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+      }),
+    },
     linkedRecordCachedName: {
       universalIdentifier: '20202020-cfdb-4bef-bbce-a29f41230934',
     },
@@ -239,6 +319,86 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workflow,
+      }),
+    },
+    targetRequirement: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    targetCandidate: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    targetSubmission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    targetInterview: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    targetTeam: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+      }),
+    },
+    targetLocation: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+      }),
+    },
+    targetEmployee: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    targetInvoice: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
       }),
     },
   },
@@ -512,6 +672,26 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+    requirements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    interviews: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
       }),
     },
   },
@@ -844,6 +1024,86 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.opportunity,
       }),
     },
+    targetRequirement: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    targetCandidate: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    targetSubmission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    targetInterview: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    targetTeam: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+      }),
+    },
+    targetLocation: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+      }),
+    },
+    targetEmployee: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    targetInvoice: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+      }),
+    },
   },
   opportunity: {
     ...buildStandardObjectSystemFields(
@@ -918,6 +1178,16 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.opportunity,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+    requirements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.opportunity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
       }),
     },
   },
@@ -1004,6 +1274,24 @@ export const STANDARD_OBJECT_FIELDS = {
     },
     listMemberships: {
       universalIdentifier: '8b8d1be0-4c94-4413-a2c9-c7ede205a81d',
+    },
+    candidateProfiles: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    requirements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
     },
   },
   recordShare: {
@@ -1096,6 +1384,86 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.opportunity,
+      }),
+    },
+    targetRequirement: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    targetCandidate: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    targetSubmission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    targetInterview: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    targetTeam: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+      }),
+    },
+    targetLocation: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+      }),
+    },
+    targetEmployee: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    targetInvoice: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
       }),
     },
   },
@@ -1285,6 +1653,2001 @@ export const STANDARD_OBJECT_FIELDS = {
     },
     numberFormat: {
       universalIdentifier: '20202020-7f40-4e7f-b126-11c0eda6b141',
+    },
+    ownedRequirements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+      }),
+    },
+    hrOwnedRequirements: {
+      // Explicit literal: getSystemRelationFieldUniversalIdentifier derives
+      // from (object, target) only, so three workspaceMember→requirement
+      // relations would collide on the same UUID.
+      universalIdentifier: '3f7d2b91-6c58-4a0e-9d24-8b1f5c7e30a2',
+    },
+    recruiterOwnedRequirements: {
+      universalIdentifier: '7e2a9c45-d1b3-4f86-b05e-2c9d4a7f61b8',
+    },
+    ownedCandidates: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+    submittedSubmissions: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    hrOwnedSubmissions: {
+      universalIdentifier: '5b8e1f72-9a4c-4d63-a217-c6f0b3d9845e',
+    },
+    ownedInterviews: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+  },
+  // Achare recruitment domain (stable — never mutate a universal identifier)
+  requirement: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+    ),
+    title: { universalIdentifier: 'fac6a8aa-9192-408e-b143-d7221ba4b6c2' },
+    rolePosition: {
+      universalIdentifier: '5fdc21c9-8e8b-4e02-b1d0-451f840565aa',
+    },
+    numberOfOpenings: {
+      universalIdentifier: 'ba9b080a-272a-47d6-ba8d-e5641d50dac3',
+    },
+    filledCount: {
+      universalIdentifier: '4dcdc233-03f4-46fd-9204-5eab80479088',
+    },
+    company: { universalIdentifier: '9e77a878-9344-476c-a390-469fb8e2055b' },
+    pointOfContact: {
+      universalIdentifier: '0a774851-5312-4220-a715-d5a7ba8bdea2',
+    },
+    deal: { universalIdentifier: 'd54cb9c5-4543-4367-93df-bd2cb89e2653' },
+    location: { universalIdentifier: 'f665c864-a6aa-4afd-a5ff-9fae1d78fd87' },
+    workMode: { universalIdentifier: 'a9d03ef8-3a10-48ab-b467-679e871f1458' },
+    employmentType: {
+      universalIdentifier: 'aeac0dc0-aa65-4ca4-90cc-3b30a6b59ee1',
+    },
+    experienceMin: {
+      universalIdentifier: '06efc617-7084-404f-9589-0f37bbcbf668',
+    },
+    experienceMax: {
+      universalIdentifier: '508befc8-c8ab-4e19-b3a0-76a9f3784b99',
+    },
+    salaryMin: { universalIdentifier: '431830b3-4fcb-4a1d-a66f-3ccf1386a54e' },
+    salaryMax: { universalIdentifier: '132f7d3e-07f5-4d70-8a22-1d5b664e40d6' },
+    skills: { universalIdentifier: '335b1b34-8497-424a-8d9d-dde4c00bd7cf' },
+    education: { universalIdentifier: '09b5bc1f-2fca-47a7-9161-902ad4986e99' },
+    description: {
+      universalIdentifier: 'fcb3622a-f288-4e2f-87c9-93b4ca198383',
+    },
+    responsibilities: {
+      universalIdentifier: 'fb244c28-7d10-47bc-82bd-dadbdfe51621',
+    },
+    requirementsText: {
+      universalIdentifier: 'add8bcc3-9cc7-41c8-aeb6-86858c0ac1c6',
+    },
+    priority: { universalIdentifier: 'a4fdc3e4-ca32-41d6-af98-5e15e2e53f83' },
+    status: { universalIdentifier: 'fbd0b4ff-39c9-4e69-9529-fee9813a0b5f' },
+    bdeOwner: { universalIdentifier: '2fad5cd6-a893-447e-bd82-7c86939fbb58' },
+    hrOwner: { universalIdentifier: '086b8106-6c69-45de-8dc1-4d80164322c8' },
+    recruiterOwner: {
+      universalIdentifier: '107c478a-5860-422d-be2e-19852bbab41a',
+    },
+    receivedAt: {
+      universalIdentifier: '6ab5a3d1-2e27-4d51-80f0-aa1976178538',
+    },
+    targetDate: {
+      universalIdentifier: 'c866e970-8b83-4b46-bd13-63a2c8da00e8',
+    },
+    closedAt: { universalIdentifier: '941c95f7-e0a5-4882-a355-a8db200b0028' },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+    candidateSubmissions: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    interviews: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+  },
+  candidate: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+    ),
+    name: { universalIdentifier: '7966163a-8059-41e7-b74f-bab4c7a176d4' },
+    person: { universalIdentifier: 'a6f08d76-c6c3-4178-bfac-9a34feef93bb' },
+    source: { universalIdentifier: '3a50fed5-e39a-40a7-b819-6f6983ee5c43' },
+    skills: { universalIdentifier: 'b08aeb7d-bc38-4072-8757-6cf12cf9d5e0' },
+    totalExperienceYears: {
+      universalIdentifier: '1a8efcd7-6027-45a7-88e4-ab29cf61716e',
+    },
+    currentCompany: {
+      universalIdentifier: '84990e88-20be-4e20-949c-dd4b15591c1a',
+    },
+    currentDesignation: {
+      universalIdentifier: 'cdd95eca-5202-4d20-9083-10d8e494adb9',
+    },
+    currentSalary: {
+      universalIdentifier: '26dec8fb-dd39-4f41-8b91-0458e071c1cd',
+    },
+    expectedSalary: {
+      universalIdentifier: '01dab3c4-ac19-4346-a504-771bab13d2c4',
+    },
+    noticePeriod: {
+      universalIdentifier: '21898d4b-5fd3-418c-9dae-d0d1489df420',
+    },
+    preferredLocation: {
+      universalIdentifier: '5f4e2f34-fab4-4723-b5cf-2a8a6c3512f1',
+    },
+    recruiterOwner: {
+      universalIdentifier: '8938fa35-1ba7-4a2e-9bb3-25cc64226709',
+    },
+    status: { universalIdentifier: 'a2663c31-a0f5-4771-8766-6e80c0942da3' },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+    candidateSubmissions: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    interviews: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+  },
+  candidateSubmission: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+    ),
+    name: { universalIdentifier: 'c3fb9a17-bdca-4d12-b51f-94b668714a89' },
+    candidate: {
+      universalIdentifier: '9553ae7e-2a92-4f34-8dec-a12331d3333e',
+    },
+    requirement: {
+      universalIdentifier: '3eebb343-036f-4b94-8f30-56743c398b7e',
+    },
+    recruiter: { universalIdentifier: '45cfaca1-fb0e-485f-a4c1-5bf946c47dff' },
+    hrOwner: { universalIdentifier: '4a7e1835-2602-4748-a85b-8e93bad63357' },
+    stage: { universalIdentifier: 'fbb90879-0349-41b1-a1ea-57c5a1b9bdef' },
+    resumeSent: {
+      universalIdentifier: '95b7b675-e815-480d-8de3-46d449aef2f8',
+    },
+    clientFeedback: {
+      universalIdentifier: 'ddbf684f-497d-483a-876c-d9a7c44d10fd',
+    },
+    expectedSalary: {
+      universalIdentifier: 'b34514ba-9323-47f8-be2d-0be56332b2db',
+    },
+    offeredSalary: {
+      universalIdentifier: '7db9cc5b-867b-47d3-ac7c-7613607c6e01',
+    },
+    joiningDate: {
+      universalIdentifier: '78510818-c52b-450f-923d-eb8465e8dee7',
+    },
+    rejectionReason: {
+      universalIdentifier: 'b17eb1de-c133-4ff9-bae8-96e7f42d3d9f',
+    },
+    dropReason: {
+      universalIdentifier: '48f7b432-2728-4f9b-9b6c-6a0d7bd38cfc',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+    interviews: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+  },
+  interview: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+    ),
+    title: { universalIdentifier: 'f0aa68ed-d40f-422b-ac90-c52ce24737d8' },
+    submission: {
+      universalIdentifier: 'ae2619f3-9293-4fd1-a194-2bb41937062a',
+    },
+    requirement: {
+      universalIdentifier: '22479f65-fb10-468e-aced-798a63ebd994',
+    },
+    candidate: {
+      universalIdentifier: '5d942e38-4fbc-483f-b852-3bec3e622055',
+    },
+    company: { universalIdentifier: 'cb721d40-5887-4ce8-bbec-bdbae68fee32' },
+    round: { universalIdentifier: '2a5575dc-5bf1-44e2-b5eb-6e80de0ec542' },
+    interviewer: {
+      universalIdentifier: '90a1a8bb-469a-4b06-872a-93e3e40f35d2',
+    },
+    scheduledAt: {
+      universalIdentifier: '5a9d3fce-b067-4cb1-bf77-e58a08630368',
+    },
+    mode: { universalIdentifier: '659b1e0b-072b-4b31-bb9b-62da06e6b650' },
+    meetingLink: {
+      universalIdentifier: '2b7785a3-7b74-4ab9-8547-137148f340ab',
+    },
+    status: { universalIdentifier: '89d6c955-4d7b-4ce4-81af-f9c3fdfd0b54' },
+    result: { universalIdentifier: '4d2f1eb3-9331-4af8-9be9-f07af035748d' },
+    feedback: { universalIdentifier: 'df483513-4502-4639-ba73-0f0bba7c09f8' },
+    owner: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+      }),
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  designation: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.designation,
+    ),
+    title: {
+      universalIdentifier: 'c3d4e5f6-0001-4000-8000-000000000001',
+    },
+    description: {
+      universalIdentifier: 'c3d4e5f6-0001-4000-8000-000000000002',
+    },
+    level: {
+      universalIdentifier: 'c3d4e5f6-0001-4000-8000-000000000003',
+    },
+    status: {
+      universalIdentifier: 'c3d4e5f6-0001-4000-8000-000000000004',
+    },
+    employees: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.designation,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+  },
+  employee: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+    ),
+    employeeCode: {
+      universalIdentifier: '0d0257ae-609b-4c7f-8e46-704da72cd017',
+    },
+    person: {
+      universalIdentifier: '3ccc0ea0-5adb-401d-8d12-d54df4fcf693',
+    },
+    status: {
+      universalIdentifier: 'd893b0e5-65ab-4b0f-84d8-0df963eea4dd',
+    },
+    department: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+      }),
+    },
+    designation: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.designation,
+      }),
+    },
+    employmentType: {
+      universalIdentifier: '22785094-b2f6-45cc-80f0-99a64e7097eb',
+    },
+    joiningDate: {
+      universalIdentifier: '883b8572-7730-44a0-8e43-353c1dd875ec',
+    },
+    exitDate: {
+      universalIdentifier: '0dee5bb5-33f8-4576-8965-4bc20e848201',
+    },
+    workLocation: {
+      universalIdentifier: '5093b3e3-d569-4642-85ae-ee866e66244f',
+    },
+    team: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+      }),
+    },
+    location: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+      }),
+    },
+    manager: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    onboardingItems: {
+      universalIdentifier: 'add1706f-4a67-47fc-8106-8471da201a6e',
+    },
+    rosterAssignments: {
+      universalIdentifier: 'f75128a0-fcd0-41bf-8489-aa66bbd8ad88',
+    },
+    attendanceDays: {
+      universalIdentifier: '9d6ee019-5459-439d-8140-aba3e0a9c451',
+    },
+    attendanceEvents: {
+      universalIdentifier: '51b3d8c4-323f-4ca2-8117-e30611578c81',
+    },
+    attendanceCorrections: {
+      universalIdentifier: '27f20624-8766-4ca0-8ab6-342e90a89741',
+    },
+    leaveRequests: {
+      universalIdentifier: 'c783573a-caaf-4f73-8bc7-d3afbed77461',
+    },
+    leaveBalances: {
+      universalIdentifier: '6207243a-8487-4f6b-8675-29d741f11c8a',
+    },
+    salaryStructures: {
+      universalIdentifier: '1f98057b-f49b-42fd-8771-518c8c55b6cf',
+    },
+    payslips: {
+      universalIdentifier: 'b0339fbf-54b6-468d-8fac-a50858dd560d',
+    },
+    payrollAdjustments: {
+      universalIdentifier: '35bc4fd9-ec4c-4f09-8fb9-c1108d747776',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  onboardingItem: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+    ),
+    title: {
+      universalIdentifier: '28df0cb6-bdb4-47ee-89c5-f39d8eb92a90',
+    },
+    employee: {
+      universalIdentifier: 'f0b2ca73-5ea2-42cf-8c44-a8041e621a60',
+    },
+    category: {
+      universalIdentifier: 'dd2798cb-a9e4-4ec4-8636-6949947ddb39',
+    },
+    isRequired: {
+      universalIdentifier: 'ff7e8cb3-5b1f-473b-8f18-4bf664b5a4ae',
+    },
+    assignedTo: {
+      universalIdentifier: '783fbbc7-9667-4042-8e34-80d6e9321f77',
+    },
+    dueDate: {
+      universalIdentifier: '008eeb8e-41b9-48e8-8615-6157530b2135',
+    },
+    status: {
+      universalIdentifier: 'ee651b75-5667-4325-8ab2-2db67c4539af',
+    },
+    completedAt: {
+      universalIdentifier: '8d2fbb98-fd87-416f-87b9-a1a894cfbdd5',
+    },
+    notes: {
+      universalIdentifier: 'b3234d49-9acf-4fd1-817e-eba09657eba7',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  shift: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+    ),
+    name: {
+      universalIdentifier: '376a13f7-7114-4028-841d-e9c8deb91718',
+    },
+    startTime: {
+      universalIdentifier: '3debbccd-5f12-4088-800e-1ff935d1ad18',
+    },
+    endTime: {
+      universalIdentifier: '62e1baba-60f5-4c53-84b3-86e2fa20b526',
+    },
+    breakMinutes: {
+      universalIdentifier: '3b989400-c54e-405a-8d89-8979fdfc4078',
+    },
+    graceMinutes: {
+      universalIdentifier: 'bf77f236-00de-44d2-855f-0ecddce3544c',
+    },
+    workingDays: {
+      universalIdentifier: '34eb29ec-8bff-4ad0-8e53-f885aaefb4d7',
+    },
+    isActive: {
+      universalIdentifier: 'c4dc7c66-c89f-4c41-8d94-041bff5e5650',
+    },
+    rosterAssignments: {
+      universalIdentifier: '2a8f6288-2237-4c91-8fc6-d30f6879b94d',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  rosterAssignment: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+    ),
+    employee: {
+      universalIdentifier: '16f64b76-d43b-4093-8d57-f4202766af41',
+    },
+    shift: {
+      universalIdentifier: 'f9307eec-9ee2-4ebb-8b5f-9fb0f359a9f7',
+    },
+    effectiveFrom: {
+      universalIdentifier: '60358aa4-346c-461d-869f-4f58ea1ffa97',
+    },
+    effectiveTo: {
+      universalIdentifier: '4c7dfebe-80a0-46dc-8862-8aa240d06185',
+    },
+    isActive: {
+      universalIdentifier: '415d1679-c112-48b2-8f76-7f8d278a991b',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  attendanceEvent: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+    ),
+    employee: {
+      universalIdentifier: 'ea31c4c9-c80c-4ed4-8532-bc786bdefa92',
+    },
+    timestamp: {
+      universalIdentifier: 'e3ad0c28-c340-4b88-89b4-329b896c083c',
+    },
+    eventType: {
+      universalIdentifier: 'ee4e74e9-a143-447f-88e3-0918ec541ab1',
+    },
+    source: {
+      universalIdentifier: '5b3b844f-d5f8-4665-8e93-545fd36eb160',
+    },
+    correction: {
+      universalIdentifier: '0e94cdb4-2a13-405d-8a67-7cdb33f0b95e',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  attendanceDay: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+    ),
+    employee: {
+      universalIdentifier: '2e0e3e25-4b87-46b2-8d93-26133496b5c7',
+    },
+    workDate: {
+      universalIdentifier: '5b04cecb-761c-41d9-8f1a-83f8de65a165',
+    },
+    status: {
+      universalIdentifier: '45c4804f-b876-48da-8d4d-f61285a87565',
+    },
+    shift: {
+      universalIdentifier: '0a6c2da1-4c02-401e-8a11-dead581b9fc8',
+    },
+    firstCheckIn: {
+      universalIdentifier: '97ef3c2c-5acd-46ff-870d-9c67f6c0897c',
+    },
+    lastCheckOut: {
+      universalIdentifier: '93f87902-a9cb-4ee4-85fb-6f5286c0cfed',
+    },
+    workedMinutes: {
+      universalIdentifier: '5d3247cd-d16c-486c-8fd3-6d79dfb2cac9',
+    },
+    breakMinutes: {
+      universalIdentifier: 'b3bc5481-9e9c-4a89-8181-de45cfd763ed',
+    },
+    lateMinutes: {
+      universalIdentifier: '9b5c1f2a-0a1b-4508-8778-69cc9388abee',
+    },
+    earlyDepartureMinutes: {
+      universalIdentifier: 'd6612e94-b239-4491-8ffc-786548c21f2c',
+    },
+    overtimeMinutes: {
+      universalIdentifier: '5491bd80-bac3-4727-8aa0-d10062869d2c',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  attendanceCorrection: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+    ),
+    employee: {
+      universalIdentifier: 'd4702266-f4f6-4962-8bae-10e44c9c0c43',
+    },
+    workDate: {
+      universalIdentifier: '60af8f08-f8e5-47c6-815f-8fa4a84db7e7',
+    },
+    requestedCheckIn: {
+      universalIdentifier: '2304e09e-57aa-468b-85bd-7e2c59a90ff4',
+    },
+    requestedCheckOut: {
+      universalIdentifier: '99d65119-1986-45b5-8cda-886c6aabd489',
+    },
+    reason: {
+      universalIdentifier: 'd0905ac1-f064-46c2-89ea-40c700b38b4b',
+    },
+    status: {
+      universalIdentifier: '2519307e-cce3-4ef2-8ab0-212f8e781405',
+    },
+    reviewedBy: {
+      universalIdentifier: '8047c864-fe7d-41b3-8491-0be2d1081ab0',
+    },
+    reviewedAt: {
+      universalIdentifier: 'a6b6f5ca-ecf3-4204-8848-00e917894b26',
+    },
+    reviewNotes: {
+      universalIdentifier: 'c2e651fa-e3fb-46b2-8a0f-9612e20fb431',
+    },
+    correctedEvents: {
+      universalIdentifier: 'ab68394a-bcfe-4ca1-8b58-0af35821046e',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  leaveType: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+    ),
+    name: {
+      universalIdentifier: '281f51ec-0001-4f31-82c5-6b5c14d0896e',
+    },
+    isPaid: {
+      universalIdentifier: '3423ef72-21f8-4204-802f-4380a5600ad3',
+    },
+    annualQuota: {
+      universalIdentifier: '977765c1-c1e9-4d54-8c8b-b1b4febec7ce',
+    },
+    isActive: {
+      universalIdentifier: '928c421c-d7cc-4d02-8944-d6993fb573ec',
+    },
+    leaveRequests: {
+      universalIdentifier: '67f32022-eaf8-41a4-83fc-d632c140c6e6',
+    },
+    leaveBalances: {
+      universalIdentifier: '71d1f0d2-d50c-4f5a-8f4e-abec3afdc8d2',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  leaveRequest: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+    ),
+    employee: {
+      universalIdentifier: '4b98f1cf-012d-4212-88db-004e01fc6956',
+    },
+    leaveType: {
+      universalIdentifier: 'b3b95167-240f-4964-88f3-1a0fa8ea5a74',
+    },
+    startDate: {
+      universalIdentifier: '51f1b224-f4ef-4de2-8a2e-c969f05603e1',
+    },
+    endDate: {
+      universalIdentifier: '514ea397-6fb7-4700-8f26-3abf152fc1aa',
+    },
+    days: {
+      universalIdentifier: 'c87e3230-efa3-40ce-8517-af71d60828d4',
+    },
+    reason: {
+      universalIdentifier: 'af3f38ad-6cfd-40db-8833-d05b785daad2',
+    },
+    status: {
+      universalIdentifier: '255b20f8-b2eb-49a8-8eb3-ef36846b8396',
+    },
+    reviewedBy: {
+      universalIdentifier: 'c62821d5-6950-4afa-822e-cd259d7abbdc',
+    },
+    reviewedAt: {
+      universalIdentifier: '3179bab7-a3f8-432b-89ec-56e14cf46b09',
+    },
+    reviewNotes: {
+      universalIdentifier: '4ea8bd02-fc60-4ddd-889b-6fcd37a54ab9',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  leaveBalance: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+    ),
+    employee: {
+      universalIdentifier: 'de33ca50-86bf-47cb-8997-ae1ecd21b8f4',
+    },
+    leaveType: {
+      universalIdentifier: 'd2b26480-ff2e-47bb-8830-d2e185f27e52',
+    },
+    year: {
+      universalIdentifier: '8bc3c153-657c-4a60-82e9-67b3efc50299',
+    },
+    entitled: {
+      universalIdentifier: '04b12af6-5979-4a6b-8d45-9cc9d3520527',
+    },
+    used: {
+      universalIdentifier: 'b98c9f5c-e047-46fe-893a-22af01b641b2',
+    },
+    pending: {
+      universalIdentifier: '222f7c27-4f69-4600-8964-8b3651137728',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  salaryStructure: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+    ),
+    employee: {
+      universalIdentifier: 'c078f559-3a1e-47da-8a72-45e0e096302d',
+    },
+    effectiveFrom: {
+      universalIdentifier: '87ffcf7a-b3ff-44bd-8958-7f94b2fda0ee',
+    },
+    effectiveTo: {
+      universalIdentifier: 'd9baa8e0-cc99-41e8-86dd-a0a22e86d2f7',
+    },
+    currency: {
+      universalIdentifier: '74cbb561-ef16-4d92-8bd2-ecbe53dca59d',
+    },
+    monthlyGross: {
+      universalIdentifier: '443cfe55-d87d-44b1-8f61-60a151be260a',
+    },
+    isActive: {
+      universalIdentifier: '200e4d9b-fa56-4487-8393-51d61aafb9d9',
+    },
+    components: {
+      universalIdentifier: '3946bc65-62e1-4553-830f-9f4381a4bea4',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  salaryComponent: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+    ),
+    salaryStructure: {
+      universalIdentifier: '04591518-2643-429b-810d-3479d403fd98',
+    },
+    name: {
+      universalIdentifier: 'ae5d91ea-13f6-48db-8626-baee442c17bd',
+    },
+    componentType: {
+      universalIdentifier: '368c46b4-8488-4cb1-8527-d2f546fc6af6',
+    },
+    calculationType: {
+      universalIdentifier: '464d3d26-db38-4ae3-80ff-1fcbf81eef07',
+    },
+    amount: {
+      universalIdentifier: '61c25309-dd29-496a-8bd4-590fd57d42e1',
+    },
+    percentage: {
+      universalIdentifier: 'f7c73e9f-9b60-4a0a-88ee-1cea9c7577ea',
+    },
+    position: {
+      universalIdentifier: 'fc7a7937-9b9d-4a5e-8089-32ab15709bec',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  payrollPeriod: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+    ),
+    name: {
+      universalIdentifier: '1bdebf87-7878-4634-8597-1202fb5c8f51',
+    },
+    startDate: {
+      universalIdentifier: '7beec81a-5d30-4029-8be7-f93a8dbce014',
+    },
+    endDate: {
+      universalIdentifier: '3d949dc9-5551-4f7d-8bfa-f5d9b263d945',
+    },
+    payDate: {
+      universalIdentifier: 'bdfef5a8-4bb0-4883-859b-73a72b2516e2',
+    },
+    status: {
+      universalIdentifier: '07c42b92-8025-4129-89a5-5a944f430c66',
+    },
+    employeeCount: {
+      universalIdentifier: '1e4def32-f53b-4cc6-8135-612062725234',
+    },
+    totalGross: {
+      universalIdentifier: '8006af23-74a7-4e80-8abb-52810c3898cf',
+    },
+    totalDeductions: {
+      universalIdentifier: '3d2ab627-8d4a-42d9-813b-d2a6d7ab29a9',
+    },
+    totalAdjustments: {
+      universalIdentifier: 'c19d5d1d-adab-4d44-8563-b39eb4cfc022',
+    },
+    totalNet: {
+      universalIdentifier: 'ee3947da-df4e-4aa6-8ec0-8984b6ac6a15',
+    },
+    payslips: {
+      universalIdentifier: 'ee4ad5e4-99fa-4741-8ade-6d29a74165cb',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  payslip: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+    ),
+    payrollPeriod: {
+      universalIdentifier: 'aeb9348c-8dfb-4c51-8e3c-6939e0d81efd',
+    },
+    employee: {
+      universalIdentifier: '7c97ce1a-772a-4dd7-8868-6c0b740d2c4c',
+    },
+    currency: {
+      universalIdentifier: '54fca65f-6f0b-4464-8d77-7fefc78ed1b7',
+    },
+    grossEarnings: {
+      universalIdentifier: '767e2d6d-9111-4785-8e08-539496164e78',
+    },
+    totalDeductions: {
+      universalIdentifier: 'eb5d724f-d38f-4eb3-816f-8106de7f51f5',
+    },
+    totalAdjustments: {
+      universalIdentifier: '52e4aea5-1480-40ed-8b41-754fa1aadd3e',
+    },
+    netPay: {
+      universalIdentifier: '3f4db2d9-9c12-4db5-8242-ae182ecb0875',
+    },
+    workingDays: {
+      universalIdentifier: '5e84afc2-223a-4423-8b49-c1ee912d123a',
+    },
+    presentDays: {
+      universalIdentifier: '8f35b6fc-2a28-4fd5-8d3e-8ec6c531f65a',
+    },
+    paidLeaveDays: {
+      universalIdentifier: '4576f870-5750-4754-8d9c-2411d1057f61',
+    },
+    unpaidLeaveDays: {
+      universalIdentifier: '4142a961-cf41-4189-803c-d1b3ff34d75f',
+    },
+    overtimeMinutes: {
+      universalIdentifier: '8253fa20-ee96-4c11-8a94-461ebab9e79f',
+    },
+    paymentStatus: {
+      universalIdentifier: '2ef654ea-2a51-493f-8197-8fc632f58c84',
+    },
+    paidAt: {
+      universalIdentifier: '8791e52b-36dc-4083-8763-fb44952066e9',
+    },
+    paymentReference: {
+      universalIdentifier: '19280eff-be4c-4bf8-851f-b9ae1f807526',
+    },
+    paymentMethod: {
+      universalIdentifier: 'ef0874ad-ebe0-470f-886a-f3ecb15fa4a3',
+    },
+    lines: {
+      universalIdentifier: 'da1bee74-8da3-465f-8bb6-267d678a65be',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  payslipLine: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+    ),
+    payslip: {
+      universalIdentifier: 'af57b042-12d8-4a2b-8176-36c1a9445f49',
+    },
+    label: {
+      universalIdentifier: 'c19bf207-22b7-4fce-8cc6-53677e3fd418',
+    },
+    lineType: {
+      universalIdentifier: '6ce7fb45-5589-4c8d-8748-aaadf1092db9',
+    },
+    amount: {
+      universalIdentifier: '70cb6aaf-031a-45f8-871d-204309373b17',
+    },
+    notes: {
+      universalIdentifier: '3040cabb-c22d-4e62-8278-baf97777ab7f',
+    },
+    position: {
+      universalIdentifier: 'ac6ce73c-071e-4120-8de9-6c604b86e77b',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  payrollAdjustment: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+    ),
+    employee: {
+      universalIdentifier: '25fe43e5-39a0-417d-83f2-8271c5bca541',
+    },
+    payrollPeriod: {
+      universalIdentifier: 'eb95c0c6-a0ca-4455-8bb8-4c45244f2cf1',
+    },
+    adjustmentType: {
+      universalIdentifier: '10e35b79-03d2-4021-8e80-0d178e347439',
+    },
+    amount: {
+      universalIdentifier: 'a444f912-fc7c-4a72-86c9-de541d427c24',
+    },
+    reason: {
+      universalIdentifier: '78fcd68f-067c-4cf0-814e-8bc953428655',
+    },
+    status: {
+      universalIdentifier: '17cccbcb-755c-47be-8f6e-edb0c7b46cae',
+    },
+    approvedBy: {
+      universalIdentifier: 'f7a50167-a08d-4027-8f9a-797b9e6103ec',
+    },
+    approvedAt: {
+      universalIdentifier: '384e7eb2-754e-4211-8cb9-3a6b7a16a16d',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  invoice: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+    ),
+    invoiceNumber: {
+      universalIdentifier: '5c8125d5-276f-473e-8e0f-79cee3d19347',
+    },
+    company: {
+      universalIdentifier: 'bf0f1979-0fd9-4aa9-8f64-5aaff1406494',
+    },
+    deal: {
+      universalIdentifier: '71d16bdf-62e2-4b63-8b95-1f8c36e93edd',
+    },
+    requirement: {
+      universalIdentifier: 'c00d7bf5-1c1d-4e84-8f1c-3eef31bb2041',
+    },
+    amount: {
+      universalIdentifier: 'd6a65ec4-d490-479d-87c2-1d0cf02e5c1e',
+    },
+    invoiceDate: {
+      universalIdentifier: 'a5bed69f-d8d0-4810-84da-678edd233665',
+    },
+    dueDate: {
+      universalIdentifier: '983a7f2a-38ea-48bf-8eb8-3c0fa87efd95',
+    },
+    status: {
+      universalIdentifier: '83555fef-aa9a-4577-8b26-706212987b64',
+    },
+    amountPaid: {
+      universalIdentifier: '4c232172-d8be-4077-842f-c94e4c187611',
+    },
+    outstanding: {
+      universalIdentifier: 'f2809acc-72bd-4b1b-8095-6b0f73ce0c4f',
+    },
+    notes: {
+      universalIdentifier: 'f76d46c4-c187-42bd-859b-547d269a4bc3',
+    },
+    payments: {
+      universalIdentifier: 'a15fc89a-dafd-48d4-8f65-375d69ae0f10',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  department: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+    ),
+    name: {
+      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abc',
+    },
+    description: {
+      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abd',
+    },
+    status: {
+      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abe',
+    },
+    departmentHead: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+      }),
+    },
+    employees: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+  },
+  payment: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+    ),
+    invoice: {
+      universalIdentifier: 'cd8c5ac4-6137-4cf0-8bad-705a870115bd',
+    },
+    amount: {
+      universalIdentifier: 'cc1a9efc-77b3-49ff-8f9d-28945817ae93',
+    },
+    paidDate: {
+      universalIdentifier: '73640177-0b65-4a7e-8eb3-ee5e9f204092',
+    },
+    method: {
+      universalIdentifier: '4b761d6f-8204-4863-8c6b-dd85bf815dce',
+    },
+    reference: {
+      universalIdentifier: '7c6d64ec-2a24-41fc-835f-afc4afb71a1e',
+    },
+    notes: {
+      universalIdentifier: '35d0a79a-de3d-43e0-8008-5b3757cc2d9d',
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  location: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+    ),
+    name: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890130',
+    },
+    address: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890131',
+    },
+    city: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890132',
+    },
+    state: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890133',
+    },
+    country: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890134',
+    },
+    timezone: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890135',
+    },
+    status: {
+      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890136',
+    },
+    employees: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  team: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+    ),
+    name: {
+      universalIdentifier: 'b2c3d4e5-f6a7-8901-bcde-f12345678910',
+    },
+    description: {
+      universalIdentifier: 'b2c3d4e5-f6a7-8901-bcde-f12345678911',
+    },
+    status: {
+      universalIdentifier: 'b2c3d4e5-f6a7-8901-bcde-f12345678912',
+    },
+    department: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+      }),
+    },
+    teamLead: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+      }),
+    },
+    members: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+      }),
+    },
+    taskTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.taskTarget,
+      }),
+    },
+    noteTargets: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.noteTarget,
+      }),
+    },
+    attachments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attachment,
+      }),
+    },
+    timelineActivities: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
     },
   },
 } satisfies Record<string, Record<string, { universalIdentifier: string }>>;

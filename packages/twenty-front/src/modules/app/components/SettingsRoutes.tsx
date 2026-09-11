@@ -176,6 +176,12 @@ const SettingsGeneral = lazy(() =>
   })),
 );
 
+const SetupCenter = lazy(() =>
+  import('~/pages/settings/SetupCenter').then((module) => ({
+    default: module.SetupCenter,
+  })),
+);
+
 const SettingsLegalDpa = lazy(() =>
   import('~/pages/settings/legal/SettingsLegalDpa').then((module) => ({
     default: module.SettingsLegalDpa,
@@ -753,6 +759,7 @@ const createSettingsRouteElements = ({
       }
     >
       <Route path={SettingsPath.General} element={<SettingsGeneral />} />
+      <Route path={SettingsPath.SetupCenter} element={<SetupCenter />} />
       <Route
         path={SettingsPath.WorkspaceCommunications}
         element={<SettingsWorkspaceCommunications />}

@@ -124,6 +124,12 @@ const useSettingsNavigationItems = (): SettingsNavigationSection[] => {
           isHidden: !permissionMap[PermissionFlagType.WORKSPACE],
         },
         {
+          label: t`Setup Center`,
+          path: SettingsPath.SetupCenter,
+          Icon: IconSettings,
+          isHidden: !permissionMap[PermissionFlagType.WORKSPACE],
+        },
+        {
           label: t`Data model`,
           path: SettingsPath.Objects,
           Icon: IconHierarchy,

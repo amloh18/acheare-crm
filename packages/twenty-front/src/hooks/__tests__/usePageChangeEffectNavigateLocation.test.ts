@@ -443,6 +443,19 @@ const testCases: {
   { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.BOOK_CALL, res: AppPath.BookCall },
   { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.COMPLETED, res: undefined },
 
+  // Achare onboarding statuses
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_WELCOME, res: AppPath.AchareWelcome },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_BASIC_SETUP, res: AppPath.AchareBasicSetup },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_SETUP_CHOICE, res: AppPath.AchareSetupChoice },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_AGENCY, res: AppPath.AchareAgency },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_TEAM, res: AppPath.AchareTeam },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_CRM_IMPORT, res: AppPath.AchareCrmImport },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_RECRUITMENT, res: AppPath.AchareRecruitment },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_HR, res: AppPath.AchareHr },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_PAYROLL, res: AppPath.AcharePayroll },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_DASHBOARD, res: AppPath.AchareDashboard },
+  { loc: AppPath.NotFound, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.ACHARE_REVIEW, res: AppPath.AchareReview },
+
   // isBillingEnabled:false — no post-invite-team upgrade interception on billing-disabled instances
   { loc: AppPath.InviteTeam, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.COMPLETED, isBillingEnabled: false, res: defaultHomePagePath },
   { loc: AppPath.PlanRequired, isLogged: true, isWorkspaceSuspended: false, onboardingStatus: OnboardingStatus.COMPLETED, isBillingEnabled: false, res: defaultHomePagePath },

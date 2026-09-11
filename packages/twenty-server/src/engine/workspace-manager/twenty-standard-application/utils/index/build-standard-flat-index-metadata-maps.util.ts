@@ -6,10 +6,13 @@ import { type AllStandardObjectName } from 'src/engine/workspace-manager/twenty-
 import { buildAttachmentStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-attachment-standard-flat-index-metadata.util';
 import { buildBlocklistStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-blocklist-standard-flat-index-metadata.util';
 import { buildCalendarChannelEventAssociationStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-calendar-channel-event-association-standard-flat-index-metadata.util';
+import { buildCandidateStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-candidate-standard-flat-index-metadata.util';
+import { buildCandidateSubmissionStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-candidate-submission-standard-flat-index-metadata.util';
 import { buildCalendarEventParticipantStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-calendar-event-participant-standard-flat-index-metadata.util';
 import { buildCalendarEventTargetStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-calendar-event-target-standard-flat-index-metadata.util';
 import { buildCallRecordingStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-call-recording-standard-flat-index-metadata.util';
 import { buildCompanyStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-company-standard-flat-index-metadata.util';
+import { buildInterviewStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-interview-standard-flat-index-metadata.util';
 import { buildDashboardStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-dashboard-standard-flat-index-metadata.util';
 import { buildMessageCampaignStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-message-campaign-standard-flat-index-metadata.util';
 import { buildMessageListStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-message-list-standard-flat-index-metadata.util';
@@ -24,6 +27,7 @@ import { buildNoteTargetStandardFlatIndexMetadatas } from 'src/engine/workspace-
 import { buildOpportunityStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-opportunity-standard-flat-index-metadata.util';
 import { buildPersonStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-person-standard-flat-index-metadata.util';
 import { buildRecordShareStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-record-share-standard-flat-index-metadata.util';
+import { buildRequirementStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-requirement-standard-flat-index-metadata.util';
 import { buildTaskStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-task-standard-flat-index-metadata.util';
 import { buildTaskTargetStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-task-target-standard-flat-index-metadata.util';
 import { buildTimelineActivityStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-timeline-activity-standard-flat-index-metadata.util';
@@ -32,15 +36,53 @@ import { buildWorkflowRunStandardFlatIndexMetadatas } from 'src/engine/workspace
 import { buildWorkflowStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-workflow-standard-flat-index-metadata.util';
 import { buildWorkflowVersionStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-workflow-version-standard-flat-index-metadata.util';
 import { buildWorkspaceMemberStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-workspace-member-standard-flat-index-metadata.util';
-import { type CreateStandardIndexArgs } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/create-standard-index-flat-metadata.util';
+import { type CreateStandardIndexArgs } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/create-standard-index-flat-metadata.util';import { buildEmployeeStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-employee-standard-flat-index-metadata.util';
+import { buildOnboardingItemStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-onboardingItem-standard-flat-index-metadata.util';
+import { buildShiftStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-shift-standard-flat-index-metadata.util';
+import { buildRosterAssignmentStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-rosterAssignment-standard-flat-index-metadata.util';
+import { buildAttendanceEventStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-attendanceEvent-standard-flat-index-metadata.util';
+import { buildAttendanceDayStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-attendanceDay-standard-flat-index-metadata.util';
+import { buildAttendanceCorrectionStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-attendanceCorrection-standard-flat-index-metadata.util';
+import { buildLeaveTypeStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-leaveType-standard-flat-index-metadata.util';
+import { buildLeaveRequestStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-leaveRequest-standard-flat-index-metadata.util';
+import { buildLeaveBalanceStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-leaveBalance-standard-flat-index-metadata.util';
+import { buildSalaryStructureStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-salaryStructure-standard-flat-index-metadata.util';
+import { buildSalaryComponentStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-salaryComponent-standard-flat-index-metadata.util';
+import { buildPayrollPeriodStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-payrollPeriod-standard-flat-index-metadata.util';
+import { buildPayslipStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-payslip-standard-flat-index-metadata.util';
+import { buildPayslipLineStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-payslipLine-standard-flat-index-metadata.util';
+import { buildPayrollAdjustmentStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-payrollAdjustment-standard-flat-index-metadata.util';
+import { buildInvoiceStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-invoice-standard-flat-index-metadata.util';
+import { buildPaymentStandardFlatIndexMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/index/compute-payment-standard-flat-index-metadata.util';
+
 
 type StandardIndexBuilder<P extends AllStandardObjectName> = (
   args: Omit<CreateStandardIndexArgs<P>, 'context'>,
 ) => Record<string, FlatIndexMetadata>;
 
 const STANDARD_FLAT_INDEX_METADATA_BUILDERS_BY_OBJECT_NAME = {
+  payment: buildPaymentStandardFlatIndexMetadatas,
+  invoice: buildInvoiceStandardFlatIndexMetadatas,
+  payrollAdjustment: buildPayrollAdjustmentStandardFlatIndexMetadatas,
+  payslipLine: buildPayslipLineStandardFlatIndexMetadatas,
+  payslip: buildPayslipStandardFlatIndexMetadatas,
+  payrollPeriod: buildPayrollPeriodStandardFlatIndexMetadatas,
+  salaryComponent: buildSalaryComponentStandardFlatIndexMetadatas,
+  salaryStructure: buildSalaryStructureStandardFlatIndexMetadatas,
+  leaveBalance: buildLeaveBalanceStandardFlatIndexMetadatas,
+  leaveRequest: buildLeaveRequestStandardFlatIndexMetadatas,
+  leaveType: buildLeaveTypeStandardFlatIndexMetadatas,
+  attendanceCorrection: buildAttendanceCorrectionStandardFlatIndexMetadatas,
+  attendanceDay: buildAttendanceDayStandardFlatIndexMetadatas,
+  attendanceEvent: buildAttendanceEventStandardFlatIndexMetadatas,
+  rosterAssignment: buildRosterAssignmentStandardFlatIndexMetadatas,
+  shift: buildShiftStandardFlatIndexMetadatas,
+  onboardingItem: buildOnboardingItemStandardFlatIndexMetadatas,
+  employee: buildEmployeeStandardFlatIndexMetadatas,
   attachment: buildAttachmentStandardFlatIndexMetadatas,
   blocklist: buildBlocklistStandardFlatIndexMetadatas,
+  candidate: buildCandidateStandardFlatIndexMetadatas,
+  candidateSubmission: buildCandidateSubmissionStandardFlatIndexMetadatas,
   calendarChannelEventAssociation:
     buildCalendarChannelEventAssociationStandardFlatIndexMetadatas,
   calendarEventParticipant:
@@ -48,6 +90,7 @@ const STANDARD_FLAT_INDEX_METADATA_BUILDERS_BY_OBJECT_NAME = {
   calendarEventTarget: buildCalendarEventTargetStandardFlatIndexMetadatas,
   callRecording: buildCallRecordingStandardFlatIndexMetadatas,
   company: buildCompanyStandardFlatIndexMetadatas,
+  interview: buildInterviewStandardFlatIndexMetadatas,
   dashboard: buildDashboardStandardFlatIndexMetadatas,
   messageCampaign: buildMessageCampaignStandardFlatIndexMetadatas,
   messageList: buildMessageListStandardFlatIndexMetadatas,
@@ -64,6 +107,7 @@ const STANDARD_FLAT_INDEX_METADATA_BUILDERS_BY_OBJECT_NAME = {
   opportunity: buildOpportunityStandardFlatIndexMetadatas,
   person: buildPersonStandardFlatIndexMetadatas,
   recordShare: buildRecordShareStandardFlatIndexMetadatas,
+  requirement: buildRequirementStandardFlatIndexMetadatas,
   task: buildTaskStandardFlatIndexMetadatas,
   taskTarget: buildTaskTargetStandardFlatIndexMetadatas,
   timelineActivity: buildTimelineActivityStandardFlatIndexMetadatas,

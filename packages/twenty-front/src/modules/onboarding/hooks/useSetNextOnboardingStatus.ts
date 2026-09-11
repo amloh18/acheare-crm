@@ -53,7 +53,51 @@ const getNextOnboardingStatus = ({
       : statusAfterBookCall;
 
   if (currentUser?.onboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
-    return OnboardingStatus.SYNC_EMAIL;
+    return OnboardingStatus.ACHARE_WELCOME;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_WELCOME) {
+    return OnboardingStatus.ACHARE_BASIC_SETUP;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_BASIC_SETUP) {
+    return OnboardingStatus.ACHARE_SETUP_CHOICE;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_SETUP_CHOICE) {
+    return OnboardingStatus.ACHARE_AGENCY;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_AGENCY) {
+    return OnboardingStatus.ACHARE_TEAM;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_TEAM) {
+    return OnboardingStatus.ACHARE_CRM_IMPORT;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_CRM_IMPORT) {
+    return OnboardingStatus.ACHARE_RECRUITMENT;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_RECRUITMENT) {
+    return OnboardingStatus.ACHARE_HR;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_HR) {
+    return OnboardingStatus.ACHARE_PAYROLL;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_PAYROLL) {
+    return OnboardingStatus.ACHARE_DASHBOARD;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_DASHBOARD) {
+    return OnboardingStatus.ACHARE_REVIEW;
+  }
+
+  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_REVIEW) {
+    return OnboardingStatus.COMPLETED;
   }
 
   if (currentUser?.onboardingStatus === OnboardingStatus.SYNC_EMAIL) {

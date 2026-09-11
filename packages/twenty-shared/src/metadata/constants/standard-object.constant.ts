@@ -3,6 +3,58 @@ import { STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS } from '@/metadata/constants/stan
 import { buildStandardObjectIndexView } from '@/metadata/utils/internal/build-standard-object-index-view.util';
 import { buildStandardObjectRecordPageFieldsView } from '@/metadata/utils/internal/build-standard-object-record-page-fields-view.util';
 
+// Achare recruitment domain: composite index universal identifiers. Generated
+// once and frozen here so every workspace build derives the same value.
+const ACHARE_STD_UUIDS = {
+  reqByStatusView: '0d6f24c8-5936-4587-98f7-d63d13aa8bc4',
+  subByStageView: '3df642c2-8957-4690-bb32-231e9a2ab3f6',
+  intCalendarView: 'f22e587c-8898-449a-a3c2-2c8b6cd4de36',
+  reqCompanyIdIndex: '4887c4bb-7e8c-4e60-ab02-6e176e9655fa',
+  reqDealIdIndex: '629a1f71-cae7-4809-9ed2-6673cff90ca0',
+  reqPointOfContactIdIndex: '810473be-be84-4304-a878-4a4efbfc10b9',
+  reqBdeOwnerIdIndex: 'da823e09-ee85-4fee-8a72-f12b8a9d274e',
+  reqHrOwnerIdIndex: '691d6576-8fe1-4ffd-8b01-a99060da19ca',
+  reqRecruiterOwnerIdIndex: '0579aa32-a4e5-4632-9cc8-2bb5dac70fad',
+  reqStatusIndex: '7aa4250f-0491-4147-87d5-aa75efdb4cdc',
+  reqSearchVectorGinIndex: '5e06fef9-1e86-4abc-a864-90c2fb2e7f06',
+  candPersonIdIndex: '9e608f69-fcf9-469c-9db2-c8c6ebefad80',
+  candRecruiterOwnerIdIndex: '9dfda2e1-e1c0-401d-9f96-1a8f445f70d1',
+  candStatusIndex: 'fc371991-a4c2-4de8-bb56-4c91568b180d',
+  candSourceIndex: 'a9960f0e-8c55-43aa-9c84-fffb294754d1',
+  candSearchVectorGinIndex: '9aabc5ca-cce0-4772-891e-258a2335cfa5',
+  subCandidateIdIndex: '1091e1eb-39f1-4d1b-b80d-46d504494acd',
+  subRequirementIdIndex: 'ec430f80-47f0-4224-a5fb-93723e87c7a3',
+  subRecruiterIdIndex: '0a3ffd0c-b722-4d78-8679-f223565c7bc7',
+  subHrOwnerIdIndex: '9a596c70-39eb-4811-be72-f0585e05267a',
+  subStageIndex: '832f4152-8c4b-4665-9714-82f64b91ba0e',
+  subCandidateRequirementUniqueIndex: 'b045aae3-b9ca-4082-9d9a-8fa6c844e8c3',
+  subSearchVectorGinIndex: '75ff84eb-50fa-4683-a4b5-c1c598fad4f3',
+  intSubmissionIdIndex: 'bc96be96-4b19-4c65-acb2-c898499e102e',
+  intRequirementIdIndex: '4a29ccab-35e8-45ee-b169-98190aa184e2',
+  intCandidateIdIndex: 'f07dd5ca-ca41-4a13-a0b7-dfd34f730113',
+  intCompanyIdIndex: '09b7af4d-40f1-49ef-ba1f-1b3c3426c045',
+  intScheduledAtIndex: '64b986c4-e397-4239-b41d-961be013897e',
+  intStatusIndex: 'ac3c422e-8a78-440d-8704-8cc790139cb0',
+  intSearchVectorGinIndex: '7738a69d-e363-40e5-b7cc-21dcc7652f9b',
+  subPipelineVfName: 'f79e96bd-7d39-4213-96de-6e14e6ea2d54',
+  subPipelineVfCandidate: '04f41abf-38e3-4ac0-a3ef-6bcb47399cb8',
+  subPipelineVfStage: 'd3b0e79d-7779-4a5a-8e42-1f1d30de1e06',
+  subPipelineVfRecruiter: '86d7b04d-c30c-46d8-bb40-a40546cc6a9c',
+  subPipelineVfExpectedSalary: 'b1a2e6bd-937c-4b76-a3b2-f01fb3a06c47',
+  subPipelineVfJoiningDate: '7bb277c2-2a3e-4d9f-ba95-9d20a68c8684',
+  reqBoardVfTitle: 'c16060de-9e18-4e63-973e-0482e2f41c85',
+  reqBoardVfCompany: 'dc9b04e9-c53a-4f86-8d02-32121ac10a83',
+  reqBoardVfStatus: 'e90a2e47-f6be-46a3-9a52-56e13bbde14a',
+  reqBoardVfPriority: '1cabb99e-66e0-4db4-b74f-e91b45ca1b83',
+  reqBoardVfOpenings: 'd15c93de-f325-441e-b3e0-95ed0895b97b',
+  reqBoardVfFilled: '0e03a95a-0504-4d40-8647-51c8df21ed79',
+  reqBoardVfTargetDate: '7a51db9e-6b53-409f-9a5c-88625ca87953',
+  intCalendarVfTitle: 'f0c14260-b5cc-4a44-9b96-f19e37d4a1c3',
+  intCalendarVfCandidate: 'd3ad1ccb-236a-46aa-862e-e0f6b5df7ac4',
+  intCalendarVfScheduledAt: 'f8bb1ac1-4e26-4c4d-84da-0d8c99c9d70c',
+  intCalendarVfMode: '82a5a0a9-f79b-4a52-a095-813a5706a372',
+} as const;
+
 // Important notice:
 // - Never ever mutate an existing universal identifier
 // - Deleting an existing universal identifier should be very rare
@@ -1369,6 +1421,1460 @@ export const STANDARD_OBJECTS = {
           'ownedOpportunities',
           'assignedTasks',
         ],
+      }),
+    },
+  },
+  // Achare recruitment domain objects (stable — never mutate a universal identifier)
+  requirement: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+    fields: STANDARD_OBJECT_FIELDS.requirement,
+    indexes: {
+      companyIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqCompanyIdIndex,
+      },
+      dealIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqDealIdIndex,
+      },
+      pointOfContactIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqPointOfContactIdIndex,
+      },
+      bdeOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqBdeOwnerIdIndex,
+      },
+      hrOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqHrOwnerIdIndex,
+      },
+      recruiterOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqRecruiterOwnerIdIndex,
+      },
+      statusIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqStatusIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allRequirements: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        fields: STANDARD_OBJECT_FIELDS.requirement,
+        viewFieldNames: [
+          'title',
+          'company',
+          'status',
+          'priority',
+          'bdeOwner',
+          'hrOwner',
+          'numberOfOpenings',
+          'filledCount',
+          'targetDate',
+          'createdBy',
+        ],
+      }),
+      byStatus: {
+        universalIdentifier: ACHARE_STD_UUIDS.reqByStatusView,
+        viewFields: {
+          title: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfTitle,
+          },
+          company: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfCompany,
+          },
+          status: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfStatus,
+          },
+          priority: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfPriority,
+          },
+          numberOfOpenings: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfOpenings,
+          },
+          filledCount: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfFilled,
+          },
+          targetDate: {
+            universalIdentifier: ACHARE_STD_UUIDS.reqBoardVfTargetDate,
+          },
+        },
+        viewGroups: {
+          draft: { universalIdentifier: 'da6ea4f4-a281-4eba-9c22-2465edf71821' },
+          received: {
+            universalIdentifier: '8d7ad651-790c-48a5-b177-dff9224e158c',
+          },
+          confirmed: {
+            universalIdentifier: 'e6a6948f-596b-4179-bbed-1108f7a60e0c',
+          },
+          commercialAgreed: {
+            universalIdentifier: '9d4824ff-d425-4fa2-b386-a7a8ffa93025',
+          },
+          assignedToHr: {
+            universalIdentifier: '77d73704-062c-413a-b720-e653351c8a80',
+          },
+          inProgress: {
+            universalIdentifier: '79ec4549-a230-4e13-82c3-0792d257bdf4',
+          },
+          partiallyFilled: {
+            universalIdentifier: '68a5705a-f40d-4d36-8d9f-2e6887106a62',
+          },
+          filled: {
+            universalIdentifier: '2a6f47ab-9dd0-4e49-b685-d3835ed15c3c',
+          },
+          closed: {
+            universalIdentifier: '885d015e-2247-453d-aae7-625ec9fe8546',
+          },
+          cancelled: {
+            universalIdentifier: '0cec8d50-613d-44e2-933e-ae5189eff058',
+          },
+        },
+      },
+      requirementRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        fields: STANDARD_OBJECT_FIELDS.requirement,
+        viewFieldNames: [
+          'title',
+          'rolePosition',
+          'company',
+          'pointOfContact',
+          'deal',
+          'location',
+          'workMode',
+          'employmentType',
+          'experienceMin',
+          'experienceMax',
+          'salaryMin',
+          'salaryMax',
+          'skills',
+          'education',
+          'description',
+          'responsibilities',
+          'requirementsText',
+          'priority',
+          'status',
+          'numberOfOpenings',
+          'filledCount',
+          'bdeOwner',
+          'hrOwner',
+          'recruiterOwner',
+          'receivedAt',
+          'targetDate',
+          'closedAt',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+          'candidateSubmissions',
+          'interviews',
+        ],
+        viewFieldGroupNames: {
+          recruitment: 'Recruitment',
+          ownership: 'Ownership',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  candidate: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+    fields: STANDARD_OBJECT_FIELDS.candidate,
+    indexes: {
+      personIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.candPersonIdIndex,
+      },
+      recruiterOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.candRecruiterOwnerIdIndex,
+      },
+      statusIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.candStatusIndex,
+      },
+      sourceIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.candSourceIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.candSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allCandidates: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        fields: STANDARD_OBJECT_FIELDS.candidate,
+        viewFieldNames: [
+          'name',
+          'person',
+          'source',
+          'recruiterOwner',
+          'status',
+          'totalExperienceYears',
+          'expectedSalary',
+          'noticePeriod',
+          'createdBy',
+        ],
+      }),
+      candidateRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        fields: STANDARD_OBJECT_FIELDS.candidate,
+        viewFieldNames: [
+          'name',
+          'person',
+          'source',
+          'skills',
+          'totalExperienceYears',
+          'currentCompany',
+          'currentDesignation',
+          'currentSalary',
+          'expectedSalary',
+          'noticePeriod',
+          'preferredLocation',
+          'recruiterOwner',
+          'status',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+          'candidateSubmissions',
+          'interviews',
+        ],
+        viewFieldGroupNames: {
+          candidate: 'Candidate',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  candidateSubmission: {
+    universalIdentifier:
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+    fields: STANDARD_OBJECT_FIELDS.candidateSubmission,
+    indexes: {
+      candidateIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subCandidateIdIndex,
+      },
+      requirementIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subRequirementIdIndex,
+      },
+      recruiterIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subRecruiterIdIndex,
+      },
+      hrOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subHrOwnerIdIndex,
+      },
+      stageIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subStageIndex,
+      },
+      candidateRequirementUniqueIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subCandidateRequirementUniqueIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.subSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allSubmissions: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        fields: STANDARD_OBJECT_FIELDS.candidateSubmission,
+        viewFieldNames: [
+          'name',
+          'candidate',
+          'requirement',
+          'stage',
+          'recruiter',
+          'expectedSalary',
+          'joiningDate',
+          'createdBy',
+        ],
+      }),
+      byStage: {
+        universalIdentifier: ACHARE_STD_UUIDS.subByStageView,
+        viewFields: {
+          name: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfName,
+          },
+          candidate: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfCandidate,
+          },
+          stage: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfStage,
+          },
+          recruiter: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfRecruiter,
+          },
+          expectedSalary: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfExpectedSalary,
+          },
+          joiningDate: {
+            universalIdentifier: ACHARE_STD_UUIDS.subPipelineVfJoiningDate,
+          },
+        },
+        viewGroups: {
+          sourced: {
+            universalIdentifier: '9eb09df1-111c-4500-b9c5-71eb9374d338',
+          },
+          screening: {
+            universalIdentifier: '9d9f337b-10ce-4732-abbe-0d7cc9143d79',
+          },
+          shortlisted: {
+            universalIdentifier: 'f0a0148e-9c1b-4a48-a7e2-63f9e0ca27fb',
+          },
+          submittedToClient: {
+            universalIdentifier: 'aaf8fc25-e89a-40ee-befd-232fd8daa200',
+          },
+          clientReview: {
+            universalIdentifier: '4a26ed00-4e35-41e9-882a-641cb18a85d9',
+          },
+          interview: {
+            universalIdentifier: '6b8656b1-163c-46d1-ba18-59db8bd69ed7',
+          },
+          selected: {
+            universalIdentifier: '0f01db9c-7109-40d3-9f82-4fc84a06f62a',
+          },
+          offer: {
+            universalIdentifier: '88e8b4ae-881f-487f-a751-3d040d7733f6',
+          },
+          offerAccepted: {
+            universalIdentifier: '749b0969-9c10-4a5c-9efe-f83d68d8e401',
+          },
+          joined: {
+            universalIdentifier: 'd997f7bf-0323-4ba0-9e4a-c4b52549b235',
+          },
+          rejected: {
+            universalIdentifier: '757b7f44-8dab-4236-9f2f-86d4cfffb1a8',
+          },
+          dropped: {
+            universalIdentifier: '227bf223-dddd-4495-9250-e5159e46ce65',
+          },
+        },
+      },
+      candidateSubmissionRecordPageFields:
+        buildStandardObjectRecordPageFieldsView({
+          objectUniversalIdentifier:
+            STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+          fields: STANDARD_OBJECT_FIELDS.candidateSubmission,
+          viewFieldNames: [
+            'name',
+            'candidate',
+            'requirement',
+            'recruiter',
+            'hrOwner',
+            'stage',
+            'resumeSent',
+            'clientFeedback',
+            'expectedSalary',
+            'offeredSalary',
+            'joiningDate',
+            'rejectionReason',
+            'dropReason',
+            'createdAt',
+            'createdBy',
+            'updatedAt',
+            'updatedBy',
+            'taskTargets',
+            'noteTargets',
+            'attachments',
+            'timelineActivities',
+            'interviews',
+          ],
+          viewFieldGroupNames: {
+            submission: 'Submission',
+            relations: 'Relations',
+            system: 'System',
+          },
+        }),
+    },
+  },
+  interview: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+    fields: STANDARD_OBJECT_FIELDS.interview,
+    indexes: {
+      submissionIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intSubmissionIdIndex,
+      },
+      requirementIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intRequirementIdIndex,
+      },
+      candidateIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intCandidateIdIndex,
+      },
+      companyIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intCompanyIdIndex,
+      },
+      scheduledAtIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intScheduledAtIndex,
+      },
+      statusIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intStatusIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.intSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allInterviews: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        fields: STANDARD_OBJECT_FIELDS.interview,
+        viewFieldNames: [
+          'title',
+          'candidate',
+          'requirement',
+          'round',
+          'interviewer',
+          'scheduledAt',
+          'mode',
+          'status',
+          'result',
+          'createdBy',
+        ],
+      }),
+      byScheduledAt: {
+        universalIdentifier: ACHARE_STD_UUIDS.intCalendarView,
+        viewFields: {
+          title: {
+            universalIdentifier: ACHARE_STD_UUIDS.intCalendarVfTitle,
+          },
+          candidate: {
+            universalIdentifier: ACHARE_STD_UUIDS.intCalendarVfCandidate,
+          },
+          scheduledAt: {
+            universalIdentifier: ACHARE_STD_UUIDS.intCalendarVfScheduledAt,
+          },
+          mode: {
+            universalIdentifier: ACHARE_STD_UUIDS.intCalendarVfMode,
+          },
+        },
+      },
+      interviewRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        fields: STANDARD_OBJECT_FIELDS.interview,
+        viewFieldNames: [
+          'title',
+          'submission',
+          'requirement',
+          'candidate',
+          'company',
+          'round',
+          'interviewer',
+          'scheduledAt',
+          'mode',
+          'meetingLink',
+          'status',
+          'result',
+          'feedback',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+        ],
+        viewFieldGroupNames: {
+          interview: 'Interview',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  designation: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.designation,
+    fields: STANDARD_OBJECT_FIELDS.designation,
+    indexes: {
+      titleIndex: {
+        universalIdentifier: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
+      },
+      statusIndex: {
+        universalIdentifier: 'b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e',
+      },
+    },
+    views: {
+      allDesignations: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.designation,
+        fields: STANDARD_OBJECT_FIELDS.designation,
+        viewFieldNames: [
+          'title',
+          'level',
+          'status',
+          'description',
+          'createdAt',
+        ],
+      }),
+    },
+  },
+  employee: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+    fields: STANDARD_OBJECT_FIELDS.employee,
+    indexes: {
+      employeeCodeUniqueIndex: {
+        universalIdentifier: 'ff0d3e00-c77b-4193-8912-5293c6bf0b0a',
+      },
+      personIdIndex: {
+        universalIdentifier: 'db5ee3ee-8a79-403a-81d2-dc8c4456344e',
+      },
+      statusIndex: {
+        universalIdentifier: '80ab60fd-e5fb-41a3-8e2b-25d8c8f1494a',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: '99d916a4-e8ee-42b2-8d28-65810da35ef3',
+      },
+    },
+    views: {
+      allEmployees: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        fields: STANDARD_OBJECT_FIELDS.employee,
+        viewFieldNames: [
+          'employeeCode',
+          'person',
+          'status',
+          'department',
+          'designation',
+          'employmentType',
+          'joiningDate',
+          'workLocation',
+          'createdBy',
+        ],
+      }),
+      employeeRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.employee,
+        fields: STANDARD_OBJECT_FIELDS.employee,
+        viewFieldNames: [
+          'employeeCode',
+          'person',
+          'status',
+          'department',
+          'designation',
+          'employmentType',
+          'joiningDate',
+          'exitDate',
+          'workLocation',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'onboardingItems',
+          'rosterAssignments',
+          'attendanceDays',
+          'attendanceEvents',
+          'attendanceCorrections',
+          'leaveRequests',
+          'leaveBalances',
+          'salaryStructures',
+          'payslips',
+          'payrollAdjustments',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+        ],
+        viewFieldGroupNames: {
+          employee: 'Employee',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  team: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+    fields: STANDARD_OBJECT_FIELDS.team,
+    indexes: {},
+    views: {
+      allTeams: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
+        fields: STANDARD_OBJECT_FIELDS.team,
+        viewFieldNames: [
+          'name',
+          'description',
+          'status',
+          'members',
+          'createdAt',
+        ],
+      }),
+    },
+  },
+  onboardingItem: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+    fields: STANDARD_OBJECT_FIELDS.onboardingItem,
+    indexes: {
+      employeeTitleUniqueIndex: {
+        universalIdentifier: '26240034-7187-4d5e-83cc-d4d2bae58c77',
+      },
+      employeeIdIndex: {
+        universalIdentifier: 'a25de2ed-ebb6-4826-8c26-89d45ba26379',
+      },
+      statusIndex: {
+        universalIdentifier: 'b02eb08c-27a2-4ba0-8098-b303e544d528',
+      },
+    },
+    views: {
+      allOnboardingItems: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+        fields: STANDARD_OBJECT_FIELDS.onboardingItem,
+        viewFieldNames: [
+          'title',
+          'employee',
+          'category',
+          'isRequired',
+          'assignedTo',
+          'dueDate',
+          'status',
+          'completedAt',
+        ],
+      }),
+    },
+  },
+  shift: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+    fields: STANDARD_OBJECT_FIELDS.shift,
+    indexes: {
+      nameIndex: {
+        universalIdentifier: 'cd32ad37-d31b-4c3a-8af6-e40541bf9664',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: '42f5bf7a-b5a3-4a09-8afa-6346e1330ca1',
+      },
+    },
+    views: {
+      allShifts: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        fields: STANDARD_OBJECT_FIELDS.shift,
+        viewFieldNames: [
+          'name',
+          'startTime',
+          'endTime',
+          'breakMinutes',
+          'graceMinutes',
+          'workingDays',
+          'isActive',
+        ],
+      }),
+      shiftRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        fields: STANDARD_OBJECT_FIELDS.shift,
+        viewFieldNames: [
+          'name',
+          'startTime',
+          'endTime',
+          'breakMinutes',
+          'graceMinutes',
+          'workingDays',
+          'isActive',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'rosterAssignments',
+        ],
+        viewFieldGroupNames: {
+          shift: 'Shift',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  rosterAssignment: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+    fields: STANDARD_OBJECT_FIELDS.rosterAssignment,
+    indexes: {
+      employeeIdIndex: {
+        universalIdentifier: 'cad75f01-5807-4c4f-85b9-4308ba5fb2ed',
+      },
+      shiftIdIndex: {
+        universalIdentifier: 'c7868182-9965-40c1-8946-30f6c3d4859a',
+      },
+      effectiveFromIndex: {
+        universalIdentifier: '708568e2-3724-48cf-8685-f098df57e5fe',
+      },
+    },
+    views: {
+      allRosterAssignments: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.rosterAssignment,
+        fields: STANDARD_OBJECT_FIELDS.rosterAssignment,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'shift',
+          'effectiveFrom',
+          'effectiveTo',
+          'isActive',
+        ],
+      }),
+    },
+  },
+  attendanceEvent: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+    fields: STANDARD_OBJECT_FIELDS.attendanceEvent,
+    indexes: {
+      employeeTimestampIndex: {
+        universalIdentifier: '679ffa56-8228-44a3-835d-d53fac96880d',
+      },
+      eventTypeIndex: {
+        universalIdentifier: 'b1394db6-98a5-4c0e-832c-06b564c40a63',
+      },
+    },
+    views: {
+      allAttendanceEvents: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceEvent,
+        fields: STANDARD_OBJECT_FIELDS.attendanceEvent,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'timestamp',
+          'eventType',
+          'source',
+          'correction',
+        ],
+      }),
+    },
+  },
+  attendanceDay: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+    fields: STANDARD_OBJECT_FIELDS.attendanceDay,
+    indexes: {
+      employeeWorkDateUniqueIndex: {
+        universalIdentifier: '8b335da8-a866-427b-872e-034520204c39',
+      },
+      statusIndex: {
+        universalIdentifier: '0b910f05-f48a-4516-8ff0-112162b1fbed',
+      },
+      workDateIndex: {
+        universalIdentifier: '121ce378-a5ff-46af-8365-8b570a2e4f8d',
+      },
+    },
+    views: {
+      allAttendanceDays: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        fields: STANDARD_OBJECT_FIELDS.attendanceDay,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'workDate',
+          'status',
+          'shift',
+          'firstCheckIn',
+          'lastCheckOut',
+          'workedMinutes',
+          'lateMinutes',
+          'overtimeMinutes',
+        ],
+      }),
+      attendanceDayRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+        fields: STANDARD_OBJECT_FIELDS.attendanceDay,
+        viewFieldNames: [
+          'employee',
+          'workDate',
+          'status',
+          'shift',
+          'firstCheckIn',
+          'lastCheckOut',
+          'workedMinutes',
+          'breakMinutes',
+          'lateMinutes',
+          'earlyDepartureMinutes',
+          'overtimeMinutes',
+          'createdAt',
+          'updatedAt',
+        ],
+        viewFieldGroupNames: {
+          attendance: 'Attendance',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  attendanceCorrection: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+    fields: STANDARD_OBJECT_FIELDS.attendanceCorrection,
+    indexes: {
+      employeeIdIndex: {
+        universalIdentifier: '24c56bdd-5a95-4541-81b4-f74110f9aa39',
+      },
+      statusIndex: {
+        universalIdentifier: 'ae76bf39-c137-4c0f-8935-51781f103719',
+      },
+      workDateIndex: {
+        universalIdentifier: '4f31460c-d585-48a9-844c-ac055c87492d',
+      },
+    },
+    views: {
+      allAttendanceCorrections: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        fields: STANDARD_OBJECT_FIELDS.attendanceCorrection,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'workDate',
+          'status',
+          'requestedCheckIn',
+          'requestedCheckOut',
+          'reason',
+          'reviewedBy',
+        ],
+      }),
+      attendanceCorrectionRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+        fields: STANDARD_OBJECT_FIELDS.attendanceCorrection,
+        viewFieldNames: [
+          'employee',
+          'workDate',
+          'requestedCheckIn',
+          'requestedCheckOut',
+          'reason',
+          'status',
+          'reviewedBy',
+          'reviewedAt',
+          'reviewNotes',
+          'createdAt',
+          'createdBy',
+          'correctedEvents',
+        ],
+        viewFieldGroupNames: {
+          correction: 'Correction',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  leaveType: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+    fields: STANDARD_OBJECT_FIELDS.leaveType,
+    indexes: {
+      nameIndex: {
+        universalIdentifier: '918068f0-a073-4ae9-89ad-001b0fbf321e',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: 'bc790012-38b8-46cc-8234-c61576ede210',
+      },
+    },
+    views: {
+      allLeaveTypes: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        fields: STANDARD_OBJECT_FIELDS.leaveType,
+        viewFieldNames: [
+          'name',
+          'isPaid',
+          'annualQuota',
+          'isActive',
+        ],
+      }),
+      leaveTypeRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveType,
+        fields: STANDARD_OBJECT_FIELDS.leaveType,
+        viewFieldNames: [
+          'name',
+          'isPaid',
+          'annualQuota',
+          'isActive',
+          'createdAt',
+          'createdBy',
+          'leaveRequests',
+          'leaveBalances',
+        ],
+        viewFieldGroupNames: {
+          leave: 'Leave',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  leaveRequest: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+    fields: STANDARD_OBJECT_FIELDS.leaveRequest,
+    indexes: {
+      employeeIdIndex: {
+        universalIdentifier: 'bb6773e9-8943-450a-8183-97eea28069a0',
+      },
+      leaveTypeIdIndex: {
+        universalIdentifier: '7eb97998-5f5c-4643-8a71-1661e484bbdd',
+      },
+      statusIndex: {
+        universalIdentifier: 'ddfb406c-8895-4474-8684-cffc977fae28',
+      },
+    },
+    views: {
+      allLeaveRequests: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        fields: STANDARD_OBJECT_FIELDS.leaveRequest,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'leaveType',
+          'startDate',
+          'endDate',
+          'days',
+          'status',
+          'reviewedBy',
+        ],
+      }),
+      leaveRequestRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+        fields: STANDARD_OBJECT_FIELDS.leaveRequest,
+        viewFieldNames: [
+          'employee',
+          'leaveType',
+          'startDate',
+          'endDate',
+          'days',
+          'reason',
+          'status',
+          'reviewedBy',
+          'reviewedAt',
+          'reviewNotes',
+          'createdAt',
+          'createdBy',
+        ],
+        viewFieldGroupNames: {
+          leave: 'Leave',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  leaveBalance: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+    fields: STANDARD_OBJECT_FIELDS.leaveBalance,
+    indexes: {
+      employeeTypeYearUniqueIndex: {
+        universalIdentifier: '04f6011e-cd9b-486e-83d9-ceb13c6affb0',
+      },
+      employeeIdIndex: {
+        universalIdentifier: '9b5d9789-a954-4f03-8eda-24e8c416bece',
+      },
+    },
+    views: {
+      allLeaveBalances: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveBalance,
+        fields: STANDARD_OBJECT_FIELDS.leaveBalance,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'leaveType',
+          'year',
+          'entitled',
+          'used',
+          'pending',
+        ],
+      }),
+    },
+  },
+  salaryStructure: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+    fields: STANDARD_OBJECT_FIELDS.salaryStructure,
+    indexes: {
+      employeeIdIndex: {
+        universalIdentifier: '7df48854-6a07-46c9-88fa-d445ddce20cf',
+      },
+      effectiveFromIndex: {
+        universalIdentifier: 'b7c24ca9-7179-4249-894e-46e2a0d734dd',
+      },
+    },
+    views: {
+      allSalaryStructures: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        fields: STANDARD_OBJECT_FIELDS.salaryStructure,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'effectiveFrom',
+          'effectiveTo',
+          'currency',
+          'monthlyGross',
+          'isActive',
+        ],
+      }),
+      salaryStructureRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryStructure,
+        fields: STANDARD_OBJECT_FIELDS.salaryStructure,
+        viewFieldNames: [
+          'employee',
+          'effectiveFrom',
+          'effectiveTo',
+          'currency',
+          'monthlyGross',
+          'isActive',
+          'createdAt',
+          'createdBy',
+          'components',
+        ],
+        viewFieldGroupNames: {
+          salary: 'Salary',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  salaryComponent: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+    fields: STANDARD_OBJECT_FIELDS.salaryComponent,
+    indexes: {
+      structureNameUniqueIndex: {
+        universalIdentifier: 'b6c5b963-8531-4593-8ba2-2e64e0c83f37',
+      },
+      structureIdIndex: {
+        universalIdentifier: '41be4eea-032b-4169-80f1-fa58747aae06',
+      },
+    },
+    views: {
+      allSalaryComponents: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.salaryComponent,
+        fields: STANDARD_OBJECT_FIELDS.salaryComponent,
+        viewFieldNames: [
+          'name',
+          'salaryStructure',
+          'componentType',
+          'calculationType',
+          'amount',
+          'percentage',
+          'position',
+        ],
+      }),
+    },
+  },
+  payrollPeriod: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+    fields: STANDARD_OBJECT_FIELDS.payrollPeriod,
+    indexes: {
+      nameUniqueIndex: {
+        universalIdentifier: 'e9b7eafe-dbe1-40bc-82f7-f2bf337b1662',
+      },
+      statusIndex: {
+        universalIdentifier: '79b4c373-3c4a-4d2d-8130-bdc5a795faf6',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: '5de4a94b-92be-43e4-8aeb-4ecd63cff94b',
+      },
+    },
+    views: {
+      allPayrollPeriods: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        fields: STANDARD_OBJECT_FIELDS.payrollPeriod,
+        viewFieldNames: [
+          'name',
+          'startDate',
+          'endDate',
+          'payDate',
+          'status',
+          'employeeCount',
+          'totalGross',
+          'totalNet',
+        ],
+      }),
+      payrollPeriodRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollPeriod,
+        fields: STANDARD_OBJECT_FIELDS.payrollPeriod,
+        viewFieldNames: [
+          'name',
+          'startDate',
+          'endDate',
+          'payDate',
+          'status',
+          'employeeCount',
+          'totalGross',
+          'totalDeductions',
+          'totalAdjustments',
+          'totalNet',
+          'createdAt',
+          'createdBy',
+          'payslips',
+        ],
+        viewFieldGroupNames: {
+          payroll: 'Payroll',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  payslip: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+    fields: STANDARD_OBJECT_FIELDS.payslip,
+    indexes: {
+      periodEmployeeUniqueIndex: {
+        universalIdentifier: '80ed480c-df99-477b-86a8-0d5e6c4cc8ed',
+      },
+      employeeIdIndex: {
+        universalIdentifier: '1f379d41-49a2-421f-8653-f0ae1c41e59b',
+      },
+      periodIdIndex: {
+        universalIdentifier: 'fd7b563c-7275-43d9-8242-90c5ec1cacfc',
+      },
+    },
+    views: {
+      allPayslips: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        fields: STANDARD_OBJECT_FIELDS.payslip,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'payrollPeriod',
+          'grossEarnings',
+          'totalDeductions',
+          'totalAdjustments',
+          'netPay',
+          'paymentStatus',
+        ],
+      }),
+      payslipRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslip,
+        fields: STANDARD_OBJECT_FIELDS.payslip,
+        viewFieldNames: [
+          'payrollPeriod',
+          'employee',
+          'currency',
+          'grossEarnings',
+          'totalDeductions',
+          'totalAdjustments',
+          'netPay',
+          'workingDays',
+          'presentDays',
+          'paidLeaveDays',
+          'unpaidLeaveDays',
+          'overtimeMinutes',
+          'paymentStatus',
+          'paidAt',
+          'paymentReference',
+          'paymentMethod',
+          'createdAt',
+          'lines',
+        ],
+        viewFieldGroupNames: {
+          payslip: 'Payslip',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  payslipLine: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+    fields: STANDARD_OBJECT_FIELDS.payslipLine,
+    indexes: {
+      payslipIdIndex: {
+        universalIdentifier: '09b07235-15ca-4fbb-8413-7f0280fbf94c',
+      },
+    },
+    views: {
+      allPayslipLines: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payslipLine,
+        fields: STANDARD_OBJECT_FIELDS.payslipLine,
+        viewFieldNames: [
+          'label',
+          'payslip',
+          'lineType',
+          'amount',
+          'notes',
+        ],
+      }),
+    },
+  },
+  payrollAdjustment: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+    fields: STANDARD_OBJECT_FIELDS.payrollAdjustment,
+    indexes: {
+      employeeIdIndex: {
+        universalIdentifier: '6f7d4183-2a35-42b7-87b3-842790fabcb9',
+      },
+      periodIdIndex: {
+        universalIdentifier: '105cfc79-7442-49c7-809e-661a15a33291',
+      },
+      statusIndex: {
+        universalIdentifier: '185f9ab9-b9c9-4abc-83c4-43b72664cbe9',
+      },
+    },
+    views: {
+      allPayrollAdjustments: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        fields: STANDARD_OBJECT_FIELDS.payrollAdjustment,
+        viewFieldNames: [
+          'id',
+          'employee',
+          'payrollPeriod',
+          'adjustmentType',
+          'amount',
+          'reason',
+          'status',
+        ],
+      }),
+      payrollAdjustmentRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payrollAdjustment,
+        fields: STANDARD_OBJECT_FIELDS.payrollAdjustment,
+        viewFieldNames: [
+          'employee',
+          'payrollPeriod',
+          'adjustmentType',
+          'amount',
+          'reason',
+          'status',
+          'approvedBy',
+          'approvedAt',
+          'createdAt',
+          'createdBy',
+        ],
+        viewFieldGroupNames: {
+          adjustment: 'Adjustment',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  invoice: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+    fields: STANDARD_OBJECT_FIELDS.invoice,
+    indexes: {
+      invoiceNumberUniqueIndex: {
+        universalIdentifier: '3f007db8-a9e0-4326-8422-ed3946d51c38',
+      },
+      companyIdIndex: {
+        universalIdentifier: '5a6be31b-60e7-4562-8e67-02a5c9f93d2b',
+      },
+      requirementIdIndex: {
+        universalIdentifier: 'd66fb8b1-87bc-4f56-8534-f5b70363b81c',
+      },
+      statusIndex: {
+        universalIdentifier: '1b815766-5336-4779-8e0a-6d4a6fc8bd6d',
+      },
+      dueDateIndex: {
+        universalIdentifier: '4b9524c8-e968-407b-8298-8b2569fd6e36',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: '9bc523a8-970f-44ef-8919-e8b8dd7891f6',
+      },
+    },
+    views: {
+      allInvoices: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        fields: STANDARD_OBJECT_FIELDS.invoice,
+        viewFieldNames: [
+          'invoiceNumber',
+          'company',
+          'amount',
+          'invoiceDate',
+          'dueDate',
+          'status',
+          'amountPaid',
+          'outstanding',
+        ],
+      }),
+      invoiceRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+        fields: STANDARD_OBJECT_FIELDS.invoice,
+        viewFieldNames: [
+          'invoiceNumber',
+          'company',
+          'deal',
+          'requirement',
+          'amount',
+          'invoiceDate',
+          'dueDate',
+          'status',
+          'amountPaid',
+          'outstanding',
+          'notes',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'payments',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+        ],
+        viewFieldGroupNames: {
+          invoice: 'Invoice',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  payment: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+    fields: STANDARD_OBJECT_FIELDS.payment,
+    indexes: {
+      invoiceIdIndex: {
+        universalIdentifier: '02363e64-f828-441b-8024-d6fa088f22ee',
+      },
+    },
+    views: {
+      allPayments: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        fields: STANDARD_OBJECT_FIELDS.payment,
+        viewFieldNames: [
+          'id',
+          'invoice',
+          'amount',
+          'paidDate',
+          'method',
+          'reference',
+        ],
+      }),
+      paymentRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.payment,
+        fields: STANDARD_OBJECT_FIELDS.payment,
+        viewFieldNames: [
+          'invoice',
+          'amount',
+          'paidDate',
+          'method',
+          'reference',
+          'notes',
+          'createdAt',
+          'createdBy',
+        ],
+        viewFieldGroupNames: {
+          payment: 'Payment',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  department: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+    fields: STANDARD_OBJECT_FIELDS.department,
+    indexes: {},
+    views: {
+      allDepartments: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+        fields: STANDARD_OBJECT_FIELDS.department,
+        viewFieldNames: [
+          'name',
+          'status',
+          'departmentHead',
+          'createdAt',
+        ],
+      }),
+      departmentRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+        fields: STANDARD_OBJECT_FIELDS.department,
+        viewFieldNames: [
+          'name',
+          'description',
+          'status',
+          'departmentHead',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'employees',
+        ],
+        viewFieldGroupNames: {
+          general: 'General',
+          relations: 'Relations',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  location: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+    fields: STANDARD_OBJECT_FIELDS.location,
+    indexes: {
+      statusIndex: {
+        universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890140',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890141',
+      },
+    },
+    views: {
+      allLocations: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        fields: STANDARD_OBJECT_FIELDS.location,
+        viewFieldNames: [
+          'name',
+          'city',
+          'country',
+          'status',
+          'createdAt',
+        ],
+      }),
+      locationRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
+        fields: STANDARD_OBJECT_FIELDS.location,
+        viewFieldNames: [
+          'name',
+          'address',
+          'city',
+          'state',
+          'country',
+          'timezone',
+          'status',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+          'employees',
+          'taskTargets',
+          'noteTargets',
+          'attachments',
+          'timelineActivities',
+        ],
+        viewFieldGroupNames: {
+          general: 'General',
+          relations: 'Relations',
+          system: 'System',
+        },
       }),
     },
   },

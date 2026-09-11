@@ -88,6 +88,72 @@ const BookCall = lazyWithPreload(() =>
   })),
 );
 
+const AchareWelcome = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareWelcome').then((module) => ({
+    default: module.AchareWelcome,
+  })),
+);
+
+const AchareBasicSetup = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareBasicSetup').then((module) => ({
+    default: module.AchareBasicSetup,
+  })),
+);
+
+const AchareSetupChoice = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareSetupChoice').then((module) => ({
+    default: module.AchareSetupChoice,
+  })),
+);
+
+const AchareAgency = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareAgency').then((module) => ({
+    default: module.AchareAgency,
+  })),
+);
+
+const AchareTeam = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareTeam').then((module) => ({
+    default: module.AchareTeam,
+  })),
+);
+
+const AchareCrmImport = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareCrmImport').then((module) => ({
+    default: module.AchareCrmImport,
+  })),
+);
+
+const AchareRecruitment = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareRecruitment').then((module) => ({
+    default: module.AchareRecruitment,
+  })),
+);
+
+const AchareHr = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareHr').then((module) => ({
+    default: module.AchareHr,
+  })),
+);
+
+const AcharePayroll = lazyWithPreload(() =>
+  import('~/pages/onboarding/AcharePayroll').then((module) => ({
+    default: module.AcharePayroll,
+  })),
+);
+
+const AchareDashboard = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareDashboard').then((module) => ({
+    default: module.AchareDashboard,
+  })),
+);
+
+const AchareReview = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareReview').then((module) => ({
+    default: module.AchareReview,
+  })),
+);
+
 const preloadOnboardingPages = () => {
   WorkspaceActivation.preload();
   CreateProfile.preload();
@@ -96,6 +162,17 @@ const preloadOnboardingPages = () => {
   InviteTeam.preload();
   BookCall.preload();
   ChooseYourPlan.preload();
+  AchareWelcome.preload();
+  AchareBasicSetup.preload();
+  AchareSetupChoice.preload();
+  AchareAgency.preload();
+  AchareTeam.preload();
+  AchareCrmImport.preload();
+  AchareRecruitment.preload();
+  AchareHr.preload();
+  AcharePayroll.preload();
+  AchareDashboard.preload();
+  AchareReview.preload();
 
   return null;
 };
@@ -252,6 +329,94 @@ const createWorkspaceAppRouter = ({
                       element: (
                         <LazyRoute fallback={<OnboardingStepPageLoader />}>
                           <ChooseYourPlan />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareWelcome,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareWelcome />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareBasicSetup,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareBasicSetup />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareSetupChoice,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareSetupChoice />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareAgency,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareAgency />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareTeam,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareTeam />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareCrmImport,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareCrmImport />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareRecruitment,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareRecruitment />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareHr,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareHr />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AcharePayroll,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AcharePayroll />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareDashboard,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareDashboard />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareReview,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareReview />
                         </LazyRoute>
                       ),
                     },
