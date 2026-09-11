@@ -8,6 +8,11 @@ import { PayrollCalculationService } from 'src/modules/hr/services/payroll-calcu
 import { PayrollLifecycleService } from 'src/modules/hr/services/payroll-lifecycle.service';
 import { RosterService } from 'src/modules/hr/services/roster.service';
 import { MyWorkspaceService } from 'src/modules/hr/services/my-workspace.service';
+import { MyWorkspaceResolver } from 'src/modules/hr/resolvers/my-workspace.resolver';
+import { AttendanceResolver } from 'src/modules/hr/resolvers/attendance.resolver';
+import { LeaveResolver } from 'src/modules/hr/resolvers/leave.resolver';
+import { PayrollResolver } from 'src/modules/hr/resolvers/payroll.resolver';
+import { EmployeeLifecycleResolver } from 'src/modules/hr/resolvers/employee-lifecycle.resolver';
 
 @Module({
   providers: [
@@ -19,6 +24,11 @@ import { MyWorkspaceService } from 'src/modules/hr/services/my-workspace.service
     PayrollLifecycleService,
     RosterService,
     MyWorkspaceService,
+    MyWorkspaceResolver,
+    AttendanceResolver,
+    LeaveResolver,
+    PayrollResolver,
+    EmployeeLifecycleResolver,
   ],
   exports: [
     EmployeeLifecycleService,
