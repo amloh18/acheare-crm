@@ -47,6 +47,12 @@ const MobileHomePage = lazy(() =>
   })),
 );
 
+const MyWorkspacePage = lazy(() =>
+  import('~/pages/my-workspace/MyWorkspacePage').then((module) => ({
+    default: module.MyWorkspacePage,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('~/pages/not-found/NotFound').then((module) => ({
     default: module.NotFound,
@@ -131,7 +137,7 @@ export const createWorkspaceRouteObjects = ({
       path: AppPath.Home,
       element: (
         <LazyRoute>
-          <MobileHomePage />
+          <MyWorkspacePage />
         </LazyRoute>
       ),
     },

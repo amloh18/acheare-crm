@@ -112,10 +112,6 @@ export const useDefaultHomePagePath = () => {
       return AppPath.SignInUp;
     }
 
-    if (isMobile) {
-      return AppPath.Home;
-    }
-
     // Both stores are transiently empty during the post-login window;
     // deciding the redirect before they are loaded could strand users on a
     // wrong fallback (/settings/profile or the alphabetically-first object).
@@ -123,33 +119,12 @@ export const useDefaultHomePagePath = () => {
       return AppPath.Index;
     }
 
-    if (isEmpty(readableNonSystemObjectMetadataItems)) {
-      return getSettingsPath(SettingsPath.ProfilePage);
-    }
-
-    if (isDefined(firstNavigationMenuItemLink)) {
-      return firstNavigationMenuItemLink;
-    }
-
-    if (!isDefined(firstObjectPathInfo)) {
-      return AppPath.NotFound;
-    }
-
-    return getAppPath(
-      AppPath.RecordIndexPage,
-      { objectNamePlural: firstObjectPathInfo.objectMetadataItem?.namePlural },
-      firstObjectPathInfo.view?.id
-        ? { viewId: firstObjectPathInfo.view.id }
-        : undefined,
-    );
+    // Home is now My Workspace for all users (mobile + desktop).
+    return AppPath.Home;
   }, [
     currentUser,
-    isMobile,
-    readableNonSystemObjectMetadataItems,
     areObjectMetadataItemsLoaded,
     areNavigationMenuItemsLoaded,
-    firstNavigationMenuItemLink,
-    firstObjectPathInfo,
   ]);
 
   return { defaultHomePagePath };
