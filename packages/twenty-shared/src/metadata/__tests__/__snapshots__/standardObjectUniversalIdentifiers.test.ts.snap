@@ -34,11 +34,26 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "searchVector": {
         "universalIdentifier": "e3222f8c-aad5-5873-9a10-648908f48f81",
       },
+      "targetCandidate": {
+        "universalIdentifier": "f2a9a37e-79a1-55c8-80b8-00c338b3a4d0",
+      },
       "targetCompany": {
         "universalIdentifier": "a69093bb-6f2a-5ad6-90b1-0d78e9528019",
       },
       "targetDashboard": {
         "universalIdentifier": "3af87717-6757-5d61-940e-3016cff35cdc",
+      },
+      "targetEmployee": {
+        "universalIdentifier": "17bc488d-4ecf-5b03-8883-bbe1e30e24fa",
+      },
+      "targetInterview": {
+        "universalIdentifier": "8d5ea2de-b168-5d47-aea0-7d530a9907ab",
+      },
+      "targetInvoice": {
+        "universalIdentifier": "a454ca9e-c6a5-53a2-8e63-9301832f8bda",
+      },
+      "targetLocation": {
+        "universalIdentifier": "aaac2100-f8f1-5e70-880b-9e20425e800a",
       },
       "targetNote": {
         "universalIdentifier": "a627557c-db37-53be-8a59-9aa2d45cd7ee",
@@ -49,8 +64,17 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "targetPerson": {
         "universalIdentifier": "721ddb1f-468d-535a-9809-cb3429a52e06",
       },
+      "targetRequirement": {
+        "universalIdentifier": "d41d2cb8-05f4-54d0-8705-2f2cc7c7a6c4",
+      },
+      "targetSubmission": {
+        "universalIdentifier": "af01b5db-b45b-59b9-bd67-080e0fd8c2a2",
+      },
       "targetTask": {
         "universalIdentifier": "ace06117-9980-5506-adae-74c71556728b",
+      },
+      "targetTeam": {
+        "universalIdentifier": "873499e3-4153-5bcb-b945-3d70fb8d439a",
       },
       "targetWorkflow": {
         "universalIdentifier": "edbe3ea7-b9ff-5b23-9a81-ef53a190c873",
@@ -127,6 +151,437 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
           },
           "targetWorkflow": {
             "universalIdentifier": "75d1d092-412f-57b1-9e74-e3f8285a3f0c",
+          },
+        },
+      },
+    },
+  },
+  "attendanceCorrection": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "96cb675b-8ee5-5f34-a4b3-63bb9d2bbc11",
+      },
+      "correctedEvents": {
+        "universalIdentifier": "ab68394a-bcfe-4ca1-8b58-0af35821046e",
+      },
+      "createdAt": {
+        "universalIdentifier": "d58bc844-8765-5649-bf54-0883334d3faf",
+      },
+      "createdBy": {
+        "universalIdentifier": "bf3a77a8-797e-5433-a3cd-9c94fe594a65",
+      },
+      "deletedAt": {
+        "universalIdentifier": "70a31dff-b63c-525b-a30b-62494f650d7d",
+      },
+      "employee": {
+        "universalIdentifier": "d4702266-f4f6-4962-8bae-10e44c9c0c43",
+      },
+      "id": {
+        "universalIdentifier": "0a9e929f-51f4-5e9e-8c4d-d520001b116c",
+      },
+      "noteTargets": {
+        "universalIdentifier": "913c0048-adb7-5666-b378-c338bb1bead1",
+      },
+      "position": {
+        "universalIdentifier": "9577d92b-6122-5fbf-80aa-12c5dcad78c5",
+      },
+      "reason": {
+        "universalIdentifier": "d0905ac1-f064-46c2-89ea-40c700b38b4b",
+      },
+      "requestedCheckIn": {
+        "universalIdentifier": "2304e09e-57aa-468b-85bd-7e2c59a90ff4",
+      },
+      "requestedCheckOut": {
+        "universalIdentifier": "99d65119-1986-45b5-8cda-886c6aabd489",
+      },
+      "reviewNotes": {
+        "universalIdentifier": "c2e651fa-e3fb-46b2-8a0f-9612e20fb431",
+      },
+      "reviewedAt": {
+        "universalIdentifier": "a6b6f5ca-ecf3-4204-8848-00e917894b26",
+      },
+      "reviewedBy": {
+        "universalIdentifier": "8047c864-fe7d-41b3-8491-0be2d1081ab0",
+      },
+      "searchVector": {
+        "universalIdentifier": "21a35869-39a9-5ede-88db-3187af2efb17",
+      },
+      "status": {
+        "universalIdentifier": "2519307e-cce3-4ef2-8ab0-212f8e781405",
+      },
+      "taskTargets": {
+        "universalIdentifier": "e6a04dde-090f-51fe-b718-af0ee62cf9e7",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "0f38db66-8d17-5339-a1d2-15890b065d33",
+      },
+      "updatedAt": {
+        "universalIdentifier": "06427331-18ab-5db2-8bfb-d8ce6ae909dc",
+      },
+      "updatedBy": {
+        "universalIdentifier": "8ba4a930-4e72-5c57-bd37-8f4c1e252170",
+      },
+      "workDate": {
+        "universalIdentifier": "60af8f08-f8e5-47c6-815f-8fa4a84db7e7",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "24c56bdd-5a95-4541-81b4-f74110f9aa39",
+      },
+      "statusIndex": {
+        "universalIdentifier": "ae76bf39-c137-4c0f-8935-51781f103719",
+      },
+      "workDateIndex": {
+        "universalIdentifier": "4f31460c-d585-48a9-844c-ac055c87492d",
+      },
+    },
+    "universalIdentifier": "1bc95cda-3fa3-4eca-9c20-3a5fec57d138",
+    "views": {
+      "allAttendanceCorrections": {
+        "universalIdentifier": "96ae901b-b275-51e4-91cf-4947df7eba45",
+        "viewFields": {
+          "employee": {
+            "universalIdentifier": "716afdd1-c350-53d5-bf76-815d243c87b1",
+          },
+          "id": {
+            "universalIdentifier": "3302fe1e-2b62-574f-bf32-280cb8192afc",
+          },
+          "reason": {
+            "universalIdentifier": "3f8d1efe-3813-51a3-957c-399c222f1c76",
+          },
+          "requestedCheckIn": {
+            "universalIdentifier": "53fc9bc9-9bb6-55bd-b1b6-06c117a1bc32",
+          },
+          "requestedCheckOut": {
+            "universalIdentifier": "c4405db0-0b8a-5803-9461-633c8f85208c",
+          },
+          "reviewedBy": {
+            "universalIdentifier": "85611c3e-5042-514c-a657-b335fdaa334b",
+          },
+          "status": {
+            "universalIdentifier": "0da4a46e-3893-5663-9872-e3f17a889ce5",
+          },
+          "workDate": {
+            "universalIdentifier": "5cc2b09b-01ea-5872-baa5-2ccf7b55a48e",
+          },
+        },
+      },
+      "attendanceCorrectionRecordPageFields": {
+        "universalIdentifier": "86aabd79-6a11-5b63-9b55-ae8df29a00f7",
+        "viewFieldGroups": {
+          "correction": {
+            "universalIdentifier": "cd1c8d55-1fc2-5df3-8b28-644b66ae598d",
+          },
+          "relations": {
+            "universalIdentifier": "c4006582-06e9-5aad-8120-04a658bc98f6",
+          },
+          "system": {
+            "universalIdentifier": "866ce25f-2d72-55fd-be8e-8360bc15b033",
+          },
+        },
+        "viewFields": {
+          "correctedEvents": {
+            "universalIdentifier": "43f683e2-e59f-5c26-814e-5b8d6d995489",
+          },
+          "createdAt": {
+            "universalIdentifier": "ac954d6e-4f44-544b-9dc8-61b0d1ba3f52",
+          },
+          "createdBy": {
+            "universalIdentifier": "d360f5bb-f136-50e3-a488-d0e7c34fc5c4",
+          },
+          "employee": {
+            "universalIdentifier": "7fa4a824-57d8-5167-9361-53f1516db413",
+          },
+          "reason": {
+            "universalIdentifier": "9eb7c44b-e922-5758-82c1-c92f72809d25",
+          },
+          "requestedCheckIn": {
+            "universalIdentifier": "13b6a597-7495-5d9c-84e0-f89f0b8ac6de",
+          },
+          "requestedCheckOut": {
+            "universalIdentifier": "fdd156c1-cf63-5efd-9d83-a67b155203ed",
+          },
+          "reviewNotes": {
+            "universalIdentifier": "eee93188-01d1-5a47-939a-2d77786059d9",
+          },
+          "reviewedAt": {
+            "universalIdentifier": "0922c14c-1a2d-5f52-8333-4cfe216b1866",
+          },
+          "reviewedBy": {
+            "universalIdentifier": "d3f5ab47-f722-5f81-a3c4-be176b1d677d",
+          },
+          "status": {
+            "universalIdentifier": "7e40a110-f345-584e-ab9e-8d7bbe7ced9c",
+          },
+          "workDate": {
+            "universalIdentifier": "43c856b1-6907-5310-8533-49d7a184a9c1",
+          },
+        },
+      },
+    },
+  },
+  "attendanceDay": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "b4393398-e5e8-50fd-986a-e2aeb1e5c704",
+      },
+      "breakMinutes": {
+        "universalIdentifier": "b3bc5481-9e9c-4a89-8181-de45cfd763ed",
+      },
+      "createdAt": {
+        "universalIdentifier": "d455ad60-4298-5244-a5f4-c7d19d248f44",
+      },
+      "createdBy": {
+        "universalIdentifier": "b5bc17e6-d03e-5bad-886b-df76b12d1b52",
+      },
+      "deletedAt": {
+        "universalIdentifier": "0f4c88bb-af8a-5453-af34-d19d55cf61ca",
+      },
+      "earlyDepartureMinutes": {
+        "universalIdentifier": "d6612e94-b239-4491-8ffc-786548c21f2c",
+      },
+      "employee": {
+        "universalIdentifier": "2e0e3e25-4b87-46b2-8d93-26133496b5c7",
+      },
+      "firstCheckIn": {
+        "universalIdentifier": "97ef3c2c-5acd-46ff-870d-9c67f6c0897c",
+      },
+      "id": {
+        "universalIdentifier": "2e1d8da0-a0ec-540d-a6ad-3964bf0dfe36",
+      },
+      "lastCheckOut": {
+        "universalIdentifier": "93f87902-a9cb-4ee4-85fb-6f5286c0cfed",
+      },
+      "lateMinutes": {
+        "universalIdentifier": "9b5c1f2a-0a1b-4508-8778-69cc9388abee",
+      },
+      "noteTargets": {
+        "universalIdentifier": "e30c68e6-e681-520d-9ce2-afce8c8ed1b7",
+      },
+      "overtimeMinutes": {
+        "universalIdentifier": "5491bd80-bac3-4727-8aa0-d10062869d2c",
+      },
+      "position": {
+        "universalIdentifier": "0dd4026d-bae8-5681-acd3-87b7ad597a87",
+      },
+      "searchVector": {
+        "universalIdentifier": "3dc33858-83b1-5c9e-9926-d1182ceb3239",
+      },
+      "shift": {
+        "universalIdentifier": "0a6c2da1-4c02-401e-8a11-dead581b9fc8",
+      },
+      "status": {
+        "universalIdentifier": "45c4804f-b876-48da-8d4d-f61285a87565",
+      },
+      "taskTargets": {
+        "universalIdentifier": "dc414a9c-360c-5b9f-9636-50aa6ccd3711",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "bcb9d1cb-1041-55c4-afa6-8b4c806b384f",
+      },
+      "updatedAt": {
+        "universalIdentifier": "a4165e92-16c5-5894-9677-3d9246d75d65",
+      },
+      "updatedBy": {
+        "universalIdentifier": "2ab30e28-d6a6-51f6-bb17-bf581b879ab5",
+      },
+      "workDate": {
+        "universalIdentifier": "5b04cecb-761c-41d9-8f1a-83f8de65a165",
+      },
+      "workedMinutes": {
+        "universalIdentifier": "5d3247cd-d16c-486c-8fd3-6d79dfb2cac9",
+      },
+    },
+    "indexes": {
+      "employeeWorkDateUniqueIndex": {
+        "universalIdentifier": "8b335da8-a866-427b-872e-034520204c39",
+      },
+      "statusIndex": {
+        "universalIdentifier": "0b910f05-f48a-4516-8ff0-112162b1fbed",
+      },
+      "workDateIndex": {
+        "universalIdentifier": "121ce378-a5ff-46af-8365-8b570a2e4f8d",
+      },
+    },
+    "universalIdentifier": "6ccb8504-033b-4b10-bacc-08f4250d2c9c",
+    "views": {
+      "allAttendanceDays": {
+        "universalIdentifier": "a7f07782-a603-521c-8367-886492573873",
+        "viewFields": {
+          "employee": {
+            "universalIdentifier": "d8407861-19f5-5ee7-bf83-5c7649ec5506",
+          },
+          "firstCheckIn": {
+            "universalIdentifier": "93357423-4d62-533c-9414-eeb70b50ac78",
+          },
+          "id": {
+            "universalIdentifier": "d54104d1-f127-5ae2-8254-bf0a80aca5fd",
+          },
+          "lastCheckOut": {
+            "universalIdentifier": "f3a5077b-9333-53ce-ad05-a35c9efb7528",
+          },
+          "lateMinutes": {
+            "universalIdentifier": "95c96e46-5a45-5f89-9867-8e037e71e72b",
+          },
+          "overtimeMinutes": {
+            "universalIdentifier": "b753ab10-1a60-5416-becf-fd841807790e",
+          },
+          "shift": {
+            "universalIdentifier": "aea402c8-b94f-570b-a91b-e502243e3180",
+          },
+          "status": {
+            "universalIdentifier": "9ac79719-82c3-5aa7-a5b5-e2574825716c",
+          },
+          "workDate": {
+            "universalIdentifier": "cb4e51ba-8871-5408-9c1b-85e589068e2b",
+          },
+          "workedMinutes": {
+            "universalIdentifier": "901c95d0-d7c0-544c-a138-82b2b58cfdb5",
+          },
+        },
+      },
+      "attendanceDayRecordPageFields": {
+        "universalIdentifier": "a74519e2-d9ca-58bd-82b0-6866d80e93b5",
+        "viewFieldGroups": {
+          "attendance": {
+            "universalIdentifier": "c5a370be-b204-56ce-876e-c3d66de915db",
+          },
+          "relations": {
+            "universalIdentifier": "3a88e52a-6289-5295-98eb-4e1c91a7b731",
+          },
+          "system": {
+            "universalIdentifier": "97cce117-d320-5cac-ad52-00faf550bd9a",
+          },
+        },
+        "viewFields": {
+          "breakMinutes": {
+            "universalIdentifier": "c36fcc66-a7e0-5331-870e-e35bfb5d950d",
+          },
+          "createdAt": {
+            "universalIdentifier": "4e71bf76-2601-5bd5-af5e-00cc800ab64c",
+          },
+          "earlyDepartureMinutes": {
+            "universalIdentifier": "41d80594-ae55-5fb3-91f3-3e3491eefa0e",
+          },
+          "employee": {
+            "universalIdentifier": "2f0193d0-8b5d-5012-b27e-d05b889e2f15",
+          },
+          "firstCheckIn": {
+            "universalIdentifier": "5e927aeb-cbee-582a-a4ca-644e1e732cad",
+          },
+          "lastCheckOut": {
+            "universalIdentifier": "53550351-ce08-5464-a7a5-1d5e8e0f5fe3",
+          },
+          "lateMinutes": {
+            "universalIdentifier": "eb0b1cbd-e749-5986-ace6-98095e26cabd",
+          },
+          "overtimeMinutes": {
+            "universalIdentifier": "9f52d777-a80f-5ee4-97a4-b717011b8074",
+          },
+          "shift": {
+            "universalIdentifier": "6f78f85b-5a1e-5dc7-a942-9b69d5692e51",
+          },
+          "status": {
+            "universalIdentifier": "0353f1e1-5b45-5b14-8b9a-11f309270ccc",
+          },
+          "updatedAt": {
+            "universalIdentifier": "84abfdf2-e468-5871-97d2-56fec38c2d81",
+          },
+          "workDate": {
+            "universalIdentifier": "f8aa0244-a280-58c7-aa16-f2dd3d659ef3",
+          },
+          "workedMinutes": {
+            "universalIdentifier": "697e5d9f-dc4b-5e68-b145-641568447866",
+          },
+        },
+      },
+    },
+  },
+  "attendanceEvent": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "31ca7e7d-2138-538f-a2ad-a07335a6b46b",
+      },
+      "correction": {
+        "universalIdentifier": "0e94cdb4-2a13-405d-8a67-7cdb33f0b95e",
+      },
+      "createdAt": {
+        "universalIdentifier": "c1d91f69-5b3e-5dc0-8a46-a776fa5784aa",
+      },
+      "createdBy": {
+        "universalIdentifier": "5e91c20d-a4ea-5401-88f8-9486f14991af",
+      },
+      "deletedAt": {
+        "universalIdentifier": "ca0c1e1d-8205-57e0-a56b-8558a5fca16a",
+      },
+      "employee": {
+        "universalIdentifier": "ea31c4c9-c80c-4ed4-8532-bc786bdefa92",
+      },
+      "eventType": {
+        "universalIdentifier": "ee4e74e9-a143-447f-88e3-0918ec541ab1",
+      },
+      "id": {
+        "universalIdentifier": "c3763bcf-d1b3-5d42-b8b3-f1ae2fa3174a",
+      },
+      "noteTargets": {
+        "universalIdentifier": "8b1f663a-6f59-5229-a952-9d5653b0ad34",
+      },
+      "position": {
+        "universalIdentifier": "1dc1248e-b334-5913-8fea-c691f8bb6e7b",
+      },
+      "searchVector": {
+        "universalIdentifier": "20edd884-8874-50e4-bc61-df3a451be85e",
+      },
+      "source": {
+        "universalIdentifier": "5b3b844f-d5f8-4665-8e93-545fd36eb160",
+      },
+      "taskTargets": {
+        "universalIdentifier": "cd4a9afa-1f71-53d8-8e65-7609eae4b0a9",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "e372d98c-07e2-5118-bb85-234bbe205ed3",
+      },
+      "timestamp": {
+        "universalIdentifier": "e3ad0c28-c340-4b88-89b4-329b896c083c",
+      },
+      "updatedAt": {
+        "universalIdentifier": "9bd2305d-4732-598f-a6bc-c623854ad6ff",
+      },
+      "updatedBy": {
+        "universalIdentifier": "1028a759-7048-5f19-bdbe-76588adc1ff0",
+      },
+    },
+    "indexes": {
+      "employeeTimestampIndex": {
+        "universalIdentifier": "679ffa56-8228-44a3-835d-d53fac96880d",
+      },
+      "eventTypeIndex": {
+        "universalIdentifier": "b1394db6-98a5-4c0e-832c-06b564c40a63",
+      },
+    },
+    "universalIdentifier": "41fb234c-8f3c-4121-bd5e-58094911b4b1",
+    "views": {
+      "allAttendanceEvents": {
+        "universalIdentifier": "89d88899-0aa6-5bc7-8d2e-a3ed845e91b0",
+        "viewFields": {
+          "correction": {
+            "universalIdentifier": "786d1224-5501-5463-aeb7-2d7d60e9f43b",
+          },
+          "employee": {
+            "universalIdentifier": "4b4f1373-7582-5c4f-b2d6-aec2d2eb6821",
+          },
+          "eventType": {
+            "universalIdentifier": "8b3da85f-752c-5164-94cd-7e5f9212b263",
+          },
+          "id": {
+            "universalIdentifier": "fc1849b7-23b3-574e-bbbd-3786fdc5df56",
+          },
+          "source": {
+            "universalIdentifier": "925635ed-8ff3-5d85-8f37-fa930cd8de7c",
+          },
+          "timestamp": {
+            "universalIdentifier": "35d228c6-de4c-5a44-867a-f076d3f9e669",
           },
         },
       },
@@ -807,6 +1262,508 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
     },
   },
+  "candidate": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "41a414d8-5d1a-54de-a16a-b3aeac2d9fe7",
+      },
+      "candidateSubmissions": {
+        "universalIdentifier": "06dc1760-59d7-5a44-b016-1b497838be9a",
+      },
+      "createdAt": {
+        "universalIdentifier": "02dd283f-1776-56b3-88ff-6e2ea758e2c2",
+      },
+      "createdBy": {
+        "universalIdentifier": "cd4f89d4-90c3-5106-b5c3-3e0aea0f636e",
+      },
+      "currentCompany": {
+        "universalIdentifier": "84990e88-20be-4e20-949c-dd4b15591c1a",
+      },
+      "currentDesignation": {
+        "universalIdentifier": "cdd95eca-5202-4d20-9083-10d8e494adb9",
+      },
+      "currentSalary": {
+        "universalIdentifier": "26dec8fb-dd39-4f41-8b91-0458e071c1cd",
+      },
+      "deletedAt": {
+        "universalIdentifier": "89ff8615-66f9-515b-a146-43a8ec8b5d08",
+      },
+      "expectedSalary": {
+        "universalIdentifier": "01dab3c4-ac19-4346-a504-771bab13d2c4",
+      },
+      "id": {
+        "universalIdentifier": "27f33f74-64f5-55a7-8577-f7edc115d66a",
+      },
+      "interviews": {
+        "universalIdentifier": "af5a05ec-4523-5200-8a06-d525b260dc91",
+      },
+      "name": {
+        "universalIdentifier": "7966163a-8059-41e7-b74f-bab4c7a176d4",
+      },
+      "noteTargets": {
+        "universalIdentifier": "c20f2888-a6cf-5f61-a32c-8d6ed6705905",
+      },
+      "noticePeriod": {
+        "universalIdentifier": "21898d4b-5fd3-418c-9dae-d0d1489df420",
+      },
+      "person": {
+        "universalIdentifier": "a6f08d76-c6c3-4178-bfac-9a34feef93bb",
+      },
+      "position": {
+        "universalIdentifier": "e73dc961-3fee-572f-ae54-e091984c80f9",
+      },
+      "preferredLocation": {
+        "universalIdentifier": "5f4e2f34-fab4-4723-b5cf-2a8a6c3512f1",
+      },
+      "recruiterOwner": {
+        "universalIdentifier": "8938fa35-1ba7-4a2e-9bb3-25cc64226709",
+      },
+      "searchVector": {
+        "universalIdentifier": "f5589b34-e71b-5e96-a4d0-5a9db9984c2d",
+      },
+      "skills": {
+        "universalIdentifier": "b08aeb7d-bc38-4072-8757-6cf12cf9d5e0",
+      },
+      "source": {
+        "universalIdentifier": "3a50fed5-e39a-40a7-b819-6f6983ee5c43",
+      },
+      "status": {
+        "universalIdentifier": "a2663c31-a0f5-4771-8766-6e80c0942da3",
+      },
+      "taskTargets": {
+        "universalIdentifier": "4bdaaac7-2185-57b2-98dd-aa4be56f7120",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "c16ed44e-613a-5496-9b47-24a284869261",
+      },
+      "totalExperienceYears": {
+        "universalIdentifier": "1a8efcd7-6027-45a7-88e4-ab29cf61716e",
+      },
+      "updatedAt": {
+        "universalIdentifier": "f011ff81-adbf-5a13-8a57-c8ae13245170",
+      },
+      "updatedBy": {
+        "universalIdentifier": "df8e3a37-ffc7-51e4-a1f2-e6fe438fd181",
+      },
+    },
+    "indexes": {
+      "personIdIndex": {
+        "universalIdentifier": "9e608f69-fcf9-469c-9db2-c8c6ebefad80",
+      },
+      "recruiterOwnerIdIndex": {
+        "universalIdentifier": "9dfda2e1-e1c0-401d-9f96-1a8f445f70d1",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "9aabc5ca-cce0-4772-891e-258a2335cfa5",
+      },
+      "sourceIndex": {
+        "universalIdentifier": "a9960f0e-8c55-43aa-9c84-fffb294754d1",
+      },
+      "statusIndex": {
+        "universalIdentifier": "fc371991-a4c2-4de8-bb56-4c91568b180d",
+      },
+    },
+    "universalIdentifier": "25b414c3-8b47-4e07-adab-c746ba69f6a2",
+    "views": {
+      "allCandidates": {
+        "universalIdentifier": "7414f0b4-91f8-5a8a-956a-f10375564c00",
+        "viewFields": {
+          "createdBy": {
+            "universalIdentifier": "4f18e496-b663-57fe-835a-347a221575d1",
+          },
+          "expectedSalary": {
+            "universalIdentifier": "6756b9d0-7b2e-5d63-9c0f-45c6a0abb155",
+          },
+          "name": {
+            "universalIdentifier": "8cc3167a-8ae3-51f5-9900-326ff769121a",
+          },
+          "noticePeriod": {
+            "universalIdentifier": "d22efec5-e667-544d-a2ca-d51495662b8e",
+          },
+          "person": {
+            "universalIdentifier": "a047ae2a-47c4-5e3e-8fb9-418be7be5e49",
+          },
+          "recruiterOwner": {
+            "universalIdentifier": "ce434522-e5aa-5e64-8a11-e6ecb0fd3d27",
+          },
+          "source": {
+            "universalIdentifier": "f6d3feaa-ddce-5c57-8c2e-bea0ff904987",
+          },
+          "status": {
+            "universalIdentifier": "f9202d8a-d1fb-52bf-9325-6eef4d8a4e4f",
+          },
+          "totalExperienceYears": {
+            "universalIdentifier": "b70d7530-e46a-5efe-a4a3-b86583b3f242",
+          },
+        },
+      },
+      "candidateRecordPageFields": {
+        "universalIdentifier": "f9bee3e2-0fc9-58ab-bdfc-0cf49f459cab",
+        "viewFieldGroups": {
+          "candidate": {
+            "universalIdentifier": "3d49f2aa-938b-544e-aa11-93ecf1558d76",
+          },
+          "relations": {
+            "universalIdentifier": "7011a0cb-74e7-5b86-80a9-7774ed7a55df",
+          },
+          "system": {
+            "universalIdentifier": "cd4a10f4-8b40-51ea-b580-2fd1c7057400",
+          },
+        },
+        "viewFields": {
+          "attachments": {
+            "universalIdentifier": "b722aaa6-92f7-5bce-aff7-822cecd8392e",
+          },
+          "candidateSubmissions": {
+            "universalIdentifier": "919207d8-2e77-5670-807e-a866323a9f23",
+          },
+          "createdAt": {
+            "universalIdentifier": "2b8c6a22-e47a-5dfb-81e2-e58fbae651fa",
+          },
+          "createdBy": {
+            "universalIdentifier": "0d278682-9e35-5702-9456-084fe751dffd",
+          },
+          "currentCompany": {
+            "universalIdentifier": "9cb3b8ed-8c15-5c61-afa9-d572e9e813bb",
+          },
+          "currentDesignation": {
+            "universalIdentifier": "ea2813e3-a8b6-5bc7-b6f0-2b3765d031de",
+          },
+          "currentSalary": {
+            "universalIdentifier": "23ee0267-aeb3-5dad-9904-46000abac584",
+          },
+          "expectedSalary": {
+            "universalIdentifier": "699d9e15-e13c-5077-b9c7-87b67fdade6a",
+          },
+          "interviews": {
+            "universalIdentifier": "051e79ca-fcfa-520f-b472-c4952042a247",
+          },
+          "name": {
+            "universalIdentifier": "0e7e85d3-e25a-5a4b-be6e-15d750f4764b",
+          },
+          "noteTargets": {
+            "universalIdentifier": "2957f34e-57fb-5797-a2bb-dc3a01a7ac93",
+          },
+          "noticePeriod": {
+            "universalIdentifier": "d891ce49-79c5-5d32-a407-ce68b7b1b55f",
+          },
+          "person": {
+            "universalIdentifier": "73e4d973-bd3a-5d02-9d1d-2b2b24c28211",
+          },
+          "preferredLocation": {
+            "universalIdentifier": "0aa9ba88-f31c-5b11-a070-c11b66930c68",
+          },
+          "recruiterOwner": {
+            "universalIdentifier": "0810887c-4b35-53bd-8a0c-d1c7be6af2e7",
+          },
+          "skills": {
+            "universalIdentifier": "7d0c4a48-f770-5459-beab-97423b210846",
+          },
+          "source": {
+            "universalIdentifier": "f71d73ac-6820-5d4b-9991-332193cbc72a",
+          },
+          "status": {
+            "universalIdentifier": "77373c7c-897d-501b-9589-35d971a5de26",
+          },
+          "taskTargets": {
+            "universalIdentifier": "f13a3763-85b0-561c-8804-856119213a16",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "357b6164-fe76-576a-95b5-6d85fd749253",
+          },
+          "totalExperienceYears": {
+            "universalIdentifier": "76b0f2fb-8df8-5f41-835e-11ed69e3307f",
+          },
+          "updatedAt": {
+            "universalIdentifier": "4b124618-97a4-5a95-85e3-e2bbc0ab3cc5",
+          },
+          "updatedBy": {
+            "universalIdentifier": "58577d31-0e85-58ee-a4d4-5f3822ed41c4",
+          },
+        },
+      },
+    },
+  },
+  "candidateSubmission": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "085dfb11-7c94-5169-856a-d1b85c4837bb",
+      },
+      "candidate": {
+        "universalIdentifier": "9553ae7e-2a92-4f34-8dec-a12331d3333e",
+      },
+      "clientFeedback": {
+        "universalIdentifier": "ddbf684f-497d-483a-876c-d9a7c44d10fd",
+      },
+      "createdAt": {
+        "universalIdentifier": "57ea5580-bf6f-53dd-83cd-22b25d80b7ca",
+      },
+      "createdBy": {
+        "universalIdentifier": "cf312979-2e72-5d0d-8e13-68901c0e0775",
+      },
+      "deletedAt": {
+        "universalIdentifier": "487d455c-5275-54b1-aa5e-891a52588b74",
+      },
+      "dropReason": {
+        "universalIdentifier": "48f7b432-2728-4f9b-9b6c-6a0d7bd38cfc",
+      },
+      "expectedSalary": {
+        "universalIdentifier": "b34514ba-9323-47f8-be2d-0be56332b2db",
+      },
+      "hrOwner": {
+        "universalIdentifier": "4a7e1835-2602-4748-a85b-8e93bad63357",
+      },
+      "id": {
+        "universalIdentifier": "d74b6707-ca36-54a3-94d6-52ff3150beb0",
+      },
+      "interviews": {
+        "universalIdentifier": "a47a7026-0847-52ca-9dc1-05692604271a",
+      },
+      "joiningDate": {
+        "universalIdentifier": "78510818-c52b-450f-923d-eb8465e8dee7",
+      },
+      "name": {
+        "universalIdentifier": "c3fb9a17-bdca-4d12-b51f-94b668714a89",
+      },
+      "noteTargets": {
+        "universalIdentifier": "edd59bf9-479c-5131-8b9f-c32a611ea1a0",
+      },
+      "offeredSalary": {
+        "universalIdentifier": "7db9cc5b-867b-47d3-ac7c-7613607c6e01",
+      },
+      "position": {
+        "universalIdentifier": "ae7d3e82-b57e-562d-9202-c5e3bc09bd74",
+      },
+      "recruiter": {
+        "universalIdentifier": "45cfaca1-fb0e-485f-a4c1-5bf946c47dff",
+      },
+      "rejectionReason": {
+        "universalIdentifier": "b17eb1de-c133-4ff9-bae8-96e7f42d3d9f",
+      },
+      "requirement": {
+        "universalIdentifier": "3eebb343-036f-4b94-8f30-56743c398b7e",
+      },
+      "resumeSent": {
+        "universalIdentifier": "95b7b675-e815-480d-8de3-46d449aef2f8",
+      },
+      "searchVector": {
+        "universalIdentifier": "c5ab5140-ce64-5e03-af14-fb310429db97",
+      },
+      "stage": {
+        "universalIdentifier": "fbb90879-0349-41b1-a1ea-57c5a1b9bdef",
+      },
+      "taskTargets": {
+        "universalIdentifier": "951bfb8b-337e-5c51-8f7a-e9a97de63cf5",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "1aae7959-8506-529b-b1f2-cc0b68cc5051",
+      },
+      "updatedAt": {
+        "universalIdentifier": "6e1ac51d-9b6f-5d78-a10b-5ddb6acc1e5b",
+      },
+      "updatedBy": {
+        "universalIdentifier": "591a6d64-76f0-5202-80ec-b8fa966ec64b",
+      },
+    },
+    "indexes": {
+      "candidateIdIndex": {
+        "universalIdentifier": "1091e1eb-39f1-4d1b-b80d-46d504494acd",
+      },
+      "candidateRequirementUniqueIndex": {
+        "universalIdentifier": "b045aae3-b9ca-4082-9d9a-8fa6c844e8c3",
+      },
+      "hrOwnerIdIndex": {
+        "universalIdentifier": "9a596c70-39eb-4811-be72-f0585e05267a",
+      },
+      "recruiterIdIndex": {
+        "universalIdentifier": "0a3ffd0c-b722-4d78-8679-f223565c7bc7",
+      },
+      "requirementIdIndex": {
+        "universalIdentifier": "ec430f80-47f0-4224-a5fb-93723e87c7a3",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "75ff84eb-50fa-4683-a4b5-c1c598fad4f3",
+      },
+      "stageIndex": {
+        "universalIdentifier": "832f4152-8c4b-4665-9714-82f64b91ba0e",
+      },
+    },
+    "universalIdentifier": "466cd2b0-c450-452c-921f-0f7e82990277",
+    "views": {
+      "allSubmissions": {
+        "universalIdentifier": "2247820b-7d61-5a6e-ab58-1b596c449c44",
+        "viewFields": {
+          "candidate": {
+            "universalIdentifier": "d8a5b886-f4e1-5d3c-98e0-a3fe49bad365",
+          },
+          "createdBy": {
+            "universalIdentifier": "4eeef576-a13a-58bf-be7b-6e75386c5c81",
+          },
+          "expectedSalary": {
+            "universalIdentifier": "9b19d8f3-baaf-5554-a1cd-5181aa35505b",
+          },
+          "joiningDate": {
+            "universalIdentifier": "44f03321-be7e-55d9-90cd-71c8a19d6209",
+          },
+          "name": {
+            "universalIdentifier": "05086dc9-8bf5-5775-8163-07812e3f212b",
+          },
+          "recruiter": {
+            "universalIdentifier": "73f021d8-305b-5fd9-9779-0bc0b87d50ed",
+          },
+          "requirement": {
+            "universalIdentifier": "1d06358b-2dfa-562c-8e3b-1801542a9df2",
+          },
+          "stage": {
+            "universalIdentifier": "8494924c-1170-58d7-a68a-6d3924ae4394",
+          },
+        },
+      },
+      "byStage": {
+        "universalIdentifier": "3df642c2-8957-4690-bb32-231e9a2ab3f6",
+        "viewFields": {
+          "candidate": {
+            "universalIdentifier": "04f41abf-38e3-4ac0-a3ef-6bcb47399cb8",
+          },
+          "expectedSalary": {
+            "universalIdentifier": "b1a2e6bd-937c-4b76-a3b2-f01fb3a06c47",
+          },
+          "joiningDate": {
+            "universalIdentifier": "7bb277c2-2a3e-4d9f-ba95-9d20a68c8684",
+          },
+          "name": {
+            "universalIdentifier": "f79e96bd-7d39-4213-96de-6e14e6ea2d54",
+          },
+          "recruiter": {
+            "universalIdentifier": "86d7b04d-c30c-46d8-bb40-a40546cc6a9c",
+          },
+          "stage": {
+            "universalIdentifier": "d3b0e79d-7779-4a5a-8e42-1f1d30de1e06",
+          },
+        },
+        "viewGroups": {
+          "clientReview": {
+            "universalIdentifier": "4a26ed00-4e35-41e9-882a-641cb18a85d9",
+          },
+          "dropped": {
+            "universalIdentifier": "227bf223-dddd-4495-9250-e5159e46ce65",
+          },
+          "interview": {
+            "universalIdentifier": "6b8656b1-163c-46d1-ba18-59db8bd69ed7",
+          },
+          "joined": {
+            "universalIdentifier": "d997f7bf-0323-4ba0-9e4a-c4b52549b235",
+          },
+          "offer": {
+            "universalIdentifier": "88e8b4ae-881f-487f-a751-3d040d7733f6",
+          },
+          "offerAccepted": {
+            "universalIdentifier": "749b0969-9c10-4a5c-9efe-f83d68d8e401",
+          },
+          "rejected": {
+            "universalIdentifier": "757b7f44-8dab-4236-9f2f-86d4cfffb1a8",
+          },
+          "screening": {
+            "universalIdentifier": "9d9f337b-10ce-4732-abbe-0d7cc9143d79",
+          },
+          "selected": {
+            "universalIdentifier": "0f01db9c-7109-40d3-9f82-4fc84a06f62a",
+          },
+          "shortlisted": {
+            "universalIdentifier": "f0a0148e-9c1b-4a48-a7e2-63f9e0ca27fb",
+          },
+          "sourced": {
+            "universalIdentifier": "9eb09df1-111c-4500-b9c5-71eb9374d338",
+          },
+          "submittedToClient": {
+            "universalIdentifier": "aaf8fc25-e89a-40ee-befd-232fd8daa200",
+          },
+        },
+      },
+      "candidateSubmissionRecordPageFields": {
+        "universalIdentifier": "371ffcfd-3fac-58c1-b741-850622882f6f",
+        "viewFieldGroups": {
+          "relations": {
+            "universalIdentifier": "1b495278-03aa-5eb4-8dbd-0620f47e89a2",
+          },
+          "submission": {
+            "universalIdentifier": "e7632491-85ab-5e32-82da-a0c359ab36ca",
+          },
+          "system": {
+            "universalIdentifier": "b16f1960-2f43-5365-8cb3-c42645c88510",
+          },
+        },
+        "viewFields": {
+          "attachments": {
+            "universalIdentifier": "d9b44916-80ef-5463-8265-625b49d8d230",
+          },
+          "candidate": {
+            "universalIdentifier": "356c06af-c990-5efe-8242-78a34f7114ce",
+          },
+          "clientFeedback": {
+            "universalIdentifier": "7d462f74-370e-5681-ac67-b4a9e086732e",
+          },
+          "createdAt": {
+            "universalIdentifier": "83782079-c994-53f1-8d8d-e055c3f61c7a",
+          },
+          "createdBy": {
+            "universalIdentifier": "8fce257c-0cd3-5bce-a3fd-37e3ba451ceb",
+          },
+          "dropReason": {
+            "universalIdentifier": "1fbc8b50-f82f-51e0-81e5-f700819249be",
+          },
+          "expectedSalary": {
+            "universalIdentifier": "a88a023c-858b-5aac-b04e-bbdefca60fde",
+          },
+          "hrOwner": {
+            "universalIdentifier": "003ad027-87cd-59b9-b462-8eb434022709",
+          },
+          "interviews": {
+            "universalIdentifier": "d31aa6af-cb6c-58a8-8613-4b9c9868941b",
+          },
+          "joiningDate": {
+            "universalIdentifier": "d6ea3f33-ffa2-5aa3-bc7e-c52cc555df62",
+          },
+          "name": {
+            "universalIdentifier": "f3576dca-9805-51b6-921e-4037abcf2583",
+          },
+          "noteTargets": {
+            "universalIdentifier": "8ad02ab6-78af-5d68-aa3a-d793730d1259",
+          },
+          "offeredSalary": {
+            "universalIdentifier": "aa3a81ef-b3b5-5ea4-b3c2-2d523bd05f94",
+          },
+          "recruiter": {
+            "universalIdentifier": "e07b7f06-afd0-5efe-a593-7339d92ebd31",
+          },
+          "rejectionReason": {
+            "universalIdentifier": "658f1486-5aa5-55ef-af15-400290c112b7",
+          },
+          "requirement": {
+            "universalIdentifier": "e260a245-d66e-517c-bf18-54fcf4eb0567",
+          },
+          "resumeSent": {
+            "universalIdentifier": "6e3e762e-f290-5fe0-b61b-3e144f9f48f3",
+          },
+          "stage": {
+            "universalIdentifier": "1f8c46cf-26de-5038-9329-463794bef245",
+          },
+          "taskTargets": {
+            "universalIdentifier": "9a4e3409-4cb3-57d8-ab2d-999c3026caf8",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "1336338d-3982-5e91-9b24-382bd875f614",
+          },
+          "updatedAt": {
+            "universalIdentifier": "99ca717b-a766-5b52-a105-56d97d9cdaa0",
+          },
+          "updatedBy": {
+            "universalIdentifier": "21fbd1aa-e266-5267-bf54-49e4b11176e2",
+          },
+        },
+      },
+    },
+  },
   "company": {
     "fields": {
       "accountOwner": {
@@ -839,6 +1796,12 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "id": {
         "universalIdentifier": "ca0547a7-a55a-51f7-b5d7-f3a03e266c39",
       },
+      "interviews": {
+        "universalIdentifier": "a26f025c-92fc-510d-9ee8-b8b9d8156468",
+      },
+      "invoices": {
+        "universalIdentifier": "3ccf485d-450e-52a0-a6d8-588c13798fb9",
+      },
       "linkedinLink": {
         "universalIdentifier": "20202020-ebeb-4beb-b9ad-6848036fb451",
       },
@@ -859,6 +1822,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
       "position": {
         "universalIdentifier": "a6c6ffb5-1a46-5f3d-b0e3-14c071e3a972",
+      },
+      "requirements": {
+        "universalIdentifier": "55147b21-5d38-5dd5-af19-622a3e72cf07",
       },
       "searchVector": {
         "universalIdentifier": "d043190d-3335-5463-b98d-eecbf7b41c65",
@@ -1041,6 +2007,1427 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
           },
           "updatedAt": {
             "universalIdentifier": "d37846b6-01a9-54f9-ab44-43a39375974d",
+          },
+        },
+      },
+    },
+  },
+  "department": {
+    "fields": {
+      "createdAt": {
+        "universalIdentifier": "073bc455-a42a-502c-aec6-bd1b5644d618",
+      },
+      "createdBy": {
+        "universalIdentifier": "2119406e-0707-5e5d-8ede-bba8b770b245",
+      },
+      "deletedAt": {
+        "universalIdentifier": "60930784-a5a7-5da5-b498-b6954be2fee2",
+      },
+      "departmentHead": {
+        "universalIdentifier": "3c2ec356-f4f1-5f81-a2d2-e503f8286d1a",
+      },
+      "description": {
+        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abd",
+      },
+      "employees": {
+        "universalIdentifier": "962f21a0-f3ce-5092-8739-71e2f5f54789",
+      },
+      "id": {
+        "universalIdentifier": "c08e3d4e-87e1-55c2-95d3-6fa28dee3c66",
+      },
+      "name": {
+        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abc",
+      },
+      "position": {
+        "universalIdentifier": "19bd2417-6466-5f20-9dab-00dc4665b3df",
+      },
+      "searchVector": {
+        "universalIdentifier": "ca6e0230-36f9-575e-b991-1b6fe35f6a39",
+      },
+      "status": {
+        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abe",
+      },
+      "updatedAt": {
+        "universalIdentifier": "77b0c301-6ee9-5d9c-9c5e-92bbbbbc0996",
+      },
+      "updatedBy": {
+        "universalIdentifier": "08eceb55-9eaf-5919-b645-58391e797930",
+      },
+    },
+    "indexes": {},
+    "universalIdentifier": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "views": {
+      "allDepartments": {
+        "universalIdentifier": "8b286211-30b2-5b48-b7d6-30f62d0f0247",
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "9cbae157-b7f2-55d3-8adf-b6bc93331f23",
+          },
+          "departmentHead": {
+            "universalIdentifier": "4ed23839-c220-5778-b329-a80fc0b0cf6f",
+          },
+          "name": {
+            "universalIdentifier": "f7a681c1-0fb5-50c3-9b2c-5afd7e7730ff",
+          },
+          "status": {
+            "universalIdentifier": "3a1bbd27-3b0d-593f-bd49-4d493d7e3f63",
+          },
+        },
+      },
+      "departmentRecordPageFields": {
+        "universalIdentifier": "a2c0341b-88e6-5d4b-837a-1998c0648de4",
+        "viewFieldGroups": {
+          "general": {
+            "universalIdentifier": "17854e7c-1d2b-55cd-90f7-e24ba105d9ab",
+          },
+          "relations": {
+            "universalIdentifier": "bd8d8813-9729-51f1-ad21-ce5f77665852",
+          },
+          "system": {
+            "universalIdentifier": "e8d3375c-e459-5728-bb5e-eba46d75b2a8",
+          },
+        },
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "6e4e56cc-f606-52fa-8603-512a4c03fa9c",
+          },
+          "createdBy": {
+            "universalIdentifier": "6a0a4f6b-a691-5224-907f-294ee42b8b10",
+          },
+          "departmentHead": {
+            "universalIdentifier": "7dfcae51-c22a-5f56-b6db-1934f4e74f16",
+          },
+          "description": {
+            "universalIdentifier": "c6fd1d12-1f2f-5208-ac6c-5fa381677d1b",
+          },
+          "employees": {
+            "universalIdentifier": "73c95a18-de77-5173-a725-e24f7da96c44",
+          },
+          "name": {
+            "universalIdentifier": "058aa01d-7bc1-5af8-b11e-b3158f773235",
+          },
+          "status": {
+            "universalIdentifier": "0dfbb868-3691-5232-b6cd-536b6603f1c4",
+          },
+          "updatedAt": {
+            "universalIdentifier": "9cd5a588-58a0-5b4f-bb48-2744f89248b0",
+          },
+          "updatedBy": {
+            "universalIdentifier": "5e78caa8-4362-5555-b93d-cdfda238b88c",
+          },
+        },
+      },
+    },
+  },
+  "designation": {
+    "fields": {
+      "createdAt": {
+        "universalIdentifier": "47a399ee-ecb8-5903-84c8-562fda14bce5",
+      },
+      "createdBy": {
+        "universalIdentifier": "ffc43d57-6bfe-5dbf-a266-c80b2c3ed7ca",
+      },
+      "deletedAt": {
+        "universalIdentifier": "a9aa44db-8f2c-53e2-ba41-a459c4436639",
+      },
+      "description": {
+        "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000002",
+      },
+      "employees": {
+        "universalIdentifier": "0ab0363b-84fb-55d6-bfa0-f4f60097c840",
+      },
+      "id": {
+        "universalIdentifier": "78d61558-b896-5293-a14f-218bacbf92e4",
+      },
+      "level": {
+        "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000003",
+      },
+      "position": {
+        "universalIdentifier": "89de1e30-91ee-5b2d-9c9d-0772b2868822",
+      },
+      "searchVector": {
+        "universalIdentifier": "0d129415-7788-5823-ab6e-50e0d25cc1b0",
+      },
+      "status": {
+        "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000004",
+      },
+      "title": {
+        "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000001",
+      },
+      "updatedAt": {
+        "universalIdentifier": "7290e95f-e536-5e71-90ff-136d8ba750c9",
+      },
+      "updatedBy": {
+        "universalIdentifier": "8c48d325-6168-5ad5-a5a7-35db2f2cc4f5",
+      },
+    },
+    "indexes": {
+      "statusIndex": {
+        "universalIdentifier": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+      },
+      "titleIndex": {
+        "universalIdentifier": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      },
+    },
+    "universalIdentifier": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "views": {
+      "allDesignations": {
+        "universalIdentifier": "b6a614c8-c17f-5971-8d20-e17b91db0b8d",
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "86ef64a6-fcf1-56c4-ac0f-2921171e70d8",
+          },
+          "description": {
+            "universalIdentifier": "005e8c02-d7c1-5164-9457-345641922e7e",
+          },
+          "level": {
+            "universalIdentifier": "df3caec4-8f5a-56e6-b2a5-17b8a2836372",
+          },
+          "status": {
+            "universalIdentifier": "2826013b-5563-5cac-bedc-cd086028d13a",
+          },
+          "title": {
+            "universalIdentifier": "ce76404d-ea30-5884-b800-3000a36e2016",
+          },
+        },
+      },
+    },
+  },
+  "employee": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "ced395c4-4f6d-5fe7-9592-96894bb46adb",
+      },
+      "attendanceCorrections": {
+        "universalIdentifier": "27f20624-8766-4ca0-8ab6-342e90a89741",
+      },
+      "attendanceDays": {
+        "universalIdentifier": "9d6ee019-5459-439d-8140-aba3e0a9c451",
+      },
+      "attendanceEvents": {
+        "universalIdentifier": "51b3d8c4-323f-4ca2-8117-e30611578c81",
+      },
+      "createdAt": {
+        "universalIdentifier": "83ad390e-67d1-5cc7-83a8-7a63b5d4b669",
+      },
+      "createdBy": {
+        "universalIdentifier": "1a5daf74-3679-5612-ac93-9c9ebb6a9088",
+      },
+      "deletedAt": {
+        "universalIdentifier": "b548389b-da1a-5f88-a6e4-06b18200e18d",
+      },
+      "department": {
+        "universalIdentifier": "8f6fc574-b9e6-5c6b-a5a2-1bc25fbdba3f",
+      },
+      "designation": {
+        "universalIdentifier": "92601e50-3792-5826-b399-61e6ce1c6600",
+      },
+      "employeeCode": {
+        "universalIdentifier": "0d0257ae-609b-4c7f-8e46-704da72cd017",
+      },
+      "employmentType": {
+        "universalIdentifier": "22785094-b2f6-45cc-80f0-99a64e7097eb",
+      },
+      "exitDate": {
+        "universalIdentifier": "0dee5bb5-33f8-4576-8965-4bc20e848201",
+      },
+      "id": {
+        "universalIdentifier": "15d60175-dcc3-5778-a0a2-31e90a76aa52",
+      },
+      "joiningDate": {
+        "universalIdentifier": "883b8572-7730-44a0-8e43-353c1dd875ec",
+      },
+      "leaveBalances": {
+        "universalIdentifier": "6207243a-8487-4f6b-8675-29d741f11c8a",
+      },
+      "leaveRequests": {
+        "universalIdentifier": "c783573a-caaf-4f73-8bc7-d3afbed77461",
+      },
+      "location": {
+        "universalIdentifier": "01107722-c656-51b5-89d6-fea37d6e44ca",
+      },
+      "manager": {
+        "universalIdentifier": "e6ae01f5-c72d-57ce-bfa8-195dd1498cc9",
+      },
+      "noteTargets": {
+        "universalIdentifier": "150899f7-25bf-5d7c-bdd4-93be5a8bacf3",
+      },
+      "onboardingItems": {
+        "universalIdentifier": "add1706f-4a67-47fc-8106-8471da201a6e",
+      },
+      "payrollAdjustments": {
+        "universalIdentifier": "35bc4fd9-ec4c-4f09-8fb9-c1108d747776",
+      },
+      "payslips": {
+        "universalIdentifier": "b0339fbf-54b6-468d-8fac-a50858dd560d",
+      },
+      "person": {
+        "universalIdentifier": "3ccc0ea0-5adb-401d-8d12-d54df4fcf693",
+      },
+      "position": {
+        "universalIdentifier": "78558efb-16d2-55f6-bcf9-a8ec6f18d1b7",
+      },
+      "rosterAssignments": {
+        "universalIdentifier": "f75128a0-fcd0-41bf-8489-aa66bbd8ad88",
+      },
+      "salaryStructures": {
+        "universalIdentifier": "1f98057b-f49b-42fd-8771-518c8c55b6cf",
+      },
+      "searchVector": {
+        "universalIdentifier": "edbba373-fe60-5e64-81d6-b395b8a7c05e",
+      },
+      "status": {
+        "universalIdentifier": "d893b0e5-65ab-4b0f-84d8-0df963eea4dd",
+      },
+      "taskTargets": {
+        "universalIdentifier": "b76e76e9-a034-511c-8141-3ad8abf91608",
+      },
+      "team": {
+        "universalIdentifier": "a6cabb6d-760b-519d-818f-eff3ced234ba",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "27241359-6b0c-54ea-b511-be95560a1084",
+      },
+      "updatedAt": {
+        "universalIdentifier": "1f4eeee0-b9c4-5404-ad0b-506b93d5265a",
+      },
+      "updatedBy": {
+        "universalIdentifier": "c24a6a06-1e77-5a3b-a5b2-7eb034da468c",
+      },
+      "workLocation": {
+        "universalIdentifier": "5093b3e3-d569-4642-85ae-ee866e66244f",
+      },
+    },
+    "indexes": {
+      "employeeCodeUniqueIndex": {
+        "universalIdentifier": "ff0d3e00-c77b-4193-8912-5293c6bf0b0a",
+      },
+      "personIdIndex": {
+        "universalIdentifier": "db5ee3ee-8a79-403a-81d2-dc8c4456344e",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "99d916a4-e8ee-42b2-8d28-65810da35ef3",
+      },
+      "statusIndex": {
+        "universalIdentifier": "80ab60fd-e5fb-41a3-8e2b-25d8c8f1494a",
+      },
+    },
+    "universalIdentifier": "4c4f1f64-63ad-4180-b168-e26b23b6378a",
+    "views": {
+      "allEmployees": {
+        "universalIdentifier": "0f517fc9-f0da-5aa7-b2b1-a5d2501ff691",
+        "viewFields": {
+          "createdBy": {
+            "universalIdentifier": "fcf52e9d-b368-5b88-b1cf-a5013009a2e4",
+          },
+          "department": {
+            "universalIdentifier": "3ef1f075-65aa-5f64-8bd2-f60f90679bca",
+          },
+          "designation": {
+            "universalIdentifier": "af9398c2-0ade-59ce-8f2c-8a8adc7d4002",
+          },
+          "employeeCode": {
+            "universalIdentifier": "f947071f-a51b-5191-8297-bf6e8ed270c0",
+          },
+          "employmentType": {
+            "universalIdentifier": "7caae547-0663-52c9-b8da-ff332297b937",
+          },
+          "joiningDate": {
+            "universalIdentifier": "a7910305-989d-5d4b-99e7-9c81def27a3a",
+          },
+          "person": {
+            "universalIdentifier": "8c95b97b-2ec4-5df8-b61f-f7edc7c0fd33",
+          },
+          "status": {
+            "universalIdentifier": "164c3b01-df07-5992-9725-4d28eab6542a",
+          },
+          "workLocation": {
+            "universalIdentifier": "810d2eb4-149f-5b9b-a16a-36347d4a11dd",
+          },
+        },
+      },
+      "employeeRecordPageFields": {
+        "universalIdentifier": "a821f2c8-a9a7-5ae2-af8b-cdbbd03e5868",
+        "viewFieldGroups": {
+          "employee": {
+            "universalIdentifier": "1667fc22-658d-5cdd-af3e-5165bdecef08",
+          },
+          "relations": {
+            "universalIdentifier": "bf9eacca-430a-5c97-a247-8eb664cb4409",
+          },
+          "system": {
+            "universalIdentifier": "920b28d5-c50a-53b9-9106-564dc78fb755",
+          },
+        },
+        "viewFields": {
+          "attachments": {
+            "universalIdentifier": "236de06f-37ca-51f4-9207-d607a42e1af8",
+          },
+          "attendanceCorrections": {
+            "universalIdentifier": "1064efc4-1c1e-5864-adee-91231949f9bf",
+          },
+          "attendanceDays": {
+            "universalIdentifier": "5d60ad30-89bc-5450-a6c8-b258d041af78",
+          },
+          "attendanceEvents": {
+            "universalIdentifier": "e4a7d07f-9c34-54f4-9ba8-c46bb08636ef",
+          },
+          "createdAt": {
+            "universalIdentifier": "0437b680-7c74-5fa3-a4d5-c0f23c246310",
+          },
+          "createdBy": {
+            "universalIdentifier": "0286314b-2b66-59e9-b4c9-6bd118fbfa30",
+          },
+          "department": {
+            "universalIdentifier": "fb8b3840-ff0b-5112-977a-2858c1d5cc9d",
+          },
+          "designation": {
+            "universalIdentifier": "a36c8da1-71b9-5402-a370-edeb7d2b030a",
+          },
+          "employeeCode": {
+            "universalIdentifier": "d2dfe4ee-cdc5-5442-ba70-b445c1ccb5f2",
+          },
+          "employmentType": {
+            "universalIdentifier": "2b7fe130-8e6f-5426-8633-6d03796f6c64",
+          },
+          "exitDate": {
+            "universalIdentifier": "0fb91bca-05ba-5322-a701-821d5d7349ef",
+          },
+          "joiningDate": {
+            "universalIdentifier": "8044fee3-e730-5255-8827-5f02f9e10321",
+          },
+          "leaveBalances": {
+            "universalIdentifier": "1bdcf4e9-7f64-55cd-b488-0cdb73c71dab",
+          },
+          "leaveRequests": {
+            "universalIdentifier": "6b0a3700-87db-5c40-a365-84d569a5769d",
+          },
+          "noteTargets": {
+            "universalIdentifier": "cab1d420-0caf-51da-b884-dd0d298c37e7",
+          },
+          "onboardingItems": {
+            "universalIdentifier": "c52079de-88e9-5fbb-ac3d-5075cfa8dd40",
+          },
+          "payrollAdjustments": {
+            "universalIdentifier": "e830b299-849e-5c8c-bfd6-5bed8f35c866",
+          },
+          "payslips": {
+            "universalIdentifier": "69af00e8-c5be-55d0-8664-7ca12e25b913",
+          },
+          "person": {
+            "universalIdentifier": "cc3d5724-26da-518f-9d6d-9d5ac75a5a93",
+          },
+          "rosterAssignments": {
+            "universalIdentifier": "46815c36-4a0a-584b-944f-2857f2dda19e",
+          },
+          "salaryStructures": {
+            "universalIdentifier": "f73e7a12-c650-566c-8dc9-00a21aa2713a",
+          },
+          "status": {
+            "universalIdentifier": "79938af1-d56e-5005-a9e5-df7b2b31218e",
+          },
+          "taskTargets": {
+            "universalIdentifier": "109349aa-737e-5a3a-b8ea-0c9c2f70d704",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "c9a854d7-b7be-5db8-9b40-0632418e6e66",
+          },
+          "updatedAt": {
+            "universalIdentifier": "72f60199-2fb8-5da0-8c63-953abf2083a8",
+          },
+          "updatedBy": {
+            "universalIdentifier": "5a6493f3-ffa7-5b5d-9aa9-d33d4cfd2418",
+          },
+          "workLocation": {
+            "universalIdentifier": "733ed89f-a851-5442-b978-9af71dec5311",
+          },
+        },
+      },
+    },
+  },
+  "interview": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "cb1acad0-f09c-58ee-85b1-83c36cd9b2ba",
+      },
+      "candidate": {
+        "universalIdentifier": "5d942e38-4fbc-483f-b852-3bec3e622055",
+      },
+      "company": {
+        "universalIdentifier": "cb721d40-5887-4ce8-bbec-bdbae68fee32",
+      },
+      "createdAt": {
+        "universalIdentifier": "6aae1416-300a-5d3c-a28a-6636579104c5",
+      },
+      "createdBy": {
+        "universalIdentifier": "6f35bf54-0501-5708-a25c-16f58379a463",
+      },
+      "deletedAt": {
+        "universalIdentifier": "d11565b0-c8e8-5754-9b6c-cf09c8e61fe1",
+      },
+      "feedback": {
+        "universalIdentifier": "df483513-4502-4639-ba73-0f0bba7c09f8",
+      },
+      "id": {
+        "universalIdentifier": "4397fa6e-5480-5f13-b96b-ac9011b5b8b1",
+      },
+      "interviewer": {
+        "universalIdentifier": "90a1a8bb-469a-4b06-872a-93e3e40f35d2",
+      },
+      "meetingLink": {
+        "universalIdentifier": "2b7785a3-7b74-4ab9-8547-137148f340ab",
+      },
+      "mode": {
+        "universalIdentifier": "659b1e0b-072b-4b31-bb9b-62da06e6b650",
+      },
+      "noteTargets": {
+        "universalIdentifier": "741e7cfd-edcb-5890-8ffe-30437fac5404",
+      },
+      "owner": {
+        "universalIdentifier": "e6c47c0c-a3b3-593d-b2bc-27b69de3a922",
+      },
+      "position": {
+        "universalIdentifier": "bcaade61-e3ea-5aa9-ac75-bb64e0a53662",
+      },
+      "requirement": {
+        "universalIdentifier": "22479f65-fb10-468e-aced-798a63ebd994",
+      },
+      "result": {
+        "universalIdentifier": "4d2f1eb3-9331-4af8-9be9-f07af035748d",
+      },
+      "round": {
+        "universalIdentifier": "2a5575dc-5bf1-44e2-b5eb-6e80de0ec542",
+      },
+      "scheduledAt": {
+        "universalIdentifier": "5a9d3fce-b067-4cb1-bf77-e58a08630368",
+      },
+      "searchVector": {
+        "universalIdentifier": "2053e56d-c403-5899-9208-8381224c8ea1",
+      },
+      "status": {
+        "universalIdentifier": "89d6c955-4d7b-4ce4-81af-f9c3fdfd0b54",
+      },
+      "submission": {
+        "universalIdentifier": "ae2619f3-9293-4fd1-a194-2bb41937062a",
+      },
+      "taskTargets": {
+        "universalIdentifier": "597316bf-bba4-5cf4-be1f-2bcd0d4a4146",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "1d1047ae-c08a-5ca2-b133-51aa2735e956",
+      },
+      "title": {
+        "universalIdentifier": "f0aa68ed-d40f-422b-ac90-c52ce24737d8",
+      },
+      "updatedAt": {
+        "universalIdentifier": "84bfa7e4-71ac-5eac-ab6d-0bbf7ef6c306",
+      },
+      "updatedBy": {
+        "universalIdentifier": "da63ec09-58a4-54f2-917b-0429eec25b4b",
+      },
+    },
+    "indexes": {
+      "candidateIdIndex": {
+        "universalIdentifier": "f07dd5ca-ca41-4a13-a0b7-dfd34f730113",
+      },
+      "companyIdIndex": {
+        "universalIdentifier": "09b7af4d-40f1-49ef-ba1f-1b3c3426c045",
+      },
+      "requirementIdIndex": {
+        "universalIdentifier": "4a29ccab-35e8-45ee-b169-98190aa184e2",
+      },
+      "scheduledAtIndex": {
+        "universalIdentifier": "64b986c4-e397-4239-b41d-961be013897e",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "7738a69d-e363-40e5-b7cc-21dcc7652f9b",
+      },
+      "statusIndex": {
+        "universalIdentifier": "ac3c422e-8a78-440d-8704-8cc790139cb0",
+      },
+      "submissionIdIndex": {
+        "universalIdentifier": "bc96be96-4b19-4c65-acb2-c898499e102e",
+      },
+    },
+    "universalIdentifier": "2ae33383-7466-487a-aeef-babe62024149",
+    "views": {
+      "allInterviews": {
+        "universalIdentifier": "8917b572-ec2b-5dfc-8303-98f51845eb68",
+        "viewFields": {
+          "candidate": {
+            "universalIdentifier": "fa53ef45-de99-56bd-a8cb-c4b9d3a5d8e6",
+          },
+          "createdBy": {
+            "universalIdentifier": "e10abdd0-62e3-5069-8ed5-ba46ae235e44",
+          },
+          "interviewer": {
+            "universalIdentifier": "ee3965f4-979d-52ba-b0a0-c2d496ee0f49",
+          },
+          "mode": {
+            "universalIdentifier": "951962e3-ee1c-5058-be71-214ac46f66cf",
+          },
+          "requirement": {
+            "universalIdentifier": "a5cbf873-2051-5d21-920c-adcf266a3add",
+          },
+          "result": {
+            "universalIdentifier": "21ad6813-92b6-5e58-8900-5f76974862c0",
+          },
+          "round": {
+            "universalIdentifier": "4e3d546b-141a-5599-8f70-3a712d216091",
+          },
+          "scheduledAt": {
+            "universalIdentifier": "a81546e8-c71c-5ec7-bf4c-c68e05e72544",
+          },
+          "status": {
+            "universalIdentifier": "eed2191d-0cbc-507c-ac5f-a23124f2c309",
+          },
+          "title": {
+            "universalIdentifier": "de82fa04-86e3-57d0-b95d-ef1dee11434b",
+          },
+        },
+      },
+      "byScheduledAt": {
+        "universalIdentifier": "f22e587c-8898-449a-a3c2-2c8b6cd4de36",
+        "viewFields": {
+          "candidate": {
+            "universalIdentifier": "d3ad1ccb-236a-46aa-862e-e0f6b5df7ac4",
+          },
+          "mode": {
+            "universalIdentifier": "82a5a0a9-f79b-4a52-a095-813a5706a372",
+          },
+          "scheduledAt": {
+            "universalIdentifier": "f8bb1ac1-4e26-4c4d-84da-0d8c99c9d70c",
+          },
+          "title": {
+            "universalIdentifier": "f0c14260-b5cc-4a44-9b96-f19e37d4a1c3",
+          },
+        },
+      },
+      "interviewRecordPageFields": {
+        "universalIdentifier": "7c192b9b-3da0-5d7b-9d81-b97fe4a4aea9",
+        "viewFieldGroups": {
+          "interview": {
+            "universalIdentifier": "10d44b38-4861-5253-abde-82053be3e5ce",
+          },
+          "relations": {
+            "universalIdentifier": "f73b9857-ed0d-53b6-bbf4-8a4008c44928",
+          },
+          "system": {
+            "universalIdentifier": "c058655f-89af-5d98-bc7f-656cdb3c894b",
+          },
+        },
+        "viewFields": {
+          "attachments": {
+            "universalIdentifier": "d241efc1-d21c-52ae-89be-30694dcb4927",
+          },
+          "candidate": {
+            "universalIdentifier": "faf6079f-e450-549b-a1c3-4d4bff5a1b5a",
+          },
+          "company": {
+            "universalIdentifier": "61ef1e52-9e2a-5a08-aa84-31435ef875e1",
+          },
+          "createdAt": {
+            "universalIdentifier": "e22e9339-4f71-5225-82aa-68a8200038ff",
+          },
+          "createdBy": {
+            "universalIdentifier": "adf106de-9973-5839-abc5-f051451c3b6e",
+          },
+          "feedback": {
+            "universalIdentifier": "cfe4f991-d15c-525c-807b-1d1fcf321d82",
+          },
+          "interviewer": {
+            "universalIdentifier": "839dbff2-dda4-579c-840f-d04f6d264916",
+          },
+          "meetingLink": {
+            "universalIdentifier": "48738cf4-1af7-544c-bdab-33e7d470eab2",
+          },
+          "mode": {
+            "universalIdentifier": "fff28c14-e1fd-54c9-81bf-3ac680165a47",
+          },
+          "noteTargets": {
+            "universalIdentifier": "98c42deb-ba5f-5c65-bb7d-e858c65f97db",
+          },
+          "requirement": {
+            "universalIdentifier": "044bc764-2644-5aec-989b-9a0b3085177e",
+          },
+          "result": {
+            "universalIdentifier": "afe9b16b-ef72-5b7d-b6af-9c5d7ae3dd75",
+          },
+          "round": {
+            "universalIdentifier": "11e429de-f6e6-5bb7-be2d-340d9acf7091",
+          },
+          "scheduledAt": {
+            "universalIdentifier": "0e15143d-d1f8-5845-a71b-4a17f200a9f2",
+          },
+          "status": {
+            "universalIdentifier": "59c9a71e-08d6-5f25-8e83-dc63caea28e0",
+          },
+          "submission": {
+            "universalIdentifier": "408906a6-10e0-5df5-89c8-2d0604331761",
+          },
+          "taskTargets": {
+            "universalIdentifier": "6efeb71f-3cd5-51bb-ab77-fe074656f91e",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "c01b6c5d-6d8e-5acf-bbd5-e8e639fb7407",
+          },
+          "title": {
+            "universalIdentifier": "85adcfc3-0333-5492-bacc-e0d0d7f40c41",
+          },
+          "updatedAt": {
+            "universalIdentifier": "d4b4305e-5f14-5ade-8043-7d6e72912ca8",
+          },
+          "updatedBy": {
+            "universalIdentifier": "80d719be-a32d-5066-aeb2-5715ef5e5273",
+          },
+        },
+      },
+    },
+  },
+  "invoice": {
+    "fields": {
+      "amount": {
+        "universalIdentifier": "d6a65ec4-d490-479d-87c2-1d0cf02e5c1e",
+      },
+      "amountPaid": {
+        "universalIdentifier": "4c232172-d8be-4077-842f-c94e4c187611",
+      },
+      "attachments": {
+        "universalIdentifier": "b6d96ec4-7482-5ea2-8588-c14e85b89f88",
+      },
+      "company": {
+        "universalIdentifier": "bf0f1979-0fd9-4aa9-8f64-5aaff1406494",
+      },
+      "createdAt": {
+        "universalIdentifier": "989415e6-cd76-5285-afab-269673426b43",
+      },
+      "createdBy": {
+        "universalIdentifier": "fe498da9-4c09-53a0-bb4d-2842d4de658e",
+      },
+      "deal": {
+        "universalIdentifier": "71d16bdf-62e2-4b63-8b95-1f8c36e93edd",
+      },
+      "deletedAt": {
+        "universalIdentifier": "27d7e23e-3b0e-5e1d-a684-e3cf57176c43",
+      },
+      "dueDate": {
+        "universalIdentifier": "983a7f2a-38ea-48bf-8eb8-3c0fa87efd95",
+      },
+      "id": {
+        "universalIdentifier": "8e58597f-9769-5e74-8100-7219424ca157",
+      },
+      "invoiceDate": {
+        "universalIdentifier": "a5bed69f-d8d0-4810-84da-678edd233665",
+      },
+      "invoiceNumber": {
+        "universalIdentifier": "5c8125d5-276f-473e-8e0f-79cee3d19347",
+      },
+      "noteTargets": {
+        "universalIdentifier": "dc601606-1547-5743-9cf0-c81d9438d1ca",
+      },
+      "notes": {
+        "universalIdentifier": "f76d46c4-c187-42bd-859b-547d269a4bc3",
+      },
+      "outstanding": {
+        "universalIdentifier": "f2809acc-72bd-4b1b-8095-6b0f73ce0c4f",
+      },
+      "payments": {
+        "universalIdentifier": "a15fc89a-dafd-48d4-8f65-375d69ae0f10",
+      },
+      "position": {
+        "universalIdentifier": "d1cd6113-201c-54c9-85e4-83e4658621aa",
+      },
+      "requirement": {
+        "universalIdentifier": "c00d7bf5-1c1d-4e84-8f1c-3eef31bb2041",
+      },
+      "searchVector": {
+        "universalIdentifier": "648461ee-b3ef-57dc-a7c3-ed46b866d9f9",
+      },
+      "status": {
+        "universalIdentifier": "83555fef-aa9a-4577-8b26-706212987b64",
+      },
+      "taskTargets": {
+        "universalIdentifier": "aec4114f-5702-5e2f-abd5-49c7669c162a",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "584f2b9e-a2ab-5f48-b936-e1a900097309",
+      },
+      "updatedAt": {
+        "universalIdentifier": "75421c9a-a51c-570a-a598-2108df4d1971",
+      },
+      "updatedBy": {
+        "universalIdentifier": "7df160ea-e6b5-5161-924d-39f9add7c4f3",
+      },
+    },
+    "indexes": {
+      "companyIdIndex": {
+        "universalIdentifier": "5a6be31b-60e7-4562-8e67-02a5c9f93d2b",
+      },
+      "dueDateIndex": {
+        "universalIdentifier": "4b9524c8-e968-407b-8298-8b2569fd6e36",
+      },
+      "invoiceNumberUniqueIndex": {
+        "universalIdentifier": "3f007db8-a9e0-4326-8422-ed3946d51c38",
+      },
+      "requirementIdIndex": {
+        "universalIdentifier": "d66fb8b1-87bc-4f56-8534-f5b70363b81c",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "9bc523a8-970f-44ef-8919-e8b8dd7891f6",
+      },
+      "statusIndex": {
+        "universalIdentifier": "1b815766-5336-4779-8e0a-6d4a6fc8bd6d",
+      },
+    },
+    "universalIdentifier": "1863b4d2-f24c-4e0f-bd84-6570d1436489",
+    "views": {
+      "allInvoices": {
+        "universalIdentifier": "4faae3da-76d4-55b6-8251-841fc0b91e8f",
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "8a52e043-c1d2-50c2-bb15-2747983bb0f2",
+          },
+          "amountPaid": {
+            "universalIdentifier": "ac684701-feac-51df-88e5-b8ec94325699",
+          },
+          "company": {
+            "universalIdentifier": "f821178e-de5f-52fb-a926-a1067598b035",
+          },
+          "dueDate": {
+            "universalIdentifier": "cd2157b0-8c7f-5218-b34e-bde420a0f944",
+          },
+          "invoiceDate": {
+            "universalIdentifier": "3264dac3-74b8-51d1-a442-5afc8c34197c",
+          },
+          "invoiceNumber": {
+            "universalIdentifier": "13d62273-3854-5a9a-b998-14131b5b2223",
+          },
+          "outstanding": {
+            "universalIdentifier": "a26fd3ea-deaa-5f71-ae5c-8d56279c0548",
+          },
+          "status": {
+            "universalIdentifier": "9efd9a46-da88-52cf-b5fe-0c6107df0b01",
+          },
+        },
+      },
+      "invoiceRecordPageFields": {
+        "universalIdentifier": "f32e63a8-1bdd-5094-95fd-c59189f247a7",
+        "viewFieldGroups": {
+          "invoice": {
+            "universalIdentifier": "378c93db-10c2-5259-b4ea-e30154e8fbad",
+          },
+          "relations": {
+            "universalIdentifier": "b3ade0f3-5f9a-5c60-a7c6-fd2a5fdbaed6",
+          },
+          "system": {
+            "universalIdentifier": "93b370d5-9f26-589d-b145-e06f915172d3",
+          },
+        },
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "7d9110a6-cd2f-52bd-8271-eb3416163e91",
+          },
+          "amountPaid": {
+            "universalIdentifier": "00f36c41-a7c3-5351-af84-179035bd3a5a",
+          },
+          "attachments": {
+            "universalIdentifier": "acde6306-fd6d-5527-91e0-82b0c127e305",
+          },
+          "company": {
+            "universalIdentifier": "bcb7491e-ad17-59ea-b675-bd1494836892",
+          },
+          "createdAt": {
+            "universalIdentifier": "9f5c7e88-d7d5-583e-ad59-dbd90cfd7d76",
+          },
+          "createdBy": {
+            "universalIdentifier": "2df909af-133e-5526-813b-f3e388938c00",
+          },
+          "deal": {
+            "universalIdentifier": "8e6b053e-9407-5c20-9b2e-fcd0b2c4f675",
+          },
+          "dueDate": {
+            "universalIdentifier": "e4f3fc6a-0c86-5bdb-b925-043487a97e3c",
+          },
+          "invoiceDate": {
+            "universalIdentifier": "6edea805-949a-55ab-bc1c-9c1c7e7ace83",
+          },
+          "invoiceNumber": {
+            "universalIdentifier": "75df7e8f-ea00-5d6e-841c-ac68dc7a9253",
+          },
+          "noteTargets": {
+            "universalIdentifier": "99516cc5-0bf3-50c5-980f-85018fa630ae",
+          },
+          "notes": {
+            "universalIdentifier": "6cd8c7d9-90f9-5d22-95cc-9d8240cc1871",
+          },
+          "outstanding": {
+            "universalIdentifier": "e8e64486-e1e2-56ce-b9cc-f31a43924414",
+          },
+          "payments": {
+            "universalIdentifier": "a6531c8d-ce1f-5331-bb24-e3d40dc4c95d",
+          },
+          "requirement": {
+            "universalIdentifier": "e348c999-a0d2-5aa0-98d7-5e4c9dd31455",
+          },
+          "status": {
+            "universalIdentifier": "13a647fe-a77c-5805-aaf1-1e8415eec2ff",
+          },
+          "taskTargets": {
+            "universalIdentifier": "80bb3c06-d8fd-542c-ab08-0081c40da8c1",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "bc57c627-a13f-5031-b1b9-52e52833bf19",
+          },
+          "updatedAt": {
+            "universalIdentifier": "30a0426f-17bf-5016-af7b-ed21db8345e7",
+          },
+          "updatedBy": {
+            "universalIdentifier": "12923901-2451-5727-89e5-e055735d296c",
+          },
+        },
+      },
+    },
+  },
+  "leaveBalance": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "68740aaf-4eb0-5dc6-90dc-41f2be8c31b6",
+      },
+      "createdAt": {
+        "universalIdentifier": "6520ecb7-489a-5abe-ba70-d9205b855e45",
+      },
+      "createdBy": {
+        "universalIdentifier": "f12caa3e-8893-5c75-a742-c05a8b32d5a9",
+      },
+      "deletedAt": {
+        "universalIdentifier": "155fb515-2437-569a-b951-4ff60b3c65e5",
+      },
+      "employee": {
+        "universalIdentifier": "de33ca50-86bf-47cb-8997-ae1ecd21b8f4",
+      },
+      "entitled": {
+        "universalIdentifier": "04b12af6-5979-4a6b-8d45-9cc9d3520527",
+      },
+      "id": {
+        "universalIdentifier": "cc6b0069-32c9-5cd5-8eea-3924acf1933a",
+      },
+      "leaveType": {
+        "universalIdentifier": "d2b26480-ff2e-47bb-8830-d2e185f27e52",
+      },
+      "noteTargets": {
+        "universalIdentifier": "f2c83761-7f50-5229-834a-5dc7bcb6c606",
+      },
+      "pending": {
+        "universalIdentifier": "222f7c27-4f69-4600-8964-8b3651137728",
+      },
+      "position": {
+        "universalIdentifier": "c087d372-d413-5296-b5fa-e02a0fb64577",
+      },
+      "searchVector": {
+        "universalIdentifier": "6a52a13c-1692-5bcd-a641-81f3bc391b35",
+      },
+      "taskTargets": {
+        "universalIdentifier": "0e72f9b9-1178-5985-9c28-fd7c21f8313a",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "b50ac229-7231-5bb0-9cee-6a04a4c3a0b2",
+      },
+      "updatedAt": {
+        "universalIdentifier": "81623e23-250c-5062-bdc6-bbcc05da6864",
+      },
+      "updatedBy": {
+        "universalIdentifier": "0015d0a9-18dc-5f4f-8f95-64f9fbbb0d4f",
+      },
+      "used": {
+        "universalIdentifier": "b98c9f5c-e047-46fe-893a-22af01b641b2",
+      },
+      "year": {
+        "universalIdentifier": "8bc3c153-657c-4a60-82e9-67b3efc50299",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "9b5d9789-a954-4f03-8eda-24e8c416bece",
+      },
+      "employeeTypeYearUniqueIndex": {
+        "universalIdentifier": "04f6011e-cd9b-486e-83d9-ceb13c6affb0",
+      },
+    },
+    "universalIdentifier": "c3bd480c-e717-4b7d-b17f-f375295ba725",
+    "views": {
+      "allLeaveBalances": {
+        "universalIdentifier": "14f910e2-8f0b-5927-a4c3-838c329c795a",
+        "viewFields": {
+          "employee": {
+            "universalIdentifier": "ee747220-a69f-50c1-bb61-875b9e6b92d9",
+          },
+          "entitled": {
+            "universalIdentifier": "0a749713-353b-5fb6-8271-6bde7c79004d",
+          },
+          "id": {
+            "universalIdentifier": "82092c4d-2f0e-5ed3-aacc-cdc2a200c9e7",
+          },
+          "leaveType": {
+            "universalIdentifier": "020ca200-8e69-5dcc-adc8-2363c42cf522",
+          },
+          "pending": {
+            "universalIdentifier": "a06f70f6-c001-5609-92cc-227c531361e3",
+          },
+          "used": {
+            "universalIdentifier": "7e47892f-fc44-5d8c-a2be-7f2568c3efc5",
+          },
+          "year": {
+            "universalIdentifier": "af3af402-a5cd-5325-b920-8247be9316df",
+          },
+        },
+      },
+    },
+  },
+  "leaveRequest": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "787a590e-9e2e-5398-80c7-72d4a6b3688d",
+      },
+      "createdAt": {
+        "universalIdentifier": "95a5cb59-7cf7-5b7d-8d8c-b60b3efa5955",
+      },
+      "createdBy": {
+        "universalIdentifier": "5ac76981-5526-5262-9b55-ff7f34db87a7",
+      },
+      "days": {
+        "universalIdentifier": "c87e3230-efa3-40ce-8517-af71d60828d4",
+      },
+      "deletedAt": {
+        "universalIdentifier": "08058685-f2fd-549e-8bc5-9c1caa561f84",
+      },
+      "employee": {
+        "universalIdentifier": "4b98f1cf-012d-4212-88db-004e01fc6956",
+      },
+      "endDate": {
+        "universalIdentifier": "514ea397-6fb7-4700-8f26-3abf152fc1aa",
+      },
+      "id": {
+        "universalIdentifier": "8bc263cf-561f-5a78-b356-2370c216090b",
+      },
+      "leaveType": {
+        "universalIdentifier": "b3b95167-240f-4964-88f3-1a0fa8ea5a74",
+      },
+      "noteTargets": {
+        "universalIdentifier": "63e74c86-61d8-5a13-9eb9-978c5e2f1d44",
+      },
+      "position": {
+        "universalIdentifier": "edf61c2e-1152-51ff-a85d-7f5a590c2805",
+      },
+      "reason": {
+        "universalIdentifier": "af3f38ad-6cfd-40db-8833-d05b785daad2",
+      },
+      "reviewNotes": {
+        "universalIdentifier": "4ea8bd02-fc60-4ddd-889b-6fcd37a54ab9",
+      },
+      "reviewedAt": {
+        "universalIdentifier": "3179bab7-a3f8-432b-89ec-56e14cf46b09",
+      },
+      "reviewedBy": {
+        "universalIdentifier": "c62821d5-6950-4afa-822e-cd259d7abbdc",
+      },
+      "searchVector": {
+        "universalIdentifier": "8acd0a55-6f98-5236-bcb8-fe17921ffea8",
+      },
+      "startDate": {
+        "universalIdentifier": "51f1b224-f4ef-4de2-8a2e-c969f05603e1",
+      },
+      "status": {
+        "universalIdentifier": "255b20f8-b2eb-49a8-8eb3-ef36846b8396",
+      },
+      "taskTargets": {
+        "universalIdentifier": "d4dceb99-d5f8-5d0a-ad1e-896388da7aa3",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "c0af5c0b-8fd2-5888-90a0-ccdef09721cb",
+      },
+      "updatedAt": {
+        "universalIdentifier": "744ddde1-e0d2-50c3-9a55-44d6ed3d9f64",
+      },
+      "updatedBy": {
+        "universalIdentifier": "663a3517-b127-5234-8578-af92a38bf32a",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "bb6773e9-8943-450a-8183-97eea28069a0",
+      },
+      "leaveTypeIdIndex": {
+        "universalIdentifier": "7eb97998-5f5c-4643-8a71-1661e484bbdd",
+      },
+      "statusIndex": {
+        "universalIdentifier": "ddfb406c-8895-4474-8684-cffc977fae28",
+      },
+    },
+    "universalIdentifier": "9a68ca1e-1bef-4b93-a810-b4f76201b033",
+    "views": {
+      "allLeaveRequests": {
+        "universalIdentifier": "4eb9de5d-535a-5b11-b81f-10a7858bfd90",
+        "viewFields": {
+          "days": {
+            "universalIdentifier": "8a3ad446-545c-50c6-8b6b-d73df3026cf4",
+          },
+          "employee": {
+            "universalIdentifier": "9b2b7b5d-ce65-575d-93d8-0a2591e58cdd",
+          },
+          "endDate": {
+            "universalIdentifier": "3a430f1c-a98d-5e80-ac28-6199da55ab0d",
+          },
+          "id": {
+            "universalIdentifier": "0e6b555f-4b32-56d1-a152-000ef4fe21eb",
+          },
+          "leaveType": {
+            "universalIdentifier": "e06ba911-eb33-52e3-971a-54433bbe54b5",
+          },
+          "reviewedBy": {
+            "universalIdentifier": "e152f915-b35c-5530-98fe-d416ffd49035",
+          },
+          "startDate": {
+            "universalIdentifier": "a9ceea91-59fe-5bf1-81a2-ba8d87bc3fde",
+          },
+          "status": {
+            "universalIdentifier": "fa6a476d-1d89-5cca-adc7-057784b54da9",
+          },
+        },
+      },
+      "leaveRequestRecordPageFields": {
+        "universalIdentifier": "677c02e6-8dac-507b-ba2a-6c73b53e9f9a",
+        "viewFieldGroups": {
+          "leave": {
+            "universalIdentifier": "56b86067-2177-58bf-ad02-9694d8edbe65",
+          },
+          "relations": {
+            "universalIdentifier": "9d558941-3440-5551-a9ab-506135867a08",
+          },
+          "system": {
+            "universalIdentifier": "bb8a82eb-df66-540f-a617-24f6028bc4a3",
+          },
+        },
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "be3db79a-37e5-55ee-94cb-b4070f0ba495",
+          },
+          "createdBy": {
+            "universalIdentifier": "79a3116a-0007-540d-9dcc-faf1df692852",
+          },
+          "days": {
+            "universalIdentifier": "1cb3e508-662b-5d80-b2b5-7ec94b5a9b77",
+          },
+          "employee": {
+            "universalIdentifier": "5c165fd2-84a7-5f21-a5b4-c3e5df219042",
+          },
+          "endDate": {
+            "universalIdentifier": "7aab3742-6582-5e6e-98f8-d13a04e27e80",
+          },
+          "leaveType": {
+            "universalIdentifier": "04c603fa-7202-5034-a8b3-0b7a053721e4",
+          },
+          "reason": {
+            "universalIdentifier": "dceb3736-e424-5db4-b665-d5935f34ace2",
+          },
+          "reviewNotes": {
+            "universalIdentifier": "f1a2a6fb-00e5-5d47-a5f5-973113ce1761",
+          },
+          "reviewedAt": {
+            "universalIdentifier": "bda3fc0e-fd45-5681-8c2e-7368512c9f6f",
+          },
+          "reviewedBy": {
+            "universalIdentifier": "23f44f23-e589-5050-bcaf-879c83c5d0c2",
+          },
+          "startDate": {
+            "universalIdentifier": "fa583a2e-21db-5e75-a30e-c1f1f1666ff3",
+          },
+          "status": {
+            "universalIdentifier": "41962247-bbc1-56ee-9233-53f69a54e0a6",
+          },
+        },
+      },
+    },
+  },
+  "leaveType": {
+    "fields": {
+      "annualQuota": {
+        "universalIdentifier": "977765c1-c1e9-4d54-8c8b-b1b4febec7ce",
+      },
+      "attachments": {
+        "universalIdentifier": "b41629df-76bd-567e-8a55-c2e2cd6cbf28",
+      },
+      "createdAt": {
+        "universalIdentifier": "adf66cda-aa2f-514b-8854-0354268b3bab",
+      },
+      "createdBy": {
+        "universalIdentifier": "3e85e691-ae9d-555e-8ed5-d2e71874e0e7",
+      },
+      "deletedAt": {
+        "universalIdentifier": "feb7cb1a-d16c-553d-82ea-9f43fd9a7fd3",
+      },
+      "id": {
+        "universalIdentifier": "9618885d-b45a-5131-adbe-2ee1d7697d08",
+      },
+      "isActive": {
+        "universalIdentifier": "928c421c-d7cc-4d02-8944-d6993fb573ec",
+      },
+      "isPaid": {
+        "universalIdentifier": "3423ef72-21f8-4204-802f-4380a5600ad3",
+      },
+      "leaveBalances": {
+        "universalIdentifier": "71d1f0d2-d50c-4f5a-8f4e-abec3afdc8d2",
+      },
+      "leaveRequests": {
+        "universalIdentifier": "67f32022-eaf8-41a4-83fc-d632c140c6e6",
+      },
+      "name": {
+        "universalIdentifier": "281f51ec-0001-4f31-82c5-6b5c14d0896e",
+      },
+      "noteTargets": {
+        "universalIdentifier": "01345a58-f9ad-5399-8463-50eb64421a44",
+      },
+      "position": {
+        "universalIdentifier": "6677d630-bf33-5dae-b50c-bd27a060c0ee",
+      },
+      "searchVector": {
+        "universalIdentifier": "cf5046e4-9dd7-5d99-abbd-728dc6177d5d",
+      },
+      "taskTargets": {
+        "universalIdentifier": "1de09d30-53be-54a8-925b-e3a975aa6e27",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "eb9739c4-b7ca-5708-b529-e5c721c9601b",
+      },
+      "updatedAt": {
+        "universalIdentifier": "61c0acf7-0836-5971-b4ba-ae1fd8345eb4",
+      },
+      "updatedBy": {
+        "universalIdentifier": "799180e0-ff08-588a-bf43-03244f812275",
+      },
+    },
+    "indexes": {
+      "nameIndex": {
+        "universalIdentifier": "918068f0-a073-4ae9-89ad-001b0fbf321e",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "bc790012-38b8-46cc-8234-c61576ede210",
+      },
+    },
+    "universalIdentifier": "b3b08126-261d-4b5a-b3e1-a6f9d18afe9e",
+    "views": {
+      "allLeaveTypes": {
+        "universalIdentifier": "80694a56-2f40-5c2f-9576-ec079b7805ce",
+        "viewFields": {
+          "annualQuota": {
+            "universalIdentifier": "2a348bfc-7a45-5f97-99a1-81adaeab1f0e",
+          },
+          "isActive": {
+            "universalIdentifier": "06f011cc-b7c0-5dd8-9e45-d91f7edcbd7b",
+          },
+          "isPaid": {
+            "universalIdentifier": "0df0d220-aeb3-5534-965a-97c997f18459",
+          },
+          "name": {
+            "universalIdentifier": "d9351432-6603-5f02-bd01-765a4f20b1a2",
+          },
+        },
+      },
+      "leaveTypeRecordPageFields": {
+        "universalIdentifier": "74755fae-8b0f-5179-b9e2-52fcc9b3f817",
+        "viewFieldGroups": {
+          "leave": {
+            "universalIdentifier": "3ac5a31d-ffbf-5826-864e-c8817634460c",
+          },
+          "relations": {
+            "universalIdentifier": "f43a9a15-bd84-59cf-91a3-7eb06da231f2",
+          },
+          "system": {
+            "universalIdentifier": "a6cf8a8e-6f63-5eb1-877f-2f1222b38a17",
+          },
+        },
+        "viewFields": {
+          "annualQuota": {
+            "universalIdentifier": "0b25a82e-d0b1-5646-bea4-52c5cae321a8",
+          },
+          "createdAt": {
+            "universalIdentifier": "12984c6d-0725-5a8b-9e79-7c8cb641e639",
+          },
+          "createdBy": {
+            "universalIdentifier": "da326762-67e0-53ff-9b5e-6509278178ce",
+          },
+          "isActive": {
+            "universalIdentifier": "d628272c-5e8c-5f32-95a6-6b29cd339b8d",
+          },
+          "isPaid": {
+            "universalIdentifier": "829c33cf-44c3-50c6-92e5-1c9ced11e380",
+          },
+          "leaveBalances": {
+            "universalIdentifier": "a1c56476-53b5-525c-8f22-259b08635eaf",
+          },
+          "leaveRequests": {
+            "universalIdentifier": "b7e4f55d-3a46-5b03-9c3f-69792d3e19eb",
+          },
+          "name": {
+            "universalIdentifier": "8c8b6a99-0465-52b3-b173-e781f330354a",
+          },
+        },
+      },
+    },
+  },
+  "location": {
+    "fields": {
+      "address": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890131",
+      },
+      "attachments": {
+        "universalIdentifier": "4ca9d4bc-e109-58bd-af47-94657299a681",
+      },
+      "city": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890132",
+      },
+      "country": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890134",
+      },
+      "createdAt": {
+        "universalIdentifier": "89682551-d8e5-55dc-b871-fce2203fade7",
+      },
+      "createdBy": {
+        "universalIdentifier": "efca0d1d-778f-5240-b118-40139e322ddf",
+      },
+      "deletedAt": {
+        "universalIdentifier": "e4da1191-df7e-56ca-b2ea-64fd8f50f00d",
+      },
+      "employees": {
+        "universalIdentifier": "0ee88373-87ac-5561-aff1-5b378fec4fab",
+      },
+      "id": {
+        "universalIdentifier": "844e2254-f2a4-5916-b4bb-8f10b01f83e7",
+      },
+      "name": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890130",
+      },
+      "noteTargets": {
+        "universalIdentifier": "1d2fd349-48f7-52db-9814-7c7875b3f581",
+      },
+      "position": {
+        "universalIdentifier": "fa74fe70-678c-5d15-827b-735204430466",
+      },
+      "searchVector": {
+        "universalIdentifier": "63d17ee5-cde6-5ae0-862e-6ad2fd839f2f",
+      },
+      "state": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890133",
+      },
+      "status": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890136",
+      },
+      "taskTargets": {
+        "universalIdentifier": "dca73d32-a030-52a7-89ca-11c48fed8720",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "1273e5a4-822e-557c-b9c5-7761dade83dc",
+      },
+      "timezone": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890135",
+      },
+      "updatedAt": {
+        "universalIdentifier": "6da623f2-4688-5fce-be84-70771d9d4660",
+      },
+      "updatedBy": {
+        "universalIdentifier": "dca36b57-80b9-509b-a400-e0a6dfed9b98",
+      },
+    },
+    "indexes": {
+      "searchVectorGinIndex": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890141",
+      },
+      "statusIndex": {
+        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890140",
+      },
+    },
+    "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "views": {
+      "allLocations": {
+        "universalIdentifier": "7fec5902-b90f-53cf-8bd7-74dc5daab3d7",
+        "viewFields": {
+          "city": {
+            "universalIdentifier": "64a25195-eade-579d-bfce-02653dc43352",
+          },
+          "country": {
+            "universalIdentifier": "66b6a2f9-21cc-526a-bf4d-e6ca3ce2b053",
+          },
+          "createdAt": {
+            "universalIdentifier": "4cb5aab5-f32b-570b-89c3-2f5a4bc6b73f",
+          },
+          "name": {
+            "universalIdentifier": "5ca7d874-5c07-5555-a1fb-82558a0ff9b0",
+          },
+          "status": {
+            "universalIdentifier": "8a52655e-a11f-5207-a569-77ed8e2b2e35",
+          },
+        },
+      },
+      "locationRecordPageFields": {
+        "universalIdentifier": "292f0e52-1226-52da-87af-5f0ee2cbee5a",
+        "viewFieldGroups": {
+          "general": {
+            "universalIdentifier": "2706cdf9-47be-56e5-92ba-435abc0e49fc",
+          },
+          "relations": {
+            "universalIdentifier": "7b7a334e-96da-5e13-8c4c-f002e6db5af8",
+          },
+          "system": {
+            "universalIdentifier": "9d349930-08a5-51fe-907a-530e8fab8190",
+          },
+        },
+        "viewFields": {
+          "address": {
+            "universalIdentifier": "68f86db2-7e22-552f-85b0-8c24dcacc6fe",
+          },
+          "attachments": {
+            "universalIdentifier": "0b1b8f26-87f8-5440-8027-de528c9ba8af",
+          },
+          "city": {
+            "universalIdentifier": "54db570f-f320-57bb-8aff-fdcc4c731156",
+          },
+          "country": {
+            "universalIdentifier": "2c00280f-ec8b-5281-a77f-c74c3a8d07ea",
+          },
+          "createdAt": {
+            "universalIdentifier": "6ee201a7-29a3-5b0e-aa49-6810d0f5338a",
+          },
+          "createdBy": {
+            "universalIdentifier": "a8d0f7cf-e442-5404-867f-9624a0fada63",
+          },
+          "employees": {
+            "universalIdentifier": "bbd3ed49-4721-587d-8bc4-dfc81090bf13",
+          },
+          "name": {
+            "universalIdentifier": "ef471548-784f-5d25-be1b-eea27b4e55d9",
+          },
+          "noteTargets": {
+            "universalIdentifier": "f537a63a-30e8-5186-a3c2-ab704edde85f",
+          },
+          "state": {
+            "universalIdentifier": "744f351f-e824-51ac-83ab-3c642a5457b9",
+          },
+          "status": {
+            "universalIdentifier": "5359f46c-58ea-5825-a6b8-b77fd988b631",
+          },
+          "taskTargets": {
+            "universalIdentifier": "f196d667-0712-5434-a3ac-b0e5910aa75f",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "7f2c5535-f8d6-5001-a2a6-71a7e4371871",
+          },
+          "timezone": {
+            "universalIdentifier": "6cf55939-666f-5a5b-9f35-8a77fd5e5838",
+          },
+          "updatedAt": {
+            "universalIdentifier": "783cb074-535c-5af2-b981-5dff8f95d412",
+          },
+          "updatedBy": {
+            "universalIdentifier": "469f5db0-a61b-572a-8faf-db550ecbf895",
           },
         },
       },
@@ -2025,14 +4412,38 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "searchVector": {
         "universalIdentifier": "d853a31b-f266-57a1-9a9f-ecc187864a01",
       },
+      "targetCandidate": {
+        "universalIdentifier": "fdb59f22-1377-5505-9103-fbb02d51d213",
+      },
       "targetCompany": {
         "universalIdentifier": "26b5a2d6-3296-5660-8f5b-a5710c11ae33",
+      },
+      "targetEmployee": {
+        "universalIdentifier": "310d2bf0-78d5-5955-9059-b4633c5e2104",
+      },
+      "targetInterview": {
+        "universalIdentifier": "b31267fc-40fd-550b-942c-ac2dccf5c6a9",
+      },
+      "targetInvoice": {
+        "universalIdentifier": "385bee12-ecea-57bc-96c8-f418dacc2d1c",
+      },
+      "targetLocation": {
+        "universalIdentifier": "22f74743-4fc6-5dda-b6b3-838f6e87afe1",
       },
       "targetOpportunity": {
         "universalIdentifier": "27519e5b-b16a-50cc-8de1-c5d6a2ff5c61",
       },
       "targetPerson": {
         "universalIdentifier": "b445c148-eacf-56a8-bc21-e67e7ae93302",
+      },
+      "targetRequirement": {
+        "universalIdentifier": "d37abce7-9455-56eb-a669-acfd049bacdf",
+      },
+      "targetSubmission": {
+        "universalIdentifier": "36990f9a-c463-5dd0-a6a1-e4f39bec7bb3",
+      },
+      "targetTeam": {
+        "universalIdentifier": "582521db-fe92-5efb-9216-7b08ec613c87",
       },
       "updatedAt": {
         "universalIdentifier": "18a0222a-d8d3-5a5a-89a7-55f0873b0d20",
@@ -2093,6 +4504,116 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
     },
   },
+  "onboardingItem": {
+    "fields": {
+      "assignedTo": {
+        "universalIdentifier": "783fbbc7-9667-4042-8e34-80d6e9321f77",
+      },
+      "attachments": {
+        "universalIdentifier": "07298481-259b-5615-8dd8-1ac78bfd219a",
+      },
+      "category": {
+        "universalIdentifier": "dd2798cb-a9e4-4ec4-8636-6949947ddb39",
+      },
+      "completedAt": {
+        "universalIdentifier": "8d2fbb98-fd87-416f-87b9-a1a894cfbdd5",
+      },
+      "createdAt": {
+        "universalIdentifier": "cdd764c2-07e0-5133-85cb-f92b196a14ee",
+      },
+      "createdBy": {
+        "universalIdentifier": "b3dd958b-ce0c-572e-8dc2-ce8d011eb628",
+      },
+      "deletedAt": {
+        "universalIdentifier": "57110e4e-7d41-51f2-a84e-beb1577c29c5",
+      },
+      "dueDate": {
+        "universalIdentifier": "008eeb8e-41b9-48e8-8615-6157530b2135",
+      },
+      "employee": {
+        "universalIdentifier": "f0b2ca73-5ea2-42cf-8c44-a8041e621a60",
+      },
+      "id": {
+        "universalIdentifier": "96337431-90a4-5749-8275-8eaabebcffb1",
+      },
+      "isRequired": {
+        "universalIdentifier": "ff7e8cb3-5b1f-473b-8f18-4bf664b5a4ae",
+      },
+      "noteTargets": {
+        "universalIdentifier": "9cffe8a8-7eed-5b3a-b94d-ebf26cc44069",
+      },
+      "notes": {
+        "universalIdentifier": "b3234d49-9acf-4fd1-817e-eba09657eba7",
+      },
+      "position": {
+        "universalIdentifier": "04b62320-cef1-5dc1-8759-b21dff662e72",
+      },
+      "searchVector": {
+        "universalIdentifier": "b6146518-e1b0-5d08-9773-0f500ed1dc20",
+      },
+      "status": {
+        "universalIdentifier": "ee651b75-5667-4325-8ab2-2db67c4539af",
+      },
+      "taskTargets": {
+        "universalIdentifier": "60e3fd51-cdb8-5da4-a090-57b46205409c",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "b13ff263-5d73-5861-875d-2ed0efa5fc71",
+      },
+      "title": {
+        "universalIdentifier": "28df0cb6-bdb4-47ee-89c5-f39d8eb92a90",
+      },
+      "updatedAt": {
+        "universalIdentifier": "3d0eaa41-2c64-5fad-88ec-8ab44552500e",
+      },
+      "updatedBy": {
+        "universalIdentifier": "7bd31509-0878-57e3-ad93-05f02c35647c",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "a25de2ed-ebb6-4826-8c26-89d45ba26379",
+      },
+      "employeeTitleUniqueIndex": {
+        "universalIdentifier": "26240034-7187-4d5e-83cc-d4d2bae58c77",
+      },
+      "statusIndex": {
+        "universalIdentifier": "b02eb08c-27a2-4ba0-8098-b303e544d528",
+      },
+    },
+    "universalIdentifier": "08de5a95-339d-4031-b864-51cb3c95b13d",
+    "views": {
+      "allOnboardingItems": {
+        "universalIdentifier": "b3be708c-c189-5ba3-9201-13c441354834",
+        "viewFields": {
+          "assignedTo": {
+            "universalIdentifier": "9fce0a11-a676-5b9b-bc6b-bd98249a956c",
+          },
+          "category": {
+            "universalIdentifier": "266dfe71-0698-52d4-811d-a3b5e07ee437",
+          },
+          "completedAt": {
+            "universalIdentifier": "e16d8c01-43cc-5ee0-849b-4f8ddc14f16a",
+          },
+          "dueDate": {
+            "universalIdentifier": "85c78064-d769-5902-bf77-5c0de7f95d83",
+          },
+          "employee": {
+            "universalIdentifier": "09696b6e-3116-5c95-8177-e5132a60fb28",
+          },
+          "isRequired": {
+            "universalIdentifier": "c89e9925-840c-59a1-90c8-8bf37abe165f",
+          },
+          "status": {
+            "universalIdentifier": "4bc56800-834c-56e3-8e5c-29a54a118731",
+          },
+          "title": {
+            "universalIdentifier": "23005e7b-c90c-5bd0-a177-3b05b6bb8ae2",
+          },
+        },
+      },
+    },
+  },
   "opportunity": {
     "fields": {
       "amount": {
@@ -2122,6 +4643,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "id": {
         "universalIdentifier": "2fa92d57-b39d-5ee8-ac9e-b39bc65b9ee9",
       },
+      "invoices": {
+        "universalIdentifier": "e0924e60-e609-5504-9dba-7e4b73afcdf0",
+      },
       "messageThreadTargets": {
         "universalIdentifier": "1f982757-a05a-54c1-8a74-89d01621c1f8",
       },
@@ -2139,6 +4663,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
       "position": {
         "universalIdentifier": "fd8241af-7055-5004-9cfb-edb96f1cfbb4",
+      },
+      "requirements": {
+        "universalIdentifier": "f58f4844-77b1-5102-adc9-3d2e006c0a0c",
       },
       "searchVector": {
         "universalIdentifier": "05bbfee3-ec29-5d44-a1b0-105955b320af",
@@ -2298,6 +4825,746 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
     },
   },
+  "payment": {
+    "fields": {
+      "amount": {
+        "universalIdentifier": "cc1a9efc-77b3-49ff-8f9d-28945817ae93",
+      },
+      "attachments": {
+        "universalIdentifier": "e52fd0de-a566-5761-a933-33816c52315a",
+      },
+      "createdAt": {
+        "universalIdentifier": "f8a65310-c23d-5d7a-b794-8d56a98217aa",
+      },
+      "createdBy": {
+        "universalIdentifier": "9d6c4ae0-0ea0-5e65-a097-1f6c4a79e720",
+      },
+      "deletedAt": {
+        "universalIdentifier": "27f867d2-f0a0-5e94-893a-3c48ac57eeb5",
+      },
+      "id": {
+        "universalIdentifier": "ea21f468-90aa-5135-a012-c87672f8875b",
+      },
+      "invoice": {
+        "universalIdentifier": "cd8c5ac4-6137-4cf0-8bad-705a870115bd",
+      },
+      "method": {
+        "universalIdentifier": "4b761d6f-8204-4863-8c6b-dd85bf815dce",
+      },
+      "noteTargets": {
+        "universalIdentifier": "d5f1daf4-33c2-5e09-95eb-1cc46d4c3c54",
+      },
+      "notes": {
+        "universalIdentifier": "35d0a79a-de3d-43e0-8008-5b3757cc2d9d",
+      },
+      "paidDate": {
+        "universalIdentifier": "73640177-0b65-4a7e-8eb3-ee5e9f204092",
+      },
+      "position": {
+        "universalIdentifier": "d5dda8fa-1c4b-55af-9cc0-65fa07443449",
+      },
+      "reference": {
+        "universalIdentifier": "7c6d64ec-2a24-41fc-835f-afc4afb71a1e",
+      },
+      "searchVector": {
+        "universalIdentifier": "af78f682-b110-5a56-9304-ec4ade76c0de",
+      },
+      "taskTargets": {
+        "universalIdentifier": "a7e75dd5-753b-58ea-9359-46dc55941695",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "b1992af9-6aaa-5358-90a8-700c188a1bf3",
+      },
+      "updatedAt": {
+        "universalIdentifier": "3cc81aed-083e-5017-b398-f25c27103a8e",
+      },
+      "updatedBy": {
+        "universalIdentifier": "8ca8e70c-e74e-5806-8fe0-a5fc87473461",
+      },
+    },
+    "indexes": {
+      "invoiceIdIndex": {
+        "universalIdentifier": "02363e64-f828-441b-8024-d6fa088f22ee",
+      },
+    },
+    "universalIdentifier": "bb30d658-2782-4dfa-b14f-88aac74e1e29",
+    "views": {
+      "allPayments": {
+        "universalIdentifier": "1108e81d-3bc0-5e01-8092-e031f8abd7d8",
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "4790378f-3bb2-5d2d-8e18-835bb7279bd8",
+          },
+          "id": {
+            "universalIdentifier": "b186d837-49f9-52b2-97a0-4dbb6afdd4e7",
+          },
+          "invoice": {
+            "universalIdentifier": "35e18458-86d6-5fbc-9731-4382fca29230",
+          },
+          "method": {
+            "universalIdentifier": "202687bd-be8e-52da-818c-d59cfbba64a5",
+          },
+          "paidDate": {
+            "universalIdentifier": "15f9f5e3-724c-538f-815f-149e35051e12",
+          },
+          "reference": {
+            "universalIdentifier": "ee329411-581c-5050-af61-0f91e2f387af",
+          },
+        },
+      },
+      "paymentRecordPageFields": {
+        "universalIdentifier": "59015bc6-1ef4-5e1e-ad18-6108da4d3c0c",
+        "viewFieldGroups": {
+          "payment": {
+            "universalIdentifier": "17d6e991-29de-5fb0-bc4c-2621d1992a37",
+          },
+          "relations": {
+            "universalIdentifier": "6789a943-c5b4-532c-b6db-f4076db75eb2",
+          },
+          "system": {
+            "universalIdentifier": "a312679d-6e7c-51a1-a695-5971f03522c4",
+          },
+        },
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "b00e48d0-c89d-5547-a06a-4410a115a7fb",
+          },
+          "createdAt": {
+            "universalIdentifier": "bffe8fa8-385c-5a4a-80c4-da66d177fe76",
+          },
+          "createdBy": {
+            "universalIdentifier": "a83b5197-4379-5757-b938-9d6fe1a48573",
+          },
+          "invoice": {
+            "universalIdentifier": "66c2408f-e7e9-5f71-9fc0-30ac666f977a",
+          },
+          "method": {
+            "universalIdentifier": "fe747859-e080-5dd9-8944-36477b3c4abe",
+          },
+          "notes": {
+            "universalIdentifier": "8be1dd30-0200-5d84-8743-2296e9c2206c",
+          },
+          "paidDate": {
+            "universalIdentifier": "15af4a95-d159-5818-8665-e020f9e830ff",
+          },
+          "reference": {
+            "universalIdentifier": "f5ecf198-d1f1-5129-9570-b6465f66bcf4",
+          },
+        },
+      },
+    },
+  },
+  "payrollAdjustment": {
+    "fields": {
+      "adjustmentType": {
+        "universalIdentifier": "10e35b79-03d2-4021-8e80-0d178e347439",
+      },
+      "amount": {
+        "universalIdentifier": "a444f912-fc7c-4a72-86c9-de541d427c24",
+      },
+      "approvedAt": {
+        "universalIdentifier": "384e7eb2-754e-4211-8cb9-3a6b7a16a16d",
+      },
+      "approvedBy": {
+        "universalIdentifier": "f7a50167-a08d-4027-8f9a-797b9e6103ec",
+      },
+      "attachments": {
+        "universalIdentifier": "5ddc6c05-009e-5dc8-8037-6f995acf8fd0",
+      },
+      "createdAt": {
+        "universalIdentifier": "994184bf-6e55-5ea0-84dd-17ff62eb89db",
+      },
+      "createdBy": {
+        "universalIdentifier": "60089083-4a64-5da8-bc91-d051c7caef5f",
+      },
+      "deletedAt": {
+        "universalIdentifier": "73970866-4460-534e-9d86-8b46344eb6df",
+      },
+      "employee": {
+        "universalIdentifier": "25fe43e5-39a0-417d-83f2-8271c5bca541",
+      },
+      "id": {
+        "universalIdentifier": "be059d90-cdbe-5d06-a206-aee8e04527e7",
+      },
+      "noteTargets": {
+        "universalIdentifier": "cdb7e77f-cca9-59b1-bc64-3d3a9e772509",
+      },
+      "payrollPeriod": {
+        "universalIdentifier": "eb95c0c6-a0ca-4455-8bb8-4c45244f2cf1",
+      },
+      "position": {
+        "universalIdentifier": "a94c5e33-a20d-5581-822d-da6829eb9c38",
+      },
+      "reason": {
+        "universalIdentifier": "78fcd68f-067c-4cf0-814e-8bc953428655",
+      },
+      "searchVector": {
+        "universalIdentifier": "f330528d-b9e7-5153-bd40-2bd29eef6abb",
+      },
+      "status": {
+        "universalIdentifier": "17cccbcb-755c-47be-8f6e-edb0c7b46cae",
+      },
+      "taskTargets": {
+        "universalIdentifier": "c316e867-947b-53e5-8899-1d1a90cb981f",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "cc5300ec-944d-5148-b325-6aace2060814",
+      },
+      "updatedAt": {
+        "universalIdentifier": "ac88895c-7395-59fa-bd11-99c3b561f1bb",
+      },
+      "updatedBy": {
+        "universalIdentifier": "3b1cb1a8-c305-57bb-9db1-ced8c8542514",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "6f7d4183-2a35-42b7-87b3-842790fabcb9",
+      },
+      "periodIdIndex": {
+        "universalIdentifier": "105cfc79-7442-49c7-809e-661a15a33291",
+      },
+      "statusIndex": {
+        "universalIdentifier": "185f9ab9-b9c9-4abc-83c4-43b72664cbe9",
+      },
+    },
+    "universalIdentifier": "2f8b9ef0-80f6-4d21-b247-4c58a05db806",
+    "views": {
+      "allPayrollAdjustments": {
+        "universalIdentifier": "aa15c8dc-ff17-57d7-bc12-219bd0a07647",
+        "viewFields": {
+          "adjustmentType": {
+            "universalIdentifier": "5faac908-ca3c-5dee-bbd6-50bb2df0737f",
+          },
+          "amount": {
+            "universalIdentifier": "bc5f51bf-cafa-536f-8218-e2ed500727d7",
+          },
+          "employee": {
+            "universalIdentifier": "20a7b204-1721-5f61-9438-025716fc38d0",
+          },
+          "id": {
+            "universalIdentifier": "7fef6a9b-2bde-5782-9e1b-50fdbcf9cbb5",
+          },
+          "payrollPeriod": {
+            "universalIdentifier": "e826b3a6-bf8d-5f0f-8da5-961f4eae4d5e",
+          },
+          "reason": {
+            "universalIdentifier": "4ef4d124-5760-5a99-9f07-1e9c8157f2f7",
+          },
+          "status": {
+            "universalIdentifier": "bf222396-b1c6-5319-b0be-1a1286184157",
+          },
+        },
+      },
+      "payrollAdjustmentRecordPageFields": {
+        "universalIdentifier": "8d8854f7-a5c9-5576-94a1-9d0c2c0f6472",
+        "viewFieldGroups": {
+          "adjustment": {
+            "universalIdentifier": "5d93b002-27d1-55de-8e8d-762c543c9f0f",
+          },
+          "relations": {
+            "universalIdentifier": "6b710f54-6f02-5dda-8a05-4c19f30d7b77",
+          },
+          "system": {
+            "universalIdentifier": "335d5d41-25a0-53a2-9685-6373396000e5",
+          },
+        },
+        "viewFields": {
+          "adjustmentType": {
+            "universalIdentifier": "3d87aec8-df98-5ace-bd55-f89e85128f15",
+          },
+          "amount": {
+            "universalIdentifier": "af9a561d-2e1f-55e0-9df9-d88856192a6b",
+          },
+          "approvedAt": {
+            "universalIdentifier": "0786450f-af16-542e-94c6-35e9e639e217",
+          },
+          "approvedBy": {
+            "universalIdentifier": "bb3dbbdf-de28-5406-9f43-7d3ff55b9b05",
+          },
+          "createdAt": {
+            "universalIdentifier": "867878be-3363-59b5-a3d1-97a26507f1a4",
+          },
+          "createdBy": {
+            "universalIdentifier": "4410d27c-a725-5155-8b16-44968059d29c",
+          },
+          "employee": {
+            "universalIdentifier": "2d8a32be-e4d7-57bb-8f40-cb36a17e3d82",
+          },
+          "payrollPeriod": {
+            "universalIdentifier": "39e2c591-0e16-55dd-a342-a51895ce688b",
+          },
+          "reason": {
+            "universalIdentifier": "4a3f8a7e-c8e1-5174-aad3-a8ca565d0f2f",
+          },
+          "status": {
+            "universalIdentifier": "e7607c91-07cc-50c7-9018-567f990bace8",
+          },
+        },
+      },
+    },
+  },
+  "payrollPeriod": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "e4da0872-47ad-594b-a48d-205cf32ff5e0",
+      },
+      "createdAt": {
+        "universalIdentifier": "516a451f-cf16-5dcd-b33b-854ec758fcb6",
+      },
+      "createdBy": {
+        "universalIdentifier": "274a5601-e3c5-556c-9a97-efecb9f6c5a5",
+      },
+      "deletedAt": {
+        "universalIdentifier": "fade0211-4e44-5179-8260-8951db986a63",
+      },
+      "employeeCount": {
+        "universalIdentifier": "1e4def32-f53b-4cc6-8135-612062725234",
+      },
+      "endDate": {
+        "universalIdentifier": "3d949dc9-5551-4f7d-8bfa-f5d9b263d945",
+      },
+      "id": {
+        "universalIdentifier": "b0481f81-4285-565d-ad82-35addeb21582",
+      },
+      "name": {
+        "universalIdentifier": "1bdebf87-7878-4634-8597-1202fb5c8f51",
+      },
+      "noteTargets": {
+        "universalIdentifier": "17ff74df-75b0-5033-bf7c-7699370bfc9a",
+      },
+      "payDate": {
+        "universalIdentifier": "bdfef5a8-4bb0-4883-859b-73a72b2516e2",
+      },
+      "payrollAdjustments": {
+        "universalIdentifier": "5705e51a-87fd-4e2f-acce-7dce85757a41",
+      },
+      "payslips": {
+        "universalIdentifier": "ee4ad5e4-99fa-4741-8ade-6d29a74165cb",
+      },
+      "position": {
+        "universalIdentifier": "438e6a71-1a86-5677-8ea0-4d056f060bda",
+      },
+      "searchVector": {
+        "universalIdentifier": "03205e2f-8eca-5cae-8d3c-21e9968718cb",
+      },
+      "startDate": {
+        "universalIdentifier": "7beec81a-5d30-4029-8be7-f93a8dbce014",
+      },
+      "status": {
+        "universalIdentifier": "07c42b92-8025-4129-89a5-5a944f430c66",
+      },
+      "taskTargets": {
+        "universalIdentifier": "8ab43d44-86d2-5bca-86fa-a95879d3524c",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "dcb23ada-6cfd-5357-90cd-602a8a5a98a9",
+      },
+      "totalAdjustments": {
+        "universalIdentifier": "c19d5d1d-adab-4d44-8563-b39eb4cfc022",
+      },
+      "totalDeductions": {
+        "universalIdentifier": "3d2ab627-8d4a-42d9-813b-d2a6d7ab29a9",
+      },
+      "totalGross": {
+        "universalIdentifier": "8006af23-74a7-4e80-8abb-52810c3898cf",
+      },
+      "totalNet": {
+        "universalIdentifier": "ee3947da-df4e-4aa6-8ec0-8984b6ac6a15",
+      },
+      "updatedAt": {
+        "universalIdentifier": "3652416b-5af8-57b7-a887-43bf49ffc7ba",
+      },
+      "updatedBy": {
+        "universalIdentifier": "52836dfd-19f2-55bc-b0f5-f4291257cff8",
+      },
+    },
+    "indexes": {
+      "nameUniqueIndex": {
+        "universalIdentifier": "e9b7eafe-dbe1-40bc-82f7-f2bf337b1662",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "5de4a94b-92be-43e4-8aeb-4ecd63cff94b",
+      },
+      "statusIndex": {
+        "universalIdentifier": "79b4c373-3c4a-4d2d-8130-bdc5a795faf6",
+      },
+    },
+    "universalIdentifier": "d4604140-0b03-4ee3-b7ae-442e8adc412a",
+    "views": {
+      "allPayrollPeriods": {
+        "universalIdentifier": "771ca4fb-0f52-52b6-96e5-3820ef8a5204",
+        "viewFields": {
+          "employeeCount": {
+            "universalIdentifier": "097106f2-1b0f-58e5-91a0-c505a746eaac",
+          },
+          "endDate": {
+            "universalIdentifier": "a6751340-1955-5d03-80b1-d05de7803895",
+          },
+          "name": {
+            "universalIdentifier": "cfec18bb-e33f-59a3-8a71-6581a34337f7",
+          },
+          "payDate": {
+            "universalIdentifier": "b8a9d03b-7438-5f07-adc9-3cb4b6ae7152",
+          },
+          "startDate": {
+            "universalIdentifier": "f4b463c1-84ed-5d1d-828f-0ba40bd83956",
+          },
+          "status": {
+            "universalIdentifier": "db596cbb-3736-59e7-ae31-5ec6d22c727b",
+          },
+          "totalGross": {
+            "universalIdentifier": "87b83a35-8155-5dfd-8c36-38e840269ede",
+          },
+          "totalNet": {
+            "universalIdentifier": "4fbe7fda-eff2-5cfc-be22-0a0231c89159",
+          },
+        },
+      },
+      "payrollPeriodRecordPageFields": {
+        "universalIdentifier": "99b0c285-df03-5870-897c-5bad8966cc3c",
+        "viewFieldGroups": {
+          "payroll": {
+            "universalIdentifier": "3d5dbfa2-b9ec-5c0e-b12d-3b5ea18a7e2a",
+          },
+          "relations": {
+            "universalIdentifier": "ef120ceb-6403-5019-9539-02637cdd3990",
+          },
+          "system": {
+            "universalIdentifier": "588eca64-edc4-576c-9c7d-d91f046e49d7",
+          },
+        },
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "4fd9889a-5ff0-56ae-aefa-b32beef659bb",
+          },
+          "createdBy": {
+            "universalIdentifier": "6c4cd241-e1ef-5cea-a1c0-6e7e6841f76f",
+          },
+          "employeeCount": {
+            "universalIdentifier": "99360229-cf3f-5247-a65e-3001a6a0382f",
+          },
+          "endDate": {
+            "universalIdentifier": "418a8437-b9e4-5ff7-8309-125799cac397",
+          },
+          "name": {
+            "universalIdentifier": "8f7cadda-4704-5a54-98ab-21525753fcd3",
+          },
+          "payDate": {
+            "universalIdentifier": "b16fa91a-7eae-5ded-8a57-8b2d0d7083fb",
+          },
+          "payslips": {
+            "universalIdentifier": "6aa6d4b5-077d-5135-8e28-0cfff3b6b34b",
+          },
+          "startDate": {
+            "universalIdentifier": "44ad2f5f-c5c8-581a-aee4-d515e275b3c0",
+          },
+          "status": {
+            "universalIdentifier": "4e74e056-3bfc-5b41-8aba-8468bc6b50d3",
+          },
+          "totalAdjustments": {
+            "universalIdentifier": "249ef021-e259-569d-9966-1e0b4577e314",
+          },
+          "totalDeductions": {
+            "universalIdentifier": "e79dae93-8f46-5954-993c-4cb851dd15eb",
+          },
+          "totalGross": {
+            "universalIdentifier": "e823b213-8176-584a-a824-bcb2f9903984",
+          },
+          "totalNet": {
+            "universalIdentifier": "695f9055-afa8-57da-8e16-109a79048052",
+          },
+        },
+      },
+    },
+  },
+  "payslip": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "0e3eed67-6ed1-5685-b877-21dc88e0281f",
+      },
+      "createdAt": {
+        "universalIdentifier": "9506b21a-2d69-5daf-b960-1871a2d4d6d7",
+      },
+      "createdBy": {
+        "universalIdentifier": "0ce382a1-2c68-5aee-9737-c7bf2e31863d",
+      },
+      "currency": {
+        "universalIdentifier": "54fca65f-6f0b-4464-8d77-7fefc78ed1b7",
+      },
+      "deletedAt": {
+        "universalIdentifier": "1ced5150-a1b3-5a14-96f7-db719a6dcb2f",
+      },
+      "employee": {
+        "universalIdentifier": "7c97ce1a-772a-4dd7-8868-6c0b740d2c4c",
+      },
+      "grossEarnings": {
+        "universalIdentifier": "767e2d6d-9111-4785-8e08-539496164e78",
+      },
+      "id": {
+        "universalIdentifier": "720fe79e-9d01-5d4a-bd6b-a99fc50ac15e",
+      },
+      "lines": {
+        "universalIdentifier": "da1bee74-8da3-465f-8bb6-267d678a65be",
+      },
+      "netPay": {
+        "universalIdentifier": "3f4db2d9-9c12-4db5-8242-ae182ecb0875",
+      },
+      "noteTargets": {
+        "universalIdentifier": "7badaacf-5090-5607-a2d6-a90cd4fd48b7",
+      },
+      "overtimeMinutes": {
+        "universalIdentifier": "8253fa20-ee96-4c11-8a94-461ebab9e79f",
+      },
+      "paidAt": {
+        "universalIdentifier": "8791e52b-36dc-4083-8763-fb44952066e9",
+      },
+      "paidLeaveDays": {
+        "universalIdentifier": "4576f870-5750-4754-8d9c-2411d1057f61",
+      },
+      "paymentMethod": {
+        "universalIdentifier": "ef0874ad-ebe0-470f-886a-f3ecb15fa4a3",
+      },
+      "paymentReference": {
+        "universalIdentifier": "19280eff-be4c-4bf8-851f-b9ae1f807526",
+      },
+      "paymentStatus": {
+        "universalIdentifier": "2ef654ea-2a51-493f-8197-8fc632f58c84",
+      },
+      "payrollPeriod": {
+        "universalIdentifier": "aeb9348c-8dfb-4c51-8e3c-6939e0d81efd",
+      },
+      "position": {
+        "universalIdentifier": "0b834c4f-4b0f-5650-818d-16d1ba3c7309",
+      },
+      "presentDays": {
+        "universalIdentifier": "8f35b6fc-2a28-4fd5-8d3e-8ec6c531f65a",
+      },
+      "searchVector": {
+        "universalIdentifier": "aeb83b53-b783-5fcc-95fb-0a2351defe77",
+      },
+      "taskTargets": {
+        "universalIdentifier": "c35b2385-856f-56c9-a8c2-ab7600077d5c",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "268fca90-5f0c-53c9-a4c8-552059f9340b",
+      },
+      "totalAdjustments": {
+        "universalIdentifier": "52e4aea5-1480-40ed-8b41-754fa1aadd3e",
+      },
+      "totalDeductions": {
+        "universalIdentifier": "eb5d724f-d38f-4eb3-816f-8106de7f51f5",
+      },
+      "unpaidLeaveDays": {
+        "universalIdentifier": "4142a961-cf41-4189-803c-d1b3ff34d75f",
+      },
+      "updatedAt": {
+        "universalIdentifier": "b3b7a0ec-3dbf-5e0c-9b59-0b3188bd07db",
+      },
+      "updatedBy": {
+        "universalIdentifier": "e18db08f-b4d5-5e55-95dd-c172817810a7",
+      },
+      "workingDays": {
+        "universalIdentifier": "5e84afc2-223a-4423-8b49-c1ee912d123a",
+      },
+    },
+    "indexes": {
+      "employeeIdIndex": {
+        "universalIdentifier": "1f379d41-49a2-421f-8653-f0ae1c41e59b",
+      },
+      "periodEmployeeUniqueIndex": {
+        "universalIdentifier": "80ed480c-df99-477b-86a8-0d5e6c4cc8ed",
+      },
+      "periodIdIndex": {
+        "universalIdentifier": "fd7b563c-7275-43d9-8242-90c5ec1cacfc",
+      },
+    },
+    "universalIdentifier": "235c3a4e-6dc2-4f25-bc63-a0ad612d7d62",
+    "views": {
+      "allPayslips": {
+        "universalIdentifier": "78450ac9-01a6-5b25-b4cc-0deab0848c11",
+        "viewFields": {
+          "employee": {
+            "universalIdentifier": "340dad2f-89e9-5890-803d-f7d8e5b01466",
+          },
+          "grossEarnings": {
+            "universalIdentifier": "3afc2d66-de16-5fa3-93ec-81d0d98bd3c8",
+          },
+          "id": {
+            "universalIdentifier": "b0603b1d-956e-5eb7-b129-3fe0e8e922a8",
+          },
+          "netPay": {
+            "universalIdentifier": "30d2db0a-5dce-5d55-a8c9-a5b86bb81a65",
+          },
+          "paymentStatus": {
+            "universalIdentifier": "ff258838-24a5-5ea9-a8f2-9fbae3fa6c26",
+          },
+          "payrollPeriod": {
+            "universalIdentifier": "4ac32ae7-122c-5783-8d58-313f6055525a",
+          },
+          "totalAdjustments": {
+            "universalIdentifier": "c2653dd1-2c06-569a-8aa9-4b7d04450c27",
+          },
+          "totalDeductions": {
+            "universalIdentifier": "17cc36fe-71b3-5609-a72a-d3db37c96d96",
+          },
+        },
+      },
+      "payslipRecordPageFields": {
+        "universalIdentifier": "bf495eb5-b481-5c8f-bc6c-ce72b4f463b4",
+        "viewFieldGroups": {
+          "payslip": {
+            "universalIdentifier": "17e0b312-28eb-5465-b000-d4f1b83e0866",
+          },
+          "relations": {
+            "universalIdentifier": "9adeb004-a81c-50e8-961d-2231553325f4",
+          },
+          "system": {
+            "universalIdentifier": "848aa07d-5717-58a6-8616-a068df9ba932",
+          },
+        },
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "d09117c6-54a7-5a01-b7e0-590c69dfb448",
+          },
+          "currency": {
+            "universalIdentifier": "7a3dbf67-ba7d-57ac-b380-367627295527",
+          },
+          "employee": {
+            "universalIdentifier": "6ac41172-c490-51ba-ab36-2106ad06aed8",
+          },
+          "grossEarnings": {
+            "universalIdentifier": "adf4de81-b99e-588d-91b4-da18bf6a3cdc",
+          },
+          "lines": {
+            "universalIdentifier": "ba42bb4e-bfc1-5492-8f48-40878e4ad24c",
+          },
+          "netPay": {
+            "universalIdentifier": "8e4ef55a-3aa0-570a-89de-d4a36712cd96",
+          },
+          "overtimeMinutes": {
+            "universalIdentifier": "8e575719-6570-5846-b787-d5117725ebbd",
+          },
+          "paidAt": {
+            "universalIdentifier": "f2f58f7a-13c7-5b7e-8572-2a682dfd8cee",
+          },
+          "paidLeaveDays": {
+            "universalIdentifier": "f1771b66-bd30-508c-9c45-5939c787b00a",
+          },
+          "paymentMethod": {
+            "universalIdentifier": "2a91b390-e33c-56d5-bfc1-05a956b1bf08",
+          },
+          "paymentReference": {
+            "universalIdentifier": "03891cb5-656d-5857-86e7-d8f78140023a",
+          },
+          "paymentStatus": {
+            "universalIdentifier": "792340a1-1bc2-5b6a-b42c-3157c44e937f",
+          },
+          "payrollPeriod": {
+            "universalIdentifier": "239f5f3f-3d8d-5bbc-b5f1-8850b1f85671",
+          },
+          "presentDays": {
+            "universalIdentifier": "d8378a26-f47c-571e-9337-dfd0d0794707",
+          },
+          "totalAdjustments": {
+            "universalIdentifier": "83211cd6-a581-54f4-89b2-c167b03534be",
+          },
+          "totalDeductions": {
+            "universalIdentifier": "27143610-6bb6-5dd7-bd45-113ea83ce7d2",
+          },
+          "unpaidLeaveDays": {
+            "universalIdentifier": "e93665f2-7e5f-56ab-a779-d896259c9b59",
+          },
+          "workingDays": {
+            "universalIdentifier": "f1759de1-4bd4-50e1-b41e-08ed7236889d",
+          },
+        },
+      },
+    },
+  },
+  "payslipLine": {
+    "fields": {
+      "amount": {
+        "universalIdentifier": "70cb6aaf-031a-45f8-871d-204309373b17",
+      },
+      "attachments": {
+        "universalIdentifier": "a0a4983b-4d7b-513e-a628-449ddf861a72",
+      },
+      "createdAt": {
+        "universalIdentifier": "cd4aac73-ba52-533a-a895-d79b0e09e4b3",
+      },
+      "createdBy": {
+        "universalIdentifier": "fd9d510d-8f36-57b3-a871-341dbea8b679",
+      },
+      "deletedAt": {
+        "universalIdentifier": "b1fdc387-6e3b-5677-ac0f-b6d677032400",
+      },
+      "id": {
+        "universalIdentifier": "836f4368-3070-5565-a9c3-1955e25cd673",
+      },
+      "label": {
+        "universalIdentifier": "c19bf207-22b7-4fce-8cc6-53677e3fd418",
+      },
+      "lineType": {
+        "universalIdentifier": "6ce7fb45-5589-4c8d-8748-aaadf1092db9",
+      },
+      "noteTargets": {
+        "universalIdentifier": "b4600462-f5e9-5c37-bd42-469254e5eddb",
+      },
+      "notes": {
+        "universalIdentifier": "3040cabb-c22d-4e62-8278-baf97777ab7f",
+      },
+      "payslip": {
+        "universalIdentifier": "af57b042-12d8-4a2b-8176-36c1a9445f49",
+      },
+      "position": {
+        "universalIdentifier": "ac6ce73c-071e-4120-8de9-6c604b86e77b",
+      },
+      "searchVector": {
+        "universalIdentifier": "28c72831-14f6-59e8-8722-edaf756106e9",
+      },
+      "taskTargets": {
+        "universalIdentifier": "c8f696fe-3358-5309-bf6e-82e6499c6b31",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "252a34a7-a082-571e-a47a-78a927619435",
+      },
+      "updatedAt": {
+        "universalIdentifier": "e7ceb8a5-d91f-5b0c-b71b-162ce6d2636d",
+      },
+      "updatedBy": {
+        "universalIdentifier": "013f29e4-77af-5883-8fdf-bc111bcb656e",
+      },
+    },
+    "indexes": {
+      "payslipIdIndex": {
+        "universalIdentifier": "09b07235-15ca-4fbb-8413-7f0280fbf94c",
+      },
+    },
+    "universalIdentifier": "2d4e6106-4a3a-434b-9b4c-297b97c17ac2",
+    "views": {
+      "allPayslipLines": {
+        "universalIdentifier": "a5d6e1dc-0a02-53fa-ac27-c842991c8491",
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "684c4473-e4ab-5c42-89bb-c85f0f053d37",
+          },
+          "label": {
+            "universalIdentifier": "89fe0b61-f655-5ad2-b091-52f304ba3b09",
+          },
+          "lineType": {
+            "universalIdentifier": "315d72d0-6c35-5876-bf11-e50ec34984df",
+          },
+          "notes": {
+            "universalIdentifier": "1b81989a-d0a7-5e23-b371-166661da759a",
+          },
+          "payslip": {
+            "universalIdentifier": "2beae8d3-f4c9-59ef-9b9e-52a691966d5f",
+          },
+        },
+      },
+    },
+  },
   "person": {
     "fields": {
       "attachments": {
@@ -2315,6 +5582,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "calendarEventTargets": {
         "universalIdentifier": "1bb24269-e654-598c-ac53-23973fafd1e6",
       },
+      "candidateProfiles": {
+        "universalIdentifier": "2b0e6e26-0dda-5fe2-bc80-cce35cc300fe",
+      },
       "company": {
         "universalIdentifier": "20202020-e2f3-448e-b34c-2d625f0025fd",
       },
@@ -2329,6 +5599,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
       "emails": {
         "universalIdentifier": "20202020-3c51-43fa-8b6e-af39e29368ab",
+      },
+      "employees": {
+        "universalIdentifier": "9a53d580-4e28-4861-aceb-9ffb6cd71d44",
       },
       "id": {
         "universalIdentifier": "1e99e171-d0f9-50a8-b342-7f0bdd9bea66",
@@ -2362,6 +5635,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
       "position": {
         "universalIdentifier": "e7dcf2c0-dc89-525e-93a7-720034d8ec0e",
+      },
+      "requirements": {
+        "universalIdentifier": "d8ef7c63-cceb-58b6-add2-36f05ae78254",
       },
       "searchVector": {
         "universalIdentifier": "efe6cbc6-1c6e-5a6e-91c9-17142d3bd947",
@@ -2576,6 +5852,869 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
     },
     "universalIdentifier": "fecdb92c-d150-4544-81f8-f1158d18a7a2",
     "views": {},
+  },
+  "requirement": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "5601ad27-0567-5fce-9dd9-d00407ddf432",
+      },
+      "bdeOwner": {
+        "universalIdentifier": "2fad5cd6-a893-447e-bd82-7c86939fbb58",
+      },
+      "candidateSubmissions": {
+        "universalIdentifier": "67723465-b721-58d5-949b-8a1becdd5b5e",
+      },
+      "closedAt": {
+        "universalIdentifier": "941c95f7-e0a5-4882-a355-a8db200b0028",
+      },
+      "company": {
+        "universalIdentifier": "9e77a878-9344-476c-a390-469fb8e2055b",
+      },
+      "createdAt": {
+        "universalIdentifier": "513c845f-2e48-56a8-81aa-ed77bd802ebc",
+      },
+      "createdBy": {
+        "universalIdentifier": "09a72b42-0c32-5d9a-8f41-82ae78b6981e",
+      },
+      "deal": {
+        "universalIdentifier": "d54cb9c5-4543-4367-93df-bd2cb89e2653",
+      },
+      "deletedAt": {
+        "universalIdentifier": "bfc80de6-d6ac-586d-acef-4b16b6828498",
+      },
+      "description": {
+        "universalIdentifier": "fcb3622a-f288-4e2f-87c9-93b4ca198383",
+      },
+      "education": {
+        "universalIdentifier": "09b5bc1f-2fca-47a7-9161-902ad4986e99",
+      },
+      "employmentType": {
+        "universalIdentifier": "aeac0dc0-aa65-4ca4-90cc-3b30a6b59ee1",
+      },
+      "experienceMax": {
+        "universalIdentifier": "508befc8-c8ab-4e19-b3a0-76a9f3784b99",
+      },
+      "experienceMin": {
+        "universalIdentifier": "06efc617-7084-404f-9589-0f37bbcbf668",
+      },
+      "filledCount": {
+        "universalIdentifier": "4dcdc233-03f4-46fd-9204-5eab80479088",
+      },
+      "hrOwner": {
+        "universalIdentifier": "086b8106-6c69-45de-8dc1-4d80164322c8",
+      },
+      "id": {
+        "universalIdentifier": "cc7c2e14-0c3a-5e17-abf5-798fa0ad3fe0",
+      },
+      "interviews": {
+        "universalIdentifier": "c924cf3f-0818-5e15-95d1-b916f0cfba68",
+      },
+      "invoices": {
+        "universalIdentifier": "616cb20a-aa47-57e3-8dff-7e1f0d71c44e",
+      },
+      "location": {
+        "universalIdentifier": "f665c864-a6aa-4afd-a5ff-9fae1d78fd87",
+      },
+      "noteTargets": {
+        "universalIdentifier": "ab60d24c-a254-53a7-b53b-839f8ab2ec4d",
+      },
+      "numberOfOpenings": {
+        "universalIdentifier": "ba9b080a-272a-47d6-ba8d-e5641d50dac3",
+      },
+      "pointOfContact": {
+        "universalIdentifier": "0a774851-5312-4220-a715-d5a7ba8bdea2",
+      },
+      "position": {
+        "universalIdentifier": "8cb9dddc-96fd-5458-b457-e4105fdc01de",
+      },
+      "priority": {
+        "universalIdentifier": "a4fdc3e4-ca32-41d6-af98-5e15e2e53f83",
+      },
+      "receivedAt": {
+        "universalIdentifier": "6ab5a3d1-2e27-4d51-80f0-aa1976178538",
+      },
+      "recruiterOwner": {
+        "universalIdentifier": "107c478a-5860-422d-be2e-19852bbab41a",
+      },
+      "requirementsText": {
+        "universalIdentifier": "add8bcc3-9cc7-41c8-aeb6-86858c0ac1c6",
+      },
+      "responsibilities": {
+        "universalIdentifier": "fb244c28-7d10-47bc-82bd-dadbdfe51621",
+      },
+      "rolePosition": {
+        "universalIdentifier": "5fdc21c9-8e8b-4e02-b1d0-451f840565aa",
+      },
+      "salaryMax": {
+        "universalIdentifier": "132f7d3e-07f5-4d70-8a22-1d5b664e40d6",
+      },
+      "salaryMin": {
+        "universalIdentifier": "431830b3-4fcb-4a1d-a66f-3ccf1386a54e",
+      },
+      "searchVector": {
+        "universalIdentifier": "e753cd8e-5b77-5819-bcb8-e213f722078a",
+      },
+      "skills": {
+        "universalIdentifier": "335b1b34-8497-424a-8d9d-dde4c00bd7cf",
+      },
+      "status": {
+        "universalIdentifier": "fbd0b4ff-39c9-4e69-9529-fee9813a0b5f",
+      },
+      "targetDate": {
+        "universalIdentifier": "c866e970-8b83-4b46-bd13-63a2c8da00e8",
+      },
+      "taskTargets": {
+        "universalIdentifier": "778271ee-dd45-5a3a-9342-d909abe13f04",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "f6a1279d-af22-59ed-914a-791f0a206464",
+      },
+      "title": {
+        "universalIdentifier": "fac6a8aa-9192-408e-b143-d7221ba4b6c2",
+      },
+      "updatedAt": {
+        "universalIdentifier": "657d1051-968a-5702-82e1-1f09b41a67ad",
+      },
+      "updatedBy": {
+        "universalIdentifier": "67b81312-d5ad-5557-9c34-52dfb5595d1e",
+      },
+      "workMode": {
+        "universalIdentifier": "a9d03ef8-3a10-48ab-b467-679e871f1458",
+      },
+    },
+    "indexes": {
+      "bdeOwnerIdIndex": {
+        "universalIdentifier": "da823e09-ee85-4fee-8a72-f12b8a9d274e",
+      },
+      "companyIdIndex": {
+        "universalIdentifier": "4887c4bb-7e8c-4e60-ab02-6e176e9655fa",
+      },
+      "dealIdIndex": {
+        "universalIdentifier": "629a1f71-cae7-4809-9ed2-6673cff90ca0",
+      },
+      "hrOwnerIdIndex": {
+        "universalIdentifier": "691d6576-8fe1-4ffd-8b01-a99060da19ca",
+      },
+      "pointOfContactIdIndex": {
+        "universalIdentifier": "810473be-be84-4304-a878-4a4efbfc10b9",
+      },
+      "recruiterOwnerIdIndex": {
+        "universalIdentifier": "0579aa32-a4e5-4632-9cc8-2bb5dac70fad",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "5e06fef9-1e86-4abc-a864-90c2fb2e7f06",
+      },
+      "statusIndex": {
+        "universalIdentifier": "7aa4250f-0491-4147-87d5-aa75efdb4cdc",
+      },
+    },
+    "universalIdentifier": "2f7db65e-7693-4c4f-afee-ecb8dd8a8d83",
+    "views": {
+      "allRequirements": {
+        "universalIdentifier": "1a143108-76f8-509a-a907-b92b7e1c3f9b",
+        "viewFields": {
+          "bdeOwner": {
+            "universalIdentifier": "a06a8838-df83-5873-88a6-3b27d219ac96",
+          },
+          "company": {
+            "universalIdentifier": "6a384f16-2ba3-578e-9070-49e3bee77f80",
+          },
+          "createdBy": {
+            "universalIdentifier": "4ed0b1e6-080a-50d5-a0c8-2bd50f203871",
+          },
+          "filledCount": {
+            "universalIdentifier": "59449ac7-dca8-558a-9a26-e41aa75020fa",
+          },
+          "hrOwner": {
+            "universalIdentifier": "c264ff33-7df6-5835-8654-a3d33887aed1",
+          },
+          "numberOfOpenings": {
+            "universalIdentifier": "941d4109-d97d-57bc-8a0a-0759947adb79",
+          },
+          "priority": {
+            "universalIdentifier": "546f93bd-9ce7-5789-99cf-991953ca987f",
+          },
+          "status": {
+            "universalIdentifier": "fb4cd8cf-eaad-551c-9d86-14027aeef90a",
+          },
+          "targetDate": {
+            "universalIdentifier": "e3477343-6bf5-5d77-b74e-87c9be823df8",
+          },
+          "title": {
+            "universalIdentifier": "25427e76-f870-51ff-a6ff-bfc233d2f693",
+          },
+        },
+      },
+      "byStatus": {
+        "universalIdentifier": "0d6f24c8-5936-4587-98f7-d63d13aa8bc4",
+        "viewFields": {
+          "company": {
+            "universalIdentifier": "dc9b04e9-c53a-4f86-8d02-32121ac10a83",
+          },
+          "filledCount": {
+            "universalIdentifier": "0e03a95a-0504-4d40-8647-51c8df21ed79",
+          },
+          "numberOfOpenings": {
+            "universalIdentifier": "d15c93de-f325-441e-b3e0-95ed0895b97b",
+          },
+          "priority": {
+            "universalIdentifier": "1cabb99e-66e0-4db4-b74f-e91b45ca1b83",
+          },
+          "status": {
+            "universalIdentifier": "e90a2e47-f6be-46a3-9a52-56e13bbde14a",
+          },
+          "targetDate": {
+            "universalIdentifier": "7a51db9e-6b53-409f-9a5c-88625ca87953",
+          },
+          "title": {
+            "universalIdentifier": "c16060de-9e18-4e63-973e-0482e2f41c85",
+          },
+        },
+        "viewGroups": {
+          "assignedToHr": {
+            "universalIdentifier": "77d73704-062c-413a-b720-e653351c8a80",
+          },
+          "cancelled": {
+            "universalIdentifier": "0cec8d50-613d-44e2-933e-ae5189eff058",
+          },
+          "closed": {
+            "universalIdentifier": "885d015e-2247-453d-aae7-625ec9fe8546",
+          },
+          "commercialAgreed": {
+            "universalIdentifier": "9d4824ff-d425-4fa2-b386-a7a8ffa93025",
+          },
+          "confirmed": {
+            "universalIdentifier": "e6a6948f-596b-4179-bbed-1108f7a60e0c",
+          },
+          "draft": {
+            "universalIdentifier": "da6ea4f4-a281-4eba-9c22-2465edf71821",
+          },
+          "filled": {
+            "universalIdentifier": "2a6f47ab-9dd0-4e49-b685-d3835ed15c3c",
+          },
+          "inProgress": {
+            "universalIdentifier": "79ec4549-a230-4e13-82c3-0792d257bdf4",
+          },
+          "partiallyFilled": {
+            "universalIdentifier": "68a5705a-f40d-4d36-8d9f-2e6887106a62",
+          },
+          "received": {
+            "universalIdentifier": "8d7ad651-790c-48a5-b177-dff9224e158c",
+          },
+        },
+      },
+      "requirementRecordPageFields": {
+        "universalIdentifier": "a2ae0778-2cc7-5581-bf61-2a67bbf32bc1",
+        "viewFieldGroups": {
+          "ownership": {
+            "universalIdentifier": "e0d60f75-1a31-513d-972a-a258ded88aa9",
+          },
+          "recruitment": {
+            "universalIdentifier": "fe921aa2-0122-54fc-ab5b-17193e66ffa9",
+          },
+          "relations": {
+            "universalIdentifier": "1da7bf05-e79f-5482-b8c1-6293a9a1b1fe",
+          },
+          "system": {
+            "universalIdentifier": "0903da4d-9352-54f0-929e-1f887f5e8f4a",
+          },
+        },
+        "viewFields": {
+          "attachments": {
+            "universalIdentifier": "99c38c30-2848-5e51-b56b-e7a6456f289c",
+          },
+          "bdeOwner": {
+            "universalIdentifier": "8a28a9a3-bcd4-5d95-8791-dbf8220eb1ed",
+          },
+          "candidateSubmissions": {
+            "universalIdentifier": "10c8d4c3-9865-568b-a9ac-72f4b9217c50",
+          },
+          "closedAt": {
+            "universalIdentifier": "50e99520-ae24-5d00-84d4-98881b1aa8f9",
+          },
+          "company": {
+            "universalIdentifier": "a02efb6a-f3ab-5bf8-ac44-50eecdb99f0b",
+          },
+          "createdAt": {
+            "universalIdentifier": "ab450fab-d675-5866-84d4-e9c9c57058e3",
+          },
+          "createdBy": {
+            "universalIdentifier": "8ab830b6-a3ee-5a7a-bcb7-8cf90dc463bd",
+          },
+          "deal": {
+            "universalIdentifier": "d0aff68a-ad64-554b-a0cc-8d7db8a2549c",
+          },
+          "description": {
+            "universalIdentifier": "7f93a642-15a6-57c5-82ec-915ae4ab0b2b",
+          },
+          "education": {
+            "universalIdentifier": "91e5cfa1-85e5-508c-ae14-104e79d84441",
+          },
+          "employmentType": {
+            "universalIdentifier": "2a15f804-439a-5f2b-96a7-9b250fb6f2af",
+          },
+          "experienceMax": {
+            "universalIdentifier": "09d1f5e3-cb6d-57f8-a928-488070bec367",
+          },
+          "experienceMin": {
+            "universalIdentifier": "8e588075-f22c-5f5c-b81f-77681668c276",
+          },
+          "filledCount": {
+            "universalIdentifier": "04df3db3-ce35-5679-a9c6-618dfca76f40",
+          },
+          "hrOwner": {
+            "universalIdentifier": "715aa986-e1a5-599f-a7cb-47aecbe76a76",
+          },
+          "interviews": {
+            "universalIdentifier": "bea368ac-ebd6-59b4-bc29-c50966d72943",
+          },
+          "location": {
+            "universalIdentifier": "808fbb14-0d82-5ebb-aa2d-9c01fde87492",
+          },
+          "noteTargets": {
+            "universalIdentifier": "cc3424fb-ddfd-5913-8f4f-c15cdf0acd82",
+          },
+          "numberOfOpenings": {
+            "universalIdentifier": "fb1e70aa-753f-571e-a2c8-1b0caccde1fe",
+          },
+          "pointOfContact": {
+            "universalIdentifier": "20e764dc-27a3-53b8-89c8-15b015fee577",
+          },
+          "priority": {
+            "universalIdentifier": "e4bce12d-802b-5ea0-a9af-75d13733b977",
+          },
+          "receivedAt": {
+            "universalIdentifier": "de65edf3-df0e-5f68-bdce-aa1ed7d03833",
+          },
+          "recruiterOwner": {
+            "universalIdentifier": "5666a5b2-fe54-5db3-b80f-8ecaa1830f41",
+          },
+          "requirementsText": {
+            "universalIdentifier": "6febdd81-38f9-509c-a789-77240b9345f3",
+          },
+          "responsibilities": {
+            "universalIdentifier": "67672902-71eb-5014-b127-976f2fc19630",
+          },
+          "rolePosition": {
+            "universalIdentifier": "390a8b8b-85f9-5512-b2b4-59f7144b0246",
+          },
+          "salaryMax": {
+            "universalIdentifier": "481bfc93-4234-5215-b411-ee6e352727ba",
+          },
+          "salaryMin": {
+            "universalIdentifier": "e88433e1-15e9-5f9a-af28-2f0fe50bb3c0",
+          },
+          "skills": {
+            "universalIdentifier": "4590f06c-4003-5b41-a026-700e1d362bb6",
+          },
+          "status": {
+            "universalIdentifier": "9f4791b1-f1ce-5714-b3f5-169907b6b02c",
+          },
+          "targetDate": {
+            "universalIdentifier": "d66dd54e-6b1d-5dd9-a300-ccb9ebf8af4e",
+          },
+          "taskTargets": {
+            "universalIdentifier": "3dd17821-2e61-50cb-ade4-ca74ab7536af",
+          },
+          "timelineActivities": {
+            "universalIdentifier": "cab58c14-767a-566a-b305-8814eb8503eb",
+          },
+          "title": {
+            "universalIdentifier": "9496bae2-e8f2-560a-91b4-3661fba4e305",
+          },
+          "updatedAt": {
+            "universalIdentifier": "6b5da330-073d-5153-b5ad-78b705c2b652",
+          },
+          "updatedBy": {
+            "universalIdentifier": "2046aa1f-bde5-5a68-8af2-05e933f49fca",
+          },
+          "workMode": {
+            "universalIdentifier": "fdd77208-58b3-509c-b865-23b0b1efd832",
+          },
+        },
+      },
+    },
+  },
+  "rosterAssignment": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "0f7d0f9f-6c44-567b-90cd-b98ba08a3ae3",
+      },
+      "createdAt": {
+        "universalIdentifier": "0e3aa1f6-818f-50b9-89e0-b345047aae4a",
+      },
+      "createdBy": {
+        "universalIdentifier": "b3b639d6-8328-5706-b1d6-0ec11f329447",
+      },
+      "deletedAt": {
+        "universalIdentifier": "9fd6b391-a39e-585f-a16d-60649c2a92fd",
+      },
+      "effectiveFrom": {
+        "universalIdentifier": "60358aa4-346c-461d-869f-4f58ea1ffa97",
+      },
+      "effectiveTo": {
+        "universalIdentifier": "4c7dfebe-80a0-46dc-8862-8aa240d06185",
+      },
+      "employee": {
+        "universalIdentifier": "16f64b76-d43b-4093-8d57-f4202766af41",
+      },
+      "id": {
+        "universalIdentifier": "e3f8ea7a-9187-5776-8389-e8a992d49567",
+      },
+      "isActive": {
+        "universalIdentifier": "415d1679-c112-48b2-8f76-7f8d278a991b",
+      },
+      "noteTargets": {
+        "universalIdentifier": "c631b146-8cab-59dd-8f7b-1298a689840d",
+      },
+      "position": {
+        "universalIdentifier": "ca54eef3-d38b-5378-9742-184772f728c6",
+      },
+      "searchVector": {
+        "universalIdentifier": "09d10ac7-cf55-5fcf-bf0a-7b737845d56f",
+      },
+      "shift": {
+        "universalIdentifier": "f9307eec-9ee2-4ebb-8b5f-9fb0f359a9f7",
+      },
+      "taskTargets": {
+        "universalIdentifier": "e0bb31a1-63fa-5fbc-88d9-39f5433a1a0c",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "107e349c-9cf9-5bc0-a53d-7b94f1fca515",
+      },
+      "updatedAt": {
+        "universalIdentifier": "c59ba7b5-e605-5843-9326-53e59b790050",
+      },
+      "updatedBy": {
+        "universalIdentifier": "72b91301-fa76-5aff-8aff-d3d7fce81e2f",
+      },
+    },
+    "indexes": {
+      "effectiveFromIndex": {
+        "universalIdentifier": "708568e2-3724-48cf-8685-f098df57e5fe",
+      },
+      "employeeIdIndex": {
+        "universalIdentifier": "cad75f01-5807-4c4f-85b9-4308ba5fb2ed",
+      },
+      "shiftIdIndex": {
+        "universalIdentifier": "c7868182-9965-40c1-8946-30f6c3d4859a",
+      },
+    },
+    "universalIdentifier": "b64b397c-b92f-4583-8677-5ae3be22b7ed",
+    "views": {
+      "allRosterAssignments": {
+        "universalIdentifier": "7bb3010f-0aac-5317-8fda-1ab7ea9927b9",
+        "viewFields": {
+          "effectiveFrom": {
+            "universalIdentifier": "d00ca2f4-8fea-5b5a-a0ab-1992c81b2810",
+          },
+          "effectiveTo": {
+            "universalIdentifier": "bf2e0a6d-6fd5-5565-9c0b-6d3f017711c9",
+          },
+          "employee": {
+            "universalIdentifier": "96212377-ab8a-5d57-b0b4-959ac7e26cb7",
+          },
+          "id": {
+            "universalIdentifier": "ce5c93c6-c17b-5e99-8396-72795176624e",
+          },
+          "isActive": {
+            "universalIdentifier": "21739362-58ad-5534-9b95-b66bd303f5f7",
+          },
+          "shift": {
+            "universalIdentifier": "b00c01ee-d5d9-5b8b-85fb-69302aa537e0",
+          },
+        },
+      },
+    },
+  },
+  "salaryComponent": {
+    "fields": {
+      "amount": {
+        "universalIdentifier": "61c25309-dd29-496a-8bd4-590fd57d42e1",
+      },
+      "attachments": {
+        "universalIdentifier": "93f07f8f-b206-5121-9d7a-4f06b46ee716",
+      },
+      "calculationType": {
+        "universalIdentifier": "464d3d26-db38-4ae3-80ff-1fcbf81eef07",
+      },
+      "componentType": {
+        "universalIdentifier": "368c46b4-8488-4cb1-8527-d2f546fc6af6",
+      },
+      "createdAt": {
+        "universalIdentifier": "c099e7b8-cc79-5a32-9538-a4d496e9d5a2",
+      },
+      "createdBy": {
+        "universalIdentifier": "aba9ed3f-6508-502e-9e6d-ed2b715a3093",
+      },
+      "deletedAt": {
+        "universalIdentifier": "0108717d-3d6f-5678-9b72-cc16cbbc2f29",
+      },
+      "id": {
+        "universalIdentifier": "8960899e-b956-5d69-a0aa-e510e964f8c6",
+      },
+      "name": {
+        "universalIdentifier": "ae5d91ea-13f6-48db-8626-baee442c17bd",
+      },
+      "noteTargets": {
+        "universalIdentifier": "d16958a9-f26c-569f-9bee-1ee870b81562",
+      },
+      "percentage": {
+        "universalIdentifier": "f7c73e9f-9b60-4a0a-88ee-1cea9c7577ea",
+      },
+      "position": {
+        "universalIdentifier": "fc7a7937-9b9d-4a5e-8089-32ab15709bec",
+      },
+      "salaryStructure": {
+        "universalIdentifier": "04591518-2643-429b-810d-3479d403fd98",
+      },
+      "searchVector": {
+        "universalIdentifier": "e7eace9e-ec7d-594a-b916-2102187ba355",
+      },
+      "taskTargets": {
+        "universalIdentifier": "826450fe-bccd-53a2-8376-efaff4219d24",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "8bc18d24-cd3a-5d4e-bb98-6670469f40f8",
+      },
+      "updatedAt": {
+        "universalIdentifier": "bb0c3487-3113-5381-bb9d-f7d2be242b65",
+      },
+      "updatedBy": {
+        "universalIdentifier": "2304dff8-8d5a-57cd-b45f-acd157c9534f",
+      },
+    },
+    "indexes": {
+      "structureIdIndex": {
+        "universalIdentifier": "41be4eea-032b-4169-80f1-fa58747aae06",
+      },
+      "structureNameUniqueIndex": {
+        "universalIdentifier": "b6c5b963-8531-4593-8ba2-2e64e0c83f37",
+      },
+    },
+    "universalIdentifier": "2fb3212f-58f8-44c4-b7de-b1af69ade51f",
+    "views": {
+      "allSalaryComponents": {
+        "universalIdentifier": "48963ac8-6baf-5514-93f5-4e33ede7f818",
+        "viewFields": {
+          "amount": {
+            "universalIdentifier": "93c58d99-2740-5a56-840f-59431ac35bc9",
+          },
+          "calculationType": {
+            "universalIdentifier": "875644fb-831b-5cc5-ba36-a2a6d3916a90",
+          },
+          "componentType": {
+            "universalIdentifier": "92f8b3bd-0c7e-5e93-882e-c50f0e115106",
+          },
+          "name": {
+            "universalIdentifier": "a3bda3cc-eda8-5493-be40-3dd902bf65ba",
+          },
+          "percentage": {
+            "universalIdentifier": "507460aa-904a-57ce-b149-35d865c365d9",
+          },
+          "position": {
+            "universalIdentifier": "dddb9e51-5b8e-52f5-bd4c-fc8224e64618",
+          },
+          "salaryStructure": {
+            "universalIdentifier": "7c23f7c1-79c2-526d-ada8-64241a653a12",
+          },
+        },
+      },
+    },
+  },
+  "salaryStructure": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "a6f4b9c3-c983-50f2-aca7-3754127dcff7",
+      },
+      "components": {
+        "universalIdentifier": "3946bc65-62e1-4553-830f-9f4381a4bea4",
+      },
+      "createdAt": {
+        "universalIdentifier": "511d97ad-b600-5eb2-8a27-0f8765f87828",
+      },
+      "createdBy": {
+        "universalIdentifier": "868f2614-c10a-52ff-b737-0b653fbf5942",
+      },
+      "currency": {
+        "universalIdentifier": "74cbb561-ef16-4d92-8bd2-ecbe53dca59d",
+      },
+      "deletedAt": {
+        "universalIdentifier": "e5ed107b-db67-572e-98b5-0e5158785f55",
+      },
+      "effectiveFrom": {
+        "universalIdentifier": "87ffcf7a-b3ff-44bd-8958-7f94b2fda0ee",
+      },
+      "effectiveTo": {
+        "universalIdentifier": "d9baa8e0-cc99-41e8-86dd-a0a22e86d2f7",
+      },
+      "employee": {
+        "universalIdentifier": "c078f559-3a1e-47da-8a72-45e0e096302d",
+      },
+      "id": {
+        "universalIdentifier": "3728d22a-e7f1-5ba3-bebc-1e16be9d4dfd",
+      },
+      "isActive": {
+        "universalIdentifier": "200e4d9b-fa56-4487-8393-51d61aafb9d9",
+      },
+      "monthlyGross": {
+        "universalIdentifier": "443cfe55-d87d-44b1-8f61-60a151be260a",
+      },
+      "noteTargets": {
+        "universalIdentifier": "8943769d-869e-5f78-a102-b0c7b2990c8a",
+      },
+      "position": {
+        "universalIdentifier": "9492a806-45f5-56d1-97b7-40109c1eb8fa",
+      },
+      "searchVector": {
+        "universalIdentifier": "865cd88a-26a3-5ef1-912e-4f8ac2358cb5",
+      },
+      "taskTargets": {
+        "universalIdentifier": "db1135b5-baa4-5960-a2e4-a2f23293458b",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "7144c475-7751-5ad7-886f-a4b84b41f57d",
+      },
+      "updatedAt": {
+        "universalIdentifier": "6c973a9d-60e6-5938-875e-b9116d4f942b",
+      },
+      "updatedBy": {
+        "universalIdentifier": "a6e52a88-b062-5b53-b674-22e526bbe521",
+      },
+    },
+    "indexes": {
+      "effectiveFromIndex": {
+        "universalIdentifier": "b7c24ca9-7179-4249-894e-46e2a0d734dd",
+      },
+      "employeeIdIndex": {
+        "universalIdentifier": "7df48854-6a07-46c9-88fa-d445ddce20cf",
+      },
+    },
+    "universalIdentifier": "5c26e273-8c48-475f-8324-b13284b761be",
+    "views": {
+      "allSalaryStructures": {
+        "universalIdentifier": "9712c3b5-1898-54ff-b972-18766ffec2c6",
+        "viewFields": {
+          "currency": {
+            "universalIdentifier": "c3eb1f23-f739-5373-b221-535f50d57552",
+          },
+          "effectiveFrom": {
+            "universalIdentifier": "9326560f-15e6-597a-8669-f768a2b053a1",
+          },
+          "effectiveTo": {
+            "universalIdentifier": "a4ace0c9-0abd-54bb-93bf-2edda5b28488",
+          },
+          "employee": {
+            "universalIdentifier": "680b8333-f3fc-5170-a0ab-07d08d19497d",
+          },
+          "id": {
+            "universalIdentifier": "39a51d3b-f470-5b12-bfd1-f9afc736d59d",
+          },
+          "isActive": {
+            "universalIdentifier": "37f2a0cf-0bab-5378-838e-6b653a2a4a79",
+          },
+          "monthlyGross": {
+            "universalIdentifier": "da03c91f-1d0f-5ba6-980a-a72c540a1dc2",
+          },
+        },
+      },
+      "salaryStructureRecordPageFields": {
+        "universalIdentifier": "bbab528b-4039-50d3-b00a-27728c74c09f",
+        "viewFieldGroups": {
+          "relations": {
+            "universalIdentifier": "17a6c1ee-29aa-576a-a14c-219ceb58ad98",
+          },
+          "salary": {
+            "universalIdentifier": "8e9b13c4-d3e2-5ddb-9e36-db47c686ec5f",
+          },
+          "system": {
+            "universalIdentifier": "275bc307-4608-5679-932b-59caaba43e0b",
+          },
+        },
+        "viewFields": {
+          "components": {
+            "universalIdentifier": "47f60a26-6679-595e-9627-3965b16392a4",
+          },
+          "createdAt": {
+            "universalIdentifier": "b1ec9aed-bdba-5311-a99d-44d6c962ec10",
+          },
+          "createdBy": {
+            "universalIdentifier": "13131ee1-942d-5edf-8862-9df8b260b1c0",
+          },
+          "currency": {
+            "universalIdentifier": "0963fbc8-f0c5-5402-b37d-60d05e54ac3e",
+          },
+          "effectiveFrom": {
+            "universalIdentifier": "0b3c5a6d-45d1-555b-aaff-c93964e2d7fd",
+          },
+          "effectiveTo": {
+            "universalIdentifier": "fed4067b-a1c0-511a-9879-1f838d0a3155",
+          },
+          "employee": {
+            "universalIdentifier": "f47e8fb1-c45b-507e-ba56-391438241121",
+          },
+          "isActive": {
+            "universalIdentifier": "0f74d905-9d2b-5b17-a23f-af4873061ce4",
+          },
+          "monthlyGross": {
+            "universalIdentifier": "8bb3642e-8427-5ac6-a419-066d2e254283",
+          },
+        },
+      },
+    },
+  },
+  "shift": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "2cefdfa1-5452-5353-ad4c-5856738226dc",
+      },
+      "breakMinutes": {
+        "universalIdentifier": "3b989400-c54e-405a-8d89-8979fdfc4078",
+      },
+      "createdAt": {
+        "universalIdentifier": "ad7397b1-415d-5f4d-ac3b-fd362e43ace8",
+      },
+      "createdBy": {
+        "universalIdentifier": "4d268b8c-490d-5325-b636-d7353d3e5942",
+      },
+      "deletedAt": {
+        "universalIdentifier": "d6ac5be4-4f9e-5251-99da-575dba30480a",
+      },
+      "endTime": {
+        "universalIdentifier": "62e1baba-60f5-4c53-84b3-86e2fa20b526",
+      },
+      "graceMinutes": {
+        "universalIdentifier": "bf77f236-00de-44d2-855f-0ecddce3544c",
+      },
+      "id": {
+        "universalIdentifier": "eea66048-b388-584d-afbb-ca96651924eb",
+      },
+      "isActive": {
+        "universalIdentifier": "c4dc7c66-c89f-4c41-8d94-041bff5e5650",
+      },
+      "name": {
+        "universalIdentifier": "376a13f7-7114-4028-841d-e9c8deb91718",
+      },
+      "noteTargets": {
+        "universalIdentifier": "49348c5d-c952-5936-a16d-78d966325fcc",
+      },
+      "position": {
+        "universalIdentifier": "429d1ca0-96c9-59d1-8bb5-97ce74caf8e1",
+      },
+      "rosterAssignments": {
+        "universalIdentifier": "2a8f6288-2237-4c91-8fc6-d30f6879b94d",
+      },
+      "searchVector": {
+        "universalIdentifier": "ec91602b-867f-5f95-acdd-3fa188aa8e89",
+      },
+      "startTime": {
+        "universalIdentifier": "3debbccd-5f12-4088-800e-1ff935d1ad18",
+      },
+      "taskTargets": {
+        "universalIdentifier": "a1a52b84-aa01-57aa-b3a9-dd314eb285fc",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "9741f8f9-ebbb-5194-ae0f-66f19271a9da",
+      },
+      "updatedAt": {
+        "universalIdentifier": "703c2f68-2472-553a-b603-436cf4cdfaed",
+      },
+      "updatedBy": {
+        "universalIdentifier": "5b70aee7-b016-55f9-842c-8d566adf7dd2",
+      },
+      "workingDays": {
+        "universalIdentifier": "34eb29ec-8bff-4ad0-8e53-f885aaefb4d7",
+      },
+    },
+    "indexes": {
+      "nameIndex": {
+        "universalIdentifier": "cd32ad37-d31b-4c3a-8af6-e40541bf9664",
+      },
+      "searchVectorGinIndex": {
+        "universalIdentifier": "42f5bf7a-b5a3-4a09-8afa-6346e1330ca1",
+      },
+    },
+    "universalIdentifier": "19e8307d-4d6a-4d03-b761-34cd2212faba",
+    "views": {
+      "allShifts": {
+        "universalIdentifier": "6cd7ff34-7b58-5b19-88b1-4a1dbc3ca616",
+        "viewFields": {
+          "breakMinutes": {
+            "universalIdentifier": "5b8385c9-a02e-5790-b43d-d5719739a032",
+          },
+          "endTime": {
+            "universalIdentifier": "0ec7f9cb-5029-57e0-81bd-c0a4b5ed8219",
+          },
+          "graceMinutes": {
+            "universalIdentifier": "3248e43e-9c05-5db4-9b6f-0decfe1259ab",
+          },
+          "isActive": {
+            "universalIdentifier": "87f756db-a77d-5c5e-bb71-506a1350a707",
+          },
+          "name": {
+            "universalIdentifier": "084617f3-f343-5a3a-9ed0-43ab82f56d90",
+          },
+          "startTime": {
+            "universalIdentifier": "53ec78f0-41b0-5d32-b713-2c0871ef84d9",
+          },
+          "workingDays": {
+            "universalIdentifier": "2132d73c-63d9-5550-991a-bc503f2ba553",
+          },
+        },
+      },
+      "shiftRecordPageFields": {
+        "universalIdentifier": "5a27a144-15ed-58a5-b517-09b32f730406",
+        "viewFieldGroups": {
+          "relations": {
+            "universalIdentifier": "35510979-041e-5306-b0fa-12a575203bd3",
+          },
+          "shift": {
+            "universalIdentifier": "e55a97a1-5569-533e-8c85-e43b82f21a9e",
+          },
+          "system": {
+            "universalIdentifier": "98bdcdea-1f89-5f28-95b5-345e18db0cd2",
+          },
+        },
+        "viewFields": {
+          "breakMinutes": {
+            "universalIdentifier": "833c90e9-9535-57c7-9772-5155e21cf1c8",
+          },
+          "createdAt": {
+            "universalIdentifier": "8aee7a6d-a8c9-5a3d-9d55-ed1eb1af554f",
+          },
+          "createdBy": {
+            "universalIdentifier": "6ef195fd-bba0-5522-aebb-5e4e77a2222c",
+          },
+          "endTime": {
+            "universalIdentifier": "5f56a3b8-0e6a-5859-bf4a-b117e075b9f2",
+          },
+          "graceMinutes": {
+            "universalIdentifier": "a36ffbe2-bb51-5294-8824-2c21713c1455",
+          },
+          "isActive": {
+            "universalIdentifier": "56b7375f-f55a-54e7-aafa-eb9f3bafbd04",
+          },
+          "name": {
+            "universalIdentifier": "8e000672-97ad-5324-adf7-d9621682d433",
+          },
+          "rosterAssignments": {
+            "universalIdentifier": "4bb07317-a9c5-5291-8839-223ffed520fb",
+          },
+          "startTime": {
+            "universalIdentifier": "e9d05b04-56ab-57d7-b316-bd5585dffb9d",
+          },
+          "updatedAt": {
+            "universalIdentifier": "bb0664fe-c913-5345-a57d-b2d5b3734eb1",
+          },
+          "updatedBy": {
+            "universalIdentifier": "9a3e95cd-32ad-5b06-9149-0f3f0651fdb6",
+          },
+          "workingDays": {
+            "universalIdentifier": "10f9b07a-964f-568e-94cd-5d2ce2147456",
+          },
+        },
+      },
+    },
   },
   "task": {
     "fields": {
@@ -2793,14 +6932,38 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "searchVector": {
         "universalIdentifier": "821c713e-bf1c-569d-9f0c-8e10e80eee5e",
       },
+      "targetCandidate": {
+        "universalIdentifier": "780a65e2-4f34-51fa-8dda-43b70d242614",
+      },
       "targetCompany": {
         "universalIdentifier": "805997f5-d539-5676-9aa8-0de602ac4152",
+      },
+      "targetEmployee": {
+        "universalIdentifier": "82558a23-82af-5389-a14e-d782f264b96f",
+      },
+      "targetInterview": {
+        "universalIdentifier": "a93b24ba-dd5b-5fea-a290-dfb9cb06b034",
+      },
+      "targetInvoice": {
+        "universalIdentifier": "cb1ee822-07e7-590e-910a-7d06d4e31733",
+      },
+      "targetLocation": {
+        "universalIdentifier": "10159dea-40c7-5c3d-91bf-7c079d21ab17",
       },
       "targetOpportunity": {
         "universalIdentifier": "ca354769-b50e-531b-b745-12ca12ad44ee",
       },
       "targetPerson": {
         "universalIdentifier": "c0a02b7a-a356-537a-96c8-66d1f8994100",
+      },
+      "targetRequirement": {
+        "universalIdentifier": "223c0fc5-7a69-5853-8617-84cb000a43d2",
+      },
+      "targetSubmission": {
+        "universalIdentifier": "cddfad88-8f09-53f2-aacd-bc88eb73d2ca",
+      },
+      "targetTeam": {
+        "universalIdentifier": "ec9066ff-fe91-5766-802b-f256646fd0b0",
       },
       "task": {
         "universalIdentifier": "20202020-e881-457a-8758-74aaef4ae78a",
@@ -2864,6 +7027,88 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
     },
   },
+  "team": {
+    "fields": {
+      "attachments": {
+        "universalIdentifier": "68ea7cc3-1de7-550e-9cae-5c88d02b8aa7",
+      },
+      "createdAt": {
+        "universalIdentifier": "68754029-6a7b-5447-aac6-ce756d6caee5",
+      },
+      "createdBy": {
+        "universalIdentifier": "b1b93dbc-9e7d-501f-b854-62a5d8e5afe3",
+      },
+      "deletedAt": {
+        "universalIdentifier": "d405d606-5909-54aa-81eb-91646442a2c5",
+      },
+      "department": {
+        "universalIdentifier": "9dc57676-f8bd-5f36-9551-813270ef490b",
+      },
+      "description": {
+        "universalIdentifier": "b2c3d4e5-f6a7-8901-bcde-f12345678911",
+      },
+      "id": {
+        "universalIdentifier": "2d6c12f5-7a53-59f4-9daa-021a4273b939",
+      },
+      "members": {
+        "universalIdentifier": "8fc22b06-9fbe-5ee5-8680-60d41bae6cc1",
+      },
+      "name": {
+        "universalIdentifier": "b2c3d4e5-f6a7-8901-bcde-f12345678910",
+      },
+      "noteTargets": {
+        "universalIdentifier": "8226291f-7fc7-5981-8360-e3a51fe08694",
+      },
+      "position": {
+        "universalIdentifier": "4cea1d9f-c9a9-5cf3-a539-66bbbc7f9c99",
+      },
+      "searchVector": {
+        "universalIdentifier": "b7539865-cf83-5bd9-a0ba-c8d1bdd45083",
+      },
+      "status": {
+        "universalIdentifier": "b2c3d4e5-f6a7-8901-bcde-f12345678912",
+      },
+      "taskTargets": {
+        "universalIdentifier": "2ab70e39-a873-546a-8e85-42b6268ed568",
+      },
+      "teamLead": {
+        "universalIdentifier": "d100ecdf-af56-58a4-9756-a3bad64817f7",
+      },
+      "timelineActivities": {
+        "universalIdentifier": "b046779a-48ed-55e0-98a4-d93981282607",
+      },
+      "updatedAt": {
+        "universalIdentifier": "9c289c25-e7f8-5130-8584-4bd3d46f4cb6",
+      },
+      "updatedBy": {
+        "universalIdentifier": "a14c3f52-6499-5870-9d4b-8a68089a0ea8",
+      },
+    },
+    "indexes": {},
+    "universalIdentifier": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "views": {
+      "allTeams": {
+        "universalIdentifier": "e5ea4758-d9e1-5f0b-af59-2014d97f8e38",
+        "viewFields": {
+          "createdAt": {
+            "universalIdentifier": "b7ddd672-dba6-5681-89b1-7b1ca2af1d23",
+          },
+          "description": {
+            "universalIdentifier": "2c42122e-39f1-5c33-900e-6a95a33af56f",
+          },
+          "members": {
+            "universalIdentifier": "178927de-7fa9-55b9-a73d-f61f7da43185",
+          },
+          "name": {
+            "universalIdentifier": "ed94c758-ceac-5971-9ad0-503e983bf60e",
+          },
+          "status": {
+            "universalIdentifier": "f01c3f27-44de-54e1-a94e-810809114e4e",
+          },
+        },
+      },
+    },
+  },
   "timelineActivity": {
     "fields": {
       "createdAt": {
@@ -2899,11 +7144,26 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "searchVector": {
         "universalIdentifier": "23a0482b-f41b-5e13-9b3e-356c5aaa90a3",
       },
+      "targetCandidate": {
+        "universalIdentifier": "02dfa572-7a77-59b4-abcd-67b98249c1be",
+      },
       "targetCompany": {
         "universalIdentifier": "500e6797-19a2-5f11-b239-259b58765533",
       },
       "targetDashboard": {
         "universalIdentifier": "0a1c0f53-5cbe-5ae8-8dde-e0dd7a7d136f",
+      },
+      "targetEmployee": {
+        "universalIdentifier": "e1fabf79-204d-5756-9b5b-0a66d143afdf",
+      },
+      "targetInterview": {
+        "universalIdentifier": "87e21a4a-6822-511c-a550-2bb27c576ced",
+      },
+      "targetInvoice": {
+        "universalIdentifier": "a18c0879-c118-51a1-9462-525be6a17c8e",
+      },
+      "targetLocation": {
+        "universalIdentifier": "904297a5-0e4c-53e4-9b84-a681192871b0",
       },
       "targetMessageCampaign": {
         "universalIdentifier": "22194f8d-a9f3-5f13-ae0f-eb23c6338cea",
@@ -2920,8 +7180,17 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "targetPerson": {
         "universalIdentifier": "e2477375-5aeb-53bd-8ee1-97e804a73f9d",
       },
+      "targetRequirement": {
+        "universalIdentifier": "3d306094-358e-5f87-8b88-276a31a29754",
+      },
+      "targetSubmission": {
+        "universalIdentifier": "bd12df7a-3a7e-5efe-aed9-05a85945eff6",
+      },
       "targetTask": {
         "universalIdentifier": "9022391d-5b5b-519e-be9f-fa954856bb29",
+      },
+      "targetTeam": {
+        "universalIdentifier": "2ca14d0b-6973-5ac4-b437-b3382bc06948",
       },
       "targetWorkflow": {
         "universalIdentifier": "7bdf04f6-a598-57b2-b485-5263c25e1257",
@@ -3472,6 +7741,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "accountOwnerForCompanies": {
         "universalIdentifier": "20202020-dc29-4bd4-a3c1-29eafa324bee",
       },
+      "approvedPayrollAdjustments": {
+        "universalIdentifier": "1c9eb8e8-013e-4f3f-9899-7d3ad188c391",
+      },
       "assignedTasks": {
         "universalIdentifier": "20202020-61dc-4a1c-99e8-38ebf8d2bbeb",
       },
@@ -3502,6 +7774,12 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "deletedAt": {
         "universalIdentifier": "0c39c6a8-a1bf-54fb-8c86-ca2981820fd0",
       },
+      "hrOwnedRequirements": {
+        "universalIdentifier": "3f7d2b91-6c58-4a0e-9d24-8b1f5c7e30a2",
+      },
+      "hrOwnedSubmissions": {
+        "universalIdentifier": "5b8e1f72-9a4c-4d63-a217-c6f0b3d9845e",
+      },
       "id": {
         "universalIdentifier": "d77dff76-dcfd-52a3-b352-832898b28b9d",
       },
@@ -3523,14 +7801,29 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "openRecordIn": {
         "universalIdentifier": "20202020-1b16-419d-9323-6f3ea850e5d9",
       },
+      "ownedCandidates": {
+        "universalIdentifier": "fc426b3f-63d2-5210-9c02-dc0d4365e417",
+      },
+      "ownedInterviews": {
+        "universalIdentifier": "fe82f0d1-4abd-5976-a92c-6af0c1aa4c42",
+      },
       "ownedOpportunities": {
         "universalIdentifier": "20202020-9e4d-4b3a-8c1f-6d7e8f9a0b1c",
+      },
+      "ownedRequirements": {
+        "universalIdentifier": "489001bc-f19a-5ffb-9da4-7c6099150905",
       },
       "position": {
         "universalIdentifier": "f5f7f097-05c3-5e99-9b51-d57af26d3fd0",
       },
+      "recruiterOwnedRequirements": {
+        "universalIdentifier": "7e2a9c45-d1b3-4f86-b05e-2c9d4a7f61b8",
+      },
       "searchVector": {
         "universalIdentifier": "48bb08bc-41e9-521d-8a84-b41e6a421c46",
+      },
+      "submittedSubmissions": {
+        "universalIdentifier": "fbdbda80-15ac-5f45-88a3-045f94e19bd9",
       },
       "timeFormat": {
         "universalIdentifier": "20202020-8acb-4cf8-a851-a6ed443c8d81",

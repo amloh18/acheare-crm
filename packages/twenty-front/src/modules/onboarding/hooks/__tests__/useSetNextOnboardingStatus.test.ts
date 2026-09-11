@@ -27,6 +27,19 @@ import {
   mockedUserData,
 } from '~/testing/mock-data/users';
 
+import { useAchareOnboardingSteps } from '@/workspace-feature/hooks/useAchareOnboardingSteps';
+import { type AchareOnboardingStepKey } from 'twenty-shared/workspace';
+
+// The wizard is generated from the workspace's enabled features, so the hook
+// reads it from the server. Stub it here to keep this suite Apollo-free.
+jest.mock('@/workspace-feature/hooks/useAchareOnboardingSteps');
+
+const setupMockAchareOnboardingSteps = (
+  steps: AchareOnboardingStepKey[] | undefined,
+) => {
+  jest.mocked(useAchareOnboardingSteps).mockReturnValue(steps);
+};
+
 const Wrapper = ({ children }: { children: React.ReactNode }) =>
   createElement(JotaiProvider, { store: jotaiStore }, children);
 
@@ -139,17 +152,72 @@ describe('useSetNextOnboardingStatus', () => {
     sessionStorage.clear();
     localStorage.clear();
     resetJotaiStore();
+    // Default: configuration not loaded yet → the full canonical wizard.
+    setupMockAchareOnboardingSteps(undefined);
   });
 
-  it('should sync emails right after workspace activation', () => {
+  it('should start the Achare wizard right after workspace activation', () => {
     const {
       nextOnboardingStatus,
       isWelcomeAnimationVisible,
       shouldOpenAiChatAfterOnboarding,
     } = renderHooks(OnboardingStatus.WORKSPACE_ACTIVATION);
-    expect(nextOnboardingStatus).toEqual(OnboardingStatus.SYNC_EMAIL);
+    expect(nextOnboardingStatus).toEqual(OnboardingStatus.ACHARE_WELCOME);
     expect(isWelcomeAnimationVisible).toBe(false);
     expect(shouldOpenAiChatAfterOnboarding).toBe(false);
+  });
+
+  it('should walk the workspace-generated wizard instead of a fixed chain', () => {
+    setupMockAchareOnboardingSteps([
+      'WELCOME',
+      'BASIC_SETUP',
+      'SETUP_CHOICE',
+      'FEATURE_SELECTION',
+      'AGENCY',
+      'CRM_IMPORT',
+      'REVIEW',
+    ]);
+
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_AGENCY).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.ACHARE_CRM_IMPORT);
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_CRM_IMPORT).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.ACHARE_REVIEW);
+  });
+
+  it('should skip module steps the workspace did not select', () => {
+    setupMockAchareOnboardingSteps([
+      'WELCOME',
+      'BASIC_SETUP',
+      'SETUP_CHOICE',
+      'FEATURE_SELECTION',
+      'AGENCY',
+      'REVIEW',
+    ]);
+
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_AGENCY).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.ACHARE_REVIEW);
+  });
+
+  it('should complete after the last generated step', () => {
+    setupMockAchareOnboardingSteps(['WELCOME', 'REVIEW']);
+
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_REVIEW).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.COMPLETED);
+  });
+
+  it('should fall back to the full wizard while the configuration is loading', () => {
+    setupMockAchareOnboardingSteps(undefined);
+
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_PAYROLL).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.ACHARE_FINANCE);
+    expect(
+      renderHooks(OnboardingStatus.ACHARE_FINANCE).nextOnboardingStatus,
+    ).toEqual(OnboardingStatus.ACHARE_DOCUMENTS);
   });
 
   it('should install apps after syncing emails', () => {
@@ -481,7 +549,7 @@ describe('useSetNextOnboardingStatus', () => {
     );
   });
 
-  it('should still sync emails when the server status landed before advancing', () => {
+  it('should not rewind a status the server already advanced past', () => {
     jotaiStore.set(currentUserState.atom, {
       ...mockedUserData,
       onboardingStatus: OnboardingStatus.WORKSPACE_ACTIVATION,
@@ -499,15 +567,16 @@ describe('useSetNextOnboardingStatus', () => {
     const advanceCapturedBeforeActivation = result.current;
 
     act(() => {
+      // The server moved on to a later step before this callback ran.
       jotaiStore.set(currentUserState.atom, {
         ...mockedUserData,
-        onboardingStatus: OnboardingStatus.SYNC_EMAIL,
+        onboardingStatus: OnboardingStatus.ACHARE_BASIC_SETUP,
       });
       advanceCapturedBeforeActivation({ stepHistoryEffect: 'leaveUnchanged' });
     });
 
     expect(jotaiStore.get(currentUserState.atom)?.onboardingStatus).toEqual(
-      OnboardingStatus.SYNC_EMAIL,
+      OnboardingStatus.ACHARE_BASIC_SETUP,
     );
   });
 });

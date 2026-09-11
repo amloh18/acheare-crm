@@ -812,4 +812,34 @@ export const buildPersonStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  employees: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'employees',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Employees`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Employee records linked to this person`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconBriefcase',
+      isNullable: true,
+      targetObjectName: 'employee',
+      targetFieldName: 'person',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

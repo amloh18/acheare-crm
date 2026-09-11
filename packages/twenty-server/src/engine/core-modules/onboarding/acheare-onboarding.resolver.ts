@@ -18,16 +18,21 @@ import {
   AchareRecruitmentSetupInputDTO,
   AchareHrSetupInputDTO,
   AcharePayrollSetupInputDTO,
+  AchareFeatureSelectionInputDTO,
+  AchareModuleSetupInputDTO,
   AchareDashboardSetupInputDTO,
 } from 'src/engine/core-modules/onboarding/dtos/acheare-setup-inputs.dto';
+import { type AchareSetupStep } from 'src/engine/core-modules/onboarding/constants/acheare-setup-step-keys';
 import { type AuthContextUser } from 'src/engine/core-modules/auth/types/auth-context.type';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
+import { WorkspaceFeatureService } from 'src/engine/core-modules/workspace-feature/services/workspace-feature.service';
 import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { SettingsPermissionGuard } from 'src/engine/guards/settings-permission.guard';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
 import { PermissionFlagType } from 'twenty-shared/constants';
+import { type AchareFeatureKey } from 'twenty-shared/workspace';
 
 @UseGuards(WorkspaceAuthGuard, UserAuthGuard)
 @UsePipes(ResolverValidationPipe)
@@ -37,7 +42,39 @@ export class AchareOnboardingResolver {
   constructor(
     private readonly achareOnboardingService: AchareOnboardingService,
     private readonly dashboardProvisioningService: AchareDashboardProvisioningService,
+    private readonly workspaceFeatureService: WorkspaceFeatureService,
   ) {}
+
+  /**
+   * Moves to the step that follows the current one in *this workspace's*
+   * generated step list, and returns it. Every completion mutation funnels
+   * through here, so no mutation needs to know the wizard's shape — enabling
+   * or disabling a module changes the order without touching the resolver.
+   */
+  private async advanceToNextStep({
+    userId,
+    workspaceId,
+  }: {
+    userId: string;
+    workspaceId: string;
+  }): Promise<AchareSetupStep | null> {
+    const nextStep = await this.achareOnboardingService.getNextStep({
+      userId,
+      workspaceId,
+    });
+
+    if (nextStep === null) {
+      return null;
+    }
+
+    await this.achareOnboardingService.advanceToStep({
+      userId,
+      workspaceId,
+      step: nextStep,
+    });
+
+    return nextStep;
+  }
 
   @Query(() => AchareSetupProgressDTO)
   async acheareSetupProgress(
@@ -100,16 +137,12 @@ export class AchareOnboardingResolver {
       step: 'BASIC_SETUP',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'SETUP_CHOICE',
     });
 
-    return {
-      success: true,
-      currentStep: 'SETUP_CHOICE',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -131,22 +164,53 @@ export class AchareOnboardingResolver {
         workspaceId: workspace.id,
       });
 
-      return {
-        success: true,
-        currentStep: null,
-      };
+      return { success: true, currentStep: null };
     }
 
-    await this.achareOnboardingService.advanceToStep({
+    await this.achareOnboardingService.completeStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'AGENCY',
+      step: 'SETUP_CHOICE',
     });
 
-    return {
-      success: true,
-      currentStep: 'AGENCY',
-    };
+    const currentStep = await this.advanceToNextStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
+    return { success: true, currentStep };
+  }
+
+  /**
+   * Persists the workspace's feature composition. This is the step that makes
+   * the rest of onboarding dynamic: the steps that follow are generated from
+   * whatever is selected here.
+   */
+  @Mutation(() => AchareSetupSuccessDTO)
+  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
+  async completeAchareFeatureSelection(
+    @AuthUser() user: AuthContextUser,
+    @AuthWorkspace() workspace: WorkspaceEntity,
+    @Args('input') input: AchareFeatureSelectionInputDTO,
+  ): Promise<AchareSetupSuccessDTO> {
+    await this.workspaceFeatureService.setEnabledFeatures({
+      workspaceId: workspace.id,
+      features: input.features as AchareFeatureKey[],
+      presetKey: input.presetKey,
+    });
+
+    await this.achareOnboardingService.completeStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+      step: 'FEATURE_SELECTION',
+    });
+
+    const currentStep = await this.advanceToNextStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -162,16 +226,12 @@ export class AchareOnboardingResolver {
       step: 'AGENCY',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'TEAM',
     });
 
-    return {
-      success: true,
-      currentStep: 'TEAM',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -187,16 +247,12 @@ export class AchareOnboardingResolver {
       step: 'TEAM',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'CRM_IMPORT',
     });
 
-    return {
-      success: true,
-      currentStep: 'CRM_IMPORT',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -212,16 +268,12 @@ export class AchareOnboardingResolver {
       step: 'CRM_IMPORT',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'RECRUITMENT',
     });
 
-    return {
-      success: true,
-      currentStep: 'RECRUITMENT',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -237,16 +289,12 @@ export class AchareOnboardingResolver {
       step: 'RECRUITMENT',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'HR',
     });
 
-    return {
-      success: true,
-      currentStep: 'HR',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -270,16 +318,12 @@ export class AchareOnboardingResolver {
       });
     }
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'PAYROLL',
     });
 
-    return {
-      success: true,
-      currentStep: 'PAYROLL',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -303,16 +347,70 @@ export class AchareOnboardingResolver {
       });
     }
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'DASHBOARD',
     });
 
-    return {
-      success: true,
-      currentStep: 'DASHBOARD',
-    };
+    return { success: true, currentStep };
+  }
+
+  @Mutation(() => AchareSetupSuccessDTO)
+  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
+  async completeAchareFinanceSetup(
+    @AuthUser() user: AuthContextUser,
+    @AuthWorkspace() workspace: WorkspaceEntity,
+    @Args('input') input: AchareModuleSetupInputDTO,
+  ): Promise<AchareSetupSuccessDTO> {
+    if (input.skipSetup) {
+      await this.achareOnboardingService.skipStep({
+        userId: user.id,
+        workspaceId: workspace.id,
+        step: 'FINANCE',
+      });
+    } else {
+      await this.achareOnboardingService.completeStep({
+        userId: user.id,
+        workspaceId: workspace.id,
+        step: 'FINANCE',
+      });
+    }
+
+    const currentStep = await this.advanceToNextStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
+    return { success: true, currentStep };
+  }
+
+  @Mutation(() => AchareSetupSuccessDTO)
+  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
+  async completeAchareDocumentsSetup(
+    @AuthUser() user: AuthContextUser,
+    @AuthWorkspace() workspace: WorkspaceEntity,
+    @Args('input') input: AchareModuleSetupInputDTO,
+  ): Promise<AchareSetupSuccessDTO> {
+    if (input.skipSetup) {
+      await this.achareOnboardingService.skipStep({
+        userId: user.id,
+        workspaceId: workspace.id,
+        step: 'DOCUMENTS',
+      });
+    } else {
+      await this.achareOnboardingService.completeStep({
+        userId: user.id,
+        workspaceId: workspace.id,
+        step: 'DOCUMENTS',
+      });
+    }
+
+    const currentStep = await this.advanceToNextStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -323,6 +421,10 @@ export class AchareOnboardingResolver {
     @Args('input') input: AchareDashboardSetupInputDTO,
   ): Promise<AchareSetupSuccessDTO> {
     if (input.provisionDefaults) {
+      // Only create the dashboards whose modules this workspace actually has.
+      const enabledFeatures =
+        await this.workspaceFeatureService.getEnabledFeatures(workspace.id);
+
       await this.dashboardProvisioningService.provisionDashboards({
         workspaceId: workspace.id,
         config: {
@@ -333,6 +435,7 @@ export class AchareOnboardingResolver {
             'Recruiter',
           ],
         },
+        enabledFeatures,
       });
     }
 
@@ -342,16 +445,12 @@ export class AchareOnboardingResolver {
       step: 'DASHBOARD',
     });
 
-    await this.achareOnboardingService.advanceToStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
-      step: 'REVIEW',
     });
 
-    return {
-      success: true,
-      currentStep: 'REVIEW',
-    };
+    return { success: true, currentStep };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
@@ -371,6 +470,11 @@ export class AchareOnboardingResolver {
     };
   }
 
+  /**
+   * Skips a step and moves on. Skippability is decided by the service (only
+   * module steps with a skip key can be skipped), so an unknown or
+   * non-skippable step is rejected rather than silently completing.
+   */
   @Mutation(() => AchareSetupSuccessDTO)
   @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async skipAchareSetupStep(
@@ -378,45 +482,17 @@ export class AchareOnboardingResolver {
     @AuthWorkspace() workspace: WorkspaceEntity,
     @Args('step') step: string,
   ): Promise<AchareSetupSuccessDTO> {
-    const validSkipSteps = ['HR', 'PAYROLL', 'CRM_IMPORT'];
+    await this.achareOnboardingService.skipStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+      step: step as AchareSetupStep,
+    });
 
-    if (!validSkipSteps.includes(step)) {
-      return {
-        success: false,
-        currentStep: null,
-      };
-    }
-
-    if (step === 'HR' || step === 'PAYROLL') {
-      await this.achareOnboardingService.skipStep({
-        userId: user.id,
-        workspaceId: workspace.id,
-        step: step as 'HR' | 'PAYROLL',
-      });
-    } else {
-      await this.achareOnboardingService.completeStep({
-        userId: user.id,
-        workspaceId: workspace.id,
-        step: step as 'CRM_IMPORT',
-      });
-    }
-
-    const nextStep = await this.achareOnboardingService.getNextStep({
+    const currentStep = await this.advanceToNextStep({
       userId: user.id,
       workspaceId: workspace.id,
     });
 
-    if (nextStep) {
-      await this.achareOnboardingService.advanceToStep({
-        userId: user.id,
-        workspaceId: workspace.id,
-        step: nextStep,
-      });
-    }
-
-    return {
-      success: true,
-      currentStep: nextStep,
-    };
+    return { success: true, currentStep };
   }
 }

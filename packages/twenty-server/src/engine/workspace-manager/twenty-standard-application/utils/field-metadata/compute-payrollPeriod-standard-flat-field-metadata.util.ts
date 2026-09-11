@@ -515,4 +515,34 @@ export const buildPayrollPeriodStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  payrollAdjustments: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'payrollAdjustments',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Adjustments`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Payroll adjustments in this period`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconSettings',
+      isNullable: true,
+      targetObjectName: 'payrollAdjustment',
+      targetFieldName: 'payrollPeriod',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

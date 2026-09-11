@@ -1,42 +1,32 @@
 import { useLingui } from '@lingui/react/macro';
 import { styled } from '@linaria/react';
+import { useCallback, useMemo, useState } from 'react';
+import {
+  ACHARE_FEATURES,
+  ACHARE_MODULES,
+  ACHARE_ONBOARDING_STEP_LABEL,
+  type AchareFeatureKey,
+  type AchareModuleKey,
+  getAchareDependentFeatures,
+  getMissingAchareFeatureDependencies,
+  resolveAchareFeatureDependencies,
+} from 'twenty-shared/workspace';
 
+import { AchareFeatureCompositionEditor } from '@/onboarding/components/AchareFeatureCompositionEditor';
+import { useAchareSetupProgressQuery } from '@/onboarding/hooks/useAchareSetupProgressQuery';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import { SettingsPageLayout } from '@/settings/components/layout/SettingsPageLayout';
-import { useAchareSetupProgressQuery } from '@/onboarding/hooks/useAchareSetupProgressQuery';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
+import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
+import { useAchareOnboardingSteps } from '@/workspace-feature/hooks/useAchareOnboardingSteps';
+import { useSetWorkspaceFeaturesMutation } from '@/workspace-feature/hooks/useSetWorkspaceFeaturesMutation';
+import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import type { AchareSetupStepStatus } from '~/generated-metadata/graphql';
-import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { IconCheck, IconCircle, IconClock } from 'twenty-ui/icon';
-import { H2Title } from 'twenty-ui/typography';
+import { MainButton } from 'twenty-ui/input';
 import { Section } from 'twenty-ui/layout';
-
-const STEP_LABELS: Record<string, string> = {
-  WELCOME: 'Welcome',
-  BASIC_SETUP: 'Basic Setup',
-  SETUP_CHOICE: 'Setup Mode',
-  AGENCY: 'Agency',
-  TEAM: 'Team',
-  CRM_IMPORT: 'CRM Import',
-  RECRUITMENT: 'Recruitment',
-  HR: 'HR',
-  PAYROLL: 'Payroll',
-  DASHBOARD: 'Dashboard',
-  REVIEW: 'Review',
-};
-
-const STEP_DESCRIPTIONS: Record<string, string> = {
-  WELCOME: 'Get started with Achare',
-  BASIC_SETUP: 'Agency profile and admin account',
-  SETUP_CHOICE: 'Guided or manual setup',
-  AGENCY: 'Working days and departments',
-  TEAM: 'Invite team members',
-  CRM_IMPORT: 'Import companies and contacts',
-  RECRUITMENT: 'Candidate sources and pipeline',
-  HR: 'Leave types and shifts',
-  PAYROLL: 'Payroll configuration',
-  DASHBOARD: 'Role-based dashboards',
-  REVIEW: 'Final review and finish',
-};
+import { themeCssVariables } from 'twenty-ui/theme-constants';
+import { H2Title } from 'twenty-ui/typography';
 
 const StyledSection = styled.div`
   display: flex;
@@ -44,7 +34,7 @@ const StyledSection = styled.div`
   gap: ${themeCssVariables.spacing[4]};
 `;
 
-const StyledCard = styled.div<{ status: string }>`
+const StyledCard = styled.div`
   align-items: center;
   background: ${themeCssVariables.background.primary};
   border: 1px solid ${themeCssVariables.border.color.light};
@@ -52,21 +42,16 @@ const StyledCard = styled.div<{ status: string }>`
   display: flex;
   gap: ${themeCssVariables.spacing[4]};
   padding: ${themeCssVariables.spacing[4]};
-  transition: border-color 0.15s ease;
-
-  &:hover {
-    border-color: ${themeCssVariables.border.color.medium};
-  }
 `;
 
 const StyledStatusIcon = styled.div<{ status: string }>`
   align-items: center;
   border-radius: 50%;
   display: flex;
+  flex-shrink: 0;
   height: 32px;
   justify-content: center;
   width: 32px;
-  flex-shrink: 0;
 
   background: ${(props) =>
     props.status === 'COMPLETED'
@@ -78,9 +63,9 @@ const StyledStatusIcon = styled.div<{ status: string }>`
 
 const StyledCardContent = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: ${themeCssVariables.spacing[1]};
-  flex: 1;
 `;
 
 const StyledCardLabel = styled.div`
@@ -89,9 +74,28 @@ const StyledCardLabel = styled.div`
   font-weight: ${themeCssVariables.font.weight.medium};
 `;
 
-const StyledCardDescription = styled.div`
+const StyledCardStatus = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: ${themeCssVariables.font.size.sm};
+`;
+
+const StyledNotice = styled.div`
+  background: ${themeCssVariables.background.transparent.blue};
+  border-radius: ${themeCssVariables.border.radius.md};
   color: ${themeCssVariables.font.color.secondary};
   font-size: ${themeCssVariables.font.size.sm};
+  line-height: 1.5;
+  padding: ${themeCssVariables.spacing[3]} ${themeCssVariables.spacing[4]};
+`;
+
+const StyledWarning = styled(StyledNotice)`
+  background: ${themeCssVariables.background.transparent.orange};
+`;
+
+const StyledHint = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: ${themeCssVariables.font.size.sm};
+  line-height: 1.5;
 `;
 
 const StyledEmptyState = styled.div`
@@ -101,54 +105,175 @@ const StyledEmptyState = styled.div`
   text-align: center;
 `;
 
-const ALL_STEPS = [
-  'WELCOME',
-  'BASIC_SETUP',
-  'SETUP_CHOICE',
-  'AGENCY',
-  'TEAM',
-  'CRM_IMPORT',
-  'RECRUITMENT',
-  'HR',
-  'PAYROLL',
-  'DASHBOARD',
-  'REVIEW',
-];
+const StyledButtonRow = styled.div`
+  display: flex;
+  gap: ${themeCssVariables.spacing[3]};
+`;
 
 const getStatusIcon = (status: AchareSetupStepStatus['status']) => {
   switch (status) {
     case 'COMPLETED':
       return <IconCheck size={16} color={themeCssVariables.color.green} />;
     case 'IN_PROGRESS':
-      return (
-        <IconClock size={16} color={themeCssVariables.color.yellow} />
-      );
+      return <IconClock size={16} color={themeCssVariables.color.yellow} />;
     case 'SKIPPED':
-      return (
-        <IconCheck size={16} color={themeCssVariables.font.color.tertiary} />
-      );
+      return <IconCheck size={16} color={themeCssVariables.font.color.tertiary} />;
     default:
-      return (
-        <IconCircle size={16} color={themeCssVariables.font.color.tertiary} />
-      );
+      return <IconCircle size={16} color={themeCssVariables.font.color.tertiary} />;
   }
 };
 
+const describeStatus = (
+  status: AchareSetupStepStatus['status'],
+  labels: {
+    completed: string;
+    inProgress: string;
+    skipped: string;
+    notStarted: string;
+  },
+) => {
+  switch (status) {
+    case 'COMPLETED':
+      return labels.completed;
+    case 'IN_PROGRESS':
+      return labels.inProgress;
+    case 'SKIPPED':
+      return labels.skipped;
+    default:
+      return labels.notStarted;
+  }
+};
+
+/**
+ * Post-onboarding configuration hub.
+ *
+ * Two jobs: show honestly where the workspace's setup got to, and let an admin
+ * change the feature composition after the fact. The wizard shown here is the
+ * workspace's *generated* one, so a workspace that never selected Payroll does
+ * not see a Payroll step — the same generator the onboarding flow uses.
+ */
 export const SetupCenter = () => {
   const { t } = useLingui();
-  const { data, loading } = useAchareSetupProgressQuery();
+  const { data: progressData, loading: isProgressLoading } =
+    useAchareSetupProgressQuery();
+  const enabledFeatures = useAchareEnabledFeatures();
+  const onboardingSteps = useAchareOnboardingSteps();
+  const [setWorkspaceFeatures] = useSetWorkspaceFeaturesMutation();
+  const { enqueueErrorSnackBar, enqueueSuccessSnackBar } = useSnackBar();
 
-  const stepStatuses = data?.acheareSetupProgress?.stepStatuses ?? [];
+  const [isSaving, setIsSaving] = useState(false);
+  const [draftFeatures, setDraftFeatures] = useState<
+    AchareFeatureKey[] | null
+  >(null);
 
-  const stepsToShow = ALL_STEPS.map((step) => {
-    const found = stepStatuses.find((s) => s.step === step);
+  const savedFeatures = useMemo(
+    () => (enabledFeatures ?? []) as AchareFeatureKey[],
+    [enabledFeatures],
+  );
+
+  const currentFeatures = draftFeatures ?? savedFeatures;
+  const isConfigurationLoading =
+    enabledFeatures === undefined || onboardingSteps === undefined;
+
+  /**
+   * What will actually be stored. Dependencies are one-directional, so the
+   * server re-adds anything still required by an enabled feature — resolving
+   * here means the preview matches the saved result exactly.
+   */
+  const effectiveFeatures = useMemo(
+    () => resolveAchareFeatureDependencies(currentFeatures),
+    [currentFeatures],
+  );
+
+  /** Features the admin turned off that came back because something needs them. */
+  const reEnabledByDependencies = useMemo(
+    () => effectiveFeatures.filter((feature) => !currentFeatures.includes(feature)),
+    [effectiveFeatures, currentFeatures],
+  );
+
+  /** Features the admin did not pick that will be enabled anyway. */
+  const addedByDependencies = useMemo(
+    () => getMissingAchareFeatureDependencies(currentFeatures),
+    [currentFeatures],
+  );
+
+  const hasChanges = useMemo(() => {
+    if (draftFeatures === null) {
+      return false;
+    }
+
+    return (
+      effectiveFeatures.length !== savedFeatures.length ||
+      effectiveFeatures.some((feature) => !savedFeatures.includes(feature))
+    );
+  }, [draftFeatures, effectiveFeatures, savedFeatures]);
+
+  const handleToggleModule = useCallback((moduleKey: AchareModuleKey) => {
+    setDraftFeatures((current) => {
+      const base = current ?? savedFeatures;
+      const moduleFeatures = ACHARE_MODULES[moduleKey].features;
+      const isFullySelected = moduleFeatures.every((feature) =>
+        base.includes(feature),
+      );
+
+      return isFullySelected
+        ? base.filter((feature) => !moduleFeatures.includes(feature))
+        : [...new Set([...base, ...moduleFeatures])];
+    });
+  }, [savedFeatures]);
+
+  const handleToggleFeature = useCallback((feature: AchareFeatureKey) => {
+    setDraftFeatures((current) => {
+      const base = current ?? savedFeatures;
+
+      return base.includes(feature)
+        ? base.filter((candidate) => candidate !== feature)
+        : [...base, feature];
+    });
+  }, [savedFeatures]);
+
+  const handleDiscard = useCallback(() => {
+    setDraftFeatures(null);
+  }, []);
+
+  const handleSave = useCallback(async () => {
+    setIsSaving(true);
+    try {
+      await setWorkspaceFeatures({
+        variables: { input: { features: effectiveFeatures } },
+      });
+      setDraftFeatures(null);
+      enqueueSuccessSnackBar({ message: t`Workspace modules updated.` });
+    } catch (error) {
+      enqueueErrorSnackBar({
+        apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  }, [
+    setWorkspaceFeatures,
+    effectiveFeatures,
+    enqueueSuccessSnackBar,
+    enqueueErrorSnackBar,
+    t,
+  ]);
+
+  const stepStatuses = progressData?.acheareSetupProgress?.stepStatuses ?? [];
+
+  const stepsToShow = (onboardingSteps ?? []).map((step) => {
+    const found = stepStatuses.find((stepStatus) => stepStatus.step === step);
+
     return {
       step,
-      label: STEP_LABELS[step] ?? step,
-      description: STEP_DESCRIPTIONS[step] ?? '',
+      label: ACHARE_ONBOARDING_STEP_LABEL[step],
       status: found?.status ?? ('NOT_STARTED' as const),
     };
   });
+
+  const completedStepCount = stepsToShow.filter(
+    (step) => step.status === 'COMPLETED' || step.status === 'SKIPPED',
+  ).length;
 
   return (
     <SettingsPageLayout
@@ -159,30 +284,115 @@ export const SetupCenter = () => {
         <Section>
           <H2Title
             title={t`Setup Progress`}
-            description={t`Complete your workspace configuration.`}
+            description={t`Where this workspace's setup got to. The steps below are generated from the modules you selected.`}
           />
           <StyledSection>
-            {loading && (
+            {isProgressLoading && (
               <StyledEmptyState>{t`Loading setup progress...`}</StyledEmptyState>
             )}
-            {!loading && stepsToShow.length === 0 && (
+            {!isProgressLoading && stepsToShow.length === 0 && (
               <StyledEmptyState>
                 {t`Setup has not been started yet.`}
               </StyledEmptyState>
             )}
-            {stepsToShow.map((item) => (
-              <StyledCard key={item.step} status={item.status}>
-                <StyledStatusIcon status={item.status}>
-                  {getStatusIcon(item.status)}
-                </StyledStatusIcon>
-                <StyledCardContent>
-                  <StyledCardLabel>{item.label}</StyledCardLabel>
-                  <StyledCardDescription>
-                    {item.description}
-                  </StyledCardDescription>
-                </StyledCardContent>
-              </StyledCard>
-            ))}
+            {!isProgressLoading && stepsToShow.length > 0 && (
+              <StyledHint>
+                {t`${completedStepCount} of ${stepsToShow.length} steps done.`}
+              </StyledHint>
+            )}
+            {!isProgressLoading &&
+              stepsToShow.map((item) => (
+                <StyledCard key={item.step}>
+                  <StyledStatusIcon status={item.status}>
+                    {getStatusIcon(item.status)}
+                  </StyledStatusIcon>
+                  <StyledCardContent>
+                    <StyledCardLabel>{item.label}</StyledCardLabel>
+                    <StyledCardStatus>
+                      {describeStatus(item.status, {
+                        completed: t`Completed`,
+                        inProgress: t`In progress`,
+                        skipped: t`Skipped — the module can be enabled below`,
+                        notStarted: t`Not started`,
+                      })}
+                    </StyledCardStatus>
+                  </StyledCardContent>
+                </StyledCard>
+              ))}
+          </StyledSection>
+        </Section>
+
+        <Section>
+          <H2Title
+            title={t`Modules & Features`}
+            description={t`Turn parts of Achare on or off for this workspace.`}
+          />
+          <StyledSection>
+            {isConfigurationLoading ? (
+              <StyledEmptyState>
+                {t`Loading modules...`}
+              </StyledEmptyState>
+            ) : (
+              <>
+                <AchareFeatureCompositionEditor
+                  selectedFeatures={currentFeatures}
+                  onToggleModule={handleToggleModule}
+                  onToggleFeature={handleToggleFeature}
+                  disabled={isSaving}
+                />
+
+                {reEnabledByDependencies.length > 0 && (
+                  <StyledWarning>
+                    {reEnabledByDependencies
+                      .map(
+                        (feature) =>
+                          `${ACHARE_FEATURES[feature].label} (${t`required by`} ${getAchareDependentFeatures(
+                            feature,
+                            effectiveFeatures,
+                          )
+                            .map(
+                              (dependent) =>
+                                ACHARE_FEATURES[dependent].label,
+                            )
+                            .join(', ')})`,
+                      )
+                      .join(' · ')}
+                    {' — '}
+                    {t`these stay on until the features that need them are turned off too.`}
+                  </StyledWarning>
+                )}
+
+                {addedByDependencies.length > 0 && (
+                  <StyledNotice>
+                    {t`Also turning on`}{' '}
+                    {addedByDependencies
+                      .map((feature) => ACHARE_FEATURES[feature].label)
+                      .join(', ')}{' '}
+                    {t`— they are required by the modules you selected.`}
+                  </StyledNotice>
+                )}
+
+                <StyledHint>
+                  {t`Turning a module off only hides it — no records, files or history are ever deleted.`}
+                </StyledHint>
+
+                {hasChanges && (
+                  <StyledButtonRow>
+                    <MainButton
+                      title={t`Discard`}
+                      onClick={handleDiscard}
+                      disabled={isSaving}
+                      variant="secondary"
+                    />
+                    <MainButton
+                      title={t`Save changes`}
+                      onClick={handleSave}
+                      disabled={isSaving}
+                    />
+                  </StyledButtonRow>
+                )}
+              </>
+            )}
           </StyledSection>
         </Section>
       </SettingsPageContainer>

@@ -686,4 +686,33 @@ export const buildOpportunityStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  invoices: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'invoices',
+      label: i18nLabel(
+        msg({ message: `Invoices`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Invoices raised for this opportunity`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconFileInvoice',
+      isNullable: true,
+      targetObjectName: 'invoice',
+      targetFieldName: 'deal',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

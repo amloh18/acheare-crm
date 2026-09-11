@@ -11,11 +11,13 @@ import { AchareOnboardingService } from 'src/engine/core-modules/onboarding/serv
 import { OnboardingStatus } from 'src/engine/core-modules/onboarding/enums/onboarding-status.enum';
 import { UserVarsService } from 'src/engine/core-modules/user/user-vars/services/user-vars.service';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
+import { WorkspaceFeatureService } from 'src/engine/core-modules/workspace-feature/services/workspace-feature.service';
 
 describe('AchareOnboardingService', () => {
   let service: AchareOnboardingService;
   let userVarsService: jest.Mocked<UserVarsService<any>>;
   let workspaceRepository: jest.Mocked<Repository<WorkspaceEntity>>;
+  let workspaceFeatureService: jest.Mocked<WorkspaceFeatureService>;
 
   const mockUserId = 'test-user-id';
   const mockWorkspaceId = 'test-workspace-id';
@@ -34,12 +36,20 @@ describe('AchareOnboardingService', () => {
       update: jest.fn(),
     };
 
+    const mockWorkspaceFeatureService = {
+      getOnboardingSteps: jest.fn(),
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AchareOnboardingService,
         {
           provide: UserVarsService,
           useValue: mockUserVarsService,
+        },
+        {
+          provide: WorkspaceFeatureService,
+          useValue: mockWorkspaceFeatureService,
         },
         {
           provide: getRepositoryToken(WorkspaceEntity),
@@ -51,6 +61,25 @@ describe('AchareOnboardingService', () => {
     service = module.get<AchareOnboardingService>(AchareOnboardingService);
     userVarsService = module.get(UserVarsService);
     workspaceRepository = module.get(getRepositoryToken(WorkspaceEntity));
+    workspaceFeatureService = module.get(WorkspaceFeatureService);
+
+    // Default: a workspace with every module, i.e. the full wizard.
+    workspaceFeatureService.getOnboardingSteps.mockResolvedValue([
+      'WELCOME',
+      'BASIC_SETUP',
+      'SETUP_CHOICE',
+      'FEATURE_SELECTION',
+      'AGENCY',
+      'TEAM',
+      'CRM_IMPORT',
+      'RECRUITMENT',
+      'HR',
+      'PAYROLL',
+      'FINANCE',
+      'DOCUMENTS',
+      'DASHBOARD',
+      'REVIEW',
+    ]);
   });
 
   it('should be defined', () => {
@@ -109,12 +138,15 @@ describe('AchareOnboardingService', () => {
         WELCOME: OnboardingStatus.ACHARE_WELCOME,
         BASIC_SETUP: OnboardingStatus.ACHARE_BASIC_SETUP,
         SETUP_CHOICE: OnboardingStatus.ACHARE_SETUP_CHOICE,
+        FEATURE_SELECTION: OnboardingStatus.ACHARE_FEATURE_SELECTION,
         AGENCY: OnboardingStatus.ACHARE_AGENCY,
         TEAM: OnboardingStatus.ACHARE_TEAM,
         CRM_IMPORT: OnboardingStatus.ACHARE_CRM_IMPORT,
         RECRUITMENT: OnboardingStatus.ACHARE_RECRUITMENT,
         HR: OnboardingStatus.ACHARE_HR,
         PAYROLL: OnboardingStatus.ACHARE_PAYROLL,
+        FINANCE: OnboardingStatus.ACHARE_FINANCE,
+        DOCUMENTS: OnboardingStatus.ACHARE_DOCUMENTS,
         DASHBOARD: OnboardingStatus.ACHARE_DASHBOARD,
         REVIEW: OnboardingStatus.ACHARE_REVIEW,
       };
@@ -129,6 +161,92 @@ describe('AchareOnboardingService', () => {
 
         expect(result).toBe(expectedStatus);
       }
+    });
+  });
+
+  describe('getStepOrder', () => {
+    it('should delegate to the workspace feature configuration', async () => {
+      const stepOrder = await service.getStepOrder(mockWorkspaceId);
+
+      expect(workspaceFeatureService.getOnboardingSteps).toHaveBeenCalledWith(
+        mockWorkspaceId,
+      );
+      expect(stepOrder).toContain('FEATURE_SELECTION');
+    });
+  });
+
+  describe('getNextStep', () => {
+    const mockProgress = (overrides: Record<string, unknown>) => {
+      userVarsService.getAll.mockResolvedValue(
+        new Map<string, any>([
+          [AchareSetupStepKeys.ACHARE_SETUP_STATUS, 'IN_PROGRESS'],
+          ...Object.entries(overrides),
+        ]),
+      );
+    };
+
+    it('should return the next step in the generated order', async () => {
+      mockProgress({
+        [AchareSetupStepKeys.ACHARE_SETUP_CURRENT_STEP]: 'FEATURE_SELECTION',
+      });
+
+      const nextStep = await service.getNextStep({
+        userId: mockUserId,
+        workspaceId: mockWorkspaceId,
+      });
+
+      expect(nextStep).toBe('AGENCY');
+    });
+
+    it('should skip a module step the workspace does not have', async () => {
+      workspaceFeatureService.getOnboardingSteps.mockResolvedValue([
+        'WELCOME',
+        'BASIC_SETUP',
+        'SETUP_CHOICE',
+        'FEATURE_SELECTION',
+        'AGENCY',
+        'TEAM',
+        'REVIEW',
+      ]);
+      mockProgress({
+        [AchareSetupStepKeys.ACHARE_SETUP_CURRENT_STEP]: 'TEAM',
+      });
+
+      const nextStep = await service.getNextStep({
+        userId: mockUserId,
+        workspaceId: mockWorkspaceId,
+      });
+
+      expect(nextStep).toBe('REVIEW');
+    });
+
+    it('should return null when the wizard is completed', async () => {
+      userVarsService.getAll.mockResolvedValue(
+        new Map<string, any>([
+          [AchareSetupStepKeys.ACHARE_SETUP_STATUS, 'COMPLETED'],
+        ]),
+      );
+
+      const nextStep = await service.getNextStep({
+        userId: mockUserId,
+        workspaceId: mockWorkspaceId,
+      });
+
+      expect(nextStep).toBeNull();
+    });
+
+    it('should jump to REVIEW for module steps in MANUAL mode', async () => {
+      mockProgress({
+        [AchareSetupStepKeys.ACHARE_SETUP_MODE]: 'MANUAL',
+        [AchareSetupStepKeys.ACHARE_SETUP_CURRENT_STEP]: 'AGENCY',
+      });
+
+      const nextStep = await service.getNextStep({
+        userId: mockUserId,
+        workspaceId: mockWorkspaceId,
+      });
+
+      expect(nextStep).toBe('REVIEW');
     });
   });
 
@@ -247,6 +365,18 @@ describe('AchareOnboardingService', () => {
           value: true,
         }),
       );
+    });
+
+    it('should reject a step that cannot be skipped', async () => {
+      await expect(
+        service.skipStep({
+          userId: mockUserId,
+          workspaceId: mockWorkspaceId,
+          step: 'BASIC_SETUP',
+        }),
+      ).rejects.toThrow('Step BASIC_SETUP cannot be skipped');
+
+      expect(userVarsService.set).not.toHaveBeenCalled();
     });
   });
 

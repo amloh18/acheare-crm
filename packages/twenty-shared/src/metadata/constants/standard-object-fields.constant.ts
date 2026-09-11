@@ -694,6 +694,16 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
       }),
     },
+    invoices: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+      }),
+    },
   },
   dashboard: {
     ...buildStandardObjectSystemFields(
@@ -1190,6 +1200,16 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
       }),
     },
+    invoices: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.opportunity,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
+      }),
+    },
   },
   person: {
     ...buildStandardObjectSystemFields(
@@ -1292,6 +1312,9 @@ export const STANDARD_OBJECT_FIELDS = {
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
       }),
+    },
+    employees: {
+      universalIdentifier: '9a53d580-4e28-4861-aceb-9ffb6cd71d44',
     },
   },
   recordShare: {
@@ -1706,6 +1729,9 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
       }),
     },
+    approvedPayrollAdjustments: {
+      universalIdentifier: '1c9eb8e8-013e-4f3f-9899-7d3ad188c391',
+    },
   },
   // Achare recruitment domain (stable — never mutate a universal identifier)
   requirement: {
@@ -1823,6 +1849,16 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    invoices: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.requirement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.invoice,
       }),
     },
   },
@@ -3042,6 +3078,9 @@ export const STANDARD_OBJECT_FIELDS = {
     },
     payslips: {
       universalIdentifier: 'ee4ad5e4-99fa-4741-8ade-6d29a74165cb',
+    },
+    payrollAdjustments: {
+      universalIdentifier: '5705e51a-87fd-4e2f-acce-7dce85757a41',
     },
     taskTargets: {
       universalIdentifier: getSystemRelationFieldUniversalIdentifier({

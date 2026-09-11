@@ -9,6 +9,7 @@ import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-
 import { type BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
 import { type CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
 import { type CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
+import { type PayrollAdjustmentWorkspaceEntity } from 'src/modules/hr/standard-objects/payrollAdjustment.workspace-entity';
 import { type MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
@@ -87,6 +88,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
   submittedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
   hrOwnedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
   ownedInterviews: Relation<InterviewWorkspaceEntity[]>;
+  approvedPayrollAdjustments: Relation<PayrollAdjustmentWorkspaceEntity[]>;
   searchVector: string;
   numberFormat: string;
 }

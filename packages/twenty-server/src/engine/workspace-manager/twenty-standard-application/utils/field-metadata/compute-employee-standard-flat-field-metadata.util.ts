@@ -309,6 +309,37 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  person: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'person',
+      label: i18nLabel(
+        msg({ message: `Person`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Person record backing this employee`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUser',
+      isNullable: false,
+      targetObjectName: 'person',
+      targetFieldName: 'employees',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.CASCADE,
+        joinColumnName: 'personId',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   department: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

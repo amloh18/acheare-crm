@@ -8,6 +8,7 @@ export enum OnboardingExceptionCode {
   NO_PREVIOUS_ONBOARDING_STEP = 'NO_PREVIOUS_ONBOARDING_STEP',
   MISSING_TRANSACTION_QUERY_RUNNER = 'MISSING_TRANSACTION_QUERY_RUNNER',
   INSTALL_APPS_JOB_ENQUEUE_FAILED = 'INSTALL_APPS_JOB_ENQUEUE_FAILED',
+  STEP_NOT_SKIPPABLE = 'STEP_NOT_SKIPPABLE',
 }
 
 const getOnboardingExceptionUserFriendlyMessage = (
@@ -20,6 +21,8 @@ const getOnboardingExceptionUserFriendlyMessage = (
       return msg`Something went wrong while saving your onboarding progress.`;
     case OnboardingExceptionCode.INSTALL_APPS_JOB_ENQUEUE_FAILED:
       return msg`Something went wrong while starting the app installation. Please try again.`;
+    case OnboardingExceptionCode.STEP_NOT_SKIPPABLE:
+      return msg`This onboarding step cannot be skipped.`;
     default:
       assertUnreachable(code);
   }

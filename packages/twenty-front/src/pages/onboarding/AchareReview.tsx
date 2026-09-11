@@ -6,12 +6,19 @@ import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboard
 import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
 import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useFinishAchareOnboardingMutation } from '@/onboarding/hooks/useFinishAchareOnboardingMutation';
+import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { IconCheck } from '@tabler/icons-react';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
+import { isDefined } from 'twenty-shared/utils';
+import {
+  ACHARE_MODULES,
+  type AchareFeatureKey,
+  getEnabledAchareModules,
+} from 'twenty-shared/workspace';
 import { MainButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
@@ -60,15 +67,20 @@ export const AchareReview = () => {
   const [finishOnboarding] = useFinishAchareOnboardingMutation();
   const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
+  const enabledFeatures = useAchareEnabledFeatures();
+
+  // The review lists what this workspace actually composed, not a fixed list of
+  // everything Achare can do.
+  const enabledModules = isDefined(enabledFeatures)
+    ? getEnabledAchareModules(enabledFeatures as AchareFeatureKey[])
+    : [];
 
   const summaryItems = [
     { label: t`Agency`, value: t`Configured` },
-    { label: t`Team`, value: t`Members invited` },
-    { label: t`CRM`, value: t`Ready` },
-    { label: t`Recruitment`, value: t`Pipeline configured` },
-    { label: t`HR`, value: t`Leave types & shifts` },
-    { label: t`Payroll`, value: t`Components configured` },
-    { label: t`Dashboard`, value: t`Provisioned` },
+    ...enabledModules.map((moduleKey) => ({
+      label: ACHARE_MODULES[moduleKey].label,
+      value: t`Ready`,
+    })),
   ];
 
   const handleFinish = useCallback(async () => {

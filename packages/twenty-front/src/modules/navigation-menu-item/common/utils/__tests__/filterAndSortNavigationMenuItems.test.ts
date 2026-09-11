@@ -1,4 +1,5 @@
 import { NavigationMenuItemType } from 'twenty-shared/types';
+import { AchareFeatureKey } from 'twenty-shared/workspace';
 
 import { filterAndSortNavigationMenuItems } from '@/navigation-menu-item/common/utils/filterAndSortNavigationMenuItems';
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
@@ -290,5 +291,73 @@ describe('filterAndSortNavigationMenuItems', () => {
     );
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('folder-1');
+  });
+
+  describe('Achare feature filtering', () => {
+    const objectItem = {
+      id: 'obj-1',
+      type: NavigationMenuItemType.OBJECT,
+      targetObjectMetadataId: 'metadata-id',
+      position: 1,
+    } as NavigationMenuItem;
+
+    it('should hide object items whose Achare feature is disabled', () => {
+      const result = filterAndSortNavigationMenuItems(
+        [objectItem],
+        [],
+        [mockObjectMetadataItem],
+        [],
+      );
+
+      expect(result).toEqual([]);
+    });
+
+    it('should keep object items whose Achare feature is enabled', () => {
+      const result = filterAndSortNavigationMenuItems(
+        [objectItem],
+        [],
+        [mockObjectMetadataItem],
+        [AchareFeatureKey.CONTACTS],
+      );
+
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe('obj-1');
+    });
+
+    it('should keep object items that are not gated by any Achare feature', () => {
+      const ungatedObjectMetadataItem = {
+        ...mockObjectMetadataItem,
+        id: 'ungated-metadata-id',
+        nameSingular: 'someUngatedObject',
+      } as EnrichedObjectMetadataItem;
+
+      const result = filterAndSortNavigationMenuItems(
+        [
+          {
+            id: 'ungated-obj',
+            type: NavigationMenuItemType.OBJECT,
+            targetObjectMetadataId: 'ungated-metadata-id',
+            position: 1,
+          } as NavigationMenuItem,
+        ],
+        [],
+        [ungatedObjectMetadataItem],
+        [],
+      );
+
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe('ungated-obj');
+    });
+
+    it('should not apply feature filtering when enabled features are unknown', () => {
+      const result = filterAndSortNavigationMenuItems(
+        [objectItem],
+        [],
+        [mockObjectMetadataItem],
+        undefined,
+      );
+
+      expect(result).toHaveLength(1);
+    });
   });
 });

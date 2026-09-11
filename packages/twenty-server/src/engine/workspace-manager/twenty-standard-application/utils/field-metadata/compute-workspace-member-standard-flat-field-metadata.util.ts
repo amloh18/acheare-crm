@@ -1166,4 +1166,34 @@ export const buildWorkspaceMemberStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  approvedPayrollAdjustments: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'approvedPayrollAdjustments',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Approved adjustments`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Payroll adjustments approved by this workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCheck',
+      isNullable: true,
+      targetObjectName: 'payrollAdjustment',
+      targetFieldName: 'approvedBy',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

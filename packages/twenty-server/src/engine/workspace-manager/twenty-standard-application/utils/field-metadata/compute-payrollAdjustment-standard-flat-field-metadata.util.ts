@@ -241,6 +241,68 @@ export const buildPayrollAdjustmentStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  payrollPeriod: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'payrollPeriod',
+      label: i18nLabel(
+        msg({ message: `Payroll Period`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Payroll Period`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconCalendarMoney',
+      isNullable: false,
+      targetObjectName: 'payrollPeriod',
+      targetFieldName: 'payrollAdjustments',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.CASCADE,
+        joinColumnName: 'payrollPeriodId',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  approvedBy: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'approvedBy',
+      label: i18nLabel(
+        msg({ message: `Approved by`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Workspace member who approved this adjustment`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCheck',
+      isNullable: true,
+      targetObjectName: 'workspaceMember',
+      targetFieldName: 'approvedPayrollAdjustments',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'approvedById',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 
   adjustmentType: createStandardFieldFlatMetadata({
     objectName,

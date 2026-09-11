@@ -439,6 +439,99 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  company: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'company',
+      label: i18nLabel(
+        msg({ message: `Company`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Client company for this invoice`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconBuildingSkyscraper',
+      isNullable: true,
+      targetObjectName: 'company',
+      targetFieldName: 'invoices',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'companyId',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  deal: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'deal',
+      label: i18nLabel(
+        msg({ message: `Deal`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Opportunity this invoice is linked to`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTargetArrow',
+      isNullable: true,
+      targetObjectName: 'opportunity',
+      targetFieldName: 'invoices',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'dealId',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  requirement: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'requirement',
+      label: i18nLabel(
+        msg({ message: `Requirement`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Requirement this invoice is linked to`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconClipboardList',
+      isNullable: true,
+      targetObjectName: 'requirement',
+      targetFieldName: 'invoices',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'requirementId',
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   payments: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

@@ -2,16 +2,48 @@ import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/Enriche
 import { type View } from '@/views/types/View';
 import { NavigationMenuItemType } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
+import { isAchareStandardObjectEnabled } from 'twenty-shared/workspace';
 import { type NavigationMenuItem } from '~/generated-metadata/graphql';
+
+type NavigationObjectMetadataItem = Pick<
+  EnrichedObjectMetadataItem,
+  'id' | 'isActive' | 'nameSingular'
+>;
 
 export const filterAndSortNavigationMenuItems = (
   navigationMenuItems: NavigationMenuItem[],
   views: Pick<View, 'id' | 'objectMetadataId' | 'key'>[],
-  objectMetadataItems: Pick<EnrichedObjectMetadataItem, 'id' | 'isActive'>[],
+  objectMetadataItems: NavigationObjectMetadataItem[],
+  /**
+   * Enabled Achare product features. When provided, navigation items pointing
+   * at an object gated by a disabled feature are hidden. When `undefined` (the
+   * configuration is still loading, or this is not an Achare workspace) no
+   * feature filtering is applied.
+   */
+  enabledAchareFeatures?: string[],
 ): NavigationMenuItem[] => {
   const activeObjectMetadataItems = objectMetadataItems.filter(
     (meta) => meta.isActive,
   );
+
+  const isObjectMetadataAllowed = (objectMetadataId: string): boolean => {
+    if (!isDefined(enabledAchareFeatures)) {
+      return true;
+    }
+
+    const objectMetadataItem = activeObjectMetadataItems.find(
+      (meta) => meta.id === objectMetadataId,
+    );
+
+    if (!isDefined(objectMetadataItem)) {
+      return true;
+    }
+
+    return isAchareStandardObjectEnabled(
+      objectMetadataItem.nameSingular,
+      enabledAchareFeatures,
+    );
+  };
 
   return navigationMenuItems
     .filter((item) => {
@@ -29,7 +61,8 @@ export const filterAndSortNavigationMenuItems = (
           isDefined(item.targetObjectMetadataId) &&
           activeObjectMetadataItems.some(
             (meta) => meta.id === item.targetObjectMetadataId,
-          )
+          ) &&
+          isObjectMetadataAllowed(item.targetObjectMetadataId)
         );
       }
       if (item.type === NavigationMenuItemType.VIEW) {
@@ -41,7 +74,8 @@ export const filterAndSortNavigationMenuItems = (
           isDefined(view) &&
           activeObjectMetadataItems.some(
             (meta) => meta.id === view.objectMetadataId,
-          )
+          ) &&
+          isObjectMetadataAllowed(view.objectMetadataId)
         );
       }
       if (item.type === NavigationMenuItemType.RECORD) {
@@ -51,7 +85,8 @@ export const filterAndSortNavigationMenuItems = (
           isDefined(item.targetRecordIdentifier) &&
           activeObjectMetadataItems.some(
             (meta) => meta.id === item.targetObjectMetadataId,
-          )
+          ) &&
+          isObjectMetadataAllowed(item.targetObjectMetadataId)
         );
       }
       return false;

@@ -20,7 +20,12 @@ import { isNonEmptyString } from '@sniptt/guards';
 import { matchPath, useLocation } from 'react-router-dom';
 import { AppPath, SettingsPath } from 'twenty-shared/types';
 import { isDefined, getAppPath } from 'twenty-shared/utils';
-import { WorkspaceActivationStatus } from 'twenty-shared/workspace';
+import {
+  ACHARE_ONBOARDING_STATUS_TO_STEP,
+  ACHARE_ONBOARDING_STEP_APP_PATH,
+  type AchareOnboardingStepKey,
+  WorkspaceActivationStatus,
+} from 'twenty-shared/workspace';
 import {
   FindOnePageLayoutTypeDocument,
   OnboardingStatus,
@@ -172,81 +177,23 @@ export const usePageChangeEffectNavigateLocation = () => {
     return AppPath.BookCall;
   }
 
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_WELCOME &&
-    !isMatchingLocation(location, AppPath.AchareWelcome)
-  ) {
-    return AppPath.AchareWelcome;
-  }
+  // Every Achare onboarding step maps one-to-one to its route, so the redirect
+  // rule is derived from the shared step vocabulary instead of being
+  // hand-maintained per step (which is how new steps silently lost their
+  // redirect).
+  const achareOnboardingStep = isDefined(onboardingStatus)
+    ? (ACHARE_ONBOARDING_STATUS_TO_STEP[onboardingStatus] as
+        | AchareOnboardingStepKey
+        | undefined)
+    : undefined;
 
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_BASIC_SETUP &&
-    !isMatchingLocation(location, AppPath.AchareBasicSetup)
-  ) {
-    return AppPath.AchareBasicSetup;
-  }
+  if (isDefined(achareOnboardingStep)) {
+    const achareOnboardingAppPath =
+      ACHARE_ONBOARDING_STEP_APP_PATH[achareOnboardingStep];
 
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_SETUP_CHOICE &&
-    !isMatchingLocation(location, AppPath.AchareSetupChoice)
-  ) {
-    return AppPath.AchareSetupChoice;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_AGENCY &&
-    !isMatchingLocation(location, AppPath.AchareAgency)
-  ) {
-    return AppPath.AchareAgency;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_TEAM &&
-    !isMatchingLocation(location, AppPath.AchareTeam)
-  ) {
-    return AppPath.AchareTeam;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_CRM_IMPORT &&
-    !isMatchingLocation(location, AppPath.AchareCrmImport)
-  ) {
-    return AppPath.AchareCrmImport;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_RECRUITMENT &&
-    !isMatchingLocation(location, AppPath.AchareRecruitment)
-  ) {
-    return AppPath.AchareRecruitment;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_HR &&
-    !isMatchingLocation(location, AppPath.AchareHr)
-  ) {
-    return AppPath.AchareHr;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_PAYROLL &&
-    !isMatchingLocation(location, AppPath.AcharePayroll)
-  ) {
-    return AppPath.AcharePayroll;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_DASHBOARD &&
-    !isMatchingLocation(location, AppPath.AchareDashboard)
-  ) {
-    return AppPath.AchareDashboard;
-  }
-
-  if (
-    onboardingStatus === OnboardingStatus.ACHARE_REVIEW &&
-    !isMatchingLocation(location, AppPath.AchareReview)
-  ) {
-    return AppPath.AchareReview;
+    if (!isMatchingLocation(location, achareOnboardingAppPath)) {
+      return achareOnboardingAppPath;
+    }
   }
 
   if (isBillingEnabled && onboardingStatus === OnboardingStatus.COMPLETED) {

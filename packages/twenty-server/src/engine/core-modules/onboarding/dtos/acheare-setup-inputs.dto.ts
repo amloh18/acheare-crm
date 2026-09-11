@@ -186,6 +186,26 @@ export class AcharePayrollSetupInputDTO {
   skipSetup?: boolean;
 }
 
+@InputType('AchareFeatureSelectionInput')
+export class AchareFeatureSelectionInputDTO {
+  /**
+   * The Achare feature keys the workspace should have. Dependencies are
+   * resolved server-side, so callers may send a partial selection.
+   */
+  @Field(() => [String])
+  features: string[];
+
+  /** Optional preset the selection came from, kept for reporting. */
+  @Field(() => String, { nullable: true })
+  presetKey?: string;
+}
+
+@InputType('AchareModuleSetupInput')
+export class AchareModuleSetupInputDTO {
+  @Field(() => Boolean, { nullable: true })
+  skipSetup?: boolean;
+}
+
 @InputType('AchareDashboardSetupInput')
 export class AchareDashboardSetupInputDTO {
   @Field(() => Boolean, { nullable: true })

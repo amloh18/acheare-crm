@@ -7,11 +7,14 @@ import { AggregateOperations } from '@/object-record/record-table/constants/Aggr
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { renderHook, waitFor } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { createElement, useEffect, type ReactNode } from 'react';
 import { AppPath, SettingsPath } from 'twenty-shared/types';
-import { getSettingsPath } from 'twenty-shared/utils';
+import { getSettingsPath, isDefined } from 'twenty-shared/utils';
+import { AchareFeatureKey } from 'twenty-shared/workspace';
 import {
+  GetWorkspaceFeatureConfigurationDocument,
   type NavigationMenuItem,
   NavigationMenuItemType,
   ViewType,
@@ -29,8 +32,33 @@ jest.mock('@/ui/utilities/responsive/hooks/useIsMobile', () => ({
   useIsMobile: () => mockIsMobile,
 }));
 
+// Apollo is needed because the navigation items feeding the home page are
+// feature-filtered, and that hook reads the workspace feature configuration.
+// With no mock registered the configuration stays unknown and no feature
+// filtering is applied — the behaviour most of these tests assert.
+let mockEnabledFeatures: string[] | undefined = undefined;
+
 const Wrapper = ({ children }: { children: ReactNode }) =>
-  createElement(JotaiProvider, { store: jotaiStore }, children);
+  createElement(
+    MockedProvider,
+    {
+      mocks: isDefined(mockEnabledFeatures)
+        ? [
+            {
+              request: { query: GetWorkspaceFeatureConfigurationDocument },
+              result: {
+                data: {
+                  workspaceFeatureConfiguration: {
+                    enabledFeatures: mockEnabledFeatures,
+                  },
+                },
+              },
+            },
+          ]
+        : [],
+    },
+    createElement(JotaiProvider, { store: jotaiStore }, children),
+  );
 
 const buildObjectNavigationMenuItem = (
   objectNameSingular: string,
@@ -104,6 +132,7 @@ const renderHooks = ({
   objectMetadataItems = getTestEnrichedObjectMetadataItemsMock(),
   navigationMenuItems = [],
   withNavigationMenuItemsLoaded = true,
+  enabledFeatures,
 }: {
   withCurrentUser: boolean;
   withExistingView: boolean;
@@ -111,7 +140,10 @@ const renderHooks = ({
   objectMetadataItems?: EnrichedObjectMetadataItem[];
   navigationMenuItems?: NavigationMenuItem[];
   withNavigationMenuItemsLoaded?: boolean;
+  enabledFeatures?: string[];
 }) => {
+  mockEnabledFeatures = enabledFeatures;
+
   if (withObjectMetadataLoaded) {
     setTestObjectMetadataItemsInMetadataStore(jotaiStore, objectMetadataItems);
   } else {
@@ -183,6 +215,7 @@ const renderHooks = ({
 describe('useDefaultHomePagePath', () => {
   afterEach(() => {
     mockIsMobile = false;
+    mockEnabledFeatures = undefined;
   });
 
   it('should return proper path when no currentUser', async () => {
@@ -298,6 +331,38 @@ describe('useDefaultHomePagePath', () => {
       expect(result.current.defaultHomePagePath).toEqual(
         getSettingsPath(SettingsPath.ProfilePage),
       );
+    });
+  });
+  it('should not fall back to an object whose Achare feature is disabled', async () => {
+    // `companies` is the alphabetically-first object and the usual fallback;
+    // with the Companies feature off the resolver must pick another object.
+    const { result } = renderHooks({
+      withCurrentUser: true,
+      withExistingView: false,
+      navigationMenuItems: [],
+      enabledFeatures: [AchareFeatureKey.CONTACTS],
+    });
+
+    await waitFor(() => {
+      expect(result.current.defaultHomePagePath).not.toEqual(
+        '/objects/companies',
+      );
+      expect(result.current.defaultHomePagePath).toContain('/objects/');
+    });
+  });
+  it('should keep the usual fallback when the gating feature is enabled', async () => {
+    const { result } = renderHooks({
+      withCurrentUser: true,
+      withExistingView: false,
+      navigationMenuItems: [],
+      enabledFeatures: [
+        AchareFeatureKey.COMPANIES,
+        AchareFeatureKey.CONTACTS,
+      ],
+    });
+
+    await waitFor(() => {
+      expect(result.current.defaultHomePagePath).toEqual('/objects/companies');
     });
   });
   // Regression: during the post-login transition window object metadata may

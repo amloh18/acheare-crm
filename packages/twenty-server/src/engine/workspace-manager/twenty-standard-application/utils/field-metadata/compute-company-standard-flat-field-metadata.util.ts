@@ -628,6 +628,35 @@ export const buildCompanyStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  invoices: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'invoices',
+      label: i18nLabel(
+        msg({ message: `Invoices`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Invoices for this company`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconFileInvoice',
+      isNullable: true,
+      targetObjectName: 'invoice',
+      targetFieldName: 'company',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   attachments: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

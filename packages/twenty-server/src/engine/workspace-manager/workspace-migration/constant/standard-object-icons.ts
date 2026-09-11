@@ -39,4 +39,45 @@ export const STANDARD_OBJECT_ICONS = {
   workflowVersion: 'IconVersions',
   workflowAutomatedTrigger: 'IconSettingsAutomation',
   workspaceMember: 'IconUserCircle',
+
+  // Achare Recruitment
+  requirement: 'IconClipboardList',
+  candidate: 'IconUserSearch',
+  candidateSubmission: 'IconSend',
+  interview: 'IconCalendarEvent',
+
+  // Achare HR / Organization
+  employee: 'IconUserCog',
+  department: 'IconBuilding',
+  team: 'IconUsersGroup',
+  designation: 'IconBadge',
+  location: 'IconMapPin',
+
+  // Achare Attendance / Scheduling
+  shift: 'IconClock',
+  rosterAssignment: 'IconCalendarRepeat',
+  attendanceEvent: 'IconLogin',
+  attendanceDay: 'IconCalendarDay',
+  attendanceCorrection: 'IconEditCircle',
+
+  // Achare Leave
+  leaveType: 'IconCalendarOff',
+  leaveRequest: 'IconCalendarMinus',
+  leaveBalance: 'IconScale',
+
+  // Achare Payroll
+  salaryStructure: 'IconCoin',
+  salaryComponent: 'IconCoins',
+  payrollPeriod: 'IconCalendarDollar',
+  payslip: 'IconFileText',
+  payslipLine: 'IconList',
+  payrollAdjustment: 'IconAdjustments',
+
+  // Achare Finance
+  invoice: 'IconReceipt',
+  payment: 'IconCreditCard',
+
+  // Achare Onboarding
+  onboardingItem: 'IconClipboardCheck',
+
 } as const;

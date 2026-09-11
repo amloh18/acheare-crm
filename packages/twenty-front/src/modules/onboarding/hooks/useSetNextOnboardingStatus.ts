@@ -1,4 +1,11 @@
 import { isDefined } from 'twenty-shared/utils';
+import {
+  ACHARE_MODULE_ONBOARDING_STEPS,
+  ACHARE_ONBOARDING_LEADING_STEPS,
+  ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
+  ACHARE_ONBOARDING_TRAILING_STEPS,
+  type AchareOnboardingStepKey,
+} from 'twenty-shared/workspace';
 
 import {
   type CurrentUser,
@@ -20,16 +27,39 @@ import { getIsPlanRequired } from '@/onboarding/utils/getIsPlanRequired';
 import { getNextPreviousOnboardingStatus } from '@/onboarding/utils/getNextPreviousOnboardingStatus';
 import { type OnboardingStepHistoryEffect } from '@/onboarding/types/OnboardingStepHistoryEffect';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
+import { useAchareOnboardingSteps } from '@/workspace-feature/hooks/useAchareOnboardingSteps';
 
 import { useStore } from 'jotai';
 import { useCallback } from 'react';
 import { OnboardingStatus } from '~/generated-metadata/graphql';
+
+/**
+ * Fallback used while the workspace's feature configuration is still loading.
+ *
+ * A workspace with no stored configuration is served exactly this list by the
+ * server (the default enables every feature), so the fallback and the server
+ * always agree.
+ */
+const DEFAULT_ACHARE_ONBOARDING_STEPS: AchareOnboardingStepKey[] = [
+  ...ACHARE_ONBOARDING_LEADING_STEPS,
+  ...ACHARE_MODULE_ONBOARDING_STEPS,
+  ...ACHARE_ONBOARDING_TRAILING_STEPS,
+];
+
+const getAchareOnboardingStatuses = (
+  steps: AchareOnboardingStepKey[] | undefined,
+): string[] =>
+  (steps ?? DEFAULT_ACHARE_ONBOARDING_STEPS).map(
+    (step) => ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS[step],
+  );
 
 type GetNextOnboardingStatusArgs = {
   currentUser: CurrentUser | null;
   currentWorkspace: CurrentWorkspace | null;
   isBillingEnabled: boolean;
   isBookCallRequired: boolean;
+  /** This workspace's generated wizard, derived from its enabled features. */
+  achareOnboardingSteps?: AchareOnboardingStepKey[];
 };
 
 const getNextOnboardingStatus = ({
@@ -37,6 +67,7 @@ const getNextOnboardingStatus = ({
   currentWorkspace,
   isBillingEnabled,
   isBookCallRequired,
+  achareOnboardingSteps,
 }: GetNextOnboardingStatusArgs) => {
   const isPlanRequired = getIsPlanRequired({
     isBillingEnabled,
@@ -52,77 +83,53 @@ const getNextOnboardingStatus = ({
       ? OnboardingStatus.BOOK_CALL
       : statusAfterBookCall;
 
-  if (currentUser?.onboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
+  const currentOnboardingStatus = currentUser?.onboardingStatus;
+
+  // Workspace activation hands over to the Achare wizard.
+  if (currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
     return OnboardingStatus.ACHARE_WELCOME;
   }
 
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_WELCOME) {
-    return OnboardingStatus.ACHARE_BASIC_SETUP;
+  // Achare onboarding is generated per workspace, so "the next step" is a
+  // lookup in *this* workspace's list rather than a fixed chain. Enabling or
+  // disabling a module changes the wizard without changing this hook.
+  const achareOnboardingStatuses = getAchareOnboardingStatuses(
+    achareOnboardingSteps,
+  );
+  const currentAchareStepIndex = achareOnboardingStatuses.indexOf(
+    currentOnboardingStatus ?? '',
+  );
+
+  if (currentAchareStepIndex !== -1) {
+    const nextAchareStatus =
+      achareOnboardingStatuses[currentAchareStepIndex + 1];
+
+    return (nextAchareStatus ?? OnboardingStatus.COMPLETED) as OnboardingStatus;
   }
 
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_BASIC_SETUP) {
-    return OnboardingStatus.ACHARE_SETUP_CHOICE;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_SETUP_CHOICE) {
-    return OnboardingStatus.ACHARE_AGENCY;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_AGENCY) {
-    return OnboardingStatus.ACHARE_TEAM;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_TEAM) {
-    return OnboardingStatus.ACHARE_CRM_IMPORT;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_CRM_IMPORT) {
-    return OnboardingStatus.ACHARE_RECRUITMENT;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_RECRUITMENT) {
-    return OnboardingStatus.ACHARE_HR;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_HR) {
-    return OnboardingStatus.ACHARE_PAYROLL;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_PAYROLL) {
-    return OnboardingStatus.ACHARE_DASHBOARD;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_DASHBOARD) {
-    return OnboardingStatus.ACHARE_REVIEW;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.ACHARE_REVIEW) {
-    return OnboardingStatus.COMPLETED;
-  }
-
-  if (currentUser?.onboardingStatus === OnboardingStatus.SYNC_EMAIL) {
+  if (currentOnboardingStatus === OnboardingStatus.SYNC_EMAIL) {
     if (currentWorkspace?.workspaceMembersCount === 1) {
       return OnboardingStatus.APPS_INSTALLATION;
     }
     return OnboardingStatus.PROFILE_CREATION;
   }
 
-  if (currentUser?.onboardingStatus === OnboardingStatus.APPS_INSTALLATION) {
+  if (currentOnboardingStatus === OnboardingStatus.APPS_INSTALLATION) {
     return OnboardingStatus.PROFILE_CREATION;
   }
 
-  if (currentUser?.onboardingStatus === OnboardingStatus.PROFILE_CREATION) {
+  if (currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION) {
     if (currentWorkspace?.workspaceMembersCount === 1) {
       return OnboardingStatus.INVITE_TEAM;
     }
     return statusAfterInviteTeam;
   }
-  if (currentUser?.onboardingStatus === OnboardingStatus.INVITE_TEAM) {
+  if (currentOnboardingStatus === OnboardingStatus.INVITE_TEAM) {
     return statusAfterInviteTeam;
   }
   if (
-    currentUser?.onboardingStatus === OnboardingStatus.BOOK_CALL ||
-    currentUser?.onboardingStatus === OnboardingStatus.PLAN_REQUIRED
+    currentOnboardingStatus === OnboardingStatus.BOOK_CALL ||
+    currentOnboardingStatus === OnboardingStatus.PLAN_REQUIRED
   ) {
     return statusAfterBookCall;
   }
@@ -138,6 +145,7 @@ export const useSetNextOnboardingStatus = () => {
   const isOnboardingAiChatEnabled = useAtomStateValue(
     isOnboardingAiChatEnabledState,
   );
+  const achareOnboardingSteps = useAchareOnboardingSteps();
 
   return useCallback(
     ({
@@ -152,11 +160,20 @@ export const useSetNextOnboardingStatus = () => {
         isBookCallRequired:
           store.get(isBookCallOnboardingStepEnabledState.atom) &&
           getIsBookCallOnboardingStepPending(store.get(currentUserState.atom)),
+        achareOnboardingSteps,
       });
 
       store.set(onboardingNavigationDirectionState.atom, 'forward');
       store.set(currentUserState.atom, (current) => {
         if (isDefined(current)) {
+          // The status is computed from the snapshot this callback closed over.
+          // If the stored status has already moved on — the server advanced it,
+          // or another step completed while this callback was in flight — do not
+          // rewind it.
+          if (current.onboardingStatus !== currentUser?.onboardingStatus) {
+            return current;
+          }
+
           return {
             ...current,
             onboardingStatus: nextOnboardingStatus,
@@ -188,6 +205,7 @@ export const useSetNextOnboardingStatus = () => {
       currentWorkspace,
       isBillingEnabled,
       isOnboardingAiChatEnabled,
+      achareOnboardingSteps,
       store,
     ],
   );

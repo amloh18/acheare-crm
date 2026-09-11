@@ -63,6 +63,12 @@ jest.mock('@/page-layout/components/PageLayoutContent', () => ({
   },
 }));
 
+// Widget visibility reads the workspace feature configuration; with none
+// loaded no widget is filtered out, which is what these tests assert.
+jest.mock('@/workspace-feature/hooks/useAchareEnabledFeatures', () => ({
+  useAchareEnabledFeatures: () => undefined,
+}));
+
 describe('PageLayoutSingleTabRenderer', () => {
   beforeEach(() => {
     jest.useFakeTimers();

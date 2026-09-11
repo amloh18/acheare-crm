@@ -13,10 +13,12 @@ import { useAtomFamilySelectorValue } from '@/ui/utilities/state/jotai/hooks/use
 import { useAtomFamilyStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { viewsSelector } from '@/views/states/selectors/viewsSelector';
+import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 import isEmpty from 'lodash.isempty';
 import { useCallback, useMemo } from 'react';
 import { AppPath, SettingsPath } from 'twenty-shared/types';
 import { getAppPath, getSettingsPath, isDefined } from 'twenty-shared/utils';
+import { isAchareStandardObjectEnabled } from 'twenty-shared/workspace';
 
 export const useDefaultHomePagePath = () => {
   const currentUser = useAtomStateValue(currentUserState);
@@ -38,7 +40,13 @@ export const useDefaultHomePagePath = () => {
   const objectMetadataItems = useAtomStateValue(objectMetadataItemsSelector);
   const views = useAtomStateValue(viewsSelector);
   const navigationMenuItemsInDisplayOrder = useNavigationMenuItemSectionItems();
+  const enabledAchareFeatures = useAchareEnabledFeatures();
 
+  // The fallback landing spot must respect feature composition: landing a user
+  // on the alphabetically-first object of a module their workspace does not
+  // have would be worse than landing them in Settings. `undefined` features
+  // mean "not loaded yet", so nothing is dropped and the existing behaviour is
+  // preserved for unconfigured workspaces.
   const readableNonSystemObjectMetadataItems = useMemo(
     () =>
       filterReadableActiveObjectMetadataItems(
@@ -46,8 +54,20 @@ export const useDefaultHomePagePath = () => {
         objectPermissionsByObjectMetadataId,
       )
         .filter((item) => !item.isSystem)
+        .filter((item) =>
+          isDefined(enabledAchareFeatures)
+            ? isAchareStandardObjectEnabled(
+                item.nameSingular,
+                enabledAchareFeatures,
+              )
+            : true,
+        )
         .sort((a, b) => a.nameSingular.localeCompare(b.nameSingular)),
-    [activeObjectMetadataItems, objectPermissionsByObjectMetadataId],
+    [
+      activeObjectMetadataItems,
+      objectPermissionsByObjectMetadataId,
+      enabledAchareFeatures,
+    ],
   );
 
   const getFirstView = useCallback(

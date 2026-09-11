@@ -6,6 +6,7 @@ import { isNavigationMenuItemFolder } from '@/navigation-menu-item/common/utils/
 import { useNavigationObjectMetadataItems } from '@/navigation-menu-item/common/hooks/useNavigationObjectMetadataItems';
 import { viewsSelector } from '@/views/states/selectors/viewsSelector';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
+import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 
 import { useNavigationMenuItemsData } from '@/navigation-menu-item/display/hooks/useNavigationMenuItemsData';
 
@@ -25,6 +26,7 @@ type NavigationMenuItemFolderEntry = Pick<
 export const useNavigationMenuItemsByFolder = () => {
   const views = useAtomStateValue(viewsSelector);
   const objectMetadataItems = useNavigationObjectMetadataItems();
+  const enabledAchareFeatures = useAchareEnabledFeatures();
 
   const { navigationMenuItems, workspaceNavigationMenuItems } =
     useNavigationMenuItemsData();
@@ -71,7 +73,15 @@ export const useNavigationMenuItemsByFolder = () => {
       },
     );
 
-  const buildFoldersList = (folders: NavigationMenuItemFolderEntry[]) => {
+  const buildFoldersList = (
+    folders: NavigationMenuItemFolderEntry[],
+    /**
+     * When true, folders whose visible items are all hidden (e.g. because
+     * every module in the folder is disabled) are dropped. Only applied while
+     * Achare feature filtering is active, so default behaviour is unchanged.
+     */
+    dropEmptyFolders: boolean,
+  ) => {
     const sortedFolders = [...folders].sort((a, b) => {
       const folderA = allNavigationMenuItems.find((item) => item.id === a.id);
       const folderB = allNavigationMenuItems.find((item) => item.id === b.id);
@@ -87,7 +97,12 @@ export const useNavigationMenuItemsByFolder = () => {
         itemsInFolder,
         views,
         objectMetadataItems,
+        enabledAchareFeatures,
       );
+
+      if (dropEmptyFolders && sortedItems.length === 0) {
+        return acc;
+      }
 
       acc.push({
         id: folder.id,
@@ -101,9 +116,11 @@ export const useNavigationMenuItemsByFolder = () => {
     }, []);
   };
 
-  const workspaceNavigationMenuItemsByFolder =
-    buildFoldersList(workspaceFolders);
-  const userNavigationMenuItemsByFolder = buildFoldersList(userFolders);
+  const workspaceNavigationMenuItemsByFolder = buildFoldersList(
+    workspaceFolders,
+    isDefined(enabledAchareFeatures),
+  );
+  const userNavigationMenuItemsByFolder = buildFoldersList(userFolders, false);
   const navigationMenuItemsByFolder = [
     ...workspaceNavigationMenuItemsByFolder,
     ...userNavigationMenuItemsByFolder,

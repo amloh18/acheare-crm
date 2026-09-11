@@ -54,6 +54,13 @@ jest.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
 }));
 
+// Routed pages in the side panel render a page layout, whose widget visibility
+// reads the workspace feature configuration. With none loaded no widget is
+// filtered out, which is what these tests assert.
+jest.mock('@/workspace-feature/hooks/useAchareEnabledFeatures', () => ({
+  useAchareEnabledFeatures: () => undefined,
+}));
+
 const recordIndexFocusItem = {
   focusId: PageFocusId.RecordIndex,
   componentInstance: {

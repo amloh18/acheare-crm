@@ -12,6 +12,7 @@ module.exports = {
     './src/modules/applications/graphql/**/*.{ts,tsx}',
 
     './src/modules/workspace/graphql/**/*.{ts,tsx}',
+    './src/modules/workspace-feature/graphql/**/*.{ts,tsx}',
     './src/modules/workspace-member/graphql/**/*.{ts,tsx}',
     './src/modules/workspace-invitation/graphql/**/*.{ts,tsx}',
 

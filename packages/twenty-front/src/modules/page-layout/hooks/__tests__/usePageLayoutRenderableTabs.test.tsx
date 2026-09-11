@@ -48,6 +48,12 @@ jest.mock('@/ui/layout/hooks/useWorkspaceSurface', () => ({
   useWorkspaceSurface: () => ({ type: mockWorkspaceSurfaceType }),
 }));
 
+// Widget visibility reads the workspace feature configuration; with none
+// loaded no widget is filtered out, which is what these tests assert.
+jest.mock('@/workspace-feature/hooks/useAchareEnabledFeatures', () => ({
+  useAchareEnabledFeatures: () => undefined,
+}));
+
 jest.mock('twenty-ui/utilities', () => ({
   useIsMobile: () => mockIsMobile,
 }));

@@ -11,6 +11,7 @@ describe('filterVisibleWidgets', () => {
   const createMockWidget = (
     id: string,
     conditionalDisplay?: any,
+    objectMetadataId: string | null = null,
   ): PageLayoutTab['widgets'][0] => ({
     isSystemSideEffect: false,
     universalIdentifier: 'universal-identifier-mock',
@@ -21,7 +22,7 @@ describe('filterVisibleWidgets', () => {
     pageLayoutTabId: 'tab-1',
     title: `Widget ${id}`,
     type: WidgetType.FIELDS,
-    objectMetadataId: null,
+    objectMetadataId,
     position: {
       layoutMode: PageLayoutTabLayoutMode.GRID,
       __typename: 'PageLayoutWidgetGridPosition',
@@ -192,6 +193,70 @@ describe('filterVisibleWidgets', () => {
       });
 
       expect(result).toHaveLength(2);
+    });
+  });
+
+  describe('hiddenObjectMetadataIdsForDisabledFeatures', () => {
+    it('should filter out widgets backed by an object of a disabled feature', () => {
+      const result = filterVisibleWidgets({
+        widgets: [
+          createMockWidget('widget-1', undefined, 'object-metadata-id-1'),
+          createMockWidget('widget-2', undefined, 'object-metadata-id-2'),
+        ],
+        context: {
+          device: 'DESKTOP',
+          selectedRecords: [],
+          hiddenObjectMetadataIdsForDisabledFeatures: ['object-metadata-id-1'],
+        },
+      });
+
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe('widget-2');
+    });
+
+    it('should keep object-backed widgets when the list is empty', () => {
+      const result = filterVisibleWidgets({
+        widgets: [createMockWidget('widget-1', undefined, 'object-metadata-id-1')],
+        context: {
+          device: 'DESKTOP',
+          selectedRecords: [],
+          hiddenObjectMetadataIdsForDisabledFeatures: [],
+        },
+      });
+
+      expect(result).toHaveLength(1);
+    });
+
+    it('should keep widgets without an object even when the list is populated', () => {
+      const result = filterVisibleWidgets({
+        widgets: [createMockWidget('widget-1')],
+        context: {
+          device: 'DESKTOP',
+          selectedRecords: [],
+          hiddenObjectMetadataIdsForDisabledFeatures: ['object-metadata-id-1'],
+        },
+      });
+
+      expect(result).toHaveLength(1);
+    });
+
+    it('should apply the feature gate before the conditional display expression', () => {
+      const result = filterVisibleWidgets({
+        widgets: [
+          createMockWidget(
+            'widget-1',
+            { and: [{ '===': [{ var: 'device' }, 'DESKTOP'] }] },
+            'object-metadata-id-1',
+          ),
+        ],
+        context: {
+          device: 'DESKTOP',
+          selectedRecords: [],
+          hiddenObjectMetadataIdsForDisabledFeatures: ['object-metadata-id-1'],
+        },
+      });
+
+      expect(result).toHaveLength(0);
     });
   });
 });

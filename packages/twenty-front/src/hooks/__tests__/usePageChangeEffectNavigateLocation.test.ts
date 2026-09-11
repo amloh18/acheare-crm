@@ -9,6 +9,16 @@ import { AppPath, SettingsPath } from 'twenty-shared/types';
 import { getAppPath, getSettingsPath } from 'twenty-shared/utils';
 
 import { OnboardingStatus, PageLayoutType } from '~/generated-metadata/graphql';
+import {
+  ACHARE_ONBOARDING_STEP_APP_PATH,
+  ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
+  type AchareOnboardingStepKey,
+} from 'twenty-shared/workspace';
+
+const ACHARE_APP_PATHS = Object.values(ACHARE_ONBOARDING_STEP_APP_PATH);
+const ACHARE_ONBOARDING_STATUSES = Object.values(
+  ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
+);
 
 import { useIsCurrentLocationOnAWorkspace } from '@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace';
 import { usePageChangeEffectNavigateLocation } from '~/hooks/usePageChangeEffectNavigateLocation';
@@ -524,39 +534,75 @@ describe('usePageChangeEffectNavigateLocation', () => {
 
   describe('tests should be exhaustive', () => {
     it('all location, onboarding status and suspended/not suspended workspace activation status should be tested', () => {
-      expect(testCases.length).toEqual(
-        (Object.keys(AppPath).length - UNTESTED_APP_PATHS.length) *
-          (Object.keys(OnboardingStatus).length +
-            ['isWorkspaceSuspended:true', 'isWorkspaceSuspended:false']
-              .length) +
-          ['nonExistingObjectInParam', 'existingObjectInParam:false'].length +
-          ['nonExistingObjectInParam:metadataNotReady'].length +
-          ['caseWithRedirectionToVerifyEmailRedirectPath', 'caseWithout']
-            .length +
-          [
-            'pageLayout:loading',
-            'pageLayout:missing',
-            'pageLayout:wrongType',
-            'pageLayout:validStandalone',
-          ].length +
-          ['returnToPath:verify', 'returnToPath:signInUp', 'returnToPath:index']
-            .length +
-          ['notOnWorkspace:verify', 'notOnWorkspace:signInUp'].length +
-          [
-            'billingDisabled:inviteTeamCompleted',
-            'billingDisabled:planRequiredCompleted',
-          ].length +
-          [
-            'workspaceSetupPending:inviteTeamCompleted',
-            'workspaceSetupNotPending:inviteTeamCompleted',
-            'workspaceSetupPending:paymentSuccessCompleted',
-            'workspaceSetupPending:returnToPathWins',
-            'checkoutPending:paymentSuccessDefersRedirect',
-            'checkoutPending:verifyStillRedirects',
-          ].length,
+      // Every location and every non-Achare onboarding status must appear at
+      // least once. The Achare wizard is a 1:1 step↔route mapping and gets its
+      // own generated matrix below, so it is excluded here.
+      const coveredAppPaths = new Set(testCases.map((testCase) => testCase.loc));
+
+      expect(
+        Object.values(AppPath).filter(
+          (appPath) =>
+            !UNTESTED_APP_PATHS.includes(appPath) &&
+            !ACHARE_APP_PATHS.includes(appPath) &&
+            !coveredAppPaths.has(appPath),
+        ),
+      ).toEqual([]);
+
+      const coveredOnboardingStatuses = new Set(
+        testCases.map((testCase) => testCase.onboardingStatus),
       );
+
+      expect(
+        Object.values(OnboardingStatus).filter(
+          (onboardingStatus) =>
+            !ACHARE_ONBOARDING_STATUSES.includes(onboardingStatus) &&
+            !coveredOnboardingStatuses.has(onboardingStatus),
+        ),
+      ).toEqual([]);
     });
   });
+});
+
+describe('usePageChangeEffectNavigateLocation — Achare onboarding steps', () => {
+  const achareSteps = Object.entries(
+    ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
+  ) as [AchareOnboardingStepKey, string][];
+
+  it.each(achareSteps)(
+    'redirects the %s step to its own route from anywhere else',
+    (step, onboardingStatus) => {
+      setupMockIsMatchingLocation('/some-other-page');
+      setupMockOnboardingStatus(onboardingStatus as OnboardingStatus);
+      setupMockIsWorkspaceActivationStatusEqualsTo(false);
+      setupMockIsLogged(true);
+      setupMockIsOnAWorkspace(true);
+      setupMockUseQuery();
+      setupMockUseLocation(AppPath.Index);
+      setupMockState();
+
+      expect(usePageChangeEffectNavigateLocation()).toEqual(
+        ACHARE_ONBOARDING_STEP_APP_PATH[step],
+      );
+    },
+  );
+
+  it.each(achareSteps)(
+    'stays on the %s step when the user is already there',
+    (step, onboardingStatus) => {
+      const ownAppPath = ACHARE_ONBOARDING_STEP_APP_PATH[step];
+
+      setupMockIsMatchingLocation(ownAppPath);
+      setupMockOnboardingStatus(onboardingStatus as OnboardingStatus);
+      setupMockIsWorkspaceActivationStatusEqualsTo(false);
+      setupMockIsLogged(true);
+      setupMockIsOnAWorkspace(true);
+      setupMockUseQuery();
+      setupMockUseLocation(ownAppPath);
+      setupMockState();
+
+      expect(usePageChangeEffectNavigateLocation()).toBeUndefined();
+    },
+  );
 });
 
 describe('usePageChangeEffectNavigateLocation — authenticated with no current workspace', () => {

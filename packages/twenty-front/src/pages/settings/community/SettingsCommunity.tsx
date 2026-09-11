@@ -38,6 +38,12 @@ const StyledCardLink = styled.button`
   text-decoration: none;
 `;
 
+const StyledCardAnchor = styled.a`
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+`;
+
 const StyledCardsGrid = styled.div`
   display: grid;
   gap: ${themeCssVariables.spacing[2]};
@@ -135,7 +141,7 @@ export const SettingsCommunity = () => {
             title={t`Partners`}
             description={t`Hire a partner to help you implement and customize ACHEARE.`}
           />
-          <StyledCardLink
+          <StyledCardAnchor
             href="https://morigird.com/partners/list"
             target="_blank"
             rel="noopener noreferrer"
@@ -149,7 +155,7 @@ export const SettingsCommunity = () => {
               }
               title={t`Browse partners`}
             />
-          </StyledCardLink>
+          </StyledCardAnchor>
         </Section>
 
         <Section>
@@ -159,7 +165,7 @@ export const SettingsCommunity = () => {
           />
           <StyledFeaturesContent>
             <SettingsLabContent />
-            <StyledCardLink
+            <StyledCardAnchor
               href="https://morigird.com/releases"
               target="_blank"
               rel="noopener noreferrer"
@@ -173,7 +179,7 @@ export const SettingsCommunity = () => {
                 }
                 title={t`Read changelog`}
               />
-            </StyledCardLink>
+            </StyledCardAnchor>
           </StyledFeaturesContent>
         </Section>
       </SettingsPageContainer>

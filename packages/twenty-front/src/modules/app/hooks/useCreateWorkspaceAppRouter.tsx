@@ -106,6 +106,12 @@ const AchareSetupChoice = lazyWithPreload(() =>
   })),
 );
 
+const AchareFeatureSelection = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareFeatureSelection').then((module) => ({
+    default: module.AchareFeatureSelection,
+  })),
+);
+
 const AchareAgency = lazyWithPreload(() =>
   import('~/pages/onboarding/AchareAgency').then((module) => ({
     default: module.AchareAgency,
@@ -142,6 +148,18 @@ const AcharePayroll = lazyWithPreload(() =>
   })),
 );
 
+const AchareFinance = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareFinance').then((module) => ({
+    default: module.AchareFinance,
+  })),
+);
+
+const AchareDocuments = lazyWithPreload(() =>
+  import('~/pages/onboarding/AchareDocuments').then((module) => ({
+    default: module.AchareDocuments,
+  })),
+);
+
 const AchareDashboard = lazyWithPreload(() =>
   import('~/pages/onboarding/AchareDashboard').then((module) => ({
     default: module.AchareDashboard,
@@ -165,12 +183,15 @@ const preloadOnboardingPages = () => {
   AchareWelcome.preload();
   AchareBasicSetup.preload();
   AchareSetupChoice.preload();
+  AchareFeatureSelection.preload();
   AchareAgency.preload();
   AchareTeam.preload();
   AchareCrmImport.preload();
   AchareRecruitment.preload();
   AchareHr.preload();
   AcharePayroll.preload();
+  AchareFinance.preload();
+  AchareDocuments.preload();
   AchareDashboard.preload();
   AchareReview.preload();
 
@@ -357,6 +378,14 @@ const createWorkspaceAppRouter = ({
                       ),
                     },
                     {
+                      path: AppPath.AchareFeatureSelection,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareFeatureSelection />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
                       path: AppPath.AchareAgency,
                       element: (
                         <LazyRoute fallback={<OnboardingStepPageLoader />}>
@@ -401,6 +430,22 @@ const createWorkspaceAppRouter = ({
                       element: (
                         <LazyRoute fallback={<OnboardingStepPageLoader />}>
                           <AcharePayroll />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareFinance,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareFinance />
+                        </LazyRoute>
+                      ),
+                    },
+                    {
+                      path: AppPath.AchareDocuments,
+                      element: (
+                        <LazyRoute fallback={<OnboardingStepPageLoader />}>
+                          <AchareDocuments />
                         </LazyRoute>
                       ),
                     },
