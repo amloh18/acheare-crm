@@ -1,0 +1,1 @@
+export { AchareCinemaLanding } from './AchareCinemaLanding';

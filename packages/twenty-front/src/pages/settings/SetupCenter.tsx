@@ -1,19 +1,24 @@
 import { useLingui } from '@lingui/react/macro';
 import { styled } from '@linaria/react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ACHARE_FEATURES,
   ACHARE_MODULES,
+  ACHARE_MODULE_ORDER,
   ACHARE_ONBOARDING_STEP_LABEL,
   type AchareFeatureKey,
   type AchareModuleKey,
   getAchareDependentFeatures,
+  getEnabledFeaturesForModule,
   getMissingAchareFeatureDependencies,
+  isAchareModuleEnabled,
   resolveAchareFeatureDependencies,
 } from 'twenty-shared/workspace';
 
 import { AchareFeatureCompositionEditor } from '@/onboarding/components/AchareFeatureCompositionEditor';
+import { AchareSetupCenterSections } from '@/onboarding/components/AchareSetupCenterSections';
 import { useAchareSetupProgressQuery } from '@/onboarding/hooks/useAchareSetupProgressQuery';
+import { useOpenObjectRecordsSpreadsheetImportDialog } from '@/object-record/spreadsheet-import/hooks/useOpenObjectRecordsSpreadsheetImportDialog';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import { SettingsPageLayout } from '@/settings/components/layout/SettingsPageLayout';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
@@ -33,6 +38,44 @@ const StyledSection = styled.div`
   flex-direction: column;
   gap: ${themeCssVariables.spacing[4]};
 `;
+
+/**
+ * Hosts the standard spreadsheet-import dialog for one object at a time.
+ * Mounted only while a dialog is open so the per-object hooks inside do not
+ * run for every module on the page.
+ */
+const SetupCenterImportDialogHost = ({
+  objectNameSingular,
+  onClose,
+}: {
+  objectNameSingular: string;
+  onClose: () => void;
+}) => {
+  const { t } = useLingui();
+  const { enqueueSuccessSnackBar } = useSnackBar();
+
+  const { openObjectRecordsSpreadsheetImportDialog } =
+    useOpenObjectRecordsSpreadsheetImportDialog(objectNameSingular);
+
+  useEffect(() => {
+    openObjectRecordsSpreadsheetImportDialog({
+      onClose: () => {
+        onClose();
+      },
+      onSubmit: async (validationResult: {
+        validStructuredRows: Array<unknown>;
+      }) => {
+        enqueueSuccessSnackBar({
+          message: t`${validationResult.validStructuredRows.length} records imported`,
+        });
+      },
+    } as never);
+    // The dialog must open exactly once per mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return null;
+};
 
 const StyledCard = styled.div`
   align-items: center;
@@ -165,6 +208,10 @@ export const SetupCenter = () => {
   const [draftFeatures, setDraftFeatures] = useState<
     AchareFeatureKey[] | null
   >(null);
+  const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
+  const [importObjectNameSingular, setImportObjectNameSingular] = useState<
+    string | null
+  >(null);
 
   const savedFeatures = useMemo(
     () => (enabledFeatures ?? []) as AchareFeatureKey[],
@@ -259,7 +306,43 @@ export const SetupCenter = () => {
     t,
   ]);
 
+  /*
+   * One import dialog host for every section card. The dialog is opened with
+   * the singular object name of the feature that was clicked; the standard
+   * spreadsheet-import hook does the actual batch create.
+   */
+  const handleOpenImportDialog = useCallback(
+    (objectNameSingular: string) => {
+      setImportObjectNameSingular(objectNameSingular);
+      setIsImportDialogOpen(true);
+    },
+    [],
+  );
+
   const stepStatuses = progressData?.acheareSetupProgress?.stepStatuses ?? [];
+
+  /*
+   * Setup Center sections (§17): one card per module the workspace actually
+   * has, derived from the shared catalogue so the cards, the drawer and the
+   * wizard can never disagree about what a module contains. A module with no
+   * enabled feature has no card — exactly like its navigation folder.
+   */
+  const workspaceSections = useMemo(() => {
+    if (enabledFeatures === undefined) {
+      return [];
+    }
+
+    return ACHARE_MODULE_ORDER.filter((moduleKey) =>
+      isAchareModuleEnabled(enabledFeatures as AchareFeatureKey[], moduleKey),
+    ).map((moduleKey) => ({
+      moduleKey,
+      title: ACHARE_MODULES[moduleKey].label,
+      features: getEnabledFeaturesForModule(
+        enabledFeatures as AchareFeatureKey[],
+        moduleKey,
+      ),
+    }));
+  }, [enabledFeatures]);
 
   const stepsToShow = (onboardingSteps ?? []).map((step) => {
     const found = stepStatuses.find((stepStatus) => stepStatus.step === step);
@@ -320,6 +403,34 @@ export const SetupCenter = () => {
                 </StyledCard>
               ))}
           </StyledSection>
+        </Section>
+
+        <Section>
+          <H2Title
+            title={t`Workspace Sections`}
+            description={t`Only the modules you enabled appear here. Open a list or import data into it.`}
+          />
+          {isConfigurationLoading ? (
+            <StyledEmptyState>{t`Loading modules...`}</StyledEmptyState>
+          ) : workspaceSections.length === 0 ? (
+            <StyledEmptyState>
+              {t`No modules are enabled yet — turn some on below.`}
+            </StyledEmptyState>
+          ) : (
+            <AchareSetupCenterSections
+              sections={workspaceSections}
+              onImportClick={handleOpenImportDialog}
+            />
+          )}
+          {isImportDialogOpen && importObjectNameSingular !== null && (
+            <SetupCenterImportDialogHost
+              objectNameSingular={importObjectNameSingular}
+              onClose={() => {
+                setIsImportDialogOpen(false);
+                setImportObjectNameSingular(null);
+              }}
+            />
+          )}
         </Section>
 
         <Section>

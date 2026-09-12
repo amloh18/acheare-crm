@@ -28,9 +28,16 @@ export class InvoiceResolver {
     @Args('amount') amount: number,
     @Args('invoiceDate') invoiceDate: string,
     @Args('dueDate') dueDate: string,
-    @Args('opportunityId', { nullable: true }) opportunityId: string | undefined,
-    @Args('requirementId', { nullable: true }) requirementId: string | undefined,
-    @Args('notes', { nullable: true }) notes: string | undefined,
+    // The explicit `type` keeps Nest's design:paramtypes reflection a scalar
+    // instead of Object (a `string | undefined` TS type reflects as Object,
+    // which makes every GraphQL schema build — including the migration CLI —
+    // throw UndefinedTypeError).
+    @Args('opportunityId', { type: () => String, nullable: true })
+    opportunityId: string | undefined,
+    @Args('requirementId', { type: () => String, nullable: true })
+    requirementId: string | undefined,
+    @Args('notes', { type: () => String, nullable: true })
+    notes: string | undefined,
     @AuthWorkspace() workspace: WorkspaceEntity,
   ): Promise<InvoiceSummaryDTO> {
     const invoice = await this.invoiceService.createInvoice(

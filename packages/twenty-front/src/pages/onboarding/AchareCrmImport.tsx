@@ -84,7 +84,7 @@ export const AchareCrmImport = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
   const [completeCrmImport] = useCompleteAchareCrmImportMutation();
-  const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useSnackBar();
+  const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
 
   const { openObjectRecordsSpreadsheetImportDialog: openCompanyImport } =
@@ -107,33 +107,28 @@ export const AchareCrmImport = () => {
 
   const handleImportCompanies = useCallback(() => {
     openCompanyImport({
-      onSubmit: async (validationResult: { validStructuredRows: Array<unknown> }) => {
-        const count = validationResult.validStructuredRows.length;
-        enqueueSuccessSnackBar({
-          message: t`${count} companies imported successfully`,
-        });
+      onSubmit: async () => {
+        // The import dialog creates the records; advancing the wizard here
+        // only works because the caller's onSubmit is invoked after the
+        // records are created (see useOpenObjectRecordsSpreadsheetImportDialog).
         await completeCrmImport({
           variables: { input: { hasData: true } },
         });
         setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
       },
     } as never);
-  }, [openCompanyImport, completeCrmImport, setNextOnboardingStatus, enqueueSuccessSnackBar, t]);
+  }, [openCompanyImport, completeCrmImport, setNextOnboardingStatus]);
 
   const handleImportPeople = useCallback(() => {
     openPersonImport({
-      onSubmit: async (validationResult: { validStructuredRows: Array<unknown> }) => {
-        const count = validationResult.validStructuredRows.length;
-        enqueueSuccessSnackBar({
-          message: t`${count} contacts imported successfully`,
-        });
+      onSubmit: async () => {
         await completeCrmImport({
           variables: { input: { hasData: true } },
         });
         setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
       },
     } as never);
-  }, [openPersonImport, completeCrmImport, setNextOnboardingStatus, enqueueSuccessSnackBar, t]);
+  }, [openPersonImport, completeCrmImport, setNextOnboardingStatus]);
 
   return (
     <StyledOnboardingStepPage>

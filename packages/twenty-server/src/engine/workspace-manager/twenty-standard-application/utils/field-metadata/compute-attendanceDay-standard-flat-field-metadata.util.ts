@@ -446,7 +446,7 @@ export const buildAttendanceDayStandardFlatFieldMetadatas = ({
     workspaceId,
     context: {
       fieldName: 'lateMinutes',
-      type: FieldMetadataType.DATE_TIME,
+      type: FieldMetadataType.NUMBER,
       label: i18nLabel(
               msg({ message: `Late Minutes`, context: 'fieldMetadata.label' }),
             ),
@@ -458,7 +458,7 @@ export const buildAttendanceDayStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconNumbers',
       isNullable: true,
-      defaultValue: 'now',
+      defaultValue: 0,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

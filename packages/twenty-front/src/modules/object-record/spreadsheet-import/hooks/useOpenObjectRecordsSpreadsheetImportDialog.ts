@@ -61,41 +61,56 @@ export const useOpenObjectRecordsSpreadsheetImportDialog = (
       availableFieldMetadataItemsToImport,
     );
 
+    const performRecordCreation = async (data: {
+      validStructuredRows: Array<Record<string, any>>;
+    }) => {
+      const createInputs = data.validStructuredRows.map((record) => {
+        const fieldMapping: Record<string, any> =
+          buildRecordFromImportedStructuredRow({
+            importedStructuredRow: record,
+            fieldMetadataItems: availableFieldMetadataItemsToImport,
+            spreadsheetImportFields,
+          });
+
+        return fieldMapping;
+      });
+
+      try {
+        await batchCreateManyRecords({
+          recordsToCreate: createInputs,
+          upsert: true,
+        });
+        apolloCoreClient.cache.evict({
+          id: 'ROOT_QUERY',
+          fieldName: objectMetadataItem.namePlural,
+        });
+        await apolloCoreClient.refetchQueries({
+          include: 'active',
+        });
+      } catch (error: any) {
+        enqueueErrorSnackBar({
+          apolloError: error,
+        });
+      }
+    };
+
     openSpreadsheetImportDialog({
       ...options,
-      onSubmit: async (data) => {
-        const createInputs = data.validStructuredRows.map((record) => {
-          const fieldMapping: Record<string, any> =
-            buildRecordFromImportedStructuredRow({
-              importedStructuredRow: record,
-              fieldMetadataItems: availableFieldMetadataItemsToImport,
-              spreadsheetImportFields,
-            });
+      /**
+       * The caller's `onSubmit` still runs — after the records are created — so
+       * a caller can react to a finished import (show a snackbar, advance a
+       * wizard step). Previously the caller's callback was spread away by
+       * `{...options}` below it and never invoked.
+       */
+      onSubmit: async (validationResult, file) => {
+        await performRecordCreation(validationResult);
 
-          return fieldMapping;
-        });
-
-        try {
-          await batchCreateManyRecords({
-            recordsToCreate: createInputs,
-            upsert: true,
-          });
-          apolloCoreClient.cache.evict({
-            id: 'ROOT_QUERY',
-            fieldName: objectMetadataItem.namePlural,
-          });
-          await apolloCoreClient.refetchQueries({
-            include: 'active',
-          });
-        } catch (error: any) {
-          enqueueErrorSnackBar({
-            apolloError: error,
-          });
-        }
+        await options?.onSubmit?.(validationResult, file);
       },
       spreadsheetImportFields,
       availableFieldMetadataItems: availableFieldMetadataItemsToImport,
       onAbortSubmit: () => {
+        options?.onAbortSubmit?.();
         abortController.abort();
       },
       tableHook: spreadsheetImportGetUnicityTableHook(objectMetadataItem),

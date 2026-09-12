@@ -90,13 +90,13 @@ export function HomeHero() {
         <HeadingPair>
           <HeadingMeasure>
             <Heading as="h1" size="lg" weight="light">
-              {i18n._(msg`Build your Enterprise CRM *at AI Speed*`)}
+              {i18n._(msg`Hire. Manage. Pay. *All in one place.*`)}
             </Heading>
           </HeadingMeasure>
           <BodyMeasure>
             <Body muted size="sm">
               {i18n._(
-                msg`Twenty gives technical teams the building blocks for a custom CRM that meets complex business needs and quickly adapts as the business evolves.`,
+                msg`Achare brings recruitment, employee management, time tracking, payroll, documents and CRM together so your team can focus on what matters — growth.`,
               )}
             </Body>
           </BodyMeasure>
@@ -104,9 +104,9 @@ export function HomeHero() {
         <CtaRow>
           <Button
             href={SITE_URLS.appWelcome}
-            label={i18n._(msg`Get started`)}
+            label={i18n._(msg`Buy Achare`)}
           />
-          <TalkToUsButton label={msg`Talk to us`} variant="outlined" />
+          <TalkToUsButton label={msg`Explore Demo`} variant="outlined" />
         </CtaRow>
       </IntroStack>
       <MockupStage data-mockup-stage="">
