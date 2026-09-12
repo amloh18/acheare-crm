@@ -53,7 +53,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "a454ca9e-c6a5-53a2-8e63-9301832f8bda",
       },
       "targetLocation": {
-        "universalIdentifier": "aaac2100-f8f1-5e70-880b-9e20425e800a",
+        "universalIdentifier": "156992e4-371a-5641-b421-c209c084697c",
       },
       "targetNote": {
         "universalIdentifier": "a627557c-db37-53be-8a59-9aa2d45cd7ee",
@@ -2027,7 +2027,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "3c2ec356-f4f1-5f81-a2d2-e503f8286d1a",
       },
       "description": {
-        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abd",
+        "universalIdentifier": "967dd583-cf47-5032-a865-d2fd39ad4109",
       },
       "employees": {
         "universalIdentifier": "962f21a0-f3ce-5092-8739-71e2f5f54789",
@@ -2036,7 +2036,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "c08e3d4e-87e1-55c2-95d3-6fa28dee3c66",
       },
       "name": {
-        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abc",
+        "universalIdentifier": "2f2d6c8c-bd93-5552-b9b2-a507979bccbe",
       },
       "position": {
         "universalIdentifier": "19bd2417-6466-5f20-9dab-00dc4665b3df",
@@ -2045,7 +2045,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "ca6e0230-36f9-575e-b991-1b6fe35f6a39",
       },
       "status": {
-        "universalIdentifier": "e5f6a7b8-c9d0-1234-ef01-234567890abe",
+        "universalIdentifier": "9062fcd0-4af0-54c7-9059-1798b10c7fcb",
       },
       "updatedAt": {
         "universalIdentifier": "77b0c301-6ee9-5d9c-9c5e-92bbbbbc0996",
@@ -2067,10 +2067,10 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
             "universalIdentifier": "4ed23839-c220-5778-b329-a80fc0b0cf6f",
           },
           "name": {
-            "universalIdentifier": "f7a681c1-0fb5-50c3-9b2c-5afd7e7730ff",
+            "universalIdentifier": "5707791e-a58c-592a-9b06-c3291fc1b62d",
           },
           "status": {
-            "universalIdentifier": "3a1bbd27-3b0d-593f-bd49-4d493d7e3f63",
+            "universalIdentifier": "1a4cc878-7a32-5a9e-aee8-fc30023ded5f",
           },
         },
       },
@@ -2098,16 +2098,16 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
             "universalIdentifier": "7dfcae51-c22a-5f56-b6db-1934f4e74f16",
           },
           "description": {
-            "universalIdentifier": "c6fd1d12-1f2f-5208-ac6c-5fa381677d1b",
+            "universalIdentifier": "c214eda8-8f06-52f0-b13d-f7c16370a6bf",
           },
           "employees": {
             "universalIdentifier": "73c95a18-de77-5173-a725-e24f7da96c44",
           },
           "name": {
-            "universalIdentifier": "058aa01d-7bc1-5af8-b11e-b3158f773235",
+            "universalIdentifier": "cfc08834-e251-5721-a157-514ead7013d4",
           },
           "status": {
-            "universalIdentifier": "0dfbb868-3691-5232-b6cd-536b6603f1c4",
+            "universalIdentifier": "3a8746cc-fab6-58e2-b826-4b45740835c8",
           },
           "updatedAt": {
             "universalIdentifier": "9cd5a588-58a0-5b4f-bb48-2744f89248b0",
@@ -2122,31 +2122,31 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
   "designation": {
     "fields": {
       "createdAt": {
-        "universalIdentifier": "47a399ee-ecb8-5903-84c8-562fda14bce5",
+        "universalIdentifier": "6bbecfc8-b56c-573a-be34-65ad2ce827ed",
       },
       "createdBy": {
-        "universalIdentifier": "ffc43d57-6bfe-5dbf-a266-c80b2c3ed7ca",
+        "universalIdentifier": "e6d3a6db-f200-53e6-8590-b66410963346",
       },
       "deletedAt": {
-        "universalIdentifier": "a9aa44db-8f2c-53e2-ba41-a459c4436639",
+        "universalIdentifier": "e12a5989-b127-5df5-842c-6996677220e3",
       },
       "description": {
         "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000002",
       },
       "employees": {
-        "universalIdentifier": "0ab0363b-84fb-55d6-bfa0-f4f60097c840",
+        "universalIdentifier": "fff17d16-f48f-5d7e-a72a-58c8eca06f67",
       },
       "id": {
-        "universalIdentifier": "78d61558-b896-5293-a14f-218bacbf92e4",
+        "universalIdentifier": "16f7ab04-a572-5be5-8f10-649459f6fb0a",
       },
       "level": {
         "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000003",
       },
       "position": {
-        "universalIdentifier": "89de1e30-91ee-5b2d-9c9d-0772b2868822",
+        "universalIdentifier": "f4c86968-946f-5e0c-8bfd-da9c5e5965a7",
       },
       "searchVector": {
-        "universalIdentifier": "0d129415-7788-5823-ab6e-50e0d25cc1b0",
+        "universalIdentifier": "84ae527e-98a3-5cf1-ac68-75badf900e7c",
       },
       "status": {
         "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000004",
@@ -2155,10 +2155,10 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "c3d4e5f6-0001-4000-8000-000000000001",
       },
       "updatedAt": {
-        "universalIdentifier": "7290e95f-e536-5e71-90ff-136d8ba750c9",
+        "universalIdentifier": "cde0669c-fa4f-52c7-a81c-a2619022629b",
       },
       "updatedBy": {
-        "universalIdentifier": "8c48d325-6168-5ad5-a5a7-35db2f2cc4f5",
+        "universalIdentifier": "008ddd29-7527-596f-8c48-a0045b4d365a",
       },
     },
     "indexes": {
@@ -2169,25 +2169,25 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
       },
     },
-    "universalIdentifier": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "universalIdentifier": "13af9a05-a517-5dba-8fd1-b84e3df92d6a",
     "views": {
       "allDesignations": {
-        "universalIdentifier": "b6a614c8-c17f-5971-8d20-e17b91db0b8d",
+        "universalIdentifier": "01a78e08-57f0-5a12-b9f7-b84181d28a6f",
         "viewFields": {
           "createdAt": {
-            "universalIdentifier": "86ef64a6-fcf1-56c4-ac0f-2921171e70d8",
+            "universalIdentifier": "8bfdd6cf-40d6-5614-91f0-cef9441eb0bf",
           },
           "description": {
-            "universalIdentifier": "005e8c02-d7c1-5164-9457-345641922e7e",
+            "universalIdentifier": "78bf3675-543f-5990-9b47-b9da2cda7ba4",
           },
           "level": {
-            "universalIdentifier": "df3caec4-8f5a-56e6-b2a5-17b8a2836372",
+            "universalIdentifier": "dc456655-6f6f-5672-ab41-ddc0d8a930cc",
           },
           "status": {
-            "universalIdentifier": "2826013b-5563-5cac-bedc-cd086028d13a",
+            "universalIdentifier": "c43a66dc-8191-56a1-952e-9d1d78814afd",
           },
           "title": {
-            "universalIdentifier": "ce76404d-ea30-5884-b800-3000a36e2016",
+            "universalIdentifier": "61b11bd2-ddfc-55dd-a2f3-d3c9b11bd973",
           },
         },
       },
@@ -2220,7 +2220,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "8f6fc574-b9e6-5c6b-a5a2-1bc25fbdba3f",
       },
       "designation": {
-        "universalIdentifier": "92601e50-3792-5826-b399-61e6ce1c6600",
+        "universalIdentifier": "d6ae48a4-368e-5225-9e2c-00269dcf8425",
       },
       "employeeCode": {
         "universalIdentifier": "0d0257ae-609b-4c7f-8e46-704da72cd017",
@@ -2244,7 +2244,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "c783573a-caaf-4f73-8bc7-d3afbed77461",
       },
       "location": {
-        "universalIdentifier": "01107722-c656-51b5-89d6-fea37d6e44ca",
+        "universalIdentifier": "4bdc68a2-e2c5-551e-891d-c68249f34f34",
       },
       "manager": {
         "universalIdentifier": "e6ae01f5-c72d-57ce-bfa8-195dd1498cc9",
@@ -2324,7 +2324,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
             "universalIdentifier": "3ef1f075-65aa-5f64-8bd2-f60f90679bca",
           },
           "designation": {
-            "universalIdentifier": "af9398c2-0ade-59ce-8f2c-8a8adc7d4002",
+            "universalIdentifier": "24da0043-2bf4-5bc0-a627-1eadc23a811f",
           },
           "employeeCode": {
             "universalIdentifier": "f947071f-a51b-5191-8297-bf6e8ed270c0",
@@ -2382,7 +2382,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
             "universalIdentifier": "fb8b3840-ff0b-5112-977a-2858c1d5cc9d",
           },
           "designation": {
-            "universalIdentifier": "a36c8da1-71b9-5402-a370-edeb7d2b030a",
+            "universalIdentifier": "d7be9a81-cbf6-50e5-91d9-578a37f4bd91",
           },
           "employeeCode": {
             "universalIdentifier": "d2dfe4ee-cdc5-5442-ba70-b445c1ccb5f2",
@@ -3277,157 +3277,157 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
   "location": {
     "fields": {
       "address": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890131",
+        "universalIdentifier": "a5744837-651a-51b5-8a84-3b56084f2e72",
       },
       "attachments": {
-        "universalIdentifier": "4ca9d4bc-e109-58bd-af47-94657299a681",
+        "universalIdentifier": "e4459095-25a6-5ba5-9eb8-5077258505c8",
       },
       "city": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890132",
+        "universalIdentifier": "8645abab-8848-5d10-8961-bbe091d9ec73",
       },
       "country": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890134",
+        "universalIdentifier": "185e58b8-af93-57c4-94ab-7b56ff000f2d",
       },
       "createdAt": {
-        "universalIdentifier": "89682551-d8e5-55dc-b871-fce2203fade7",
+        "universalIdentifier": "60cbb257-83f5-5562-a38e-9ff678bfabd6",
       },
       "createdBy": {
-        "universalIdentifier": "efca0d1d-778f-5240-b118-40139e322ddf",
+        "universalIdentifier": "e5334d95-032e-5e34-ac44-6b6fcb1817aa",
       },
       "deletedAt": {
-        "universalIdentifier": "e4da1191-df7e-56ca-b2ea-64fd8f50f00d",
+        "universalIdentifier": "16965031-536a-5fe6-8ede-9530d9ddb682",
       },
       "employees": {
-        "universalIdentifier": "0ee88373-87ac-5561-aff1-5b378fec4fab",
+        "universalIdentifier": "afae5748-5a0f-5c61-960f-18cca90a920b",
       },
       "id": {
-        "universalIdentifier": "844e2254-f2a4-5916-b4bb-8f10b01f83e7",
+        "universalIdentifier": "8650f72b-306a-5699-af09-8f105c316e1a",
       },
       "name": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890130",
+        "universalIdentifier": "9a4cd88f-0fd9-5d79-b7b4-9c2019a65444",
       },
       "noteTargets": {
-        "universalIdentifier": "1d2fd349-48f7-52db-9814-7c7875b3f581",
+        "universalIdentifier": "fe92e2bc-1301-5c68-98b2-5f61bc7a89d4",
       },
       "position": {
-        "universalIdentifier": "fa74fe70-678c-5d15-827b-735204430466",
+        "universalIdentifier": "36f28f94-b9f4-5500-8b57-2bcb35434807",
       },
       "searchVector": {
-        "universalIdentifier": "63d17ee5-cde6-5ae0-862e-6ad2fd839f2f",
+        "universalIdentifier": "6eda5e38-8c86-5e0a-80f5-8e3b9a4486fa",
       },
       "state": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890133",
+        "universalIdentifier": "9f44b319-feb9-5c3a-9d32-e2778efa54ec",
       },
       "status": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890136",
+        "universalIdentifier": "2d2e8d8a-d039-5b1e-807d-d13ef8f4019a",
       },
       "taskTargets": {
-        "universalIdentifier": "dca73d32-a030-52a7-89ca-11c48fed8720",
+        "universalIdentifier": "58703187-cf59-59be-b312-f76586368b3a",
       },
       "timelineActivities": {
-        "universalIdentifier": "1273e5a4-822e-557c-b9c5-7761dade83dc",
+        "universalIdentifier": "6d83d6e8-0f88-5637-b212-9afd55267f85",
       },
       "timezone": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890135",
+        "universalIdentifier": "f8205b1e-0862-5889-90bf-47ce62d51685",
       },
       "updatedAt": {
-        "universalIdentifier": "6da623f2-4688-5fce-be84-70771d9d4660",
+        "universalIdentifier": "815e476d-e087-5c97-b2c4-191ae990d7a7",
       },
       "updatedBy": {
-        "universalIdentifier": "dca36b57-80b9-509b-a400-e0a6dfed9b98",
+        "universalIdentifier": "89ade1f7-fa61-5f0a-9590-640efd1bc615",
       },
     },
     "indexes": {
       "searchVectorGinIndex": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890141",
+        "universalIdentifier": "e89bc9dc-5114-52f8-b25a-3d28003f48b2",
       },
       "statusIndex": {
-        "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890140",
+        "universalIdentifier": "3f2fcf24-1a6c-56cf-9f26-c645fe1c4a56",
       },
     },
-    "universalIdentifier": "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "universalIdentifier": "5efc8bfe-d939-5eed-bfe0-fb9712387e26",
     "views": {
       "allLocations": {
-        "universalIdentifier": "7fec5902-b90f-53cf-8bd7-74dc5daab3d7",
+        "universalIdentifier": "b78f2e9d-1174-579b-a8a6-52bee3d57429",
         "viewFields": {
           "city": {
-            "universalIdentifier": "64a25195-eade-579d-bfce-02653dc43352",
+            "universalIdentifier": "a3fca3ab-d63e-5c02-bc63-b3babdb1457b",
           },
           "country": {
-            "universalIdentifier": "66b6a2f9-21cc-526a-bf4d-e6ca3ce2b053",
+            "universalIdentifier": "c4b2f08c-30db-52c4-9706-57e526024897",
           },
           "createdAt": {
-            "universalIdentifier": "4cb5aab5-f32b-570b-89c3-2f5a4bc6b73f",
+            "universalIdentifier": "404d983a-9b81-51a2-933e-42578ec3b5c1",
           },
           "name": {
-            "universalIdentifier": "5ca7d874-5c07-5555-a1fb-82558a0ff9b0",
+            "universalIdentifier": "b5b23fff-6853-54d3-9b44-3c0a53766765",
           },
           "status": {
-            "universalIdentifier": "8a52655e-a11f-5207-a569-77ed8e2b2e35",
+            "universalIdentifier": "30472951-1a00-56af-8c12-14bb770e6cf4",
           },
         },
       },
       "locationRecordPageFields": {
-        "universalIdentifier": "292f0e52-1226-52da-87af-5f0ee2cbee5a",
+        "universalIdentifier": "d90dee58-1b3b-5131-abc6-7ef9f095e3f0",
         "viewFieldGroups": {
           "general": {
-            "universalIdentifier": "2706cdf9-47be-56e5-92ba-435abc0e49fc",
+            "universalIdentifier": "4eea9783-5afb-588d-a221-2978dac85ac3",
           },
           "relations": {
-            "universalIdentifier": "7b7a334e-96da-5e13-8c4c-f002e6db5af8",
+            "universalIdentifier": "098fa29f-72b5-55ac-8651-b206f166b784",
           },
           "system": {
-            "universalIdentifier": "9d349930-08a5-51fe-907a-530e8fab8190",
+            "universalIdentifier": "8381e88c-04b6-5648-aeb0-91d3b83e0198",
           },
         },
         "viewFields": {
           "address": {
-            "universalIdentifier": "68f86db2-7e22-552f-85b0-8c24dcacc6fe",
+            "universalIdentifier": "34596eaa-d9f5-563e-8467-701d463ed643",
           },
           "attachments": {
-            "universalIdentifier": "0b1b8f26-87f8-5440-8027-de528c9ba8af",
+            "universalIdentifier": "162bd06c-fc93-5598-80a1-e39da0125ae0",
           },
           "city": {
-            "universalIdentifier": "54db570f-f320-57bb-8aff-fdcc4c731156",
+            "universalIdentifier": "f4155ff5-9b20-56e2-984d-64451c531106",
           },
           "country": {
-            "universalIdentifier": "2c00280f-ec8b-5281-a77f-c74c3a8d07ea",
+            "universalIdentifier": "e08d8dc9-2604-5361-9d19-ea99a5ab78a8",
           },
           "createdAt": {
-            "universalIdentifier": "6ee201a7-29a3-5b0e-aa49-6810d0f5338a",
+            "universalIdentifier": "ce8c8289-089e-57b3-b7ee-abdba746f614",
           },
           "createdBy": {
-            "universalIdentifier": "a8d0f7cf-e442-5404-867f-9624a0fada63",
+            "universalIdentifier": "be2cc92a-3f80-521e-9a63-99aa3d942dee",
           },
           "employees": {
-            "universalIdentifier": "bbd3ed49-4721-587d-8bc4-dfc81090bf13",
+            "universalIdentifier": "292afa0b-8fd6-5659-b851-f7be1fd5c41e",
           },
           "name": {
-            "universalIdentifier": "ef471548-784f-5d25-be1b-eea27b4e55d9",
+            "universalIdentifier": "40ee7663-efea-5c40-b6dd-a9813e4c681d",
           },
           "noteTargets": {
-            "universalIdentifier": "f537a63a-30e8-5186-a3c2-ab704edde85f",
+            "universalIdentifier": "e7071f67-daf8-56e8-9136-b0d18c4e92d9",
           },
           "state": {
-            "universalIdentifier": "744f351f-e824-51ac-83ab-3c642a5457b9",
+            "universalIdentifier": "ead9b758-b299-5184-beee-5fe3a12fd2ae",
           },
           "status": {
-            "universalIdentifier": "5359f46c-58ea-5825-a6b8-b77fd988b631",
+            "universalIdentifier": "020f8d80-cf02-52cc-a0ee-978ea5c3fa67",
           },
           "taskTargets": {
-            "universalIdentifier": "f196d667-0712-5434-a3ac-b0e5910aa75f",
+            "universalIdentifier": "f5d0790e-0e10-51f3-a6f3-5e60a3492ed9",
           },
           "timelineActivities": {
-            "universalIdentifier": "7f2c5535-f8d6-5001-a2a6-71a7e4371871",
+            "universalIdentifier": "bf663a78-9015-5403-a74b-13ea36bd26e1",
           },
           "timezone": {
-            "universalIdentifier": "6cf55939-666f-5a5b-9f35-8a77fd5e5838",
+            "universalIdentifier": "e44f67a7-6f3c-5649-a58e-6b97c13f0f23",
           },
           "updatedAt": {
-            "universalIdentifier": "783cb074-535c-5af2-b981-5dff8f95d412",
+            "universalIdentifier": "c0768f59-d21e-55e7-a29c-7665c8b80d4f",
           },
           "updatedBy": {
-            "universalIdentifier": "469f5db0-a61b-572a-8faf-db550ecbf895",
+            "universalIdentifier": "61c7f003-11d8-582f-a310-f3765ccee530",
           },
         },
       },
@@ -4428,7 +4428,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "385bee12-ecea-57bc-96c8-f418dacc2d1c",
       },
       "targetLocation": {
-        "universalIdentifier": "22f74743-4fc6-5dda-b6b3-838f6e87afe1",
+        "universalIdentifier": "7b564db2-39be-5c04-9572-0c1e357ad5e6",
       },
       "targetOpportunity": {
         "universalIdentifier": "27519e5b-b16a-50cc-8de1-c5d6a2ff5c61",
@@ -6568,6 +6568,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "attachments": {
         "universalIdentifier": "2cefdfa1-5452-5353-ad4c-5856738226dc",
       },
+      "attendanceDays": {
+        "universalIdentifier": "72d2b418-53d3-58a4-aec5-7ad55d0c99aa",
+      },
       "breakMinutes": {
         "universalIdentifier": "3b989400-c54e-405a-8d89-8979fdfc4078",
       },
@@ -6948,7 +6951,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "cb1ee822-07e7-590e-910a-7d06d4e31733",
       },
       "targetLocation": {
-        "universalIdentifier": "10159dea-40c7-5c3d-91bf-7c079d21ab17",
+        "universalIdentifier": "9abde97d-68df-540f-b545-c2c198679ac5",
       },
       "targetOpportunity": {
         "universalIdentifier": "ca354769-b50e-531b-b745-12ca12ad44ee",
@@ -7163,7 +7166,7 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
         "universalIdentifier": "a18c0879-c118-51a1-9462-525be6a17c8e",
       },
       "targetLocation": {
-        "universalIdentifier": "904297a5-0e4c-53e4-9b84-a681192871b0",
+        "universalIdentifier": "bd496b69-70bd-5fcd-9cbb-9b7cd6e6719a",
       },
       "targetMessageCampaign": {
         "universalIdentifier": "22194f8d-a9f3-5f13-ae0f-eb23c6338cea",
@@ -7747,6 +7750,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "assignedTasks": {
         "universalIdentifier": "20202020-61dc-4a1c-99e8-38ebf8d2bbeb",
       },
+      "attendanceCorrections": {
+        "universalIdentifier": "63f081d3-d06f-55f7-90fb-b7cc72718597",
+      },
       "avatarUrl": {
         "universalIdentifier": "20202020-0ced-4c4f-a376-c98a966af3f6",
       },
@@ -7774,6 +7780,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "deletedAt": {
         "universalIdentifier": "0c39c6a8-a1bf-54fb-8c86-ca2981820fd0",
       },
+      "departments": {
+        "universalIdentifier": "e798ce3c-2e0c-5173-bd3f-006809bae1d8",
+      },
       "hrOwnedRequirements": {
         "universalIdentifier": "3f7d2b91-6c58-4a0e-9d24-8b1f5c7e30a2",
       },
@@ -7786,6 +7795,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       "jobTitle": {
         "universalIdentifier": "20202020-4dd4-4619-826e-08f6c06b374d",
       },
+      "leaveRequests": {
+        "universalIdentifier": "2f09fbf5-39a7-5a0e-b9c6-56bc307d02c5",
+      },
       "locale": {
         "universalIdentifier": "20202020-402e-4695-b169-794fa015afbe",
       },
@@ -7797,6 +7809,9 @@ exports[`STANDARD_OBJECTS universal identifiers should never change without an e
       },
       "numberFormat": {
         "universalIdentifier": "20202020-7f40-4e7f-b126-11c0eda6b141",
+      },
+      "onboardingItems": {
+        "universalIdentifier": "0beb9d0b-d3f3-50e9-bb9b-f7ae783c5b40",
       },
       "openRecordIn": {
         "universalIdentifier": "20202020-1b16-419d-9323-6f3ea850e5d9",

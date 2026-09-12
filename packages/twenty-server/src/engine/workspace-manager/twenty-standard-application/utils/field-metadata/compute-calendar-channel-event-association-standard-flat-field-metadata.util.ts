@@ -296,7 +296,7 @@ export const buildCalendarChannelEventAssociationStandardFlatFieldMetadatas = ({
         msg({ message: `Channel ID`, context: 'fieldMetadata.description' }),
       ),
       icon: 'IconCalendar',
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,

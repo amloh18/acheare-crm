@@ -404,7 +404,7 @@ export const buildPayrollAdjustmentStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconTag',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -428,7 +428,7 @@ export const buildPayrollAdjustmentStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'PENDING',
+      defaultValue: "'PENDING'",
       options: [
               {
                       "id": "a0e1bca9-0000-4000-8000-00e1bca90000",

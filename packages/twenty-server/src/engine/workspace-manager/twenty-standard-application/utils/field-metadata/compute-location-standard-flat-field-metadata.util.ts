@@ -211,7 +211,7 @@ export const buildLocationStandardFlatFieldMetadatas = ({
         msg({ message: `Location name`, context: 'fieldMetadata.description' }),
       ),
       icon: 'IconMapPin',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -320,17 +320,17 @@ export const buildLocationStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'ACTIVE',
+      defaultValue: "'ACTIVE'",
       options: [
         {
-          id: 'd4e5f6a7-b8c9-0123-defa-234567890124',
+          id: '1c67bd47-55d5-5f8d-8c81-e8edacb97bfe',
           position: 0,
           value: 'ACTIVE',
           label: 'Active',
           color: 'green',
         },
         {
-          id: 'd4e5f6a7-b8c9-0123-defa-234567890125',
+          id: '29f32dd1-51d9-5011-a022-88926db494e9',
           position: 1,
           value: 'INACTIVE',
           label: 'Inactive',
@@ -377,9 +377,8 @@ export const buildLocationStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.taskTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'taskTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -410,9 +409,8 @@ export const buildLocationStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.noteTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'noteTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -443,9 +441,8 @@ export const buildLocationStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.attachment.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'attachments',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -476,9 +473,8 @@ export const buildLocationStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.timelineActivity.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'timelineActivities',
       isSystemSideEffect: true,
       label: i18nLabel(

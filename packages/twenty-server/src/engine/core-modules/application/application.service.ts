@@ -289,15 +289,20 @@ export class ApplicationService {
   async findByUniversalIdentifier({
     universalIdentifier,
     workspaceId,
+    queryRunner,
   }: {
     universalIdentifier: string;
     workspaceId: string;
+    queryRunner?: QueryRunner;
   }) {
-    return this.applicationRepository.findOne({
+    const manager = queryRunner?.manager ?? this.applicationRepository;
+
+    return manager.findOne(ApplicationEntity, {
       where: {
         universalIdentifier,
         workspaceId,
       },
+      relations: [],
     });
   }
 
@@ -397,6 +402,7 @@ export class ApplicationService {
     const existingApplication = await this.findByUniversalIdentifier({
       universalIdentifier: TWENTY_STANDARD_APPLICATION.universalIdentifier,
       workspaceId,
+      queryRunner,
     });
 
     if (isDefined(existingApplication)) {

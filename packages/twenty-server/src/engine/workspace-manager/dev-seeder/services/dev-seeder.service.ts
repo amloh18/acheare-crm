@@ -104,6 +104,10 @@ export class DevSeederService {
       initialCursor,
     });
 
+    // seedCoreSchema creates applications via queryRunner with
+    // skipCacheInvalidation, so the cache is stale after commit.
+    await this.workspaceCacheStorageService.flush(workspaceId);
+
     await this.applicationRegistrationService.createCliRegistrationIfNotExists();
 
     const schemaName =
@@ -319,6 +323,12 @@ export class DevSeederService {
           skipCacheInvalidation: true,
         },
         queryRunner,
+      );
+
+      // Recreate the workspace→application FK that was dropped in createWorkspace.
+      // Placed after all core seeding to avoid ACCESS EXCLUSIVE lock contention.
+      await queryRunner.query(
+        `ALTER TABLE "${schemaName}"."workspace" ADD CONSTRAINT "FK_3b1acb13a5dac9956d1a4b32755" FOREIGN KEY ("workspaceCustomApplicationId") REFERENCES "${schemaName}"."application"("id") ON DELETE RESTRICT`,
       );
 
       await seedApiKeys({ queryRunner, schemaName, workspaceId });

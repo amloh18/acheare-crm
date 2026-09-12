@@ -4,9 +4,8 @@ import { Args, Mutation, Query } from '@nestjs/graphql';
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
 import { PreventNestToAutoLogGraphqlErrorsFilter } from 'src/engine/core-modules/graphql/filters/prevent-nest-to-auto-log-graphql-errors.filter';
 import { ResolverValidationPipe } from 'src/engine/core-modules/graphql/pipes/resolver-validation.pipe';
-import { type AuthContextUser } from 'src/engine/core-modules/auth/types/auth-context.type';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
-import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
+import { AuthWorkspaceMemberId } from 'src/engine/decorators/auth/auth-workspace-member-id.decorator';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
@@ -43,15 +42,17 @@ export class LeaveResolver {
     return this.mapLeaveRequest(request);
   }
 
+  // reviewedBy is a workspaceMember relation: the reviewer must be identified
+  // by workspace member id, not by the (different) user id.
   @Mutation(() => LeaveRequestDTO)
   async approveLeave(
     @Args('input') input: ReviewLeaveInputDTO,
-    @AuthUser() user: AuthContextUser,
+    @AuthWorkspaceMemberId() workspaceMemberId: string,
     @AuthWorkspace() workspace: WorkspaceEntity,
   ): Promise<LeaveRequestDTO> {
     const request = await this.leaveService.approveLeave(
       input.leaveRequestId,
-      user.id,
+      workspaceMemberId,
       input.reviewNotes || '',
       workspace.id,
     );
@@ -62,12 +63,12 @@ export class LeaveResolver {
   @Mutation(() => LeaveRequestDTO)
   async rejectLeave(
     @Args('input') input: ReviewLeaveInputDTO,
-    @AuthUser() user: AuthContextUser,
+    @AuthWorkspaceMemberId() workspaceMemberId: string,
     @AuthWorkspace() workspace: WorkspaceEntity,
   ): Promise<LeaveRequestDTO> {
     const request = await this.leaveService.rejectLeave(
       input.leaveRequestId,
-      user.id,
+      workspaceMemberId,
       input.reviewNotes || '',
       workspace.id,
     );

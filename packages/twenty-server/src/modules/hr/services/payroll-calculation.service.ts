@@ -544,9 +544,22 @@ export class PayrollCalculationService {
     return workingDaysInMonth > 0 ? workingDays / workingDaysInMonth : 1;
   }
 
+  // Counts inclusive calendar days, ignoring the time of day. Payroll periods
+  // arrive with an end-of-day timestamp, so a raw millisecond diff overstated
+  // every full-month proration by one day (32/31 instead of 1).
   private daysBetween(start: Date, end: Date): number {
-    const diff = end.getTime() - start.getTime();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+    const startDay = Date.UTC(
+      start.getUTCFullYear(),
+      start.getUTCMonth(),
+      start.getUTCDate(),
+    );
+    const endDay = Date.UTC(
+      end.getUTCFullYear(),
+      end.getUTCMonth(),
+      end.getUTCDate(),
+    );
+
+    return Math.round((endDay - startDay) / (1000 * 60 * 60 * 24)) + 1;
   }
 
   private roundToTwo(num: number): number {

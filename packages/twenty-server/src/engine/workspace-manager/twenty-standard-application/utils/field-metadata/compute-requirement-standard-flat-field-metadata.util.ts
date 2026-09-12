@@ -485,7 +485,7 @@ export const buildRequirementStandardFlatFieldMetadatas = ({
         }),
       ),
       icon: 'IconTargetArrow',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

@@ -257,7 +257,7 @@ export const buildAttendanceEventStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconCalendarClock',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -335,7 +335,7 @@ export const buildAttendanceEventStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'SELF_SERVICE',
+      defaultValue: "'SELF_SERVICE'",
       options: [
               {
                       "id": "b9f7a5c8-3e0d-4a7b-8000-00f7a5c83e0d",

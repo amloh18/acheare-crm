@@ -257,7 +257,7 @@ export const buildAttendanceDayStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconCalendarEvent',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -281,7 +281,7 @@ export const buildAttendanceDayStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'PENDING',
+      defaultValue: "'PENDING'",
       options: [
               {
                       "id": "c0a8b6d9-4f1e-4b8c-8000-00a8b6d94f1e",
@@ -507,6 +507,37 @@ export const buildAttendanceDayStandardFlatFieldMetadatas = ({
       icon: 'IconNumbers',
       isNullable: true,
       defaultValue: 0,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  shift: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'shift',
+      label: i18nLabel(
+        msg({ message: `Shift`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Assigned shift`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconCalendarTime',
+      isNullable: true,
+      targetObjectName: 'shift',
+      targetFieldName: 'attendanceDays',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'shiftId',
+      },
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

@@ -225,7 +225,7 @@ export const buildLeaveTypeStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconTag',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

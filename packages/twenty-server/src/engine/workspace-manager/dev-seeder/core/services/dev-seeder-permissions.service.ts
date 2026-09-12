@@ -10,6 +10,7 @@ import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.ent
 import { ObjectMetadataEntity } from 'src/engine/metadata-modules/object-metadata/object-metadata.entity';
 import { FieldPermissionService } from 'src/engine/metadata-modules/object-permission/field-permission/field-permission.service';
 import { ObjectPermissionService } from 'src/engine/metadata-modules/object-permission/object-permission.service';
+import { MEMBER_ROLE_LABEL } from 'src/engine/metadata-modules/permissions/constants/member-role-label.constants';
 import { RolePermissionFlagService } from 'src/engine/metadata-modules/role-permission-flag/role-permission-flag.service';
 import { RoleTargetService } from 'src/engine/metadata-modules/role-target/services/role-target.service';
 import { RoleDTO } from 'src/engine/metadata-modules/role/dtos/role.dto';
@@ -106,10 +107,18 @@ export class DevSeederPermissionsService {
           ...Object.values(RANDOM_USER_WORKSPACE_IDS),
         ];
 
-        const guestRole = await this.roleService.createGuestRole({
+        const existingGuestRole = await this.roleRepository.findOne(
           workspaceId,
-          ownerFlatApplication: workspaceCustomFlatApplication,
-        });
+          {
+            where: { label: 'Guest' },
+          },
+        );
+        const guestRole =
+          existingGuestRole ??
+          (await this.roleService.createGuestRole({
+            workspaceId,
+            ownerFlatApplication: workspaceCustomFlatApplication,
+          }));
 
         await this.userRoleService.assignRoleToManyUserWorkspace({
           workspaceId,
@@ -184,10 +193,18 @@ export class DevSeederPermissionsService {
     workspaceId: string;
     workspaceCustomFlatApplication: FlatApplication;
   }): Promise<RoleDTO> {
-    const memberRole = await this.roleService.createMemberRole({
-      workspaceId,
-      ownerFlatApplication: workspaceCustomFlatApplication,
-    });
+    let memberRole = (await this.roleRepository.findOne(workspaceId, {
+      where: {
+        label: MEMBER_ROLE_LABEL,
+      },
+    })) as RoleDTO | null;
+
+    if (!memberRole) {
+      memberRole = await this.roleService.createMemberRole({
+        workspaceId,
+        ownerFlatApplication: workspaceCustomFlatApplication,
+      });
+    }
 
     await this.coreDataSource
       .getRepository(WorkspaceEntity)

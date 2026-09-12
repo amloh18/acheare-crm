@@ -56,6 +56,7 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
   ],
   employee: [
     { name: 'employeeCode', type: FieldMetadataType.TEXT },
+    { name: 'workLocation', type: FieldMetadataType.TEXT },
   ],
   shift: [
     { name: 'name', type: FieldMetadataType.TEXT },
@@ -68,6 +69,7 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
   ],
   invoice: [
     { name: 'invoiceNumber', type: FieldMetadataType.TEXT },
+    { name: 'notes', type: FieldMetadataType.TEXT },
   ],
   recordShare: [],
   task: [
@@ -94,15 +96,29 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
   rosterAssignment: [{ name: 'id', type: FieldMetadataType.UUID }],
   attendanceEvent: [{ name: 'id', type: FieldMetadataType.UUID }],
   attendanceDay: [{ name: 'id', type: FieldMetadataType.UUID }],
-  attendanceCorrection: [{ name: 'id', type: FieldMetadataType.UUID }],
-  leaveRequest: [{ name: 'id', type: FieldMetadataType.UUID }],
+  attendanceCorrection: [
+    { name: 'id', type: FieldMetadataType.UUID },
+    { name: 'reason', type: FieldMetadataType.TEXT },
+    { name: 'reviewNotes', type: FieldMetadataType.TEXT },
+  ],
+  leaveRequest: [
+    { name: 'id', type: FieldMetadataType.UUID },
+    { name: 'reason', type: FieldMetadataType.TEXT },
+  ],
   leaveBalance: [{ name: 'id', type: FieldMetadataType.UUID }],
   salaryStructure: [{ name: 'id', type: FieldMetadataType.UUID }],
   salaryComponent: [{ name: 'name', type: FieldMetadataType.TEXT }],
-  payslip: [{ name: 'id', type: FieldMetadataType.UUID }],
+  payslip: [
+    { name: 'id', type: FieldMetadataType.UUID },
+    { name: 'paymentReference', type: FieldMetadataType.TEXT },
+  ],
   payslipLine: [{ name: 'label', type: FieldMetadataType.TEXT }],
   payrollAdjustment: [{ name: 'id', type: FieldMetadataType.UUID }],
-  payment: [{ name: 'id', type: FieldMetadataType.UUID }],
+  payment: [
+    { name: 'id', type: FieldMetadataType.UUID },
+    { name: 'reference', type: FieldMetadataType.TEXT },
+    { name: 'notes', type: FieldMetadataType.TEXT },
+  ],
 } satisfies {
   [ObjectName in AllStandardObjectName]: {
     name: AllStandardObjectFieldName<ObjectName>;

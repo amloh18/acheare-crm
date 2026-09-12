@@ -18,6 +18,14 @@ export const createWorkspace = async ({
   queryRunner,
   createWorkspaceInput,
 }: SeedWorkspaceArgs) => {
+  // The workspace→application FK (FK_3b1acb13a5dac9956d1a4b32755) blocks
+  // workspace insertion before the application record exists.
+  // The seeder creates the application AFTER the workspace, so we drop
+  // the FK, insert the workspace, and let TypeORM/migrations recreate it.
+  await queryRunner.query(
+    `ALTER TABLE "${schemaName}"."workspace" DROP CONSTRAINT IF EXISTS "FK_3b1acb13a5dac9956d1a4b32755"`,
+  );
+
   await queryRunner.manager
     .createQueryBuilder()
     .insert()

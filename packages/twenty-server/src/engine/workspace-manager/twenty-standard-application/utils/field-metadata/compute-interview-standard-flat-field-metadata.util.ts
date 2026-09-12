@@ -402,7 +402,7 @@ export const buildInterviewStandardFlatFieldMetadatas = ({
         }),
       ),
       icon: 'IconCalendarStats',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

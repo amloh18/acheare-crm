@@ -2033,6 +2033,7 @@ export const STANDARD_OBJECTS = {
         viewFieldNames: [
           'title',
           'employee',
+          'assignedTo',
           'category',
           'isRequired',
           'dueDate',
@@ -2174,6 +2175,7 @@ export const STANDARD_OBJECTS = {
           'id',
           'employee',
           'workDate',
+          'shift',
           'status',
           'firstCheckIn',
           'lastCheckOut',
@@ -2189,6 +2191,7 @@ export const STANDARD_OBJECTS = {
         viewFieldNames: [
           'employee',
           'workDate',
+          'shift',
           'status',
           'firstCheckIn',
           'lastCheckOut',
@@ -2232,6 +2235,7 @@ export const STANDARD_OBJECTS = {
           'employee',
           'workDate',
           'status',
+          'reviewedBy',
           'requestedCheckIn',
           'requestedCheckOut',
           'reason',
@@ -2248,6 +2252,7 @@ export const STANDARD_OBJECTS = {
           'requestedCheckOut',
           'reason',
           'status',
+          'reviewedBy',
           'reviewedAt',
           'reviewNotes',
           'createdAt',
@@ -2334,6 +2339,7 @@ export const STANDARD_OBJECTS = {
           'endDate',
           'days',
           'status',
+          'reviewedBy',
         ],
       }),
       leaveRequestRecordPageFields: buildStandardObjectRecordPageFieldsView({
@@ -2348,6 +2354,7 @@ export const STANDARD_OBJECTS = {
           'days',
           'reason',
           'status',
+          'reviewedBy',
           'reviewedAt',
           'reviewNotes',
           'createdAt',
@@ -2790,6 +2797,7 @@ export const STANDARD_OBJECTS = {
         viewFieldNames: [
           'name',
           'status',
+          'departmentHead',
           'createdAt',
         ],
       }),
@@ -2801,6 +2809,7 @@ export const STANDARD_OBJECTS = {
           'name',
           'description',
           'status',
+          'departmentHead',
           'createdAt',
           'createdBy',
           'updatedAt',
@@ -2820,10 +2829,10 @@ export const STANDARD_OBJECTS = {
     fields: STANDARD_OBJECT_FIELDS.location,
     indexes: {
       statusIndex: {
-        universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890140',
+        universalIdentifier: '3f2fcf24-1a6c-56cf-9f26-c645fe1c4a56',
       },
       searchVectorGinIndex: {
-        universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890141',
+        universalIdentifier: 'e89bc9dc-5114-52f8-b25a-3d28003f48b2',
       },
     },
     views: {

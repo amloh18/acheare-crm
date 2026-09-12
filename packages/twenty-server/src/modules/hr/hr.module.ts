@@ -13,6 +13,7 @@ import { AttendanceResolver } from 'src/modules/hr/resolvers/attendance.resolver
 import { LeaveResolver } from 'src/modules/hr/resolvers/leave.resolver';
 import { PayrollResolver } from 'src/modules/hr/resolvers/payroll.resolver';
 import { EmployeeLifecycleResolver } from 'src/modules/hr/resolvers/employee-lifecycle.resolver';
+import { AnnouncementResolver } from 'src/modules/hr/resolvers/announcement.resolver';
 
 @Module({
   providers: [
@@ -29,6 +30,7 @@ import { EmployeeLifecycleResolver } from 'src/modules/hr/resolvers/employee-lif
     LeaveResolver,
     PayrollResolver,
     EmployeeLifecycleResolver,
+    AnnouncementResolver,
   ],
   exports: [
     EmployeeLifecycleService,

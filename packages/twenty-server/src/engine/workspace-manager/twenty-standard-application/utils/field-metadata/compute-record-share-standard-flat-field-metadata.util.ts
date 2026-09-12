@@ -141,7 +141,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconAbc',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,
@@ -166,7 +166,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconAbc',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,
@@ -191,7 +191,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconAbc',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,
@@ -216,7 +216,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconUsers',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
       options: [
         {
@@ -273,7 +273,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconLock',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
       options: [
         {
@@ -327,7 +327,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconHistory',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
       options: [
         {
@@ -390,7 +390,7 @@ export const buildRecordShareStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconAbc',
       isSystem: true,
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,

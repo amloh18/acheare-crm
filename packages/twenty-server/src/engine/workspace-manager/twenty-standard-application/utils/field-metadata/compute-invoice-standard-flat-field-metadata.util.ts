@@ -226,7 +226,7 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconTag',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -319,7 +319,7 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'DRAFT',
+      defaultValue: "'DRAFT'",
       options: [
               {
                       "id": "b1f2cd1a-1b8f-4c5d-8000-00f2cd1a1b8f",
@@ -566,9 +566,8 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.taskTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'taskTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -599,9 +598,8 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.noteTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'noteTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -632,9 +630,8 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.attachment.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'attachments',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -665,9 +662,8 @@ export const buildInvoiceStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.timelineActivity.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'timelineActivities',
       isSystemSideEffect: true,
       label: i18nLabel(

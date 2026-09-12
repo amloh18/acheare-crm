@@ -9,7 +9,14 @@ import { Section } from 'twenty-ui/layout';
 import { H2Title } from 'twenty-ui/typography';
 import { MainButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
-import { IconLogin2, IconLogout, IconClock, IconCalendar, IconCurrencyDollar, IconInbox } from 'twenty-ui/icon';
+import {
+  IconLogin2,
+  IconLogout,
+  IconClock,
+  IconCalendar,
+  IconCurrencyDollar,
+  IconInbox,
+} from 'twenty-ui/icon';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { RecordIndexSkeletonLoader } from '@/object-record/record-index/components/RecordIndexSkeletonLoader';
 
@@ -54,6 +61,69 @@ const StyledButtonRow = styled.div`
   margin-top: ${themeCssVariables.spacing[2]};
 `;
 
+const StyledList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${themeCssVariables.spacing[3]};
+  padding: ${themeCssVariables.spacing[2]} 0;
+  border-bottom: 1px solid ${themeCssVariables.border.color.light};
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+`;
+
+const StyledRowMain = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+`;
+
+const StyledRowTitle = styled.div`
+  color: ${themeCssVariables.font.color.primary};
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const StyledRowMeta = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: 0.8rem;
+`;
+
+const StyledRowValue = styled.div`
+  color: ${themeCssVariables.font.color.primary};
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+`;
+
+const formatDate = (value: string | null | undefined) =>
+  value ? new Date(value).toLocaleDateString() : '—';
+
+const formatAmount = (
+  amountMicros: number | null | undefined,
+  currencyCode: string | null | undefined,
+) => {
+  if (amountMicros === null || amountMicros === undefined) {
+    return '—';
+  }
+
+  return new Intl.NumberFormat(undefined, {
+    style: currencyCode ? 'currency' : 'decimal',
+    currency: currencyCode ?? undefined,
+  }).format(amountMicros / 1_000_000);
+};
+
 export const MyWorkspacePage = () => {
   const { t } = useLingui();
   const { data, loading, refetch } = useMyWorkspaceData();
@@ -94,6 +164,38 @@ export const MyWorkspacePage = () => {
       </PageContainer>
     );
   }
+
+  const pendingLeaveRequestList: {
+    id: string;
+    startDate: string | null;
+    endDate: string | null;
+    days: number | null;
+    status: string | null;
+  }[] = workspaceData?.pendingLeaveRequestList ?? [];
+
+  const leaveBalanceList: {
+    id: string;
+    year: number | null;
+    entitled: number;
+    used: number;
+    pending: number;
+    available: number;
+  }[] = workspaceData?.leaveBalanceList ?? [];
+
+  const recentPayslipList: {
+    id: string;
+    netPayAmountMicros: number | null;
+    currencyCode: string | null;
+    paymentStatus: string | null;
+    paidAt: string | null;
+  }[] = workspaceData?.recentPayslipList ?? [];
+
+  const announcementList: {
+    id: string;
+    title: string;
+    body: string | null;
+    publishAt: string | null;
+  }[] = workspaceData?.announcementList ?? [];
 
   return (
     <PageContainer>
@@ -169,6 +271,100 @@ export const MyWorkspacePage = () => {
             <StyledCardSubtext>{t`Pending tasks`}</StyledCardSubtext>
           </StyledCard>
         </StyledGrid>
+      </Section>
+
+      <Section>
+        <H2Title title={t`My Leave`} />
+        {pendingLeaveRequestList.length === 0 ? (
+          <StyledCardSubtext>{t`No pending leave requests`}</StyledCardSubtext>
+        ) : (
+          <StyledList>
+            {pendingLeaveRequestList.map((leaveRequest) => (
+              <StyledRow key={leaveRequest.id}>
+                <StyledRowMain>
+                  <StyledRowTitle>
+                    {formatDate(leaveRequest.startDate)} –{' '}
+                    {formatDate(leaveRequest.endDate)}
+                  </StyledRowTitle>
+                  <StyledRowMeta>
+                    {leaveRequest.days ?? 0} {t`days`}
+                  </StyledRowMeta>
+                </StyledRowMain>
+                <StyledRowValue>{leaveRequest.status ?? '—'}</StyledRowValue>
+              </StyledRow>
+            ))}
+          </StyledList>
+        )}
+
+        {leaveBalanceList.length > 0 && (
+          <StyledList>
+            {leaveBalanceList.map((balance) => (
+              <StyledRow key={balance.id}>
+                <StyledRowMain>
+                  <StyledRowTitle>
+                    {t`Leave balance`} {balance.year ?? ''}
+                  </StyledRowTitle>
+                  <StyledRowMeta>
+                    {t`Entitled`} {balance.entitled} · {t`Used`} {balance.used}{' '}
+                    · {t`Pending`} {balance.pending}
+                  </StyledRowMeta>
+                </StyledRowMain>
+                <StyledRowValue>
+                  {balance.available} {t`days`}
+                </StyledRowValue>
+              </StyledRow>
+            ))}
+          </StyledList>
+        )}
+      </Section>
+
+      <Section>
+        <H2Title title={t`My Payslips`} />
+        {recentPayslipList.length === 0 ? (
+          <StyledCardSubtext>{t`No payslips yet`}</StyledCardSubtext>
+        ) : (
+          <StyledList>
+            {recentPayslipList.map((payslip) => (
+              <StyledRow key={payslip.id}>
+                <StyledRowMain>
+                  <StyledRowTitle>
+                    {formatAmount(
+                      payslip.netPayAmountMicros,
+                      payslip.currencyCode,
+                    )}
+                  </StyledRowTitle>
+                  <StyledRowMeta>
+                    {payslip.paidAt
+                      ? t`Paid on ${formatDate(payslip.paidAt)}`
+                      : t`Awaiting payment`}
+                  </StyledRowMeta>
+                </StyledRowMain>
+                <StyledRowValue>{payslip.paymentStatus ?? '—'}</StyledRowValue>
+              </StyledRow>
+            ))}
+          </StyledList>
+        )}
+      </Section>
+
+      <Section>
+        <H2Title title={t`Announcements`} />
+        {announcementList.length === 0 ? (
+          <StyledCardSubtext>{t`No announcements`}</StyledCardSubtext>
+        ) : (
+          <StyledList>
+            {announcementList.map((announcement) => (
+              <StyledRow key={announcement.id}>
+                <StyledRowMain>
+                  <StyledRowTitle>{announcement.title}</StyledRowTitle>
+                  <StyledRowMeta>{announcement.body ?? ''}</StyledRowMeta>
+                </StyledRowMain>
+                <StyledRowValue>
+                  {formatDate(announcement.publishAt)}
+                </StyledRowValue>
+              </StyledRow>
+            ))}
+          </StyledList>
+        )}
       </Section>
     </PageContainer>
   );

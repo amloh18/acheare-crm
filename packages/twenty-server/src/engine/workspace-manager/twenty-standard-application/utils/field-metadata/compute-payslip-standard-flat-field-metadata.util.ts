@@ -290,7 +290,7 @@ export const buildPayslipStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'INR',
+      defaultValue: "'INR'",
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -526,7 +526,7 @@ export const buildPayslipStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'PENDING',
+      defaultValue: "'PENDING'",
       options: [
               {
                       "id": "c6abcde5-7d4b-4e1f-8000-00abcde57d4b",

@@ -395,7 +395,7 @@ export const buildWorkflowRunStandardFlatFieldMetadatas = ({
         }),
       ),
       icon: 'IconHierarchy2',
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,

@@ -346,6 +346,26 @@ The existing `Settings → Setup Center` page was a read-only list of **11 hardc
 3. `NODE_OPTIONS="--max-old-space-size=12288" npx tsc -p tsconfig.json --noEmit` per package. Do **not** use `nx run twenty-*:typecheck` — it depends on `^build` and dies in this environment on `SAFE_DELETE_BULK_CONFIRM_REQUIRED`.
 4. `npx jest --config jest.config.mjs <pattern>`; the shared standard-object snapshot needs `-u` after any deliberate `STANDARD_OBJECT_FIELDS` change.
 
+### Phase 6 — metadata close-out, HR self-service, payroll tests, roles, search ✅ (2026-09-12)
+
+Closed the outstanding items from the HR/Payroll gap report and the metadata workarounds taken on 2026-09-12.
+
+**Metadata (Phase 2).** The five fields whose builders were missing are now built and back in views: `department.departmentHead`, `attendanceDay.shift`, `onboardingItem.assignedTo`, `attendanceCorrection.reviewedBy`, `leaveRequest.reviewedBy` — each with its reverse side on `workspaceMember`/`shift` (`onboardingItems`, `attendanceCorrections`, `leaveRequests`, `departments`, `attendanceDays`). The workaround that removed those fields from `allAttendanceDays`, `allOnboardingItems`, `allAttendanceCorrections`, `allLeaveRequests`, `departmentRecordPageFields` etc. is reverted, so the record pages show the relations again. `employee.manager`, `team.department` and `team.teamLead` stay allowlisted as declared-but-not-built: Twenty's standard-app builder has no self-relation/reverse-field support for them yet.
+
+**Self-service frontend (Phase 3).** `myWorkspaceData` returned only counts. It now returns the underlying lists (pending leave requests, leave balances with an `available` total, recent payslips with currency-formatted net pay, active announcements) and `MyWorkspacePage` renders them under My Leave / My Payslips / Announcements sections.
+
+**API surface (Phase 4).** `MyWorkspaceService.publishAnnouncement` / `getAnnouncementsForEmployee` were unreachable: they are now exposed through a new `AnnouncementResolver` (`publishAnnouncement`, `announcementsForEmployee`) registered in `HrModule`. The first service-level tests for this domain were added (`payroll-calculation.service.spec.ts`, 9 cases) using an in-memory workspace repository harness.
+
+**Two real bugs found and fixed.**
+- **Payroll proration overstated.** `daysBetween` did a raw millisecond diff + 1 over a period that ends at `…T23:59:59Z`, so a *full* month prorated at 32/31 (every payslip paid ~3.2% extra) and the day count also depended on the server timezone. It now counts inclusive calendar days across UTC day boundaries.
+- **Reviewer attribution.** `approveLeave` / `rejectLeave` / `reviewAttendanceCorrection` passed `user.id` into `reviewedById`, which is a `workspaceMember` relation. They now use `@AuthWorkspaceMemberId()`.
+
+**Roles (Phase 5).** Non-admin standard roles are now shipped with every workspace: `Recruiter`, `HR Manager`, `Finance`, with deterministic universal identifiers (`getRoleUniversalIdentifier`). Object-level and field-level permissions are *not* part of the standard-app sync pipeline (`TWENTY_STANDARD_ALL_METADATA_NAME` carries `role` but not `objectPermission`/`fieldPermission`), so per-object/per-field grants remain workspace configuration in Settings → Roles. Extending the pipeline is the next step for real least-privilege defaults.
+
+**Search (Phase 6).** The HR objects were already indexed, but several had a UUID-only search field. `employee.workLocation`, `leaveRequest.reason`, `attendanceCorrection.reason`/`reviewNotes`, `payslip.paymentReference`, `payment.reference`/`notes`, `invoice.notes` were added to `SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME`.
+
+**Verified.** `twenty-shared:build` + 235 suites / 1905 tests green (one snapshot updated), `twenty-server` parity + standard-application + hr suites green (18 suites / 87 tests), `twenty-server` and `twenty-front` typecheck showing only the pre-existing upstream errors.
+
 ### Deliberate deferrals
 - **Dashboard-record-level hiding** (beyond widget level) is still open: widgets are filtered, but a dashboard that is *entirely* gated is hidden rather than deleted, and there is no per-dashboard management UI. The Setup Center now manages features but not dashboards.
 - `generated-metadata/graphql.ts` was hand-mirrored (codegen needs a live server). **Re-run `codegen-metadata.cjs` with the server up to confirm no drift.**

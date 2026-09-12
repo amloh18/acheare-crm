@@ -13,6 +13,16 @@ import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
 import { MyWorkspaceService } from 'src/modules/hr/services/my-workspace.service';
 import { MyWorkspaceDataDTO } from 'src/modules/hr/dtos/my-workspace.dto';
 
+const toIsoStringOrNull = (value: unknown): string | null => {
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  const date = new Date(value as string | number | Date);
+
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+};
+
 @UseGuards(WorkspaceAuthGuard, UserAuthGuard)
 @UsePipes(ResolverValidationPipe)
 @UseFilters(PreventNestToAutoLogGraphqlErrorsFilter)
@@ -33,26 +43,58 @@ export class MyWorkspaceResolver {
     const employee = data.employee;
     const attendanceToday = data.attendanceToday;
 
+    const leaveBalanceList = data.leaveBalances.map((balance) => ({
+      id: balance.id,
+      leaveTypeId: balance.leaveTypeId ?? null,
+      year: balance.year ?? null,
+      entitled: balance.entitled ?? 0,
+      used: balance.used ?? 0,
+      pending: balance.pending ?? 0,
+      available:
+        (balance.entitled ?? 0) -
+        (balance.used ?? 0) -
+        (balance.pending ?? 0),
+    }));
+
     return {
       hasEmployeeRecord: employee !== null,
       employeeId: employee?.id ?? null,
       attendanceStatus: attendanceToday?.status ?? null,
-      firstCheckIn: attendanceToday?.firstCheckIn
-        ? new Date(attendanceToday.firstCheckIn as unknown as string).toISOString()
-        : null,
-      lastCheckOut: attendanceToday?.lastCheckOut
-        ? new Date(attendanceToday.lastCheckOut as unknown as string).toISOString()
-        : null,
+      firstCheckIn: toIsoStringOrNull(attendanceToday?.firstCheckIn),
+      lastCheckOut: toIsoStringOrNull(attendanceToday?.lastCheckOut),
       workedMinutes: attendanceToday?.workedMinutes ?? null,
       pendingLeaveRequests: data.pendingLeaveRequests.length,
-      leaveBalanceDays: data.leaveBalances.reduce(
-        (sum, b) =>
-          sum +
-          ((b.entitled || 0) - (b.used || 0) - (b.pending || 0)),
+      leaveBalanceDays: leaveBalanceList.reduce(
+        (sum, balance) => sum + balance.available,
         0,
       ),
       recentPayslipCount: data.recentPayslips.length,
       announcementCount: data.announcements.length,
+      pendingLeaveRequestList: data.pendingLeaveRequests.map((request) => ({
+        id: request.id,
+        leaveTypeId: request.leaveTypeId ?? null,
+        startDate: toIsoStringOrNull(request.startDate),
+        endDate: toIsoStringOrNull(request.endDate),
+        days: request.days ?? null,
+        status: request.status ?? null,
+        reason: request.reason ?? null,
+      })),
+      leaveBalanceList,
+      recentPayslipList: data.recentPayslips.map((payslip) => ({
+        id: payslip.id,
+        payrollPeriodId: payslip.payrollPeriodId ?? null,
+        netPayAmountMicros: payslip.netPay?.amountMicros ?? null,
+        currencyCode:
+          payslip.netPay?.currencyCode ?? payslip.currency ?? null,
+        paymentStatus: payslip.paymentStatus ?? null,
+        paidAt: toIsoStringOrNull(payslip.paidAt),
+      })),
+      announcementList: data.announcements.map((announcement) => ({
+        id: announcement.id,
+        title: announcement.title,
+        body: announcement.body ?? null,
+        publishAt: toIsoStringOrNull(announcement.publishAt),
+      })),
       stats: {
         pendingTasks: data.stats.pendingTasks,
         unreadNotifications: data.stats.unreadNotifications,

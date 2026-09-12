@@ -299,7 +299,7 @@ export const buildWorkflowAutomatedTriggerStandardFlatFieldMetadatas = ({
         }),
       ),
       icon: 'IconSettings',
-      isNullable: false,
+      isNullable: true,
       isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,

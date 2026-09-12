@@ -257,7 +257,7 @@ export const buildAttendanceCorrectionStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconCalendarEvent',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -326,7 +326,7 @@ export const buildAttendanceCorrectionStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconTag',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -350,7 +350,7 @@ export const buildAttendanceCorrectionStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'PENDING',
+      defaultValue: "'PENDING'",
       options: [
               {
                       "id": "d1b9c7e0-5a2f-4c9d-8000-00b9c7e05a2f",
@@ -450,6 +450,37 @@ export const buildAttendanceCorrectionStandardFlatFieldMetadatas = ({
       targetFieldName: 'correction',
       settings: {
         relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  reviewedBy: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'reviewedBy',
+      label: i18nLabel(
+        msg({ message: `Reviewed By`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Workspace member who reviewed`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCircle',
+      isNullable: true,
+      targetObjectName: 'workspaceMember',
+      targetFieldName: 'attendanceCorrections',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'reviewedById',
       },
     },
     standardObjectMetadataRelatedEntityIds,

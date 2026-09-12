@@ -225,7 +225,7 @@ export const buildDepartmentStandardFlatFieldMetadatas = ({
         }),
       ),
       icon: 'IconBuilding',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -272,17 +272,17 @@ export const buildDepartmentStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'ACTIVE',
+      defaultValue: "'ACTIVE'",
       options: [
         {
-          id: 'd4e5f6a7-b8c9-0123-def0-1234567890ab',
+          id: '4995e4cd-8d66-5532-885b-a04eabc16775',
           position: 0,
           value: 'ACTIVE',
           label: 'Active',
           color: 'green',
         },
         {
-          id: 'd4e5f6a7-b8c9-0123-def0-1234567890ac',
+          id: '58e6a077-bee2-5060-9b54-c40dd474097c',
           position: 1,
           value: 'INACTIVE',
           label: 'Inactive',
@@ -318,6 +318,37 @@ export const buildDepartmentStandardFlatFieldMetadatas = ({
       targetFieldName: 'department',
       settings: {
         relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  departmentHead: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'departmentHead',
+      label: i18nLabel(
+        msg({ message: `Department Head`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Department head workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUserCircle',
+      isNullable: true,
+      targetObjectName: 'workspaceMember',
+      targetFieldName: 'departments',
+      settings: {
+        relationType: RelationType.MANY_TO_ONE,
+        onDelete: RelationOnDeleteAction.SET_NULL,
+        joinColumnName: 'departmentHeadId',
       },
     },
     standardObjectMetadataRelatedEntityIds,

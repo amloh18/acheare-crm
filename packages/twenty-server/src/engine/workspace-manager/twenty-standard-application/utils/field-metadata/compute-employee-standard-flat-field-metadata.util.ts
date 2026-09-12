@@ -226,7 +226,7 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
               }),
             ),
       icon: 'IconTag',
-      isNullable: false,
+      isNullable: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
@@ -251,7 +251,7 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
             ),
       icon: 'IconTag',
       isNullable: false,
-      defaultValue: 'PRE_JOINING',
+      defaultValue: "'PRE_JOINING'",
       options: [
               {
                       "id": "b3f1a9c2-7e4d-4a1b-8000-00f1a9c27e4d",
@@ -891,9 +891,8 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.taskTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'taskTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -924,9 +923,8 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.noteTarget.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'noteTargets',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -957,9 +955,8 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.attachment.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'attachments',
       isSystemSideEffect: true,
       label: i18nLabel(
@@ -990,9 +987,8 @@ export const buildEmployeeStandardFlatFieldMetadatas = ({
     objectName,
     workspaceId,
     context: {
-      type: FieldMetadataType.MORPH_RELATION,
-      morphId:
-        STANDARD_OBJECTS.timelineActivity.morphIds.targetMorphId.morphId,
+      type: FieldMetadataType.RELATION,
+      morphId: null,
       fieldName: 'timelineActivities',
       isSystemSideEffect: true,
       label: i18nLabel(

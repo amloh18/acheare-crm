@@ -7,6 +7,7 @@ import { ResolverValidationPipe } from 'src/engine/core-modules/graphql/pipes/re
 import { type AuthContextUser } from 'src/engine/core-modules/auth/types/auth-context.type';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
 import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
+import { AuthWorkspaceMemberId } from 'src/engine/decorators/auth/auth-workspace-member-id.decorator';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
@@ -103,16 +104,18 @@ export class AttendanceResolver {
     };
   }
 
+  // reviewedBy is a workspaceMember relation: the reviewer must be identified
+  // by workspace member id, not by the (different) user id.
   @Mutation(() => AttendanceCorrectionDTO)
   async reviewAttendanceCorrection(
     @Args('input') input: ReviewAttendanceCorrectionInputDTO,
-    @AuthUser() user: AuthContextUser,
+    @AuthWorkspaceMemberId() workspaceMemberId: string,
     @AuthWorkspace() workspace: WorkspaceEntity,
   ): Promise<AttendanceCorrectionDTO> {
     const correction = await this.attendanceService.reviewCorrection(
       input.correctionId,
       input.approved,
-      user.id,
+      workspaceMemberId,
       input.reviewNotes || '',
       workspace.id,
     );

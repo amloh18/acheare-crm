@@ -61,10 +61,10 @@ export const STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS = {
   payrollAdjustment: '2f8b9ef0-80f6-4d21-b247-4c58a05db806',
   invoice: '1863b4d2-f24c-4e0f-bd84-6570d1436489',
   payment: 'bb30d658-2782-4dfa-b14f-88aac74e1e29',
-  designation: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+  designation: '13af9a05-a517-5dba-8fd1-b84e3df92d6a',
   department: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
   team: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
-  location: 'd4e5f6a7-b8c9-0123-defa-234567890123',
+  location: '5efc8bfe-d939-5eed-bfe0-fb9712387e26',
 } as const;
 
 export type StandardObjectWithUniversalIdentifierName =

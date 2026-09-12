@@ -20,10 +20,14 @@ import {
   IconX,
 } from '@tabler/icons-react';
 
-export function AchareCinemaLanding() {
-  // Workflow Step State (Signature Interaction #1)
-  const [workflowStep, setWorkflowStep] = useState(0);
+const SectionDivider = () => (
+  <div className="section-divider">
+    <span className="section-divider-crosshair-left">+</span>
+    <span className="section-divider-crosshair-right">+</span>
+  </div>
+);
 
+export function AchareCinemaLanding() {
   // Candidate pipeline simulation (Section 01)
   const [candAdvancementState, setCandAdvancementState] = useState(0);
 
@@ -35,9 +39,6 @@ export function AchareCinemaLanding() {
 
   // Documents Stack Hover State (Section 06)
   const [docHovered, setDocHovered] = useState(false);
-
-  // Billing Toggle State
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
 
   // Testimonials Carousel State
   const [testimonialIndex, setTestimonialIndex] = useState(0);
@@ -51,7 +52,6 @@ export function AchareCinemaLanding() {
 
   // Catalyze AI Suite Interactive States
   const [approachTab, setApproachTab] = useState<number>(1);
-  const [puzzleOffset, setPuzzleOffset] = useState({ x: 0, y: 0, rot: 0 });
   const [isoAngle, setIsoAngle] = useState({ rotX: 54, rotZ: -34 });
   const [barsAnimated, setBarsAnimated] = useState(false);
 
@@ -61,51 +61,6 @@ export function AchareCinemaLanding() {
     }, 400);
     return () => clearTimeout(timer);
   }, []);
-
-  const workflowStages = [
-    {
-      badge: 'STAGE 01 • PROSPECTIVE RELATIONSHIP',
-      title: 'Discovered as prospective talent in Enterprise CRM.',
-      desc: 'Initial referral source captured, LinkedIn profile synced, and engagement timeline created with zero manual data entry.',
-      name: 'Aisha Khan',
-      status: 'Status: CRM Lead • Inbound',
-    },
-    {
-      badge: 'STAGE 02 • ACTIVE CANDIDATE PIPELINE',
-      title: 'Review portfolio and coordinate interview panel.',
-      desc: 'Interview scorecards, automated calendar sync, and hiring committee reviews conducted inside the Recruitment module.',
-      name: 'Aisha Khan',
-      status: 'Status: Interviewing • Final Round',
-    },
-    {
-      badge: 'STAGE 03 • OFFER DISPATCH & SIGNATURE',
-      title: 'Automated offer letter and compensation agreement.',
-      desc: 'Digital signature tracked in the Smart Vault. Salary and benefit parameters automatically populate onboarding queues.',
-      name: 'Aisha Khan',
-      status: 'Status: Offer Signed ✓',
-    },
-    {
-      badge: 'STAGE 04 • ACTIVE EMPLOYEE PROFILE',
-      title: 'Converted instantly into employee directory.',
-      desc: 'Equipment provisioned, department head assigned, and company directory updated without re-typing a single field.',
-      name: 'Aisha Khan',
-      status: 'Status: Active • Senior Designer',
-    },
-    {
-      badge: 'STAGE 05 • TIME & ATTENDANCE TRACKING',
-      title: 'Daily check-ins and verified shift hours.',
-      desc: 'Real-time attendance logs and project time allocation fed automatically into the bi-weekly payroll calculator.',
-      name: 'Aisha Khan',
-      status: 'Status: 38.2 hrs logged this week',
-    },
-    {
-      badge: 'STAGE 06 • PAYROLL & AUDIT VAULT',
-      title: 'Direct deposit executed with encrypted tax records.',
-      desc: 'Salary deposited, tax withholdings remitted, and encrypted digital pay stubs deposited into employee self-service portal.',
-      name: 'Aisha Khan',
-      status: 'Status: Payroll Run Complete',
-    },
-  ];
 
   const testimonials = [
     {
@@ -229,6 +184,37 @@ export function AchareCinemaLanding() {
         .comp-bar-height {
           transition: height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .editorial-canvas {
+          border-left: 1px solid #E6E7E3;
+          border-right: 1px solid #E6E7E3;
+        }
+        .section-divider {
+          position: relative;
+          width: calc(100% + 2px);
+          margin-left: -1px;
+          margin-right: -1px;
+          border-top: 1px solid #E6E7E3;
+        }
+        .section-divider-crosshair-left {
+          position: absolute;
+          left: -6px;
+          top: -7px;
+          font-size: 11px;
+          line-height: 1;
+          font-family: monospace;
+          color: #9A9590;
+          user-select: none;
+        }
+        .section-divider-crosshair-right {
+          position: absolute;
+          right: -6px;
+          top: -7px;
+          font-size: 11px;
+          line-height: 1;
+          font-family: monospace;
+          color: #9A9590;
+          user-select: none;
+        }
       `}</style>
 
       {/* 1. EDITORIAL NAVBAR */}
@@ -271,31 +257,26 @@ export function AchareCinemaLanding() {
             <a href="#faq-section" style={{ color: 'inherit', textDecoration: 'none' }}>FAQ</a>
           </nav>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <button
-              onClick={() => setDemoModalOpen(true)}
-              className="achare-btn-secondary"
-              style={{ padding: '0.5rem 1rem', fontSize: '13px' }}
-            >
-              Book a Demo
-            </button>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <a
-              href="#pricing-section"
-              className="achare-btn-primary"
-              style={{ padding: '0.5rem 1rem', fontSize: '13px' }}
+              href="http://localhost:3001"
+              className="achare-btn-secondary"
+              style={{ padding: '0.5rem 1.25rem', fontSize: '13px', textDecoration: 'none' }}
             >
-              <span>Buy Achare</span>
-              <IconArrowRight size={14} />
+              Login
             </a>
           </div>
         </div>
       </header>
 
-      {/* 2. HERO SECTION */}
-      <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '3rem 2rem 5rem 2rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '3rem', alignItems: 'center' }}>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+      {/* EDITORIAL CANVAS WRAPPER */}
+      <main className="editorial-canvas" style={{ maxWidth: '1320px', margin: '0 auto', overflowX: 'hidden' }}>
+
+        {/* 2. HERO SECTION */}
+        <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '2.5rem 2rem 3rem 2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div
               style={{
                 display: 'inline-flex',
@@ -467,75 +448,162 @@ export function AchareCinemaLanding() {
         </div>
       </section>
 
-      {/* 3. SIGNATURE INTERACTION #1: THE CONNECTED WORKFLOW */}
-      <section id="connected-workflow" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 5rem 2rem' }}>
-        <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', borderRadius: '28px', padding: '3rem', boxShadow: '0 2px 8px rgba(20, 25, 40, 0.05)' }}>
-          
-          <div style={{ maxWidth: '40rem', marginBottom: '2.5rem' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, color: '#4169F5', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-              ACHARE SIGNATURE ARCHITECTURE
+      {/* SECTION DIVIDER: HERO ➔ WHY GROWING TEAMS SWITCH */}
+      <SectionDivider />
+
+      {/* 2. WHY GROWING TEAMS SWITCH TO ACHARE - COMPARATIVE BARS */}
+      <section
+        id="why-achare"
+        style={{
+          maxWidth: '1240px',
+          margin: '0 auto',
+          padding: '3rem 2rem',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
+          <div>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.35rem 0.85rem',
+                borderRadius: '9999px',
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E6E7E3',
+                fontSize: '11px',
+                fontWeight: 800,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#111318',
+              }}
+            >
+              <span style={{ color: '#D97706' }}>✦</span> THE PROBLEM
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#111318', letterSpacing: '-0.03em', margin: '0 0 1rem 0' }}>
-              One person. One record.<br />One unified timeline.
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 800, color: '#111318', letterSpacing: '-0.035em', lineHeight: 1.08, margin: '0.75rem 0 0 0', maxWidth: '44rem' }}>
+              Why growing teams switch to Achare
             </h2>
-            <p style={{ fontSize: '15px', color: '#626873', lineHeight: 1.6, margin: 0 }}>
-              Stop pasting candidate records into spreadsheets, re-entering employee data into payroll, and chasing contracts across email.
+            <p style={{ fontSize: '16px', color: '#626873', maxWidth: '36rem', lineHeight: 1.6, margin: '0.75rem 0 0 0' }}>
+              Most teams are stuck juggling 5+ disconnected tools. Here's why they consolidate.
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '2rem' }}>
-            {['1. Lead / CRM', '2. Applicant', '3. Offer Accepted', '4. Employee', '5. Time Tracking', '6. Payroll & Vault'].map((title, idx) => {
-              const active = workflowStep === idx;
-              return (
-                <button
-                  key={title}
-                  onClick={() => setWorkflowStep(idx)}
-                  style={{
-                    backgroundColor: active ? '#E4EBFF' : '#F8F8F5',
-                    border: active ? '2px solid #4169F5' : '1px solid #E6E7E3',
-                    padding: '0.85rem',
-                    borderRadius: '16px',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    color: active ? '#4169F5' : '#626873',
-                    fontWeight: 600,
-                    fontSize: '12px',
-                  }}
-                >
-                  <span style={{ fontSize: '10px', color: '#9297A1', display: 'block', textTransform: 'uppercase' }}>Stage 0{idx + 1}</span>
-                  <span>{title}</span>
-                </button>
-              );
-            })}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', padding: '0.5rem 1rem', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, color: '#111318' }}>
+            <span>% of operations leaders surveyed</span>
+            <span style={{ color: '#D97706', fontWeight: 800, fontSize: '14px' }}>✳</span>
+          </div>
+        </div>
+
+        {/* 3 Comparative Percentage Columns with Side Content Dividers */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem', marginTop: '3.5rem', alignItems: 'flex-end' }}>
+          
+          {/* Column 1: 73% — Duplicate Data Entry */}
+          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', borderRight: '1px solid #E6E7E3', paddingRight: '1.5rem' }}>
+            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
+              73%
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
+              Duplicate data entry
+            </h3>
+            <div style={{ height: '280px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
+              <div
+                className="comp-bar-height"
+                style={{
+                  height: barsAnimated ? '100%' : '0px',
+                  width: '100%',
+                  borderRadius: '16px',
+                  backgroundColor: '#D97706',
+                  boxShadow: '0 8px 24px rgba(217, 119, 6, 0.25)',
+                  position: 'relative',
+                  transition: 'height 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                }}
+              >
+                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#FFFFFF', fontSize: '24px' }}>
+                  📋
+                </div>
+                <div style={{ position: 'absolute', top: '16px', right: '16px', color: 'rgba(255,255,255,0.9)', fontFamily: 'monospace', fontSize: '11px', fontWeight: 700, backgroundColor: 'rgba(0,0,0,0.2)', padding: '4px 10px', borderRadius: '9999px' }}>
+                  #1 PAIN POINT
+                </div>
+              </div>
+            </div>
+            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
+              Copying candidate data into HR, then re-entering it into payroll — the same person's information typed 3+ times across disconnected tools.
+            </p>
           </div>
 
-          <div style={{ backgroundColor: '#F8F8F5', border: '1px solid #E6E7E3', borderRadius: '16px', padding: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-            <div style={{ maxWidth: '36rem' }}>
-              <div style={{ fontSize: '11px', fontWeight: 600, color: '#4169F5', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
-                {workflowStages[workflowStep].badge}
-              </div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#111318', margin: '0 0 0.5rem 0' }}>
-                {workflowStages[workflowStep].title}
-              </h3>
-              <p style={{ fontSize: '13px', color: '#626873', margin: 0, lineHeight: 1.6 }}>
-                {workflowStages[workflowStep].desc}
-              </p>
+          {/* Column 2: 61% — Paying for tool sprawl */}
+          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', borderRight: '1px solid #E6E7E3', paddingRight: '1.5rem', paddingLeft: '0.5rem' }}>
+            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
+              61%
             </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
+              Paying for tool sprawl
+            </h3>
+            <div style={{ height: '220px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
+              <div
+                className="comp-bar-height"
+                style={{
+                  height: barsAnimated ? '100%' : '0px',
+                  width: '100%',
+                  borderRadius: '16px',
+                  backgroundColor: '#1E293B',
+                  boxShadow: '0 6px 18px rgba(30, 41, 59, 0.2)',
+                  position: 'relative',
+                  transition: 'height 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s',
+                }}
+              >
+                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#94A3B8', fontSize: '14px', fontFamily: 'monospace', fontWeight: 700 }}>
+                  $$$
+                </div>
+              </div>
+            </div>
+            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
+              Separate CRM ($50/user), ATS ($80/user), HRIS ($40/user), time tracker ($10/user), and payroll ($20/user) — when one platform does all of it.
+            </p>
+          </div>
 
-            <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', padding: '1rem 1.25rem', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '240px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: '#E4EBFF', color: '#4169F5', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px' }}>
-                AK
-              </div>
-              <div style={{ fontSize: '12px' }}>
-                <div style={{ fontWeight: 700, color: '#111318' }}>{workflowStages[workflowStep].name}</div>
-                <div style={{ color: '#626873' }}>{workflowStages[workflowStep].status}</div>
-                <div style={{ color: '#36B978', fontWeight: 600, fontSize: '11px', marginTop: '2px' }}>● Record ID: ACH-9402</div>
+          {/* Column 3: 54% — Broken handoffs */}
+          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
+            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
+              54%
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
+              Broken handoffs
+            </h3>
+            <div style={{ height: '170px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
+              <div
+                className="comp-bar-height"
+                style={{
+                  height: barsAnimated ? '100%' : '0px',
+                  width: '100%',
+                  borderRadius: '16px',
+                  backgroundColor: '#F3F1ED',
+                  border: '2px solid #D1D5DB',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)',
+                  position: 'relative',
+                  transition: 'height 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s',
+                }}
+              >
+                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#626873', fontSize: '12px', fontFamily: 'monospace', fontWeight: 700 }}>
+                  BROKEN
+                </div>
               </div>
             </div>
+            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
+              Candidate data doesn't flow to onboarding. Timesheet hours don't reach payroll without manual export. Information falls through the cracks.
+            </p>
           </div>
 
         </div>
+
+        <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid #E6E7E3', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', fontSize: '12px', color: '#626873' }}>
+          <span>Source: Gartner State of Revenue Operations 2024 & internal Achare customer survey</span>
+          <span style={{ color: '#D97706', fontWeight: 700 }}>Survey of 1,200+ people & operations leaders at companies with 20–500 employees</span>
+        </div>
       </section>
+
+      {/* SECTION DIVIDER: WHY GROWING TEAMS SWITCH ➔ PLATFORM BENTO */}
+      <SectionDivider />
 
       {/* 4.1 OUR PLATFORM - 5-CARD BENTO GRID (CATALYZE AI REFERENCE 1) */}
       <section
@@ -543,7 +611,7 @@ export function AchareCinemaLanding() {
         style={{
           maxWidth: '1240px',
           margin: '0 auto',
-          padding: '4rem 2rem',
+          padding: '3rem 2rem',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -897,187 +965,8 @@ export function AchareCinemaLanding() {
         </div>
       </section>
 
-      {/* 4.2 HARNESS UNTAPPED DATA - 4-PIECE JIGSAW PUZZLE (CATALYZE AI REF 3) */}
-      <section
-        id="untapped-data"
-        style={{
-          maxWidth: '1240px',
-          margin: '0 auto',
-          padding: '4rem 2rem',
-          borderTop: '1px solid #E6E7E3',
-        }}
-      >
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
-          
-          {/* Col 1: Editorial Title & CTA */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.35rem 0.85rem',
-                borderRadius: '9999px',
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #E6E7E3',
-                fontSize: '11px',
-                fontWeight: 800,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: '#111318',
-                width: 'fit-content',
-              }}
-            >
-              <span style={{ color: '#10B981' }}>✦</span> DATA ADVANTAGE
-            </div>
-            <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 800, color: '#111318', letterSpacing: '-0.03em', lineHeight: 1.08, margin: 0 }}>
-              Harness Untapped Data
-            </h2>
-            <p style={{ fontSize: '15px', color: '#626873', lineHeight: 1.6, margin: 0 }}>
-              Legacy CRMs only look at internal contact notes. Achare bridges public signals, corporate events, and predictive timing into immediate outbound execution.
-            </p>
-            <div>
-              <button
-                onClick={() => setDemoModalOpen(true)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.75rem',
-                  backgroundColor: '#111318',
-                  color: '#FFFFFF',
-                  padding: '0.85rem 1.6rem',
-                  borderRadius: '9999px',
-                  fontWeight: 600,
-                  fontSize: '14px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
-                }}
-              >
-                <span>Book a demo</span>
-                <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px' }}>▶</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Col 2: Speech Bubble & Concept */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p style={{ fontSize: '14px', color: '#525866', lineHeight: 1.6, margin: 0 }}>
-              Traditional data vendors sell broad, outdated spreadsheets. Achare isolates the single missing piece: high-propensity buyers and candidates at the precise moment of transition.
-            </p>
-
-            <div
-              style={{
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #E6E7E3',
-                borderRadius: '16px',
-                padding: '1.25rem',
-                boxShadow: '0 2px 8px rgba(20, 25, 40, 0.05)',
-                position: 'relative',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 700, color: '#10B981', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10B981' }} />
-                <span>Unconstrained Signal</span>
-              </div>
-              <div style={{ fontWeight: 700, color: '#111318', fontSize: '14px' }}>
-                "Unconstrained data" ➔ "Constrained execution"
-              </div>
-              <div style={{ fontSize: '11px', color: '#626873', marginTop: '4px' }}>
-                Surfacing verified high-net-worth opportunities automatically
-              </div>
-            </div>
-          </div>
-
-          {/* Col 3: Interactive Jigsaw Puzzle */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const dx = (e.clientX - centerX) * 0.15;
-                const dy = (e.clientY - centerY) * 0.15;
-                setPuzzleOffset({ x: dx, y: dy, rot: dx * 0.04 });
-              }}
-              onMouseLeave={() => setPuzzleOffset({ x: 0, y: 0, rot: 0 })}
-              style={{
-                position: 'relative',
-                width: '340px',
-                height: '340px',
-                padding: '1rem',
-                backgroundColor: '#F5F6F2',
-                borderRadius: '24px',
-                border: '1px solid #E6E7E3',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <div style={{ position: 'relative', width: '280px', height: '280px' }}>
-                
-                {/* Floating Green Piece */}
-                <div
-                  className="puzzle-float-piece"
-                  style={{
-                    position: 'absolute',
-                    top: '-12px',
-                    left: '-12px',
-                    zIndex: 20,
-                    width: '145px',
-                    height: '145px',
-                    transform: `translate(${puzzleOffset.x}px, ${puzzleOffset.y}px) rotate(${puzzleOffset.rot}deg) scale(1.04)`,
-                  }}
-                >
-                  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-                    <path d="M 10 10 L 70 10 C 70 0, 90 0, 90 10 L 150 10 L 150 70 C 160 70, 160 90, 150 90 L 150 150 L 90 150 C 90 140, 70 140, 70 150 L 10 150 L 10 90 C 20 90, 20 70, 10 70 Z" fill="#10B981" stroke="#059669" strokeWidth="2"/>
-                  </svg>
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#FFFFFF', pointerEvents: 'none' }}>
-                    <span style={{ fontSize: '18px' }}>✦</span>
-                    <span style={{ fontSize: '12px', fontWeight: 900, lineHeight: 1.2, marginTop: '2px' }}>Qualified<br/>Prospects</span>
-                    <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#D1FAE5', marginTop: '2px', textTransform: 'uppercase' }}>Top 5% Intent</span>
-                  </div>
-                </div>
-
-                {/* Piece 2: Top Right */}
-                <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, width: '140px', height: '140px' }}>
-                  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-                    <path d="M 10 10 L 150 10 L 150 150 L 90 150 C 90 140, 70 140, 70 150 L 10 150 L 10 90 C 0 90, 0 70, 10 70 L 10 10 Z" fill="#FFFFFF" stroke="#E6E7E3" strokeWidth="2"/>
-                  </svg>
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#111318' }}>
-                    <span style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>Real-Time<br/>Triggers</span>
-                    <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#626873', marginTop: '2px' }}>Acquisitions</span>
-                  </div>
-                </div>
-
-                {/* Piece 3: Bottom Left */}
-                <div style={{ position: 'absolute', bottom: 0, left: 0, zIndex: 10, width: '140px', height: '140px' }}>
-                  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-                    <path d="M 10 10 L 70 10 C 70 20, 90 20, 90 10 L 150 10 L 150 70 C 160 70, 160 90, 150 90 L 150 150 L 10 150 L 10 10 Z" fill="#FFFFFF" stroke="#E6E7E3" strokeWidth="2"/>
-                  </svg>
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#111318' }}>
-                    <span style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>Predictive<br/>Scoring</span>
-                    <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#626873', marginTop: '2px' }}>ML Models</span>
-                  </div>
-                </div>
-
-                {/* Piece 4: Bottom Right */}
-                <div style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 10, width: '140px', height: '140px' }}>
-                  <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-                    <path d="M 10 10 L 150 10 L 150 150 L 10 150 L 10 90 C 0 90, 0 70, 10 70 L 10 10 Z" fill="#F9FAF7" stroke="#E6E7E3" strokeWidth="2"/>
-                  </svg>
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: '#111318' }}>
-                    <span style={{ fontSize: '14px', fontWeight: 800, lineHeight: 1.2 }}>Automated<br/>Outreach</span>
-                    <span style={{ fontSize: '8px', fontFamily: 'monospace', color: '#626873', marginTop: '2px' }}>Pipeline</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      {/* SECTION DIVIDER: PLATFORM BENTO ➔ WHY ACHARE */}
+      <SectionDivider />
 
       {/* 4.3 OUR APPROACH - DARK 3D ISOMETRIC GRID (CATALYZE AI REF 2) */}
       <section
@@ -1085,9 +974,11 @@ export function AchareCinemaLanding() {
         style={{
           maxWidth: '1240px',
           margin: '0 auto',
-          padding: '3rem 2rem',
+          padding: '2.5rem 2rem',
+          position: 'relative',
         }}
       >
+        <div id="connected-workflow" style={{ position: 'absolute', top: '-6rem', pointerEvents: 'none' }} />
         <div
           style={{
             backgroundColor: '#0B1017',
@@ -1100,10 +991,21 @@ export function AchareCinemaLanding() {
             boxShadow: '0 24px 60px rgba(0, 0, 0, 0.4)',
           }}
         >
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center', position: 'relative', zIndex: 10 }}>
-            
-            {/* Left Col: Stat & Tabs */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          {/* TOP ROW: Heading + Narrative (Left) & "5 tools → 1 platform" Card (Right) */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '2.5rem',
+              alignItems: 'center',
+              paddingBottom: '2.5rem',
+              borderBottom: '1px solid #1E293B',
+              position: 'relative',
+              zIndex: 10,
+            }}
+          >
+            {/* Left Col: Badge, Heading, Subtitle */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div
                 style={{
                   display: 'inline-flex',
@@ -1121,17 +1023,42 @@ export function AchareCinemaLanding() {
                   width: 'fit-content',
                 }}
               >
-                <span>✦</span> OUR APPROACH
+                <span>✦</span> WHY ACHARE
               </div>
 
-              {/* Stat Box */}
-              <div style={{ backgroundColor: '#131B26', border: '1px solid #1E293B', borderRadius: '16px', padding: '1.5rem' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.03em' }}>
-                  $68 Trillion
-                </div>
-                <p style={{ color: '#94A3B8', fontSize: '14px', lineHeight: 1.5, margin: '0.5rem 0 1rem 0' }}>
-                  in generational wealth, enterprise assets, and leadership transition is shifting over the next decade.
-                </p>
+              <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.03em', lineHeight: 1.1, margin: 0 }}>
+                One person. One record.<br />
+                <span style={{ color: '#34D399' }}>One unified timeline.</span>
+              </h2>
+
+              <p style={{ color: '#94A3B8', fontSize: '15px', lineHeight: 1.6, margin: 0, maxWidth: '34rem' }}>
+                Stop pasting candidate records into spreadsheets, re-entering employee data into payroll, and chasing contracts across email. Achare replaces 5 fragmented tools with a single connected thread from initial lead to seasoned executive.
+              </p>
+            </div>
+
+            {/* Right Col: "5 tools → 1 platform" Card Next to Heading */}
+            <div
+              style={{
+                backgroundColor: '#131B26',
+                border: '1px solid #1E293B',
+                borderRadius: '20px',
+                padding: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem' }}>
+                <span style={{ fontSize: '3.5rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.04em' }}>5</span>
+                <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#D97706' }}>tools</span>
+                <span style={{ fontSize: '1.75rem', fontWeight: 700, color: '#68D39A' }}>→</span>
+                <span style={{ fontSize: '3.5rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.04em' }}>1</span>
+                <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#34D399' }}>platform</span>
+              </div>
+              <p style={{ color: '#94A3B8', fontSize: '13px', lineHeight: 1.5, margin: 0 }}>
+                Consolidate your CRM, ATS, HR, Time Tracking, and Payroll into a single source of truth. Zero sync lag.
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                 <button
                   onClick={() => setDemoModalOpen(true)}
                   style={{
@@ -1140,7 +1067,7 @@ export function AchareCinemaLanding() {
                     gap: '0.5rem',
                     backgroundColor: '#10B981',
                     color: '#FFFFFF',
-                    padding: '0.65rem 1.25rem',
+                    padding: '0.6rem 1.2rem',
                     borderRadius: '10px',
                     fontWeight: 600,
                     fontSize: '13px',
@@ -1148,51 +1075,76 @@ export function AchareCinemaLanding() {
                     cursor: 'pointer',
                   }}
                 >
-                  <span>Sign Up</span>
-                  <IconArrowRight size={16} />
+                  <span>See Pricing</span>
+                  <IconArrowRight size={15} />
                 </button>
+                <div style={{ fontSize: '11px', fontFamily: 'monospace', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10B981' }} />
+                  CRM ➔ ATS ➔ HR ➔ PAY
+                </div>
               </div>
+            </div>
+          </div>
 
-              {/* 4 Tabs */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {[
-                  { num: 1, title: 'Big Data', stat: '40M+ Records', desc: 'Continuous ingestion across business registries, cap tables, real estate deeds, and talent market movements.' },
-                  { num: 2, title: 'Event-Driven', stat: 'Real-Time', desc: 'Instant webhook triggers fired the moment a liquidity event, merger, or key executive appointment occurs.' },
-                  { num: 3, title: 'Artificial Intelligence', stat: 'ML Scoring', desc: 'Predictive neural models evaluate propensity to engage, best-fit communication channel, and deal velocity.' },
-                  { num: 4, title: 'Predictive Analytics', stat: 'Daily Queue', desc: 'Prioritized outreach queues that feed directly into automated multi-channel sequences and CRM records.' },
-                ].map((t) => {
-                  const isActive = approachTab === t.num;
-                  return (
-                    <div
-                      key={t.num}
-                      onClick={() => setApproachTab(t.num)}
-                      style={{
-                        padding: '1rem',
-                        borderRadius: '12px',
-                        border: isActive ? '1px solid rgba(16, 185, 129, 0.5)' : '1px solid #1E293B',
-                        backgroundColor: isActive ? 'rgba(16, 185, 129, 0.1)' : 'rgba(19, 27, 38, 0.5)',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 700, color: isActive ? '#FFFFFF' : '#94A3B8', fontSize: '15px' }}>
-                          <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: isActive ? '#10B981' : '#334155', color: isActive ? '#000000' : '#E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>
-                            {t.num}
-                          </span>
-                          <span>{t.title}</span>
-                        </div>
-                        <span style={{ fontSize: '11px', fontFamily: 'monospace', color: isActive ? '#34D399' : '#64748B' }}>{t.stat}</span>
+          {/* BOTTOM ROW: 4 Tabs (Left) & 3D Isometric Visualization (Right) */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '3rem',
+              alignItems: 'center',
+              paddingTop: '2.5rem',
+              position: 'relative',
+              zIndex: 10,
+            }}
+          >
+            {/* Left Col: 4 Tabs with right border divider */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.75rem',
+                paddingRight: '1.5rem',
+                borderRight: '1px solid #1E293B',
+              }}
+            >
+              {[
+                { num: 1, title: 'Single Database', stat: 'PostgreSQL', desc: 'One shared PostgreSQL database powers every module. No sync jobs, no mapping layers, no stale copies.' },
+                { num: 2, title: 'Connected Records', stat: 'Zero Duplication', desc: 'A candidate record becomes an employee record. Interview notes flow into onboarding. Timesheets feed payroll. No manual handoffs.' },
+                { num: 3, title: 'Unified Timeline', stat: '6 Modules', desc: 'One continuous activity timeline from initial lead discovery to contract signing, daily time tracking, and bi-weekly payroll execution.' },
+                { num: 4, title: 'Open Source Core', stat: 'Full Access', desc: 'Inspect every line of code. Deploy on your own infrastructure. No vendor lock-in, ever.' },
+              ].map((t) => {
+                const isActive = approachTab === t.num;
+                return (
+                  <div
+                    key={t.num}
+                    onClick={() => setApproachTab(t.num)}
+                    style={{
+                      padding: '1rem',
+                      borderRadius: '12px',
+                      border: isActive ? '1px solid rgba(16, 185, 129, 0.5)' : '1px solid #1E293B',
+                      backgroundColor: isActive ? 'rgba(16, 185, 129, 0.1)' : 'rgba(19, 27, 38, 0.5)',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 700, color: isActive ? '#FFFFFF' : '#94A3B8', fontSize: '15px' }}>
+                        <span style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: isActive ? '#10B981' : '#334155', color: isActive ? '#000000' : '#E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 900 }}>
+                          {t.num}
+                        </span>
+                        <span>{t.title}</span>
                       </div>
-                      {isActive && (
-                        <p style={{ color: '#CBD5E1', fontSize: '12px', lineHeight: 1.5, margin: '0.5rem 0 0 2rem' }}>
-                          {t.desc}
-                        </p>
-                      )}
+                      <span style={{ fontSize: '11px', fontFamily: 'monospace', color: isActive ? '#34D399' : '#64748B' }}>{t.stat}</span>
                     </div>
-                  );
-                })}
-              </div>
+                    {isActive && (
+                      <p style={{ color: '#CBD5E1', fontSize: '12px', lineHeight: 1.5, margin: '0.5rem 0 0 2rem' }}>
+                        {t.desc}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Right Col: 3D Isometric Visualization */}
@@ -1324,160 +1276,15 @@ export function AchareCinemaLanding() {
         </div>
       </section>
 
-      {/* 4.4 WHY TEAMS CHOOSE ACHARE - COMPARATIVE BARS (CATALYZE AI REF 4) */}
-      <section
-        id="why-achare"
-        style={{
-          maxWidth: '1240px',
-          margin: '0 auto',
-          padding: '4rem 2rem',
-          borderTop: '1px solid #E6E7E3',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
-          <div>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.35rem 0.85rem',
-                borderRadius: '9999px',
-                backgroundColor: '#FFFFFF',
-                border: '1px solid #E6E7E3',
-                fontSize: '11px',
-                fontWeight: 800,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: '#111318',
-              }}
-            >
-              <span style={{ color: '#10B981' }}>✦</span> MARKET SHIFT
-            </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 800, color: '#111318', letterSpacing: '-0.035em', lineHeight: 1.08, margin: '0.75rem 0 0 0', maxWidth: '44rem' }}>
-              Why high-performing teams switch to Achare
-            </h2>
-            <p style={{ fontSize: '16px', color: '#626873', maxWidth: '36rem', lineHeight: 1.6, margin: '0.75rem 0 0 0' }}>
-              Traditional CRMs rely on lagging notes and stale contacts. Achare is engineered around proactive catalyst events.
-            </p>
-          </div>
-
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', padding: '0.5rem 1rem', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, color: '#111318' }}>
-            <span>% of respondents</span>
-            <span style={{ color: '#10B981', fontWeight: 800, fontSize: '14px' }}>✳</span>
-          </div>
-        </div>
-
-        {/* 3 Comparative Bars */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2rem', marginTop: '3.5rem', alignItems: 'flex-end' }}>
-          
-          {/* Bar 1: 42% */}
-          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
-              42%
-            </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
-              Catalyst Event
-            </h3>
-            <div style={{ height: '280px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
-              <div
-                className="comp-bar-height lightning-pattern"
-                style={{
-                  height: barsAnimated ? '100%' : '0px',
-                  width: '100%',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 24px rgba(16, 185, 129, 0.25)',
-                  position: 'relative',
-                }}
-              >
-                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#FFFFFF', fontSize: '24px' }}>
-                  ⚡
-                </div>
-                <div style={{ position: 'absolute', top: '16px', right: '16px', color: 'rgba(255,255,255,0.9)', fontFamily: 'monospace', fontSize: '11px', fontWeight: 700, backgroundColor: 'rgba(0,0,0,0.2)', padding: '4px 10px', borderRadius: '9999px' }}>
-                  #1 DRIVER
-                </div>
-              </div>
-            </div>
-            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
-              A major business trigger — capital raise, acquisition, new key hire, or territory expansion — created immediate urgency.
-            </p>
-          </div>
-
-          {/* Bar 2: 32% */}
-          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
-              32%
-            </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
-              Unsatisfied with Tooling
-            </h3>
-            <div style={{ height: '220px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
-              <div
-                className="comp-bar-height"
-                style={{
-                  height: barsAnimated ? '100%' : '0px',
-                  width: '100%',
-                  borderRadius: '16px',
-                  backgroundColor: '#1E293B',
-                  boxShadow: '0 6px 18px rgba(30, 41, 59, 0.2)',
-                  position: 'relative',
-                }}
-              >
-                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#94A3B8', fontSize: '12px', fontFamily: 'monospace', fontWeight: 700 }}>
-                  SILOED
-                </div>
-              </div>
-            </div>
-            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
-              Disconnected CRMs, spreadsheets, and standalone ATS software created duplicate records and caused 14+ wasted hours per week.
-            </p>
-          </div>
-
-          {/* Bar 3: 26% */}
-          <div className="interactive-tilt" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#111318', letterSpacing: '-0.03em' }}>
-              26%
-            </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111318', margin: 0 }}>
-              Cost & Platform Sprawl
-            </h3>
-            <div style={{ height: '170px', width: '100%', display: 'flex', alignItems: 'flex-end' }}>
-              <div
-                className="comp-bar-height"
-                style={{
-                  height: barsAnimated ? '100%' : '0px',
-                  width: '100%',
-                  borderRadius: '16px',
-                  backgroundColor: '#F1F3F5',
-                  border: '2px solid #D1D5DB',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)',
-                  position: 'relative',
-                }}
-              >
-                <div style={{ position: 'absolute', bottom: '16px', left: '16px', color: '#626873', fontSize: '12px', fontFamily: 'monospace', fontWeight: 700 }}>
-                  SPRAWL
-                </div>
-              </div>
-            </div>
-            <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, margin: '0.5rem 0 0 0' }}>
-              Paying for 5 disconnected SaaS subscriptions when a single unified people and revenue operations engine costs less and does more.
-            </p>
-          </div>
-
-        </div>
-
-        <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid #E6E7E3', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', fontSize: '12px', color: '#626873' }}>
-          <span>Source: McKinsey Global Private Wealth Report & Gartner State of Revenue Operations 2024</span>
-          <span style={{ color: '#10B981', fontWeight: 700 }}>Verified survey of 1,200+ enterprise revenue & people leaders</span>
-        </div>
-      </section>
+      {/* SECTION DIVIDER: OUR APPROACH ➔ FEATURES */}
+      <SectionDivider />
 
       {/* 5. FEATURES SHOWCASE (INSPIRED BY ACHARE FEATURE BLUEPRINT / feature.png) */}
-      <section id="features" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 2rem 5rem 2rem', display: 'flex', flexDirection: 'column', gap: '7rem' }}>
+      <section id="features" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 2rem 3rem 2rem', display: 'flex', flexDirection: 'column', gap: '4.5rem' }}>
         
         {/* Section 0: Feature Intro Hero */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-          <div>
+          <div style={{ borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <span style={{ display: 'inline-block', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#2563EB', marginBottom: '0.75rem' }}>
               FEATURES
             </span>
@@ -1572,9 +1379,12 @@ export function AchareCinemaLanding() {
           </div>
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 01: RECRUITMENT CRM */}
         <div id="recruitment-crm" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-          <div>
+          <div style={{ borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#7C3AED' }}>01</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#7C3AED' }}>
@@ -1660,9 +1470,12 @@ export function AchareCinemaLanding() {
           </div>
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 02: JOBS */}
         <div id="jobs" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-          <div>
+          <div style={{ borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#EA580C' }}>02</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#EA580C' }}>
@@ -1730,10 +1543,13 @@ export function AchareCinemaLanding() {
           </div>
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 03: EMPLOYEES (REVERSED) */}
         <div id="employees" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
           
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ position: 'relative', width: '100%', maxWidth: '480px', height: '440px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* Butter Disc */}
@@ -1796,7 +1612,7 @@ export function AchareCinemaLanding() {
             </div>
           </div>
 
-          <div>
+          <div style={{ paddingLeft: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#D97706' }}>03</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#D97706' }}>
@@ -1820,9 +1636,12 @@ export function AchareCinemaLanding() {
 
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 04: TIME TRACKING */}
         <div id="time-tracking" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-          <div>
+          <div style={{ borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#059669' }}>04</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#059669' }}>
@@ -1911,10 +1730,13 @@ export function AchareCinemaLanding() {
           </div>
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 05: PAYROLL (REVERSED) */}
         <div id="payroll" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
           
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ position: 'relative', width: '100%', maxWidth: '480px', height: '420px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* Lilac Disc */}
@@ -1964,7 +1786,7 @@ export function AchareCinemaLanding() {
             </div>
           </div>
 
-          <div>
+          <div style={{ paddingLeft: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#6366F1' }}>05</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#6366F1' }}>
@@ -1988,9 +1810,12 @@ export function AchareCinemaLanding() {
 
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 06: DOCUMENTS */}
         <div id="documents" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem', alignItems: 'center' }}>
-          <div>
+          <div style={{ borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '20px', fontWeight: 800, color: '#E11D48' }}>06</span>
               <span style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#E11D48' }}>
@@ -2012,7 +1837,7 @@ export function AchareCinemaLanding() {
             </button>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingLeft: '1.5rem' }}>
             <div style={{ position: 'relative', width: '100%', maxWidth: '480px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* Peach Disc */}
@@ -2154,6 +1979,9 @@ export function AchareCinemaLanding() {
           </div>
         </div>
 
+        {/* FEATURE SUB-DIVIDER */}
+        <div style={{ borderTop: '1px solid #E6E7E3' }} />
+
         {/* Section 07: READY TO GET STARTED? (WORKSPACE CALLOUT BANNER) */}
         <div style={{ backgroundColor: '#EEF4FF', borderRadius: '28px', padding: '3.5rem', border: '1px solid #DCE7FD', overflow: 'hidden' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
@@ -2211,111 +2039,143 @@ export function AchareCinemaLanding() {
 
       </section>
 
+      {/* SECTION DIVIDER: FEATURES ➔ PRICING */}
+      <SectionDivider />
+
       {/* 6. PRICING SECTION */}
-      <section id="pricing-section" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 5rem 2rem' }}>
+      <section id="pricing-section" style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 3rem 2rem' }}>
         
-        <div style={{ textAlign: 'center', maxWidth: '40rem', margin: '0 auto 3rem auto' }}>
+        <div style={{ textAlign: 'center', maxWidth: '42rem', margin: '0 auto 3rem auto' }}>
           <div style={{ fontSize: '12px', fontWeight: 600, color: '#9297A1', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
             TRANSPARENT PLANS
           </div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: '#111318', margin: '0 0 1rem 0' }}>
             Simple, honest pricing for growing teams.
           </h2>
+          <p style={{ fontSize: '15px', color: '#626873', margin: '0 0 1.5rem 0' }}>
+            No hidden implementation fees. All plans include full unified people &amp; revenue operations.
+          </p>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', backgroundColor: '#E6E7E3', padding: '0.25rem', borderRadius: '9999px', fontSize: '12px', fontWeight: 600 }}>
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              style={{
-                padding: '0.35rem 1rem',
-                borderRadius: '9999px',
-                border: 'none',
-                cursor: 'pointer',
-                backgroundColor: billingCycle === 'monthly' ? '#FFFFFF' : 'transparent',
-                color: '#111318',
-                fontWeight: 600,
-              }}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('annual')}
-              style={{
-                padding: '0.35rem 1rem',
-                borderRadius: '9999px',
-                border: 'none',
-                cursor: 'pointer',
-                backgroundColor: billingCycle === 'annual' ? '#FFFFFF' : 'transparent',
-                color: '#111318',
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem',
-              }}
-            >
-              <span>Annual</span>
-              <span style={{ fontSize: '10px', backgroundColor: '#DDF4E6', color: '#36B978', padding: '0.1rem 0.4rem', borderRadius: '9999px' }}>Save 20%</span>
-            </button>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#E8F0EA', border: '1px solid rgba(45, 106, 90, 0.3)', padding: '0.45rem 1rem', borderRadius: '9999px', fontSize: '12px', fontWeight: 700, color: '#2D6A5A' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '9999px', backgroundColor: '#36B978', display: 'inline-block' }} />
+            <span>LIFETIME LICENSE — PAY ONCE, OWN FOREVER • NO RECURRING SAAS FEES</span>
           </div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
           
+          {/* Startup Tier */}
           <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', borderRadius: '28px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ fontSize: '12px', fontWeight: 700, color: '#9297A1', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Starter</div>
-              <div style={{ fontSize: '36px', fontWeight: 800, color: '#111318', marginBottom: '0.5rem' }}>
-                {billingCycle === 'annual' ? '$23' : '$29'}<span style={{ fontSize: '14px', fontWeight: 400, color: '#626873' }}> / mo</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: '#9297A1', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Startup</div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#36B978', backgroundColor: '#E8F0EA', padding: '0.15rem 0.6rem', borderRadius: '9999px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lifetime License</span>
               </div>
+              <div style={{ fontSize: '36px', fontWeight: 800, color: '#111318', marginBottom: '0.5rem' }}>
+                ₹49,999<span style={{ fontSize: '14px', fontWeight: 400, color: '#626873' }}> / one-time</span>
+              </div>
+
+              {/* Maintenance Callout */}
+              <div style={{ backgroundColor: '#F5EDE4', color: '#D97706', border: '1px solid rgba(217, 119, 6, 0.2)', borderRadius: '14px', padding: '0.75rem', fontSize: '12px', margin: '0.75rem 0 1.25rem 0' }}>
+                <div style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <span>🎁</span> +1 Year Maintenance on Us
+                </div>
+                <div style={{ fontSize: '11px', color: '#A25700', marginTop: '3px', lineHeight: 1.4 }}>
+                  Includes automated daily data backups &amp; continuous new feature releases.
+                </div>
+              </div>
+
               <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                For boutique studios and early-stage startups centralizing contacts and employee records.
+                For early-stage startups and high-velocity teams looking to unify CRM, candidate tracking, and employee records under one roof.
               </p>
               <div style={{ borderTop: '1px solid #E6E7E3', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Up to 15 team members</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Complete CRM &amp; Contacts</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Basic Employee Directory</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Lifetime software access &amp; ownership</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Up to 25 team members</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Complete CRM &amp; Deal Pipeline</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Recruitment &amp; Candidate Tracking</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Employee Directory &amp; Records</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> <strong>1 Year Maintenance &amp; Backups on Us</strong></div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Self-Host or 1-Click Cloud Deploy</div>
               </div>
             </div>
             <button onClick={() => setDemoModalOpen(true)} className="achare-btn-secondary" style={{ width: '100%', justifyContent: 'center', marginTop: '2rem' }}>
-              Get Started
+              Get Started with Startup
             </button>
           </div>
 
-          <div style={{ backgroundColor: '#FFFFFF', border: '2px solid #4169F5', borderRadius: '28px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', boxShadow: '0 10px 30px rgba(65, 105, 245, 0.12)' }}>
-            <div style={{ position: 'absolute', top: '-12px', right: '1.5rem', backgroundColor: '#4169F5', color: '#FFFFFF', fontSize: '10px', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '9999px', textTransform: 'uppercase' }}>
+          {/* SME Tier (Recommended) */}
+          <div style={{ backgroundColor: '#FFFFFF', border: '2px solid #2D6A5A', borderRadius: '28px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', boxShadow: '0 10px 30px rgba(45, 106, 90, 0.12)' }}>
+            <div style={{ position: 'absolute', top: '-12px', right: '1.5rem', backgroundColor: '#2D6A5A', color: '#FFFFFF', fontSize: '10px', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '9999px', textTransform: 'uppercase' }}>
               Most Popular
             </div>
             <div>
-              <div style={{ fontSize: '12px', fontWeight: 700, color: '#4169F5', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Business</div>
-              <div style={{ fontSize: '36px', fontWeight: 800, color: '#111318', marginBottom: '0.5rem' }}>
-                {billingCycle === 'annual' ? '$63' : '$79'}<span style={{ fontSize: '14px', fontWeight: 400, color: '#626873' }}> / mo</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: '#2D6A5A', textTransform: 'uppercase', marginBottom: '0.5rem' }}>SME</div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#2D6A5A', backgroundColor: '#E8F0EA', padding: '0.15rem 0.6rem', borderRadius: '9999px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lifetime License</span>
               </div>
+              <div style={{ fontSize: '36px', fontWeight: 800, color: '#111318', marginBottom: '0.5rem' }}>
+                ₹99,999<span style={{ fontSize: '14px', fontWeight: 400, color: '#626873' }}> / one-time</span>
+              </div>
+
+              {/* Maintenance Callout */}
+              <div style={{ backgroundColor: '#E8F0EA', color: '#2D6A5A', border: '1px solid rgba(45, 106, 90, 0.2)', borderRadius: '14px', padding: '0.75rem', fontSize: '12px', margin: '0.75rem 0 1.25rem 0' }}>
+                <div style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#1A453A' }}>
+                  <span>🎁</span> +1 Year Maintenance on Us
+                </div>
+                <div style={{ fontSize: '11px', color: '#2D6A5A', marginTop: '3px', lineHeight: 1.4 }}>
+                  Includes automated cloud data backups &amp; continuous feature upgrades.
+                </div>
+              </div>
+
               <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                Full people operations platform for growing businesses scaling recruitment, time, and payroll.
+                Complete operations platform for growing small &amp; medium enterprises scaling recruitment, attendance tracking, and automated payroll.
               </p>
               <div style={{ borderTop: '1px solid #E6E7E3', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Unlimited team members</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Full Recruitment Pipeline</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Precision Time Tracking</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Automated Direct Deposit Payroll</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> <strong>Unlimited team members &amp; employees</strong></div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Lifetime software access &amp; ownership</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Full Recruitment &amp; Interview Scheduler</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Precision Time &amp; Attendance Tracking</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Automated Direct Deposit Payroll &amp; Taxes</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Custom Document Vault &amp; E-Sign</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> <strong>1 Year Priority Maintenance on Us</strong></div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Priority Onboarding &amp; WhatsApp Support</div>
               </div>
             </div>
             <button onClick={() => setDemoModalOpen(true)} className="achare-btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '2rem' }}>
-              <span>Deploy Business Plan</span>
+              <span>Deploy SME Platform</span>
               <IconArrowRight size={14} />
             </button>
           </div>
 
+          {/* Enterprise Tier */}
           <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', borderRadius: '28px', padding: '2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <div style={{ fontSize: '12px', fontWeight: 700, color: '#9297A1', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Enterprise</div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, color: '#9297A1', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Enterprise</div>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#8066E8', backgroundColor: '#EAE2FF', padding: '0.15rem 0.6rem', borderRadius: '9999px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Perpetual License</span>
+              </div>
               <div style={{ fontSize: '36px', fontWeight: 800, color: '#111318', marginBottom: '0.5rem' }}>Custom</div>
+
+              {/* Maintenance Callout */}
+              <div style={{ backgroundColor: '#F3F1ED', color: '#111318', border: '1px solid #E6E7E3', borderRadius: '14px', padding: '0.75rem', fontSize: '12px', margin: '0.75rem 0 1.25rem 0' }}>
+                <div style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#111318' }}>
+                  <span>⚡</span> Bespoke Architecture &amp; SLA
+                </div>
+                <div style={{ fontSize: '11px', color: '#626873', marginTop: '3px', lineHeight: 1.4 }}>
+                  Custom infrastructure, dedicated staging, and compliance auditing.
+                </div>
+              </div>
+
               <p style={{ fontSize: '13px', color: '#626873', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                Bespoke deployment for multi-entity companies, international enterprises, and regulated industries.
+                For multi-entity corporations, conglomerates, and regulated industries requiring custom deployment, security SLAs, and enterprise integrations.
               </p>
               <div style={{ borderTop: '1px solid #E6E7E3', paddingTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Perpetual Enterprise source code license</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Air-Gapped Private Cloud &amp; Self-Host</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Dedicated Account Engineer</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Multi-Entity Hierarchy</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Dedicated Account Engineer &amp; 24/7 SLA</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Multi-Entity &amp; Multi-Branch Hierarchy</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Custom ERP, Banking &amp; Biometric APIs</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><IconCheck size={14} color="#36B978" /> Custom Feature Engineering &amp; Migration</div>
               </div>
             </div>
             <button onClick={() => setDemoModalOpen(true)} className="achare-btn-secondary" style={{ width: '100%', justifyContent: 'center', marginTop: '2rem' }}>
@@ -2327,8 +2187,11 @@ export function AchareCinemaLanding() {
 
       </section>
 
+      {/* SECTION DIVIDER: PRICING ➔ TESTIMONIALS */}
+      <SectionDivider />
+
       {/* 7. TESTIMONIAL CAROUSEL */}
-      <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 5rem 2rem' }}>
+      <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 3rem 2rem' }}>
         <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E6E7E3', borderRadius: '28px', padding: '3rem', boxShadow: '0 2px 8px rgba(20, 25, 40, 0.05)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <span style={{ fontSize: '12px', fontWeight: 700, color: '#9297A1', textTransform: 'uppercase' }}>
@@ -2361,71 +2224,95 @@ export function AchareCinemaLanding() {
         </div>
       </section>
 
-      {/* 8. FAQ ACCORDION */}
-      <section id="faq-section" style={{ maxWidth: '880px', margin: '0 auto', padding: '0 2rem 5rem 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#9297A1', textTransform: 'uppercase' }}>
-            FREQUENTLY ASKED QUESTIONS
-          </span>
-          <h2 style={{ fontSize: '2.25rem', fontWeight: 700, color: '#111318', marginTop: '0.5rem' }}>
-            Answers to common questions.
-          </h2>
-        </div>
+      {/* SECTION DIVIDER: TESTIMONIALS ➔ FAQ */}
+      <SectionDivider />
 
-        <div style={{ borderTop: '1px solid #E6E7E3' }}>
-          {[
-            {
-              q: 'How does Achare compare to separate CRM and HR tools?',
-              a: 'Unlike point solutions that require fragile third-party automations (like Zapier or custom webhooks), Achare shares a single underlying PostgreSQL database. When a candidate accepts an offer, they instantly become an active employee with automatic payroll readiness.',
-            },
-            {
-              q: 'Can we self-host Achare on our own servers?',
-              a: 'Yes. Achare is built on open architecture. You can run it in your own Docker, Kubernetes, or AWS environment with full access to the source code and complete data sovereignty.',
-            },
-            {
-              q: 'How does automated payroll handle compliance and taxes?',
-              a: 'Achare supports automated tax calculations, statutory deductions, local overtime thresholds, and standardized electronic pay stubs formatted for direct export into accounting systems.',
-            },
-            {
-              q: 'What happens to our existing spreadsheet and CRM records?',
-              a: 'Achare includes built-in CSV and spreadsheet import assistants with intelligent field mapping, allowing you to migrate thousands of customer, candidate, and employee records in minutes.',
-            },
-          ].map((faq, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div key={faq.q} style={{ borderBottom: '1px solid #E6E7E3', padding: '1.25rem 0' }}>
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    border: 'none',
-                    backgroundColor: 'transparent',
-                    cursor: 'pointer',
-                    fontSize: '16px',
-                    fontWeight: 600,
-                    color: '#111318',
-                    textAlign: 'left',
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  <span style={{ fontSize: '20px', color: '#9297A1' }}>{isOpen ? '×' : '+'}</span>
-                </button>
-                {isOpen && (
-                  <p style={{ fontSize: '14px', color: '#626873', lineHeight: 1.6, marginTop: '0.75rem', marginBottom: 0 }}>
-                    {faq.a}
-                  </p>
-                )}
-              </div>
-            );
-          })}
+      {/* 8. FAQ ACCORDION */}
+      <section id="faq-section" style={{ maxWidth: '1320px', margin: '0 auto', padding: '2.5rem 2rem 3rem 2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3.5rem' }}>
+          {/* Left Column: Heading & Support card with right border */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', borderRight: '1px solid #E6E7E3', paddingRight: '2.5rem' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: '#2563EB', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
+              FREQUENTLY ASKED QUESTIONS
+            </span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#111318', margin: 0, lineHeight: 1.15 }}>
+              Answers to common questions.
+            </h2>
+            <p style={{ fontSize: '15px', color: '#626873', lineHeight: 1.6, margin: 0 }}>
+              Can't find what you're looking for? Reach out to our technical architecture and sales engineering team.
+            </p>
+            <div style={{ backgroundColor: '#F8F8F5', border: '1px solid #E6E7E3', borderRadius: '16px', padding: '1.25rem', marginTop: '1rem' }}>
+              <div style={{ fontWeight: 700, fontSize: '14px', color: '#111318', marginBottom: '0.25rem' }}>Need specialized assistance?</div>
+              <p style={{ fontSize: '12px', color: '#626873', margin: '0 0 0.75rem 0' }}>We can arrange a customized architecture review session for your infrastructure.</p>
+              <button
+                onClick={() => setDemoModalOpen(true)}
+                className="achare-btn-secondary"
+                style={{ padding: '0.5rem 1rem', fontSize: '12px' }}
+              >
+                Schedule Architecture Review
+              </button>
+            </div>
+          </div>
+
+          {/* Right Column: FAQ Items */}
+          <div style={{ borderTop: '1px solid #E6E7E3' }}>
+            {[
+              {
+                q: 'How does Achare compare to separate CRM and HR tools?',
+                a: 'Unlike point solutions that require fragile third-party automations (like Zapier or custom webhooks), Achare shares a single underlying PostgreSQL database. When a candidate accepts an offer, they instantly become an active employee with automatic payroll readiness.',
+              },
+              {
+                q: 'Can we self-host Achare on our own servers?',
+                a: 'Yes. Achare is built on open architecture. You can run it in your own Docker, Kubernetes, or AWS environment with full access to the source code and complete data sovereignty.',
+              },
+              {
+                q: 'How does automated payroll handle compliance and taxes?',
+                a: 'Achare supports automated tax calculations, statutory deductions, local overtime thresholds, and standardized electronic pay stubs formatted for direct export into accounting systems.',
+              },
+              {
+                q: 'What happens to our existing spreadsheet and CRM records?',
+                a: 'Achare includes built-in CSV and spreadsheet import assistants with intelligent field mapping, allowing you to migrate thousands of customer, candidate, and employee records in minutes.',
+              },
+            ].map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div key={faq.q} style={{ borderBottom: '1px solid #E6E7E3', padding: '1.25rem 0' }}>
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      border: 'none',
+                      backgroundColor: 'transparent',
+                      cursor: 'pointer',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      color: '#111318',
+                      textAlign: 'left',
+                    }}
+                  >
+                    <span>{faq.q}</span>
+                    <span style={{ fontSize: '20px', color: '#9297A1' }}>{isOpen ? '×' : '+'}</span>
+                  </button>
+                  {isOpen && (
+                    <p style={{ fontSize: '14px', color: '#626873', lineHeight: 1.6, marginTop: '0.75rem', marginBottom: 0 }}>
+                      {faq.a}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
+      {/* SECTION DIVIDER: FAQ ➔ FINAL CTA */}
+      <SectionDivider />
+
       {/* 9. GRAND FINALE CTA */}
-      <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 4rem 2rem' }}>
+      <section style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 2rem 2.5rem 2rem' }}>
         <div
           style={{
             backgroundColor: '#111318',
@@ -2459,6 +2346,8 @@ export function AchareCinemaLanding() {
           </div>
         </div>
       </section>
+
+      </main>
 
       {/* 10. FOOTER */}
       <footer style={{ borderTop: '1px solid #E6E7E3', backgroundColor: '#F8F8F5', padding: '4rem 2rem 2rem 2rem', fontSize: '12px', color: '#626873' }}>

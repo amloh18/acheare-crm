@@ -1732,6 +1732,46 @@ export const STANDARD_OBJECT_FIELDS = {
     approvedPayrollAdjustments: {
       universalIdentifier: '1c9eb8e8-013e-4f3f-9899-7d3ad188c391',
     },
+    onboardingItems: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.onboardingItem,
+      }),
+    },
+    attendanceCorrections: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceCorrection,
+      }),
+    },
+    leaveRequests: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.leaveRequest,
+      }),
+    },
+    departments: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
+      }),
+    },
   },
   // Achare recruitment domain (stable — never mutate a universal identifier)
   requirement: {
@@ -2394,6 +2434,16 @@ export const STANDARD_OBJECT_FIELDS = {
     },
     rosterAssignments: {
       universalIdentifier: '2a8f6288-2237-4c91-8fc6-d30f6879b94d',
+    },
+    attendanceDays: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.shift,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.attendanceDay,
+      }),
     },
     taskTargets: {
       universalIdentifier: getSystemRelationFieldUniversalIdentifier({
@@ -3437,13 +3487,13 @@ export const STANDARD_OBJECT_FIELDS = {
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.department,
     ),
     name: {
-      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abc',
+      universalIdentifier: '2f2d6c8c-bd93-5552-b9b2-a507979bccbe',
     },
     description: {
-      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abd',
+      universalIdentifier: '967dd583-cf47-5032-a865-d2fd39ad4109',
     },
     status: {
-      universalIdentifier: 'e5f6a7b8-c9d0-1234-ef01-234567890abe',
+      universalIdentifier: '9062fcd0-4af0-54c7-9059-1798b10c7fcb',
     },
     departmentHead: {
       universalIdentifier: getSystemRelationFieldUniversalIdentifier({
@@ -3534,25 +3584,25 @@ export const STANDARD_OBJECT_FIELDS = {
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.location,
     ),
     name: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890130',
+      universalIdentifier: '9a4cd88f-0fd9-5d79-b7b4-9c2019a65444',
     },
     address: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890131',
+      universalIdentifier: 'a5744837-651a-51b5-8a84-3b56084f2e72',
     },
     city: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890132',
+      universalIdentifier: '8645abab-8848-5d10-8961-bbe091d9ec73',
     },
     state: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890133',
+      universalIdentifier: '9f44b319-feb9-5c3a-9d32-e2778efa54ec',
     },
     country: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890134',
+      universalIdentifier: '185e58b8-af93-57c4-94ab-7b56ff000f2d',
     },
     timezone: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890135',
+      universalIdentifier: 'f8205b1e-0862-5889-90bf-47ce62d51685',
     },
     status: {
-      universalIdentifier: 'd4e5f6a7-b8c9-0123-defa-234567890136',
+      universalIdentifier: '2d2e8d8a-d039-5b1e-807d-d13ef8f4019a',
     },
     employees: {
       universalIdentifier: getSystemRelationFieldUniversalIdentifier({

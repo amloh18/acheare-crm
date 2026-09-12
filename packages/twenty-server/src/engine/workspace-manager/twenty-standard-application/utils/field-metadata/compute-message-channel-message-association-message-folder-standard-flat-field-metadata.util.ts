@@ -295,7 +295,7 @@ export const buildMessageChannelMessageAssociationMessageFolderStandardFlatField
           }),
         ),
         icon: 'IconFolder',
-        isNullable: false,
+        isNullable: true,
         isUIEditable: false,
       },
       standardObjectMetadataRelatedEntityIds,
