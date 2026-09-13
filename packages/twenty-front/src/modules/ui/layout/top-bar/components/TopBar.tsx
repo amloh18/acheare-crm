@@ -34,11 +34,17 @@ const StyledTopBar = styled.div`
 `;
 
 const StyledLeftSection = styled.div`
+  align-items: center;
   display: flex;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 `;
 
 const StyledRightSection = styled.div`
+  align-items: center;
   display: flex;
+  flex-shrink: 0;
   font-weight: ${themeCssVariables.font.weight.regular};
   gap: ${themeCssVariables.betweenSiblingsGap};
 `;
