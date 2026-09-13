@@ -9,7 +9,7 @@ import { useCompleteAchareTeamSetupMutation } from '@/onboarding/hooks/useComple
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { TextInput } from '@/ui/input/components/TextInput';
 import { Select } from '@/ui/input/components/Select';
-import { IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconPlus, IconTrash } from 'twenty-ui/icon';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';

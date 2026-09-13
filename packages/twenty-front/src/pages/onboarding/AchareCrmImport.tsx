@@ -8,7 +8,7 @@ import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboard
 import { useCompleteAchareCrmImportMutation } from '@/onboarding/hooks/useCompleteAchareCrmImportMutation';
 import { useOpenObjectRecordsSpreadsheetImportDialog } from '@/object-record/spreadsheet-import/hooks/useOpenObjectRecordsSpreadsheetImportDialog';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { IconDatabase, IconFileImport } from '@tabler/icons-react';
+import { IconDatabase, IconFileImport } from 'twenty-ui/icon';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';

@@ -2,11 +2,19 @@ import { objectMetadataItemsWithFieldsSelector } from '@/object-metadata/states/
 import { useMemo } from 'react';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 
+import { isAchareIgnoredObject } from 'twenty-shared/workspace';
+
 export const useFilteredObjectMetadataItems = () => {
   const objectMetadataItemsWithFields = useAtomStateValue(
     objectMetadataItemsWithFieldsSelector,
   );
-  const objectMetadataItems = objectMetadataItemsWithFields;
+  const objectMetadataItems = useMemo(
+    () =>
+      objectMetadataItemsWithFields.filter(
+        ({ nameSingular }) => !isAchareIgnoredObject(nameSingular),
+      ),
+    [objectMetadataItemsWithFields],
+  );
 
   const activeNonSystemObjectMetadataItems = useMemo(
     () =>

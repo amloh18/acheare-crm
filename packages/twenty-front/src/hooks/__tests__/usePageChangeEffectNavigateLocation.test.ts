@@ -12,8 +12,8 @@ import { OnboardingStatus, PageLayoutType } from '~/generated-metadata/graphql';
 import {
   ACHARE_ONBOARDING_STEP_APP_PATH,
   ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
-  type AchareOnboardingStepKey,
 } from 'twenty-shared/workspace';
+import type { AchareOnboardingStepKey } from 'twenty-shared/workspace';
 
 const ACHARE_APP_PATHS = Object.values(ACHARE_ONBOARDING_STEP_APP_PATH);
 const ACHARE_ONBOARDING_STATUSES = Object.values(
@@ -55,7 +55,7 @@ const setupMockIsLogged = (isLogged: boolean) => {
   jest.mocked(useIsLogged).mockReturnValueOnce(isLogged);
 };
 
-const defaultHomePagePath = '/objects/companies';
+const defaultHomePagePath = '/objects/companies' as AppPath;
 
 jest.mock('@/navigation/hooks/useDefaultHomePagePath');
 jest.mocked(useDefaultHomePagePath).mockReturnValue({

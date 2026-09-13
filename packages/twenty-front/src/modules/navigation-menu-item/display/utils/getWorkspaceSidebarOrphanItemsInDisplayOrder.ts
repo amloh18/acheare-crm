@@ -53,6 +53,9 @@ export const getWorkspaceSidebarOrphanItemsInDisplayOrder = ({
         rowSource.type === NavigationMenuItemType.LINK ||
         rowSource.type === NavigationMenuItemType.PAGE_LAYOUT
       ) {
+        if (rowSource.name === 'Star History') {
+          return acc;
+        }
         acc.push(rowSource);
         return acc;
       }

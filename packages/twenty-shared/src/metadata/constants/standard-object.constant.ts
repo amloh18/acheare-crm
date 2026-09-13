@@ -967,6 +967,11 @@ export const STANDARD_OBJECTS = {
           'createdAt',
           'jobTitle',
           'linkedinLink',
+          'contexts',
+          'roles',
+          'status',
+          'city',
+          'inHouse',
         ],
       }),
       personRecordPageFields: buildStandardObjectRecordPageFieldsView({

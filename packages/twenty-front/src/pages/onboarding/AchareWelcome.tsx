@@ -6,8 +6,10 @@ import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboard
 import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
 import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useAchareStartOnboardingMutation } from '@/onboarding/hooks/useAchareStartOnboardingMutation';
+import { useFinishAchareOnboardingMutation } from '@/onboarding/hooks/useFinishAchareOnboardingMutation';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@linaria/react';
 import { msg } from '@lingui/core/macro';
 import { MainButton } from 'twenty-ui/input';
@@ -38,8 +40,10 @@ const StyledButtonRow = styled.div`
 
 export const AchareWelcome = () => {
   const { t } = useLingui();
+  const navigate = useNavigate();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
   const [startOnboarding] = useAchareStartOnboardingMutation();
+  const [finishOnboarding] = useFinishAchareOnboardingMutation();
   const [isNavigating, setIsNavigating] = useState(false);
 
   const handleGetStarted = useCallback(async () => {
@@ -55,12 +59,12 @@ export const AchareWelcome = () => {
   const handleDoThisLater = useCallback(async () => {
     setIsNavigating(true);
     try {
-      await startOnboarding();
-      setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
+      await finishOnboarding();
+      navigate('/dashboard');
     } catch {
       setIsNavigating(false);
     }
-  }, [startOnboarding, setNextOnboardingStatus]);
+  }, [finishOnboarding, navigate]);
 
   return (
     <StyledOnboardingStepPage>

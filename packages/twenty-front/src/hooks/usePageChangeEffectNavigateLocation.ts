@@ -205,12 +205,16 @@ export const usePageChangeEffectNavigateLocation = () => {
     }
   }
 
+  const achareOnboardingPaths = Object.values(ACHARE_ONBOARDING_STEP_APP_PATH);
+  const isAchareOnboardingPath = someMatchingLocationOf(achareOnboardingPaths);
+
   if (
     onboardingStatus === OnboardingStatus.COMPLETED &&
     someMatchingLocationOf([
       ...ONBOARDING_PATHS,
       ...ONGOING_USER_CREATION_PATHS,
     ]) &&
+    !isAchareOnboardingPath &&
     !isMatchingLocation(location, AppPath.ResetPassword) &&
     isLogged &&
     isOnAWorkspace

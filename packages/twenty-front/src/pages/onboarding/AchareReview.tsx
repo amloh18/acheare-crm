@@ -8,7 +8,7 @@ import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboard
 import { useFinishAchareOnboardingMutation } from '@/onboarding/hooks/useFinishAchareOnboardingMutation';
 import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck } from 'twenty-ui/icon';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';

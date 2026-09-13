@@ -13,13 +13,14 @@ import { act, renderHook } from '@testing-library/react';
 import { createStore, Provider } from 'jotai';
 import { type ReactNode } from 'react';
 import { MemoryRouter, useLocation } from 'react-router-dom';
+import { type AppPath } from 'twenty-shared/types';
 
 jest.mock('@/ai/hooks/useReturnFromExpandedAiChat');
 jest.mock('@/ai/hooks/useSwitchToNewAiChat');
 jest.mock('@/navigation/hooks/useDefaultHomePagePath');
 jest.mock('@/ui/utilities/responsive/hooks/useIsMobile');
 
-const DEFAULT_HOME_PAGE_PATH = '/objects/companies';
+const DEFAULT_HOME_PAGE_PATH = '/objects/companies' as AppPath;
 const AI_CHAT_PATH = '/chat/20202020-0687-4c41-b707-ed1bfca972a7';
 
 const mockSwitchToNewChat = jest.fn();

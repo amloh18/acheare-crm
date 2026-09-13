@@ -85,8 +85,15 @@ const getNextOnboardingStatus = ({
 
   const currentOnboardingStatus = currentUser?.onboardingStatus;
 
-  // Workspace activation hands over to the Achare wizard.
-  if (currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
+  // Legacy Twenty onboarding steps and workspace activation hand over to the Achare wizard.
+  if (
+    currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION ||
+    currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION ||
+    currentOnboardingStatus === OnboardingStatus.SYNC_EMAIL ||
+    currentOnboardingStatus === OnboardingStatus.APPS_INSTALLATION ||
+    currentOnboardingStatus === OnboardingStatus.INVITE_TEAM ||
+    currentOnboardingStatus === OnboardingStatus.BOOK_CALL
+  ) {
     return OnboardingStatus.ACHARE_WELCOME;
   }
 
@@ -107,32 +114,10 @@ const getNextOnboardingStatus = ({
     return (nextAchareStatus ?? OnboardingStatus.COMPLETED) as OnboardingStatus;
   }
 
-  if (currentOnboardingStatus === OnboardingStatus.SYNC_EMAIL) {
-    if (currentWorkspace?.workspaceMembersCount === 1) {
-      return OnboardingStatus.APPS_INSTALLATION;
-    }
-    return OnboardingStatus.PROFILE_CREATION;
-  }
-
-  if (currentOnboardingStatus === OnboardingStatus.APPS_INSTALLATION) {
-    return OnboardingStatus.PROFILE_CREATION;
-  }
-
-  if (currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION) {
-    if (currentWorkspace?.workspaceMembersCount === 1) {
-      return OnboardingStatus.INVITE_TEAM;
-    }
-    return statusAfterInviteTeam;
-  }
-  if (currentOnboardingStatus === OnboardingStatus.INVITE_TEAM) {
-    return statusAfterInviteTeam;
-  }
-  if (
-    currentOnboardingStatus === OnboardingStatus.BOOK_CALL ||
-    currentOnboardingStatus === OnboardingStatus.PLAN_REQUIRED
-  ) {
+  if (currentOnboardingStatus === OnboardingStatus.PLAN_REQUIRED) {
     return statusAfterBookCall;
   }
+
   return OnboardingStatus.COMPLETED;
 };
 

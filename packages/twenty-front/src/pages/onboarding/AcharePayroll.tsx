@@ -8,7 +8,7 @@ import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboard
 import { useCompleteAcharePayrollSetupMutation } from '@/onboarding/hooks/useCompleteAcharePayrollSetupMutation';
 import { Select } from '@/ui/input/components/Select';
 import { Checkbox } from 'twenty-ui/input';
-import { IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconPlus, IconTrash } from 'twenty-ui/icon';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';

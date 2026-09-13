@@ -400,6 +400,34 @@ export class AchareOnboardingService {
       key: AchareSetupStepKeys.ACHARE_SETUP_VERSION,
       value: ACHARE_SETUP_CURRENT_VERSION,
     });
+
+    await Promise.all([
+      this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: 'ONBOARDING_CREATE_PROFILE_PENDING' as never,
+      }),
+      this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: 'ONBOARDING_CONNECT_ACCOUNT_PENDING' as never,
+      }),
+      this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: 'ONBOARDING_INSTALL_APPS_PENDING' as never,
+      }),
+      this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: 'ONBOARDING_INVITE_TEAM_PENDING' as never,
+      }),
+      this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: 'ONBOARDING_BOOK_CALL_PENDING' as never,
+      }),
+    ]);
   }
 
   /**

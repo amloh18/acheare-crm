@@ -7,7 +7,7 @@ import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/Onboardin
 import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useCompleteAchareDashboardSetupMutation } from '@/onboarding/hooks/useCompleteAchareDashboardSetupMutation';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck } from 'twenty-ui/icon';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';

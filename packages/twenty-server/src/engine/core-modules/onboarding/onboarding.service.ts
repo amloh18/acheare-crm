@@ -151,6 +151,7 @@ export class OnboardingService {
         WELCOME: OnboardingStatus.ACHARE_WELCOME,
         BASIC_SETUP: OnboardingStatus.ACHARE_BASIC_SETUP,
         SETUP_CHOICE: OnboardingStatus.ACHARE_SETUP_CHOICE,
+        FEATURE_SELECTION: OnboardingStatus.ACHARE_FEATURE_SELECTION,
         AGENCY: OnboardingStatus.ACHARE_AGENCY,
         TEAM: OnboardingStatus.ACHARE_TEAM,
         CRM_IMPORT: OnboardingStatus.ACHARE_CRM_IMPORT,
@@ -158,6 +159,8 @@ export class OnboardingService {
         HR: OnboardingStatus.ACHARE_HR,
         PAYROLL: OnboardingStatus.ACHARE_PAYROLL,
         DASHBOARD: OnboardingStatus.ACHARE_DASHBOARD,
+        FINANCE: OnboardingStatus.ACHARE_FINANCE,
+        DOCUMENTS: OnboardingStatus.ACHARE_DOCUMENTS,
         REVIEW: OnboardingStatus.ACHARE_REVIEW,
       };
 
@@ -173,6 +176,15 @@ export class OnboardingService {
 
     if (acheareSetupStatus === 'COMPLETED') {
       return OnboardingStatus.COMPLETED;
+    }
+
+    const isPlanRequired =
+      await this.billingService.isSubscriptionIncompleteOnboardingStatus(
+        workspace.id,
+      );
+
+    if (isPlanRequired) {
+      return OnboardingStatus.PLAN_REQUIRED;
     }
 
     const userVars = await this.userVarsService.getAll({
@@ -194,40 +206,15 @@ export class OnboardingService {
     const isInviteTeamPending =
       userVars.get(OnboardingStepKeys.ONBOARDING_INVITE_TEAM_PENDING) === true;
 
-    const isBookCallPending =
-      userVars.get(OnboardingStepKeys.ONBOARDING_BOOK_CALL_PENDING) === true;
-
-    if (isConnectAccountPending) {
-      return OnboardingStatus.SYNC_EMAIL;
-    }
-
-    if (isInstallAppsPending) {
-      return OnboardingStatus.APPS_INSTALLATION;
-    }
-
-    if (isProfileCreationPending) {
-      return OnboardingStatus.PROFILE_CREATION;
-    }
-
-    if (isInviteTeamPending) {
-      return OnboardingStatus.INVITE_TEAM;
-    }
-
-    const isPlanRequired =
-      await this.billingService.isSubscriptionIncompleteOnboardingStatus(
-        workspace.id,
-      );
-
+    // In Achare, any user or workspace whose onboarding is pending routes to Achare Onboarding
     if (
-      isBookCallPending &&
-      isPlanRequired &&
-      isDefined(readBookCallStepMinEmployeeCount(this.twentyConfigService))
+      isProfileCreationPending ||
+      isConnectAccountPending ||
+      isInstallAppsPending ||
+      isInviteTeamPending ||
+      acheareSetupStatus === 'NOT_STARTED'
     ) {
-      return OnboardingStatus.BOOK_CALL;
-    }
-
-    if (isPlanRequired) {
-      return OnboardingStatus.PLAN_REQUIRED;
+      return OnboardingStatus.ACHARE_WELCOME;
     }
 
     return OnboardingStatus.COMPLETED;

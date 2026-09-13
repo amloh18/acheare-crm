@@ -74,86 +74,14 @@ export class DevSeederMetadataService {
 
   private readonly workspaceConfigs: Record<string, WorkspaceSeedConfig> = {
     [SEED_APPLE_WORKSPACE_ID]: {
-      objects: [
-        { seed: ROCKET_CUSTOM_OBJECT_SEED },
-        { seed: PET_CUSTOM_OBJECT_SEED, fields: PET_CUSTOM_FIELD_SEEDS },
-        {
-          seed: SURVEY_RESULT_CUSTOM_OBJECT_SEED,
-          fields: SURVEY_RESULT_CUSTOM_FIELD_SEEDS,
-        },
-        { seed: EMPLOYMENT_HISTORY_CUSTOM_OBJECT_SEED },
-        { seed: PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED },
-      ],
+      objects: [],
       fields: [
         { objectName: 'company', seeds: COMPANY_CUSTOM_FIELD_SEEDS },
         { objectName: 'person', seeds: PERSON_CUSTOM_FIELD_SEEDS },
       ],
-      morphRelations: [
-        {
-          objectName: PET_CUSTOM_OBJECT_SEED.nameSingular,
-          seeds: PET_CUSTOM_RELATION_FIELD_SEEDS,
-        },
-        {
-          objectName: PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED.nameSingular,
-          seeds: [PET_CARE_AGREEMENT_CARETAKER_MORPH_SEED],
-        },
-      ],
-      junctionFields: [
-        {
-          sourceObjectName: 'person',
-          name: 'previousCompanies',
-          label: 'Previous Companies',
-          icon: 'IconBuildingSkyscraper',
-          targetObjectName: EMPLOYMENT_HISTORY_CUSTOM_OBJECT_SEED.nameSingular,
-          targetFieldLabel: 'Person',
-          targetFieldIcon: 'IconUser',
-        },
-        {
-          sourceObjectName: 'company',
-          name: 'previousEmployees',
-          label: 'Previous Employees',
-          icon: 'IconUser',
-          targetObjectName: EMPLOYMENT_HISTORY_CUSTOM_OBJECT_SEED.nameSingular,
-          targetFieldLabel: 'Company',
-          targetFieldIcon: 'IconBuildingSkyscraper',
-        },
-        {
-          sourceObjectName: PET_CUSTOM_OBJECT_SEED.nameSingular,
-          name: 'caretakers',
-          label: 'Caretakers',
-          icon: 'IconUser',
-          targetObjectName: PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED.nameSingular,
-          targetFieldLabel: 'Pet',
-          targetFieldIcon: 'IconCat',
-        },
-      ],
-      junctionConfigs: [
-        {
-          objectName: 'person',
-          fieldName: 'previousCompanies',
-          junctionTargetFieldRef: `${EMPLOYMENT_HISTORY_CUSTOM_OBJECT_SEED.nameSingular}.company`,
-        },
-        {
-          objectName: 'company',
-          fieldName: 'previousEmployees',
-          junctionTargetFieldRef: `${EMPLOYMENT_HISTORY_CUSTOM_OBJECT_SEED.nameSingular}.person`,
-        },
-        {
-          objectName: PET_CUSTOM_OBJECT_SEED.nameSingular,
-          fieldName: 'caretakers',
-          junctionTargetFieldRef: `${PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED.nameSingular}.caretakerPerson`,
-        },
-        {
-          objectName: 'company',
-          fieldName: 'caredForPets',
-          junctionTargetFieldRef: `${PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED.nameSingular}.pet`,
-        },
-        {
-          objectName: 'person',
-          fieldName: 'caredForPets',
-          junctionTargetFieldRef: `${PET_CARE_AGREEMENT_CUSTOM_OBJECT_SEED.nameSingular}.pet`,
-        },
-      ],
+      morphRelations: [],
+      junctionFields: [],
+      junctionConfigs: [],
     },
     [SEED_YCOMBINATOR_WORKSPACE_ID]: {
       objects: [

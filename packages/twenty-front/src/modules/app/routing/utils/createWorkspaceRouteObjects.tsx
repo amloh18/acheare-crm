@@ -53,6 +53,12 @@ const MyWorkspacePage = lazy(() =>
   })),
 );
 
+const DashboardPage = lazy(() =>
+  import('~/pages/dashboard/DashboardPage').then((module) => ({
+    default: module.DashboardPage,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('~/pages/not-found/NotFound').then((module) => ({
     default: module.NotFound,
@@ -138,6 +144,14 @@ export const createWorkspaceRouteObjects = ({
       element: (
         <LazyRoute>
           <MyWorkspacePage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: AppPath.Dashboard,
+      element: (
+        <LazyRoute>
+          <DashboardPage />
         </LazyRoute>
       ),
     },

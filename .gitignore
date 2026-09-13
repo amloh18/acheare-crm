@@ -77,3 +77,7 @@ screenshots/
 
 # ACHEARE local dev
 .acheare-dev-logs/
+
+# ACHEARE deploy: local storage bind mount. deploy/.env is already covered by
+# the **/**/.env rule above.
+deploy/.data/

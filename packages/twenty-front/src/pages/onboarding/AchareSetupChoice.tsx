@@ -12,7 +12,7 @@ import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
 import { MainButton } from 'twenty-ui/input';
-import { IconBolt, IconTool } from '@tabler/icons-react';
+import { IconBolt, IconTool } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 const StyledChoiceContainer = styled.div`

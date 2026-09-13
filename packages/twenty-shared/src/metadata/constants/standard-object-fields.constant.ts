@@ -1316,6 +1316,21 @@ export const STANDARD_OBJECT_FIELDS = {
     employees: {
       universalIdentifier: '9a53d580-4e28-4861-aceb-9ffb6cd71d44',
     },
+    inHouse: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea1',
+    },
+    contexts: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea2',
+    },
+    roles: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea3',
+    },
+    status: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea4',
+    },
+    city: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea5',
+    },
   },
   recordShare: {
     ...buildStandardObjectSystemFields(

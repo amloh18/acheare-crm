@@ -36,6 +36,11 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   avatarUrl: string | null;
   avatarFile: FileOutput[] | null;
   position: number;
+  inHouse: boolean | null;
+  contexts: string[] | null;
+  roles: string[] | null;
+  status: string | null;
+  city: string | null;
   createdBy: ActorMetadata;
   updatedBy: ActorMetadata;
   company: EntityRelation<CompanyWorkspaceEntity> | null;

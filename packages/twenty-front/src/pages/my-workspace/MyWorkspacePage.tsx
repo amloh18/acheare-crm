@@ -19,6 +19,7 @@ import {
 } from 'twenty-ui/icon';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { RecordIndexSkeletonLoader } from '@/object-record/record-index/components/RecordIndexSkeletonLoader';
+import { AchareRoleSwitcherBar } from '@/achare/components/AchareRoleSwitcherBar';
 
 const StyledGrid = styled.div`
   display: grid;
@@ -200,6 +201,7 @@ export const MyWorkspacePage = () => {
   return (
     <PageContainer>
       <Section>
+        <AchareRoleSwitcherBar />
         <H2Title title={t`Today`} />
         <StyledGrid>
           <StyledCard>

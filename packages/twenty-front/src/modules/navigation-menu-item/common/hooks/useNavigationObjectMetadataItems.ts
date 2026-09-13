@@ -1,4 +1,5 @@
 import { CoreObjectNameSingular, FeatureFlagKey } from 'twenty-shared/types';
+import { isAchareIgnoredObject } from 'twenty-shared/workspace';
 
 import { objectMetadataItemsSelector } from '@/object-metadata/states/objectMetadataItemsSelector';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
@@ -10,13 +11,16 @@ export const useNavigationObjectMetadataItems = () => {
     FeatureFlagKey.IS_WORKFLOW_CORE_INDEX_PAGE_ENABLED,
   );
 
-  if (!isWorkflowCoreIndexPageEnabled) {
-    return objectMetadataItems;
-  }
-
-  return objectMetadataItems.filter(
-    (objectMetadataItem) =>
-      objectMetadataItem.nameSingular !==
-      CoreObjectNameSingular.WorkflowVersion,
-  );
+  return objectMetadataItems.filter((objectMetadataItem) => {
+    if (isAchareIgnoredObject(objectMetadataItem.nameSingular)) {
+      return false;
+    }
+    if (
+      isWorkflowCoreIndexPageEnabled &&
+      objectMetadataItem.nameSingular === CoreObjectNameSingular.WorkflowVersion
+    ) {
+      return false;
+    }
+    return true;
+  });
 };

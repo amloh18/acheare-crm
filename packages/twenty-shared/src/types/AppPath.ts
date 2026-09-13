@@ -37,6 +37,7 @@ export enum AppPath {
   Index = '/',
   // Mobile only: the navigation menu is a page there rather than a drawer.
   Home = '/home',
+  Dashboard = '/dashboard',
   TasksPage = '/objects/tasks',
   OpportunitiesPage = '/objects/opportunities',
 

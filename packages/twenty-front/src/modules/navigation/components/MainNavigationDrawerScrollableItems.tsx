@@ -1,5 +1,8 @@
 import { NavigationDrawerOpenedSection } from '@/navigation-menu-item/display/sections/components/NavigationDrawerOpenedSection';
 import { NavigationDrawerWorkspaceSectionSkeletonLoader } from '@/object-metadata/components/NavigationDrawerWorkspaceSectionSkeletonLoader';
+import { AchareNavigationContent } from '@/navigation/components/AchareNavigationContent';
+import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
+import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 
 import { styled } from '@linaria/react';
 import { lazy, Suspense } from 'react';
@@ -29,12 +32,20 @@ const StyledScrollableItemsContainer = styled.div`
 `;
 
 export const MainNavigationDrawerScrollableItems = () => {
+  const isLayoutCustomizationModeEnabled = useAtomStateValue(
+    isLayoutCustomizationModeEnabledState,
+  );
+
   return (
     <StyledScrollableItemsContainer>
       <NavigationDrawerOpenedSection />
       <Suspense fallback={<NavigationDrawerWorkspaceSectionSkeletonLoader />}>
         <FavoritesSectionDispatcher />
-        <WorkspaceSectionDispatcher />
+        {isLayoutCustomizationModeEnabled ? (
+          <WorkspaceSectionDispatcher />
+        ) : (
+          <AchareNavigationContent />
+        )}
       </Suspense>
     </StyledScrollableItemsContainer>
   );

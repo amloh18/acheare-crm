@@ -842,4 +842,218 @@ export const buildPersonStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  inHouse: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'inHouse',
+      type: FieldMetadataType.BOOLEAN,
+      label: i18nLabel(
+        msg({ message: `In-house`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Whether the person is part of the in-house internal organization`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconBuildingCommunity',
+      isNullable: true,
+      defaultValue: false,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  contexts: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'contexts',
+      type: FieldMetadataType.MULTI_SELECT,
+      label: i18nLabel(
+        msg({ message: `Contexts`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Operational contexts for this person (In-house, Candidate, Contact, Contractor)`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTags',
+      isNullable: true,
+      options: [
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeeb1',
+          value: 'IN_HOUSE',
+          label: 'In-house',
+          position: 0,
+          color: 'blue',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeeb2',
+          value: 'CANDIDATE',
+          label: 'Candidate',
+          position: 1,
+          color: 'purple',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeeb3',
+          value: 'CONTACT',
+          label: 'Contact',
+          position: 2,
+          color: 'green',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeeb4',
+          value: 'CONTRACTOR',
+          label: 'Contractor',
+          position: 3,
+          color: 'orange',
+        },
+      ],
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  roles: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'roles',
+      type: FieldMetadataType.MULTI_SELECT,
+      label: i18nLabel(
+        msg({ message: `Roles`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Organization roles (Admin, HR, Recruiter, BDE, Manager, Employee)`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconShield',
+      isNullable: true,
+      options: [
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec1',
+          value: 'ADMIN',
+          label: 'Admin',
+          position: 0,
+          color: 'red',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec2',
+          value: 'HR',
+          label: 'HR',
+          position: 1,
+          color: 'pink',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec3',
+          value: 'RECRUITER',
+          label: 'Recruiter',
+          position: 2,
+          color: 'purple',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec4',
+          value: 'BDE',
+          label: 'BDE',
+          position: 3,
+          color: 'sky',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec5',
+          value: 'MANAGER',
+          label: 'Manager',
+          position: 4,
+          color: 'yellow',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeec6',
+          value: 'EMPLOYEE',
+          label: 'Employee',
+          position: 5,
+          color: 'blue',
+        },
+      ],
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  status: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'status',
+      type: FieldMetadataType.SELECT,
+      label: i18nLabel(
+        msg({ message: `Status`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Active status within the organization`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTag',
+      isNullable: true,
+      defaultValue: "'ACTIVE'",
+      options: [
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeed1',
+          value: 'ACTIVE',
+          label: 'Active',
+          position: 0,
+          color: 'green',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeed2',
+          value: 'INACTIVE',
+          label: 'Inactive',
+          position: 1,
+          color: 'gray',
+        },
+        {
+          id: '9a112233-4455-4667-8899-aabbccddeed3',
+          value: 'FORMER',
+          label: 'Former',
+          position: 2,
+          color: 'orange',
+        },
+      ],
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  city: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'city',
+      type: FieldMetadataType.TEXT,
+      label: i18nLabel(
+        msg({ message: `City`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Location city of this person`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconMapPin',
+      isNullable: true,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
 });

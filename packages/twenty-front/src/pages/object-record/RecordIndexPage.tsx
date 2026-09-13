@@ -15,6 +15,7 @@ import { isUndefined } from '@sniptt/guards';
 import { lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { FeatureFlagKey } from 'twenty-shared/types';
+import { AchareObjectPageContainer } from '@/achare/components/AchareObjectPageContainer';
 
 const WorkflowCoreIndexPage = lazy(() =>
   import('~/pages/object-core/WorkflowCoreIndexPage').then((module) => ({
@@ -100,7 +101,11 @@ export const RecordIndexPage = () => {
 
   return (
     <PageContainer>
-      <RecordIndexContainerGater />
+      <AchareObjectPageContainer
+        objectNameSingular={objectMetadataItem.nameSingular}
+      >
+        <RecordIndexContainerGater />
+      </AchareObjectPageContainer>
     </PageContainer>
   );
 };
