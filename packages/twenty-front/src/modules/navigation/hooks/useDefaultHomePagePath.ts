@@ -119,12 +119,27 @@ export const useDefaultHomePagePath = () => {
       return AppPath.Index;
     }
 
-    // Home is now My Workspace for all users (mobile + desktop).
-    return AppPath.Home;
+    if (isDefined(firstNavigationMenuItemLink)) {
+      return firstNavigationMenuItemLink;
+    }
+
+    if (!isDefined(firstObjectPathInfo)) {
+      return AppPath.NotFound;
+    }
+
+    return getAppPath(
+      AppPath.RecordIndexPage,
+      { objectNamePlural: firstObjectPathInfo.objectMetadataItem?.namePlural },
+      firstObjectPathInfo.view?.id
+        ? { viewId: firstObjectPathInfo.view.id }
+        : undefined,
+    );
   }, [
     currentUser,
     areObjectMetadataItemsLoaded,
     areNavigationMenuItemsLoaded,
+    firstNavigationMenuItemLink,
+    firstObjectPathInfo,
   ]);
 
   return { defaultHomePagePath };

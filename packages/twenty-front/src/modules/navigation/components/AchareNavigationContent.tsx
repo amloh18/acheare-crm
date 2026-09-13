@@ -41,6 +41,7 @@ import { NavigationDrawerAnimatedCollapseWrapper } from '@/ui/navigation/navigat
 import { AnimatedExpandableContainer } from 'twenty-ui/layout';
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 import { useIsNavigationDrawerContentExpanded } from '@/navigation/hooks/useIsNavigationDrawerContentExpanded';
+import { useDefaultHomePagePath } from '@/navigation/hooks/useDefaultHomePagePath';
 
 type NavItemConfig = {
   label: string;
@@ -103,6 +104,7 @@ export const AchareNavigationContent = () => {
   const isMobile = useIsMobile();
   const isDrawerExpanded = useIsNavigationDrawerContentExpanded();
   const enabledFeatures = useAchareEnabledFeatures();
+  const { defaultHomePagePath } = useDefaultHomePagePath();
 
   const [collapsedSections, setCollapsedSections] = useState<
     Record<string, boolean>
@@ -345,9 +347,13 @@ export const AchareNavigationContent = () => {
         label={t`Home`}
         Icon={IconHome}
         active={
-          location.pathname === AppPath.Home || location.pathname === '/'
+          location.pathname === '/' ||
+          location.pathname === AppPath.Index ||
+          (defaultHomePagePath !== AppPath.Index &&
+            location.pathname === defaultHomePagePath &&
+            !location.search)
         }
-        onClick={() => navigate(AppPath.Home)}
+        onClick={() => navigate(defaultHomePagePath || AppPath.Index)}
         triggerEvent="CLICK"
         preventCollapseOnMobile={isMobile}
       />
