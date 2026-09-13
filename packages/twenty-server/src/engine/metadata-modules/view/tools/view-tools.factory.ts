@@ -31,6 +31,7 @@ import {
 const CREATABLE_VIEW_TYPES = [
   ViewType.TABLE,
   ViewType.LIST,
+  ViewType.CARD,
   ViewType.KANBAN,
   ViewType.CALENDAR,
   ViewType.TABLE_WIDGET,

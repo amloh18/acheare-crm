@@ -405,6 +405,12 @@ export const ViewPickerTabItem = ({
                   selected={view.type === ViewType.LIST}
                   onClick={() => handleSelectViewType(ViewType.LIST)}
                 />
+                <MenuItemSelect
+                  LeftIcon={viewTypeIconMapping(ViewType.CARD)}
+                  text={t(getViewTypeLabel(ViewType.CARD))}
+                  selected={view.type === ViewType.CARD}
+                  onClick={() => handleSelectViewType(ViewType.CARD)}
+                />
               </DropdownMenuItemsContainer>
             </DropdownContent>
           )

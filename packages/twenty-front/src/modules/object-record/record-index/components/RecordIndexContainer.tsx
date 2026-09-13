@@ -12,6 +12,7 @@ import { RecordIndexEmptyStateNotShared } from '@/object-record/record-index/com
 import { RecordIndexFiltersToContextStoreEffect } from '@/object-record/record-index/components/RecordIndexFiltersToContextStoreEffect';
 import { useHasCurrentViewNonReadableFields } from '@/object-record/record-index/hooks/useHasCurrentViewNonReadableFields';
 import { RecordListContainer } from '@/object-record/record-list/components/RecordListContainer';
+import { RecordCardContainer } from '@/object-record/record-card/components/RecordCardContainer';
 import { ViewType } from '@/views/types/ViewType';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
@@ -70,6 +71,14 @@ export const RecordIndexContainer = () => {
           {recordIndexViewType === ViewType.LIST && (
             <StyledContainerWithPadding>
               <RecordListContainer
+                objectNameSingular={objectNameSingular}
+                viewBarInstanceId={recordIndexId}
+              />
+            </StyledContainerWithPadding>
+          )}
+          {recordIndexViewType === ViewType.CARD && (
+            <StyledContainerWithPadding>
+              <RecordCardContainer
                 objectNameSingular={objectNameSingular}
                 viewBarInstanceId={recordIndexId}
               />

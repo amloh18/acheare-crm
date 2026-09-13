@@ -6,6 +6,7 @@ import { ViewType } from '@/views/types/ViewType';
 const VIEW_TYPES_WITH_OPTIONAL_RECORD_GROUPING: ViewType[] = [
   ViewType.TABLE,
   ViewType.LIST,
+  ViewType.CARD,
 ];
 
 export const isRecordGroupingOptionalForViewType = (viewType: ViewType) =>

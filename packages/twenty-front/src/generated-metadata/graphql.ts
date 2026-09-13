@@ -7265,6 +7265,7 @@ export enum ViewSortDirection {
 export enum ViewType {
   CALENDAR = 'CALENDAR',
   CALENDAR_WIDGET = 'CALENDAR_WIDGET',
+  CARD = 'CARD',
   FIELDS_WIDGET = 'FIELDS_WIDGET',
   KANBAN = 'KANBAN',
   KANBAN_WIDGET = 'KANBAN_WIDGET',

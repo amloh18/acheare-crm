@@ -114,6 +114,7 @@ export const ObjectOptionsDropdownLayoutContent = () => {
   const selectableItemIdArray = [
     ViewType.TABLE,
     ViewType.LIST,
+    ViewType.CARD,
     ...(!isDefaultView ? [ViewType.CALENDAR] : []),
     ...(isDefaultView ? [] : [ViewType.KANBAN]),
     ...(currentView?.type === ViewType.KANBAN ? ['Group'] : []),
@@ -121,7 +122,8 @@ export const ObjectOptionsDropdownLayoutContent = () => {
       ? ['CalendarView', 'CalendarDateField']
       : []),
     ...(currentView?.type !== ViewType.TABLE &&
-    currentView?.type !== ViewType.LIST
+    currentView?.type !== ViewType.LIST &&
+    currentView?.type !== ViewType.CARD
       ? ['Compact view']
       : []),
   ];
@@ -186,6 +188,24 @@ export const ObjectOptionsDropdownLayoutContent = () => {
                 onClick={async () => {
                   if (currentView?.type !== ViewType.LIST) {
                     await setAndPersistViewType(ViewType.LIST);
+                  }
+                }}
+              />
+            </SelectableListItem>
+            <SelectableListItem
+              itemId={ViewType.CARD}
+              onEnter={() => {
+                setAndPersistViewType(ViewType.CARD);
+              }}
+            >
+              <MenuItemSelect
+                LeftIcon={viewTypeIconMapping(ViewType.CARD)}
+                text={t(getViewTypeLabel(ViewType.CARD))}
+                selected={currentView?.type === ViewType.CARD}
+                focused={selectedItemId === ViewType.CARD}
+                onClick={async () => {
+                  if (currentView?.type !== ViewType.CARD) {
+                    await setAndPersistViewType(ViewType.CARD);
                   }
                 }}
               />
@@ -298,7 +318,8 @@ export const ObjectOptionsDropdownLayoutContent = () => {
               </SelectableListItem>
             )}
             {currentView?.type !== ViewType.TABLE &&
-              currentView?.type !== ViewType.LIST && (
+              currentView?.type !== ViewType.LIST &&
+              currentView?.type !== ViewType.CARD && (
                 <SelectableListItem
                   itemId="Compact view"
                   onEnter={() => {
