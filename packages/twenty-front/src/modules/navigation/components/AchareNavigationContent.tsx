@@ -24,7 +24,6 @@ import {
   IconFile,
   IconFileText,
   IconHierarchy,
-  IconHome,
   IconInbox,
   IconSettingsAutomation,
   IconTargetArrow,
@@ -41,7 +40,6 @@ import { NavigationDrawerAnimatedCollapseWrapper } from '@/ui/navigation/navigat
 import { AnimatedExpandableContainer } from 'twenty-ui/layout';
 import { useIsMobile } from '@/ui/utilities/responsive/hooks/useIsMobile';
 import { useIsNavigationDrawerContentExpanded } from '@/navigation/hooks/useIsNavigationDrawerContentExpanded';
-import { useDefaultHomePagePath } from '@/navigation/hooks/useDefaultHomePagePath';
 
 type NavItemConfig = {
   label: string;
@@ -50,7 +48,7 @@ type NavItemConfig = {
 };
 
 type NavModuleConfig = {
-  key: AchareModuleKey | 'WORK' | 'REPORTS';
+  key: AchareModuleKey | 'WORK';
   title: string;
   items: NavItemConfig[];
 };
@@ -104,7 +102,6 @@ export const AchareNavigationContent = () => {
   const isMobile = useIsMobile();
   const isDrawerExpanded = useIsNavigationDrawerContentExpanded();
   const enabledFeatures = useAchareEnabledFeatures();
-  const { defaultHomePagePath } = useDefaultHomePagePath();
 
   const [collapsedSections, setCollapsedSections] = useState<
     Record<string, boolean>
@@ -118,9 +115,9 @@ export const AchareNavigationContent = () => {
   };
 
   const isModuleActive = (
-    moduleKey: AchareModuleKey | 'WORK' | 'REPORTS',
+    moduleKey: AchareModuleKey | 'WORK',
   ) => {
-    if (moduleKey === 'WORK' || moduleKey === 'REPORTS') {
+    if (moduleKey === 'WORK') {
       return true;
     }
     if (!enabledFeatures) {
@@ -256,17 +253,6 @@ export const AchareNavigationContent = () => {
         },
       ],
     },
-    {
-      key: 'REPORTS',
-      title: t`Reports`,
-      items: [
-        {
-          label: t`Dashboard`,
-          path: AppPath.Dashboard,
-          Icon: IconChartBar,
-        },
-      ],
-    },
   ];
 
   const visibleModules = modules.filter((mod) => isModuleActive(mod.key));
@@ -314,18 +300,16 @@ export const AchareNavigationContent = () => {
 
   return (
     <StyledContainer>
-      {/* Home link */}
+      {/* Dashboard link */}
       <NavigationDrawerItem
-        label={t`Home`}
-        Icon={IconHome}
+        label={t`Dashboard`}
+        Icon={IconChartBar}
         active={
+          location.pathname === AppPath.Dashboard ||
           location.pathname === '/' ||
-          location.pathname === AppPath.Index ||
-          (defaultHomePagePath !== AppPath.Index &&
-            location.pathname === defaultHomePagePath &&
-            !location.search)
+          location.pathname === AppPath.Index
         }
-        onClick={() => navigate(defaultHomePagePath || AppPath.Index)}
+        onClick={() => navigate(AppPath.Dashboard)}
         triggerEvent="CLICK"
         preventCollapseOnMobile={isMobile}
       />

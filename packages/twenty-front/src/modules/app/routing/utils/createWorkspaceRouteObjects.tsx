@@ -95,7 +95,7 @@ export const createWorkspaceRouteObjects = ({
       : []),
     {
       path: AppPath.Index,
-      element: <RecordIndexSkeletonLoader />,
+      element: <Navigate to={AppPath.Dashboard} replace />,
     },
     {
       path: AppPath.RecordIndexPage,
@@ -136,7 +136,7 @@ export const createWorkspaceRouteObjects = ({
     },
     {
       path: AppPath.Home,
-      element: <Navigate to={AppPath.Index} replace />,
+      element: <Navigate to={AppPath.Dashboard} replace />,
     },
     {
       path: AppPath.Dashboard,

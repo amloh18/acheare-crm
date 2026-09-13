@@ -112,35 +112,8 @@ export const useDefaultHomePagePath = () => {
       return AppPath.SignInUp;
     }
 
-    // Both stores are transiently empty during the post-login window;
-    // deciding the redirect before they are loaded could strand users on a
-    // wrong fallback (/settings/profile or the alphabetically-first object).
-    if (!areObjectMetadataItemsLoaded || !areNavigationMenuItemsLoaded) {
-      return AppPath.Index;
-    }
-
-    if (isDefined(firstNavigationMenuItemLink)) {
-      return firstNavigationMenuItemLink;
-    }
-
-    if (!isDefined(firstObjectPathInfo)) {
-      return AppPath.NotFound;
-    }
-
-    return getAppPath(
-      AppPath.RecordIndexPage,
-      { objectNamePlural: firstObjectPathInfo.objectMetadataItem?.namePlural },
-      firstObjectPathInfo.view?.id
-        ? { viewId: firstObjectPathInfo.view.id }
-        : undefined,
-    );
-  }, [
-    currentUser,
-    areObjectMetadataItemsLoaded,
-    areNavigationMenuItemsLoaded,
-    firstNavigationMenuItemLink,
-    firstObjectPathInfo,
-  ]);
+    return AppPath.Dashboard;
+  }, [currentUser]);
 
   return { defaultHomePagePath };
 };
