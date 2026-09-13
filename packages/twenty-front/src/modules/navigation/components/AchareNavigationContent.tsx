@@ -115,12 +115,26 @@ export const AchareNavigationContent = () => {
     }));
   };
 
-  const isModuleActive = (moduleKey: AchareModuleKey | 'WORK' | 'REPORTS') => {
+  const isModuleActive = (
+    moduleKey: AchareModuleKey | 'WORK' | 'REPORTS',
+  ) => {
     if (moduleKey === 'WORK' || moduleKey === 'REPORTS') {
       return true;
     }
     if (!enabledFeatures) {
       return true;
+    }
+    if (moduleKey === AchareModuleKey.HR) {
+      return (
+        isAchareModuleEnabled(
+          enabledFeatures as AchareFeatureKey[],
+          AchareModuleKey.HR,
+        ) ||
+        isAchareModuleEnabled(
+          enabledFeatures as AchareFeatureKey[],
+          AchareModuleKey.TEAM,
+        )
+      );
     }
     return isAchareModuleEnabled(
       enabledFeatures as AchareFeatureKey[],
@@ -133,11 +147,6 @@ export const AchareNavigationContent = () => {
       key: 'WORK',
       title: t`Work`,
       items: [
-        {
-          label: t`Dashboard`,
-          path: AppPath.Dashboard,
-          Icon: IconChartBar,
-        },
         {
           label: t`Tasks`,
           path: '/objects/tasks',
@@ -160,9 +169,29 @@ export const AchareNavigationContent = () => {
           Icon: IconBuildingSkyscraper,
         },
         {
-          label: t`People`,
-          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
+          label: t`All People`,
+          path: '/objects/people',
+          Icon: IconUsers,
+        },
+        {
+          label: t`Team`,
+          path: '/objects/people?filter[inHouse][is]=true',
           Icon: IconUser,
+        },
+        {
+          label: t`Candidates`,
+          path: '/objects/people?filter[contexts][contains]=["CANDIDATE"]',
+          Icon: IconUserPlus,
+        },
+        {
+          label: t`Client Contacts`,
+          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
+          Icon: IconBuildingSkyscraper,
+        },
+        {
+          label: t`Contractors`,
+          path: '/objects/people?filter[contexts][contains]=["CONTRACTOR"]',
+          Icon: IconBriefcase,
         },
         {
           label: t`Opportunities`,
@@ -193,29 +222,9 @@ export const AchareNavigationContent = () => {
       ],
     },
     {
-      key: AchareModuleKey.TEAM,
-      title: t`People`,
+      key: AchareModuleKey.HR,
+      title: t`HR`,
       items: [
-        {
-          label: t`All People`,
-          path: '/objects/people',
-          Icon: IconUsers,
-        },
-        {
-          label: t`Team`,
-          path: '/objects/people?filter[inHouse][is]=true',
-          Icon: IconUsers,
-        },
-        {
-          label: t`Candidates`,
-          path: '/objects/people?filter[contexts][contains]=["CANDIDATE"]',
-          Icon: IconUserPlus,
-        },
-        {
-          label: t`Contacts`,
-          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
-          Icon: IconBuildingSkyscraper,
-        },
         {
           label: t`Attendance`,
           path: '/objects/attendanceDays',
@@ -270,9 +279,9 @@ export const AchareNavigationContent = () => {
       title: t`Reports`,
       items: [
         {
-          label: t`Dashboards`,
-          path: '/objects/dashboards',
-          Icon: IconChartPie,
+          label: t`Dashboard`,
+          path: AppPath.Dashboard,
+          Icon: IconChartBar,
         },
       ],
     },
