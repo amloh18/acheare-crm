@@ -7,6 +7,9 @@ import { viewFromViewIdFamilySelector } from '@/views/states/selectors/viewFromV
 import { useEffect, useState } from 'react';
 import { isDefined } from 'twenty-shared/utils';
 
+import { ViewKey, ViewType } from '~/generated-metadata/graphql';
+import { type View } from '@/views/types/View';
+
 export const RecordIndexLoadBaseOnContextStoreEffect = () => {
   const { loadRecordIndexStates } = useLoadRecordIndexStates();
   const contextStoreCurrentViewId = useAtomComponentStateValue(
@@ -42,8 +45,32 @@ export const RecordIndexLoadBaseOnContextStoreEffect = () => {
     if (isDefined(view)) {
       loadRecordIndexStates(view, objectMetadataItem);
       setLoadedViewKey(currentViewLoadKey);
+    } else if (!isDefined(contextStoreCurrentViewId)) {
+      const fallbackKey = `default-${objectMetadataItem.id}`;
+      if (loadedViewKey !== fallbackKey) {
+        loadRecordIndexStates(
+          {
+            id: fallbackKey,
+            name: 'All',
+            type: ViewType.TABLE,
+            key: ViewKey.INDEX,
+            objectMetadataId: objectMetadataItem.id,
+            position: 0,
+            icon: 'IconTable',
+            viewFields: [],
+            viewFilters: [],
+            viewFilterGroups: [],
+            viewSorts: [],
+            viewGroups: [],
+            isCompact: false,
+          } as unknown as View,
+          objectMetadataItem,
+        );
+        setLoadedViewKey(fallbackKey);
+      }
     }
   }, [
+    contextStoreCurrentViewId,
     currentViewLoadKey,
     loadRecordIndexStates,
     loadedViewKey,

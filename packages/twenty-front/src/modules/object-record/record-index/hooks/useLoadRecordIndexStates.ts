@@ -143,9 +143,16 @@ export const useLoadRecordIndexStates = () => {
         columnDefinitions,
       });
 
-      const recordFields = view.viewFields
-        .map(mapViewFieldToRecordField)
-        .filter(isDefined);
+      const recordFields =
+        view.viewFields.length > 0
+          ? view.viewFields.map(mapViewFieldToRecordField).filter(isDefined)
+          : newFieldDefinitions.map((col, index) => ({
+              id: col.fieldMetadataId,
+              fieldMetadataItemId: col.fieldMetadataId,
+              position: index,
+              isVisible: col.isVisible ?? true,
+              size: col.size ?? 150,
+            }));
 
       const recordIndexId =
         options?.recordIndexId ??

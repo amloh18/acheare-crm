@@ -42,6 +42,8 @@ export const RecordIndexContainer = () => {
   const { hasCurrentViewNonReadableFields, nonReadableViewFieldInfo } =
     useHasCurrentViewNonReadableFields(objectMetadataItem);
 
+  const currentViewType = recordIndexViewType ?? ViewType.TABLE;
+
   return (
     <StyledContainer>
       {hasCurrentViewNonReadableFields ? (
@@ -51,10 +53,10 @@ export const RecordIndexContainer = () => {
       ) : (
         <>
           <RecordIndexFiltersToContextStoreEffect />
-          {recordIndexViewType === ViewType.TABLE && (
+          {currentViewType === ViewType.TABLE && (
             <RecordIndexTableContainer recordTableId={recordIndexId} />
           )}
-          {recordIndexViewType === ViewType.KANBAN && (
+          {currentViewType === ViewType.KANBAN && (
             <StyledContainerWithPadding>
               <RecordBoardContainer
                 recordBoardId={recordIndexId}
@@ -63,12 +65,12 @@ export const RecordIndexContainer = () => {
               />
             </StyledContainerWithPadding>
           )}
-          {recordIndexViewType === ViewType.CALENDAR && (
+          {currentViewType === ViewType.CALENDAR && (
             <StyledContainerWithPadding>
               <RecordIndexCalendarContainer />
             </StyledContainerWithPadding>
           )}
-          {recordIndexViewType === ViewType.LIST && (
+          {currentViewType === ViewType.LIST && (
             <StyledContainerWithPadding>
               <RecordListContainer
                 objectNameSingular={objectNameSingular}
@@ -76,7 +78,7 @@ export const RecordIndexContainer = () => {
               />
             </StyledContainerWithPadding>
           )}
-          {recordIndexViewType === ViewType.CARD && (
+          {currentViewType === ViewType.CARD && (
             <StyledContainerWithPadding>
               <RecordCardContainer
                 objectNameSingular={objectNameSingular}

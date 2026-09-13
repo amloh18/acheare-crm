@@ -58,6 +58,13 @@ export const mapViewFieldsToColumnDefinitions = ({
     })
     .filter(isDefined);
 
+  if (
+    columnDefinitionsFromViewFields.length === 0 &&
+    columnDefinitions.length > 0
+  ) {
+    return columnDefinitions;
+  }
+
   if (!labelIdentifierFieldMetadataId) return columnDefinitionsFromViewFields;
 
   const labelIdentifierIndex = columnDefinitionsFromViewFields.findIndex(

@@ -171,29 +171,9 @@ export const AchareNavigationContent = () => {
           Icon: IconBuildingSkyscraper,
         },
         {
-          label: t`All People`,
+          label: t`People`,
           path: '/objects/people',
           Icon: IconUsers,
-        },
-        {
-          label: t`Team`,
-          path: '/objects/people?filter[inHouse][is]=true',
-          Icon: IconUser,
-        },
-        {
-          label: t`Candidates`,
-          path: '/objects/people?filter[contexts][contains]=["CANDIDATE"]',
-          Icon: IconUserPlus,
-        },
-        {
-          label: t`Client Contacts`,
-          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
-          Icon: IconBuildingSkyscraper,
-        },
-        {
-          label: t`Contractors`,
-          path: '/objects/people?filter[contexts][contains]=["CONTRACTOR"]',
-          Icon: IconBriefcase,
         },
         {
           label: t`Opportunities`,
@@ -317,15 +297,7 @@ export const AchareNavigationContent = () => {
     }
 
     if (itemPath === '/objects/people') {
-      if (currentPath === '/objects/people') {
-        const hasSpecificFilter =
-          currentSearch.includes('inHouse') ||
-          currentSearch.includes('CANDIDATE') ||
-          currentSearch.includes('CONTACT') ||
-          currentSearch.includes('CONTRACTOR');
-        return !hasSpecificFilter;
-      }
-      return false;
+      return currentPath === '/objects/people';
     }
 
     if (itemPath === AppPath.Dashboard) {
