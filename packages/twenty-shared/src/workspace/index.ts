@@ -18,11 +18,11 @@ export {
   ACHARE_FEATURE_DEFINITIONS,
   ACHARE_FEATURES,
 } from './constants/AchareFeatures';
-export { ACHARE_MODULES, ACHARE_MODULE_ORDER } from './constants/AchareModules';
 export {
   ACHARE_IGNORED_OBJECT_NAMES,
   isAchareIgnoredObject,
 } from './constants/AchareIgnoredObjects';
+export { ACHARE_MODULES, ACHARE_MODULE_ORDER } from './constants/AchareModules';
 export type { AchareOnboardingStepKey } from './constants/AchareOnboardingSteps';
 export {
   ACHARE_ONBOARDING_LEADING_STEPS,
