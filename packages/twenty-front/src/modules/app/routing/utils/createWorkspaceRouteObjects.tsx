@@ -143,7 +143,7 @@ export const createWorkspaceRouteObjects = ({
       path: AppPath.Home,
       element: (
         <LazyRoute>
-          <MyWorkspacePage />
+          <DashboardPage />
         </LazyRoute>
       ),
     },

@@ -79,23 +79,34 @@ export const useFiltersFromQueryParams = () => {
             }
           }
 
-          const filterValueAsString =
+          let filterValueAsString =
             Array.isArray(filterValueFromURL) || isObject(filterValueFromURL)
               ? JSON.stringify(filterValueFromURL)
               : (filterValueFromURL as string);
+
+          const normalizedOperand =
+            filterOperandFromURL.toUpperCase() as ViewFilterOperand;
+
+          if (
+            fieldMetadataItem.type === 'MULTI_SELECT' &&
+            normalizedOperand === 'CONTAINS' &&
+            !filterValueAsString.startsWith('[')
+          ) {
+            filterValueAsString = JSON.stringify([filterValueAsString]);
+          }
 
           const displayValue = filterValueAsString;
 
           const filterId = `tmp-${[
             fieldName,
-            filterOperandFromURL,
+            normalizedOperand,
             filterValueFromURL,
           ].join('-')}`;
 
           return {
             id: filterId,
             fieldMetadataId: fieldMetadataItem.id,
-            operand: filterOperandFromURL as ViewFilterOperand,
+            operand: normalizedOperand,
             value: filterValueAsString,
             displayValue,
             subFieldName: subFieldName

@@ -161,7 +161,7 @@ export const AchareNavigationContent = () => {
         },
         {
           label: t`People`,
-          path: '/objects/people?context=CONTACT',
+          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
           Icon: IconUser,
         },
         {
@@ -203,17 +203,17 @@ export const AchareNavigationContent = () => {
         },
         {
           label: t`Team`,
-          path: '/objects/people?context=IN_HOUSE',
+          path: '/objects/people?filter[inHouse][is]=true',
           Icon: IconUsers,
         },
         {
           label: t`Candidates`,
-          path: '/objects/people?context=CANDIDATE',
+          path: '/objects/people?filter[contexts][contains]=["CANDIDATE"]',
           Icon: IconUserPlus,
         },
         {
           label: t`Contacts`,
-          path: '/objects/people?context=CONTACT',
+          path: '/objects/people?filter[contexts][contains]=["CONTACT"]',
           Icon: IconBuildingSkyscraper,
         },
         {
@@ -280,6 +280,55 @@ export const AchareNavigationContent = () => {
 
   const visibleModules = modules.filter((mod) => isModuleActive(mod.key));
 
+  const isItemActive = (itemPath: string) => {
+    const currentPath = location.pathname;
+    const currentSearch = decodeURIComponent(location.search);
+    const decodedItemPath = decodeURIComponent(itemPath);
+
+    if (itemPath.includes('?')) {
+      const [pathPart, queryPart] = decodedItemPath.split('?');
+      if (currentPath !== pathPart) {
+        return false;
+      }
+      if (queryPart.includes('inHouse')) {
+        return currentSearch.includes('inHouse');
+      }
+      if (queryPart.includes('CANDIDATE')) {
+        return currentSearch.includes('CANDIDATE');
+      }
+      if (queryPart.includes('CONTACT')) {
+        return currentSearch.includes('CONTACT');
+      }
+      if (queryPart.includes('CONTRACTOR')) {
+        return currentSearch.includes('CONTRACTOR');
+      }
+      return decodeURIComponent(`${currentPath}${location.search}`) === decodedItemPath;
+    }
+
+    if (itemPath === '/objects/people') {
+      if (currentPath === '/objects/people') {
+        const hasSpecificFilter =
+          currentSearch.includes('inHouse') ||
+          currentSearch.includes('CANDIDATE') ||
+          currentSearch.includes('CONTACT') ||
+          currentSearch.includes('CONTRACTOR');
+        return !hasSpecificFilter;
+      }
+      return false;
+    }
+
+    if (itemPath === AppPath.Dashboard) {
+      return currentPath === AppPath.Dashboard;
+    }
+
+    return (
+      currentPath === itemPath ||
+      (currentPath.startsWith(itemPath) &&
+        (currentPath.length === itemPath.length ||
+          currentPath.charAt(itemPath.length) === '/'))
+    );
+  };
+
   return (
     <StyledContainer>
       {/* Home link */}
@@ -298,7 +347,7 @@ export const AchareNavigationContent = () => {
       {visibleModules.map((module) => {
         const isCollapsed = Boolean(collapsedSections[module.key]);
         const hasActiveChild = module.items.some((item) =>
-          location.pathname.startsWith(item.path),
+          isItemActive(item.path),
         );
 
         return (
@@ -329,7 +378,7 @@ export const AchareNavigationContent = () => {
             >
               <StyledModuleList>
                 {module.items.map((item) => {
-                  const isActive = location.pathname.startsWith(item.path);
+                  const isActive = isItemActive(item.path);
 
                   return (
                     <NavigationDrawerItem
