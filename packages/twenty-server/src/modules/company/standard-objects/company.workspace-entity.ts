@@ -12,6 +12,7 @@ import { type CalendarEventTargetWorkspaceEntity } from 'src/modules/calendar/co
 import { type MessageThreadTargetWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-thread-target.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { type PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
+import { type CompanyPersonRelationshipWorkspaceEntity } from 'src/modules/company/standard-objects/company-person-relationship.workspace-entity';
 import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
 import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/requirement.workspace-entity';
 import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
@@ -37,6 +38,9 @@ export class CompanyWorkspaceEntity {
   searchVector: string;
 
   people: EntityRelation<PersonWorkspaceEntity[]>;
+  companyPersonRelationships: EntityRelation<
+    CompanyPersonRelationshipWorkspaceEntity[]
+  >;
   accountOwner: EntityRelation<WorkspaceMemberWorkspaceEntity> | null;
   accountOwnerId: string | null;
   taskTargets: EntityRelation<TaskTargetWorkspaceEntity[]>;

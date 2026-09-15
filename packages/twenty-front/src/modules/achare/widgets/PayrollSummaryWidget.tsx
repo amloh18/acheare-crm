@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
-import { IconChevronRight, IconCoins, IconCreditCard } from 'twenty-ui/icon';
+import { IconChevronRight, IconCoins, IconCreditCard, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -41,6 +41,24 @@ const StyledViewAll = styled.button`
   &:hover {
     color: ${themeCssVariables.font.color.primary};
   }
+`;
+
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
 `;
 
 const StyledContentGrid = styled.div`
@@ -87,6 +105,8 @@ interface PayrollSummaryWidgetProps {
   employeeCount?: number;
   status?: string;
   payDate?: string;
+  loading?: boolean;
+  error?: boolean;
 }
 
 export const PayrollSummaryWidget = ({
@@ -95,6 +115,8 @@ export const PayrollSummaryWidget = ({
   employeeCount = 48,
   status = 'PAID',
   payDate = 'Aug 31, 2026',
+  loading,
+  error,
 }: PayrollSummaryWidgetProps) => {
   const navigate = useNavigate();
 
@@ -111,29 +133,40 @@ export const PayrollSummaryWidget = ({
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledContentGrid>
-        <StyledDataBlock>
-          <StyledDataLabel>Active Cycle</StyledDataLabel>
-          <StyledDataValue>{periodName}</StyledDataValue>
-          <StyledStatusBadge>{status}</StyledStatusBadge>
-        </StyledDataBlock>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading payroll data...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load payroll data</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <StyledContentGrid>
+          <StyledDataBlock>
+            <StyledDataLabel>Active Cycle</StyledDataLabel>
+            <StyledDataValue>{periodName}</StyledDataValue>
+            <StyledStatusBadge>{status}</StyledStatusBadge>
+          </StyledDataBlock>
 
-        <StyledDataBlock>
-          <StyledDataLabel>Total Net Disbursed</StyledDataLabel>
-          <StyledDataValue>{totalNet}</StyledDataValue>
-          <span style={{ fontSize: '0.75rem', color: themeCssVariables.font.color.tertiary }}>
-            Processed on {payDate}
-          </span>
-        </StyledDataBlock>
+          <StyledDataBlock>
+            <StyledDataLabel>Total Net Disbursed</StyledDataLabel>
+            <StyledDataValue>{totalNet}</StyledDataValue>
+            <span style={{ fontSize: '0.75rem', color: themeCssVariables.font.color.tertiary }}>
+              Processed on {payDate}
+            </span>
+          </StyledDataBlock>
 
-        <StyledDataBlock>
-          <StyledDataLabel>Headcount Paid</StyledDataLabel>
-          <StyledDataValue>{employeeCount} Employees</StyledDataValue>
-          <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 500 }}>
-            100% On Time
-          </span>
-        </StyledDataBlock>
-      </StyledContentGrid>
+          <StyledDataBlock>
+            <StyledDataLabel>Headcount Paid</StyledDataLabel>
+            <StyledDataValue>{employeeCount} Employees</StyledDataValue>
+            <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 500 }}>
+              100% On Time
+            </span>
+          </StyledDataBlock>
+        </StyledContentGrid>
+      )}
     </StyledCard>
   );
 };

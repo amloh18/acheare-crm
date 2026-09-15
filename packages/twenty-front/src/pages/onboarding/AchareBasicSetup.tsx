@@ -1,5 +1,6 @@
 import { currentUserState } from '@/auth/states/currentUserState';
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
+import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
 import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
 import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
 import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
@@ -94,6 +95,7 @@ export const AchareBasicSetup = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
   const [completeBasicSetup] = useCompleteAchareBasicSetupMutation();
+  const currentWorkspace = useAtomStateValue(currentWorkspaceState);
   const currentWorkspaceMember = useAtomStateValue(currentWorkspaceMemberState);
   const setCurrentUser = useSetAtomState(currentUserState);
   const { updateWorkspaceMemberSettings } = useUpdateWorkspaceMemberSettings();
@@ -107,7 +109,7 @@ export const AchareBasicSetup = () => {
   } = useForm<Form>({
     mode: 'onChange',
     defaultValues: {
-      agencyName: '',
+      agencyName: currentWorkspace?.displayName ?? '',
       country: 'India',
       timezone: 'Asia/Kolkata',
       currency: 'INR',

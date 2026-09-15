@@ -12,13 +12,16 @@ import { type EntityRelation } from 'src/engine/workspace-manager/workspace-migr
 import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { type CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
 import { type CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
+import { type CompanyPersonRelationshipWorkspaceEntity } from 'src/modules/company/standard-objects/company-person-relationship.workspace-entity';
 import { type MessageListMemberWorkspaceEntity } from 'src/modules/emailing/standard-objects/message-list-member.workspace-entity';
 import { type MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
 import { type NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
+import { type PersonExternalIdWorkspaceEntity } from 'src/modules/person/standard-objects/person-external-id.workspace-entity';
 import { type CalendarEventTargetWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-target.workspace-entity';
 import { type MessageThreadTargetWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-thread-target.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
 import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
+import { type InterviewParticipantWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview-participant.workspace-entity';
 import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/requirement.workspace-entity';
 import { type EmployeeWorkspaceEntity } from 'src/modules/hr/standard-objects/employee.workspace-entity';
 import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
@@ -41,6 +44,10 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
   roles: string[] | null;
   status: string | null;
   city: string | null;
+  /** Lowercased, trimmed primary email for deduplication matching */
+  emailNormalized: string | null;
+  /** Digits-only primary phone for deduplication matching */
+  phoneNormalized: string | null;
   createdBy: ActorMetadata;
   updatedBy: ActorMetadata;
   company: EntityRelation<CompanyWorkspaceEntity> | null;
@@ -56,6 +63,11 @@ export class PersonWorkspaceEntity extends BaseWorkspaceEntity {
     CalendarEventParticipantWorkspaceEntity[]
   >;
   timelineActivities: EntityRelation<TimelineActivityWorkspaceEntity[]>;
+  companyPersonRelationships: EntityRelation<
+    CompanyPersonRelationshipWorkspaceEntity[]
+  >;
+  interviewParticipants: EntityRelation<InterviewParticipantWorkspaceEntity[]>;
+  externalIds: EntityRelation<PersonExternalIdWorkspaceEntity[]>;
   candidateProfiles: EntityRelation<CandidateWorkspaceEntity[]>;
   requirements: EntityRelation<RequirementWorkspaceEntity[]>;
   employees: EntityRelation<EmployeeWorkspaceEntity[]>;

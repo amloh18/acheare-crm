@@ -41,6 +41,7 @@ export const ViewBarFilterDropdown = () => {
   return (
     <Dropdown
       dropdownId={ViewBarFilterDropdownIds.MAIN}
+      dropdownPlacement="bottom-end"
       onClose={handleDropdownClose}
       onOpen={handleDropdownOpen}
       clickableComponent={<ViewBarFilterButton />}

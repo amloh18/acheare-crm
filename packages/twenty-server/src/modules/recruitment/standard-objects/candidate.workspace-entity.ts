@@ -6,6 +6,7 @@ import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-
 import { type CandidateSubmissionWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate-submission.workspace-entity';
 import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
 import { type NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
+import { type PlacementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/placement.workspace-entity';
 import { type PersonWorkspaceEntity } from 'src/modules/person/standard-objects/person.workspace-entity';
 import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { type TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
@@ -31,6 +32,7 @@ export class CandidateWorkspaceEntity extends BaseWorkspaceEntity {
 
   candidateSubmissions: EntityRelation<CandidateSubmissionWorkspaceEntity[]>;
   interviews: EntityRelation<InterviewWorkspaceEntity[]>;
+  placements: EntityRelation<PlacementWorkspaceEntity[]>;
   taskTargets: EntityRelation<TaskTargetWorkspaceEntity[]>;
   noteTargets: EntityRelation<NoteTargetWorkspaceEntity[]>;
   attachments: EntityRelation<AttachmentWorkspaceEntity[]>;

@@ -119,6 +119,19 @@ export const SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME = {
     { name: 'reference', type: FieldMetadataType.TEXT },
     { name: 'notes', type: FieldMetadataType.TEXT },
   ],
+  companyPersonRelationship: [
+    { name: 'jobTitle', type: FieldMetadataType.TEXT },
+    { name: 'department', type: FieldMetadataType.TEXT },
+  ],
+  applicationStageHistory: [
+    { name: 'reason', type: FieldMetadataType.TEXT },
+  ],
+  placement: [{ name: 'id', type: FieldMetadataType.UUID }],
+  interviewParticipant: [{ name: 'id', type: FieldMetadataType.UUID }],
+  personExternalId: [
+    { name: 'externalId', type: FieldMetadataType.TEXT },
+    { name: 'source', type: FieldMetadataType.TEXT },
+  ],
 } satisfies {
   [ObjectName in AllStandardObjectName]: {
     name: AllStandardObjectFieldName<ObjectName>;

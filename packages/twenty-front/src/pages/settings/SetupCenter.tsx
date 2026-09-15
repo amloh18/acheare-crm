@@ -25,9 +25,12 @@ import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 import { useAchareOnboardingSteps } from '@/workspace-feature/hooks/useAchareOnboardingSteps';
 import { useSetWorkspaceFeaturesMutation } from '@/workspace-feature/hooks/useSetWorkspaceFeaturesMutation';
+import { useRestartAchareOnboardingMutation } from '@/onboarding/hooks/useRestartAchareOnboardingMutation';
+import { useNavigateApp } from '~/hooks/useNavigateApp';
+import { AppPath } from 'twenty-shared/types';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import type { AchareSetupStepStatus } from '~/generated-metadata/graphql';
-import { IconCheck, IconCircle, IconClock } from 'twenty-ui/icon';
+import { IconCheck, IconCircle, IconClock, IconPlayerPlay } from 'twenty-ui/icon';
 import { MainButton } from 'twenty-ui/input';
 import { Section } from 'twenty-ui/layout';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
@@ -153,6 +156,33 @@ const StyledButtonRow = styled.div`
   gap: ${themeCssVariables.spacing[3]};
 `;
 
+const StyledDemoBanner = styled.div`
+  align-items: center;
+  background: ${themeCssVariables.background.secondary};
+  border: 1px dashed ${themeCssVariables.border.color.medium};
+  border-radius: ${themeCssVariables.border.radius.md};
+  display: flex;
+  justify-content: space-between;
+  padding: ${themeCssVariables.spacing[4]};
+`;
+
+const StyledDemoText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[1]};
+`;
+
+const StyledDemoTitle = styled.div`
+  color: ${themeCssVariables.font.color.primary};
+  font-size: ${themeCssVariables.font.size.md};
+  font-weight: ${themeCssVariables.font.weight.medium};
+`;
+
+const StyledDemoSubtitle = styled.div`
+  color: ${themeCssVariables.font.color.secondary};
+  font-size: ${themeCssVariables.font.size.sm};
+`;
+
 const getStatusIcon = (status: AchareSetupStepStatus['status']) => {
   switch (status) {
     case 'COMPLETED':
@@ -202,7 +232,21 @@ export const SetupCenter = () => {
   const enabledFeatures = useAchareEnabledFeatures();
   const onboardingSteps = useAchareOnboardingSteps();
   const [setWorkspaceFeatures] = useSetWorkspaceFeaturesMutation();
+  const [restartAchareOnboarding, { loading: isRestarting }] =
+    useRestartAchareOnboardingMutation();
+  const navigateApp = useNavigateApp();
   const { enqueueErrorSnackBar, enqueueSuccessSnackBar } = useSnackBar();
+
+  const handleStartDemo = useCallback(async () => {
+    try {
+      await restartAchareOnboarding();
+      navigateApp(AppPath.AchareWelcome, undefined, { demo: 'true' });
+    } catch (error) {
+      enqueueErrorSnackBar({
+        message: t`Failed to start onboarding demo: ${error instanceof Error ? error.message : String(error)}`,
+      });
+    }
+  }, [restartAchareOnboarding, navigateApp, enqueueErrorSnackBar, t]);
 
   const [isSaving, setIsSaving] = useState(false);
   const [draftFeatures, setDraftFeatures] = useState<
@@ -370,6 +414,21 @@ export const SetupCenter = () => {
             description={t`Where this workspace's setup got to. The steps below are generated from the modules you selected.`}
           />
           <StyledSection>
+            <StyledDemoBanner>
+              <StyledDemoText>
+                <StyledDemoTitle>{t`Walkthrough & Demo Wizard`}</StyledDemoTitle>
+                <StyledDemoSubtitle>
+                  {t`Experience or demonstrate the complete multi-step onboarding wizard for this workspace.`}
+                </StyledDemoSubtitle>
+              </StyledDemoText>
+              <MainButton
+                title={isRestarting ? t`Launching...` : t`Launch Onboarding Demo`}
+                Icon={IconPlayerPlay}
+                variant="secondary"
+                disabled={isRestarting}
+                onClick={handleStartDemo}
+              />
+            </StyledDemoBanner>
             {isProgressLoading && (
               <StyledEmptyState>{t`Loading setup progress...`}</StyledEmptyState>
             )}

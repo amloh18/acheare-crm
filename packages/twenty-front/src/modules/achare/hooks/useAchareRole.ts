@@ -14,7 +14,7 @@ export const useAchareRole = () => {
     } catch {
       // Ignore storage errors
     }
-    return 'admin';
+    return 'employee';
   });
 
   useEffect(() => {

@@ -18,6 +18,7 @@ import { ACQUIRE_ONBOARDING_STEP_TRANSITION_LOCK_STATEMENT } from 'src/engine/co
 import { AchareSetupStepKeys } from 'src/engine/core-modules/onboarding/constants/acheare-setup-step-keys';
 import { buildOnboardingStepTransitionLockName } from 'src/engine/core-modules/onboarding/utils/build-onboarding-step-transition-lock-name.util';
 import { OnboardingStatus } from 'src/engine/core-modules/onboarding/enums/onboarding-status.enum';
+import { SEED_APPLE_WORKSPACE_ID } from 'src/engine/workspace-manager/dev-seeder/core/constants/seeder-workspaces.constant';
 import {
   INSTALL_ONBOARDING_APPS_JOB_NAME,
   type InstallOnboardingAppsJobData,
@@ -206,18 +207,44 @@ export class OnboardingService {
     const isInviteTeamPending =
       userVars.get(OnboardingStepKeys.ONBOARDING_INVITE_TEAM_PENDING) === true;
 
-    // In Achare, any user or workspace whose onboarding is pending routes to Achare Onboarding
-    if (
-      isProfileCreationPending ||
-      isConnectAccountPending ||
-      isInstallAppsPending ||
-      isInviteTeamPending ||
-      acheareSetupStatus === 'NOT_STARTED'
-    ) {
-      return OnboardingStatus.ACHARE_WELCOME;
+    const isDemoWorkspace =
+      workspace.id === SEED_APPLE_WORKSPACE_ID ||
+      workspace.subdomain === 'apple' ||
+      workspace.displayName?.toLowerCase() === 'apple';
+
+    if (isDemoWorkspace) {
+      const isBookCallPending =
+        userVars.get(OnboardingStepKeys.ONBOARDING_BOOK_CALL_PENDING) === true;
+
+      if (isConnectAccountPending) {
+        return OnboardingStatus.SYNC_EMAIL;
+      }
+
+      if (isInstallAppsPending) {
+        return OnboardingStatus.APPS_INSTALLATION;
+      }
+
+      if (isProfileCreationPending) {
+        return OnboardingStatus.PROFILE_CREATION;
+      }
+
+      if (isInviteTeamPending) {
+        return OnboardingStatus.INVITE_TEAM;
+      }
+
+      if (
+        isBookCallPending &&
+        isPlanRequired &&
+        isDefined(readBookCallStepMinEmployeeCount(this.twentyConfigService))
+      ) {
+        return OnboardingStatus.BOOK_CALL;
+      }
+
+      return OnboardingStatus.COMPLETED;
     }
 
-    return OnboardingStatus.COMPLETED;
+    // In Achare, any user or workspace whose onboarding is not completed routes to Achare Onboarding
+    return OnboardingStatus.ACHARE_WELCOME;
   }
 
   async isOnboardingInviteTeamPending({

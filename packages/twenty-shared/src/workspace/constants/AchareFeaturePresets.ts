@@ -35,6 +35,7 @@ export const ACHARE_FEATURE_PRESETS: Record<
       AchareFeatureKey.CANDIDATES,
       AchareFeatureKey.SUBMISSIONS,
       AchareFeatureKey.INTERVIEWS,
+      AchareFeatureKey.PLACEMENTS,
       AchareFeatureKey.EMPLOYEES,
       AchareFeatureKey.DEPARTMENTS,
       AchareFeatureKey.TEAMS,

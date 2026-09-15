@@ -24,8 +24,9 @@ import { isDDLLockedState } from '@/client-config/states/isDDLLockedState';
 import { DEFAULT_WORKSPACE_LOGO } from '@/ui/navigation/navigation-drawer/constants/DefaultWorkspaceLogo';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
+import { useAuth } from '@/auth/hooks/useAuth';
 import { isNonEmptyString } from '@sniptt/guards';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Avatar } from 'twenty-ui/data-display';
 import { IconChevronRight, IconPlus } from 'twenty-ui/icon';
 import { HorizontalSeparator } from 'twenty-ui/layout';
@@ -136,6 +137,17 @@ export const SignInUpGlobalScopeForm = () => {
   const { form } = useSignInUpForm();
   const { handleResetPassword } = useHandleResetPassword();
   const returnToPath = useAtomStateValue(returnToPathState);
+  const { signInWithCredentialsInWorkspace } = useAuth();
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
+
+  const handleTryDemo = async () => {
+    setIsDemoLoading(true);
+    try {
+      await signInWithCredentialsInWorkspace('tim@apple.dev', 'tim@apple.dev');
+    } catch {
+      setIsDemoLoading(false);
+    }
+  };
 
   useQuery(GetWorkspaceCreationDefaultsDocument, {
     skip: signInUpStep !== SignInUpStep.WorkspaceSelection,
@@ -254,12 +266,22 @@ export const SignInUpGlobalScopeForm = () => {
           <FormProvider {...form}>
             <SignInUpWithCredentials isGlobalScope />
           </FormProvider>
-          {signInUpStep === SignInUpStep.Password && (
+          {signInUpStep === SignInUpStep.Password ? (
             <StyledForgotPasswordLinkContainer>
               <ClickToActionLink
                 onClick={handleResetPassword(form.getValues('email'))}
               >
                 <Trans>Forgot your password?</Trans>
+              </ClickToActionLink>
+            </StyledForgotPasswordLinkContainer>
+          ) : (
+            <StyledForgotPasswordLinkContainer>
+              <ClickToActionLink onClick={handleTryDemo}>
+                {isDemoLoading ? (
+                  <Trans>Launching Demo Workspace...</Trans>
+                ) : (
+                  <Trans>Explore sample data with Demo</Trans>
+                )}
               </ClickToActionLink>
             </StyledForgotPasswordLinkContainer>
           )}

@@ -4,6 +4,7 @@ import { StopPropagationContainer } from '@/object-record/record-board/record-bo
 import { RECORD_BOARD_CARD_INPUT_ID_PREFIX } from '@/object-record/record-board/record-board-card/constants/RecordBoardCardInputIdPrefix';
 import { RecordBoardCardContext } from '@/object-record/record-board/record-board-card/contexts/RecordBoardCardContext';
 import { recordBoardCardHoverPositionComponentState } from '@/object-record/record-board/record-board-card/states/recordBoardCardHoverPositionComponentState';
+import { getPriorityFieldsForCompactMode } from '@/object-record/record-board/record-board-card/utils/getPriorityFieldsForCompactMode';
 import { RecordCardBodyContainer } from '@/object-record/record-card/components/RecordCardBodyContainer';
 import { visibleRecordFieldsComponentSelector } from '@/object-record/record-field/states/visibleRecordFieldsComponentSelector';
 import {
@@ -15,10 +16,30 @@ import { RecordFieldComponentInstanceContext } from '@/object-record/record-fiel
 import { useRecordIndexContextOrThrow } from '@/object-record/record-index/contexts/RecordIndexContext';
 import { RecordInlineCell } from '@/object-record/record-inline-cell/components/RecordInlineCell';
 import { getRecordFieldInputInstanceId } from '@/object-record/utils/getRecordFieldInputId';
+import { recordBoardCardIsExpandedComponentState } from '@/object-record/record-board/record-board-card/states/recordBoardCardIsExpandedComponentState';
 import { useAtomComponentSelectorValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentSelectorValue';
+import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
+import { styled } from '@linaria/react';
 import { useContext } from 'react';
 import { isDefined } from 'twenty-shared/utils';
+import { themeCssVariables } from 'twenty-ui/theme-constants';
+
+const StyledCompactCardBodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 ${themeCssVariables.spacing[2]} ${themeCssVariables.spacing[1]} 10px;
+  span {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    svg {
+      color: ${themeCssVariables.font.color.tertiary};
+      margin-right: ${themeCssVariables.spacing[2]};
+    }
+  }
+`;
 
 export const RecordBoardCardBody = () => {
   const { recordId, isRecordReadOnly, isDragOverlay } = useContext(
@@ -49,10 +70,24 @@ export const RecordBoardCardBody = () => {
     visibleRecordFieldsComponentSelector,
   );
 
+  const recordBoardCardIsExpanded = useAtomComponentStateValue(
+    recordBoardCardIsExpandedComponentState,
+    `record-board-card-${recordId}`,
+  );
+
   const visibleRecordFieldsExceptLabelIdentifier = visibleRecordFields.filter(
     (recordField) =>
       recordField.fieldMetadataItemId !== labelIdentifierFieldMetadataItem?.id,
   );
+
+  const isCollapsed = !recordBoardCardIsExpanded;
+
+  const fieldsToShow = isCollapsed
+    ? getPriorityFieldsForCompactMode(
+        visibleRecordFieldsExceptLabelIdentifier,
+        fieldMetadataItemByFieldMetadataItemId,
+      )
+    : visibleRecordFieldsExceptLabelIdentifier;
 
   const setRecordBoardCardHoverPosition = useSetAtomComponentState(
     recordBoardCardHoverPositionComponentState,
@@ -62,9 +97,13 @@ export const RecordBoardCardBody = () => {
     setRecordBoardCardHoverPosition(index);
   };
 
+  const Container = isCollapsed
+    ? StyledCompactCardBodyContainer
+    : RecordCardBodyContainer;
+
   return (
-    <RecordCardBodyContainer>
-      {visibleRecordFieldsExceptLabelIdentifier.map((recordField, index) => {
+    <Container>
+      {fieldsToShow.map((recordField, index) => {
         const correspondingFieldDefinition =
           fieldDefinitionByFieldMetadataItemId[recordField.fieldMetadataItemId];
         const fieldMetadataItem =
@@ -120,6 +159,6 @@ export const RecordBoardCardBody = () => {
           </StopPropagationContainer>
         );
       })}
-    </RecordCardBodyContainer>
+    </Container>
   );
 };

@@ -156,11 +156,10 @@ export const useSignInUp = (form: UseFormReturn<Form>) => {
           );
         }
 
-        if (
-          !isInviteMode &&
-          signInUpMode === SignInUpMode.SignUp &&
-          (!isOnAWorkspace || !isDefined(workspacePublicData))
-        ) {
+        const isAcceptingInvite =
+          isInviteMode || isDefined(workspaceInviteHash);
+
+        if (!isAcceptingInvite && signInUpMode === SignInUpMode.SignUp) {
           return await signUpWithCredentials(
             data.email.toLowerCase().trim(),
             data.password,

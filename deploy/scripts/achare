@@ -1,0 +1,594 @@
+#!/usr/bin/env bash
+#
+# achare — Achare operations CLI
+#
+# Wraps `docker compose` so nobody has to remember which profile files, env
+# file and project directory belong together, and so there is one health story:
+# `achare doctor` asks the same /readyz endpoint the container healthcheck uses.
+#
+#   achare init                 generate deploy/.env with fresh secrets
+#   achare start                start (or update) the stack, detached
+#   achare stop                 gracefully stop the containers
+#   achare restart              restart without touching data
+#   achare status               container state, ports and URLs
+#   achare logs [service]       follow logs (default: all services)
+#   achare doctor               full pre-flight and runtime diagnostic
+#   achare config               resolved configuration, secrets redacted
+#   achare version              CLI, release and image version
+#   achare backup               create an atomic snapshot backup
+#   achare restore <archive>    restore from a backup archive
+#   achare update [version]     zero-downtime upgrade to a new version
+#
+# Profile selection: ACHARE_PROFILE=local|production (default: local).
+#
+# Written for bash 3.2 (the version macOS ships): no associative arrays, no
+# ${var,,}, no mapfile.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DEPLOY_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${DEPLOY_DIR}/.." && pwd)"
+
+COMPOSE_DIR="${DEPLOY_DIR}/compose"
+ENV_FILE="${ACHARE_ENV_FILE:-${DEPLOY_DIR}/.env}"
+ENV_EXAMPLE="${DEPLOY_DIR}/.env.example"
+VERSION_FILE="${REPO_ROOT}/VERSION"
+
+FAILURES=0
+WARNINGS=0
+
+# ------------------------------------------------------------------------------
+# output
+# ------------------------------------------------------------------------------
+
+usage() {
+  cat <<'EOF'
+achare — Achare operations CLI
+
+Usage: achare <command> [options]
+
+  init [--force]        generate deploy/.env with fresh secrets
+  start                 start (or update) the stack, detached
+  stop                  gracefully stop the containers (data untouched)
+  restart               restart without touching data
+  status                container state, ports and URLs
+  logs [service]        follow logs (default: all services)
+  doctor                full pre-flight and runtime diagnostic
+  config                resolved configuration, secrets redacted
+  version               CLI, release and image version
+  backup                create an atomic snapshot backup
+  restore <archive>     restore from a backup archive
+  update [version]      zero-downtime upgrade to a new version
+
+The profile comes from ACHARE_PROFILE in deploy/.env (local | production).
+EOF
+}
+
+ok() { printf '  [✓] %s\n' "$1"; }
+warn() {
+  WARNINGS=$((WARNINGS + 1))
+  printf '  [!] %s\n' "$1"
+}
+fail() {
+  FAILURES=$((FAILURES + 1))
+  printf '  [✗] %s\n' "$1"
+}
+info() { printf '%s\n' "$1"; }
+heading() {
+  printf '\n%s\n' "$1"
+  printf -- '------------------------------------------------------------------------\n'
+}
+
+# ------------------------------------------------------------------------------
+# configuration
+# ------------------------------------------------------------------------------
+
+read_version() {
+  if [ -f "${VERSION_FILE}" ]; then
+    tr -d '[:space:]' < "${VERSION_FILE}"
+  else
+    printf '0.0.0'
+  fi
+}
+
+# Loads deploy/.env without clobbering anything already exported by the caller
+# (so `NODE_PORT=4000 achare start` wins over the file).
+load_env_file() {
+  [ -f "${ENV_FILE}" ] || return 0
+
+  while IFS= read -r line || [ -n "${line}" ]; do
+    case "${line}" in
+      '' | '#'*) continue ;;
+    esac
+
+    key="${line%%=*}"
+    value="${line#*=}"
+
+    case "${key}" in
+      '' | *[!A-Za-z0-9_]*) continue ;;
+    esac
+
+    # Trim surrounding quotes.
+    case "${value}" in
+      \"*\") value="${value#\"}" && value="${value%\"}" ;;
+      \'*\') value="${value#\'}" && value="${value%\'}" ;;
+    esac
+
+    if ! printenv "${key}" >/dev/null 2>&1; then
+      export "${key}=${value}"
+    fi
+  done < "${ENV_FILE}"
+}
+
+resolve_profile() {
+  case "${ACHARE_PROFILE:-local}" in
+    local | production) PROFILE="${ACHARE_PROFILE:-local}" ;;
+    *)
+      printf '✗ unknown ACHARE_PROFILE "%s" (expected local or production)\n' "${ACHARE_PROFILE}" >&2
+      exit 1
+      ;;
+  esac
+}
+
+compose() {
+  docker compose \
+    --project-directory "${DEPLOY_DIR}" \
+    --env-file "${ENV_FILE}" \
+    -f "${COMPOSE_DIR}/compose.base.yml" \
+    -f "${COMPOSE_DIR}/compose.${PROFILE}.yml" \
+    "$@"
+}
+
+require_docker() {
+  if ! command -v docker >/dev/null 2>&1; then
+    printf '✗ docker is not installed or not on PATH.\n' >&2
+    printf '  Docker Desktop, or: brew install colima docker && colima start\n' >&2
+    exit 1
+  fi
+
+  if ! docker compose version >/dev/null 2>&1; then
+    printf '✗ the "docker compose" plugin is not available.\n' >&2
+    printf '  Docker Compose v2 ships with Docker Desktop and with the docker CLI plugin package.\n' >&2
+    exit 1
+  fi
+
+  if ! docker info >/dev/null 2>&1; then
+    printf '✗ the Docker daemon is not reachable.\n' >&2
+    printf '  Start Docker (or "colima start") and try again.\n' >&2
+    exit 1
+  fi
+}
+
+require_env_file() {
+  if [ ! -f "${ENV_FILE}" ]; then
+    printf '✗ %s is missing.\n' "${ENV_FILE}" >&2
+    printf '  Create it with:\n' >&2
+    printf '    cp deploy/.env.example deploy/.env && deploy/scripts/achare init\n' >&2
+    exit 1
+  fi
+}
+
+env_value() {
+  # Prints the value of KEY in .env, or nothing. Used for reporting only.
+  while IFS= read -r line || [ -n "${line}" ]; do
+    case "${line}" in
+      "$1="*) printf '%s' "${line#*=}" && return 0 ;;
+    esac
+  done < "${ENV_FILE}"
+
+  return 1
+}
+
+redact() {
+  if [ -z "$1" ]; then
+    printf '(unset)'
+  else
+    printf '********'
+  fi
+}
+
+random_secret() {
+  if command -v openssl >/dev/null 2>&1; then
+    openssl rand -base64 32
+  else
+    LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 43
+  fi
+}
+
+# ------------------------------------------------------------------------------
+# commands
+# ------------------------------------------------------------------------------
+
+init_env() {
+  force="${1:-}"
+
+  if [ ! -f "${ENV_EXAMPLE}" ]; then
+    printf '✗ %s is missing; cannot initialise.\n' "${ENV_EXAMPLE}" >&2
+    exit 1
+  fi
+
+  if [ -f "${ENV_FILE}" ] && [ "${force}" != "--force" ]; then
+    ok "${ENV_FILE} already exists, left untouched"
+    info "  Use 'achare init --force' to regenerate it (this rotates the secrets!)"
+    return 0
+  fi
+
+  app_secret="$(random_secret)"
+  encryption_key="$(random_secret)"
+  db_password="$(random_secret)"
+
+  # Line-by-line copy so nothing has to be escaped for sed.
+  while IFS= read -r line || [ -n "${line}" ]; do
+    case "${line}" in
+      'APP_SECRET='*) printf 'APP_SECRET=%s\n' "${app_secret}" ;;
+      'ENCRYPTION_KEY='*) printf 'ENCRYPTION_KEY=%s\n' "${encryption_key}" ;;
+      'PG_DATABASE_PASSWORD='*) printf 'PG_DATABASE_PASSWORD=%s\n' "${db_password}" ;;
+      *) printf '%s\n' "${line}" ;;
+    esac
+  done < "${ENV_EXAMPLE}" > "${ENV_FILE}"
+
+  chmod 600 "${ENV_FILE}" 2>/dev/null || true
+
+  ok "wrote ${ENV_FILE} with generated APP_SECRET, ENCRYPTION_KEY and PG_DATABASE_PASSWORD"
+  info "  Review it before first start: SERVER_URL, ACHARE_PROFILE (and ACHARE_DOMAIN in production)."
+  info "  Back up ENCRYPTION_KEY somewhere safe: without it, encrypted fields cannot be recovered."
+}
+
+cmd_start() {
+  require_docker
+  require_env_file
+
+  heading "Starting Achare (profile: ${PROFILE}, version: ${ACHARE_VERSION})"
+  compose up -d
+
+  printf '\n'
+  compose ps
+  printf '\n'
+  ok "Achare is starting. It becomes healthy once /readyz passes: ${SERVER_URL:-http://localhost:3000}"
+  info "  Follow progress with: achare logs server"
+  info "  Verify with:          achare doctor"
+}
+
+cmd_stop() {
+  require_docker
+  require_env_file
+
+  heading "Stopping Achare (profile: ${PROFILE})"
+  compose stop
+  ok "containers stopped; volumes and data are untouched"
+}
+
+cmd_restart() {
+  require_docker
+  require_env_file
+
+  heading "Restarting Achare (profile: ${PROFILE})"
+  compose restart
+  printf '\n'
+  ok "restarted"
+}
+
+cmd_status() {
+  require_docker
+  require_env_file
+
+  heading "Achare status (profile: ${PROFILE}, version: ${ACHARE_VERSION})"
+  compose ps
+
+  printf '\nApplication URL: %s\n' "${SERVER_URL:-http://localhost:3000}"
+  if [ "${PROFILE}" = "production" ]; then
+    printf 'Public domain:   %s\n' "${ACHARE_DOMAIN:-(unset)}"
+  fi
+  printf 'Storage type:    %s\n' "${STORAGE_TYPE:-LOCAL}"
+}
+
+cmd_logs() {
+  require_docker
+  require_env_file
+
+  service="${1:-}"
+  if [ -n "${service}" ]; then
+    compose logs -f --tail=200 "${service}"
+  else
+    compose logs -f --tail=100
+  fi
+}
+
+cmd_version() {
+  printf 'achare CLI          %s\n' "$(read_version)"
+  printf 'release (VERSION)   %s\n' "${ACHARE_VERSION}"
+  printf 'image               %s:%s\n' \
+    "${ACHARE_IMAGE:-ghcr.io/amloh18/achare-server}" "${ACHARE_VERSION}"
+  printf 'profile             %s\n' "${PROFILE}"
+  printf 'compose files       %s\n' \
+    "${COMPOSE_DIR}/compose.base.yml + compose.${PROFILE}.yml"
+  printf 'env file            %s\n' "${ENV_FILE}"
+}
+
+cmd_config() {
+  require_docker
+  require_env_file
+
+  heading "Resolved configuration (secrets redacted)"
+  printf 'release             %s\n' "${ACHARE_VERSION}"
+  printf 'image               %s\n' "${ACHARE_IMAGE:-ghcr.io/amloh18/achare-server}"
+  printf 'profile             %s\n' "${PROFILE}"
+  printf 'NODE_ENV            %s\n' "${NODE_ENV:-production}"
+  printf 'NODE_PORT           %s\n' "${NODE_PORT:-3000}"
+  printf 'SERVER_URL          %s\n' "${SERVER_URL:-}"
+  printf 'STORAGE_TYPE        %s\n' "${STORAGE_TYPE:-LOCAL}"
+  printf 'STORAGE_LOCAL_PATH  %s\n' "${STORAGE_LOCAL_PATH:-}"
+  printf 'POSTGRES            %s@db:5432/%s\n' \
+    "${PG_DATABASE_USER:-achare}" "${PG_DATABASE_NAME:-default}"
+  printf 'POSTGRES password   %s\n' "$(redact "${PG_DATABASE_PASSWORD:-}")"
+  printf 'APP_SECRET          %s\n' "$(redact "${APP_SECRET:-}")"
+  printf 'ENCRYPTION_KEY      %s\n' "$(redact "${ENCRYPTION_KEY:-}")"
+  printf 'REDIS_URL           %s\n' "${REDIS_URL:-redis://redis:6379}"
+
+  printf '\n'
+  compose config >/dev/null 2>&1 &&
+    ok "compose configuration renders" ||
+    fail "compose configuration does not render (see: docker compose ... config)"
+}
+
+cmd_doctor() {
+  heading "Achare doctor (version ${ACHARE_VERSION}, profile ${PROFILE})"
+
+  # --- 1. prerequisites ------------------------------------------------------
+  if command -v docker >/dev/null 2>&1; then
+    ok "Docker CLI ($(docker --version 2>/dev/null | head -n1))"
+  else
+    fail "Docker CLI is not installed (Docker Desktop, or: brew install colima docker && colima start)"
+  fi
+
+  if command -v docker >/dev/null 2>&1; then
+    if docker compose version >/dev/null 2>&1; then
+      ok "Docker Compose plugin"
+    else
+      fail "the 'docker compose' plugin is not available"
+    fi
+
+    if docker info >/dev/null 2>&1; then
+      ok "Docker daemon reachable"
+    else
+      fail "Docker daemon not reachable (start Docker, or run 'colima start')"
+    fi
+  fi
+
+  # --- 2. configuration ------------------------------------------------------
+  if [ -f "${ENV_FILE}" ]; then
+    ok "env file present (${ENV_FILE})"
+  else
+    fail "env file missing: cp deploy/.env.example deploy/.env && achare init"
+  fi
+
+  if [ -f "${ENV_FILE}" ]; then
+    for required in APP_SECRET ENCRYPTION_KEY PG_DATABASE_PASSWORD SERVER_URL; do
+      value="$(env_value "${required}" || true)"
+      if [ -z "${value}" ]; then
+        fail "${required} is not set"
+      else
+        ok "${required} is set"
+      fi
+    done
+
+    for secret in APP_SECRET ENCRYPTION_KEY; do
+      value="$(env_value "${secret}" || true)"
+      case "${value}" in
+        *replace_me* | *changeme*)
+          fail "${secret} is still a placeholder value"
+          ;;
+        '') ;;
+        *)
+          if [ "${#value}" -lt 16 ]; then
+            warn "${secret} looks short (${#value} chars); generate with: openssl rand -base64 32"
+          fi
+          ;;
+      esac
+    done
+
+    storage_type_env="$(env_value STORAGE_TYPE || true)"
+    case "${storage_type_env}" in
+      '' | LOCAL | local) ;;
+      S_3 | s3 | S3) 
+        for s3_required in STORAGE_S3_REGION STORAGE_S3_NAME; do
+          if [ -z "$(env_value "${s3_required}" || true)" ]; then
+            fail "${s3_required} is required when STORAGE_TYPE=${storage_type_env}"
+          fi
+        done
+        ;;
+      *) warn "unrecognised STORAGE_TYPE '${storage_type_env}' (expected LOCAL or S_3)" ;;
+    esac
+  fi
+
+  # --- 3. compose renders ----------------------------------------------------
+  if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1 && [ -f "${ENV_FILE}" ]; then
+    if compose config >/dev/null 2>&1; then
+      ok "compose configuration renders (base + ${PROFILE})"
+    else
+      fail "compose configuration does not render: run 'docker compose --project-directory deploy -f deploy/compose/compose.base.yml -f deploy/compose/compose.${PROFILE}.yml config'"
+    fi
+  fi
+
+  # --- 4. host disk ----------------------------------------------------------
+  available_kb="$(df -Pk "${DEPLOY_DIR}" 2>/dev/null | awk 'NR==2 {print $4}')"
+  if [ -n "${available_kb:-}" ]; then
+    available_gb=$((available_kb / 1024 / 1024))
+    if [ "${available_kb}" -lt 2097152 ]; then
+      warn "only ${available_gb} GB free on the volume holding ${DEPLOY_DIR}"
+    else
+      ok "disk headroom (${available_gb} GB free)"
+    fi
+  fi
+
+  # --- 5. runtime ------------------------------------------------------------
+  stack_running=""
+  if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1 && [ -f "${ENV_FILE}" ]; then
+    stack_running="$(compose ps --services --status running 2>/dev/null || true)"
+  fi
+
+  if [ -z "${stack_running}" ]; then
+    warn "the stack is not running: start it with 'achare start'"
+    printf '\n'
+    print_doctor_summary
+    return 0
+  fi
+
+  printf '  running services: %s\n' "$(printf '%s' "${stack_running}" | tr '\n' ' ')"
+
+  if compose exec -T db pg_isready -U "${PG_DATABASE_USER:-achare}" -d "${PG_DATABASE_NAME:-default}" >/dev/null 2>&1; then
+    ok "PostgreSQL accepting connections"
+  else
+    fail "PostgreSQL is not accepting connections"
+  fi
+
+  if compose exec -T redis redis-cli ping 2>/dev/null | grep -q PONG; then
+    ok "Redis responds to PING"
+  else
+    fail "Redis did not answer PING"
+  fi
+
+  port="${NODE_PORT:-3000}"
+
+  if compose exec -T server curl -fsS "http://localhost:${port}/healthz" >/dev/null 2>&1; then
+    ok "server process is up (/healthz)"
+  else
+    fail "server did not answer /healthz on port ${port}"
+  fi
+
+  raw="$(compose exec -T server curl -sS -w '\n%{http_code}' "http://localhost:${port}/readyz" 2>/dev/null || true)"
+  http_code="$(printf '%s' "${raw}" | tail -n1)"
+  body="$(printf '%s' "${raw}" | sed '$d')"
+
+  if [ "${http_code}" = "200" ]; then
+    ok "/readyz reports ready"
+  elif [ -n "${http_code}" ] && [ "${http_code}" != "000" ]; then
+    fail "/readyz returned HTTP ${http_code}"
+  else
+    fail "/readyz could not be reached"
+  fi
+
+  if [ -n "${body}" ]; then
+    ready_status="$(printf '%s' "${body}" | tr ',' '\n' | grep -o '"status":"[a-z]*"' | head -n1 | sed 's/.*:"//; s/"//')"
+    [ -n "${ready_status}" ] && printf '  readiness: %s\n' "${ready_status}"
+
+    failing="$(printf '%s' "${body}" | tr '{' '\n' | grep '"status":"down"' | sed 's/.*"name":"//; s/".*//' | tr '\n' ' ')"
+    if [ -n "${failing}" ]; then
+      printf '  failing checks: %s\n' "${failing}"
+    fi
+
+    degraded="$(printf '%s' "${body}" | tr '{' '\n' | grep '"status":"degraded"' | sed 's/.*"name":"//; s/".*//' | tr '\n' ' ')"
+    if [ -n "${degraded}" ]; then
+      warn "degraded checks (non-fatal): ${degraded}"
+    fi
+  fi
+
+  if [ "${STORAGE_TYPE:-LOCAL}" = "LOCAL" ] || [ "${STORAGE_TYPE:-}" = "local" ]; then
+    if compose exec -T server sh -c 'test -w "${STORAGE_LOCAL_PATH}"' >/dev/null 2>&1; then
+      ok "storage path is writable (${STORAGE_LOCAL_PATH})"
+    else
+      fail "storage path is not writable (${STORAGE_LOCAL_PATH})"
+    fi
+  fi
+
+  # --- 6. production sanity --------------------------------------------------
+  if [ "${PROFILE}" = "production" ]; then
+    if [ -z "${ACHARE_DOMAIN:-}" ]; then
+      fail "ACHARE_DOMAIN is not set in ${ENV_FILE}"
+    else
+      case "${SERVER_URL:-}" in
+        "https://${ACHARE_DOMAIN}"* | "https://${ACHARE_DOMAIN}/"*) ok "SERVER_URL matches ACHARE_DOMAIN" ;;
+        *)
+          fail "SERVER_URL (${SERVER_URL:-unset}) does not match https://${ACHARE_DOMAIN}; links and cookies will point at the wrong host"
+          ;;
+      esac
+    fi
+
+    if [ -z "${ACHARE_ACME_EMAIL:-}" ] || [ "${ACHARE_ACME_EMAIL}" = "noreply@example.com" ]; then
+      warn "ACHARE_ACME_EMAIL is unset: certificates will be issued without an expiry contact"
+    fi
+  fi
+
+  printf '\n'
+  print_doctor_summary
+}
+
+print_doctor_summary() {
+  printf -- '------------------------------------------------------------------------\n'
+  if [ "${FAILURES}" -eq 0 ]; then
+    if [ "${WARNINGS}" -eq 0 ]; then
+      printf 'System healthy.\n'
+    else
+      printf 'System healthy, %s warning(s).\n' "${WARNINGS}"
+    fi
+  else
+    printf 'System NOT healthy: %s failure(s), %s warning(s).\n' "${FAILURES}" "${WARNINGS}"
+    exit 1
+  fi
+}
+
+# ------------------------------------------------------------------------------
+# entry point
+# ------------------------------------------------------------------------------
+
+main() {
+  load_env_file
+  resolve_profile
+
+  ACHARE_VERSION="${ACHARE_VERSION:-$(read_version)}"
+
+  cmd="${1:-help}"
+  shift || true
+
+  case "${cmd}" in
+    init) init_env "${1:-}" ;;
+    start) cmd_start ;;
+    stop) cmd_stop ;;
+    restart) cmd_restart ;;
+    status) cmd_status ;;
+    logs) cmd_logs "${1:-}" ;;
+    doctor) cmd_doctor ;;
+    version | --version | -v) cmd_version ;;
+    config) cmd_config ;;
+    backup)
+      BACKUP_SCRIPT="${DEPLOY_DIR}/backup/backup.sh"
+      if [ -x "${BACKUP_SCRIPT}" ]; then
+        "${BACKUP_SCRIPT}" "${REPO_ROOT}/backups"
+      else
+        printf '✗ backup script not found or not executable: %s\n' "${BACKUP_SCRIPT}" >&2
+        exit 1
+      fi
+      ;;
+    restore)
+      if [ -z "${1:-}" ]; then
+        printf 'Usage: achare restore <archive-path>\n' >&2
+        exit 1
+      fi
+      RESTORE_SCRIPT="${DEPLOY_DIR}/backup/restore.sh"
+      if [ -x "${RESTORE_SCRIPT}" ]; then
+        "${RESTORE_SCRIPT}" "$1"
+      else
+        printf '✗ restore script not found or not executable: %s\n' "${RESTORE_SCRIPT}" >&2
+        exit 1
+      fi
+      ;;
+    update)
+      UPDATE_SCRIPT="${DEPLOY_DIR}/scripts/update.sh"
+      if [ -x "${UPDATE_SCRIPT}" ]; then
+        "${UPDATE_SCRIPT}" "${1:-}"
+      else
+        printf '✗ update script not found or not executable: %s\n' "${UPDATE_SCRIPT}" >&2
+        exit 1
+      fi
+      ;;
+    help | --help | -h) usage ;;
+    *)
+      printf '✗ unknown command "%s"\n\n' "${cmd}" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

@@ -92,6 +92,10 @@ export const SignInUp = () => {
     setSignInUpStep(SignInUpStep.WorkspaceSelection);
   };
 
+  const isAppleOrDemoWorkspace =
+    workspacePublicData?.id === '20202020-1c25-4d02-bf25-6aeccf7ea419' ||
+    workspacePublicData?.displayName?.toLowerCase() === 'apple';
+
   const isGlobalScope = isDefaultDomain && isMultiWorkspaceEnabled;
 
   const title = useMemo(() => {
@@ -116,7 +120,7 @@ export const SignInUp = () => {
       return t`Verify code from the app`;
     }
 
-    if (isGlobalScope) {
+    if (isGlobalScope || isAppleOrDemoWorkspace || isDefaultDomain || !isOnAWorkspace) {
       return t`Welcome to ACHEARE`;
     }
 
@@ -130,8 +134,11 @@ export const SignInUp = () => {
   }, [
     workspaceInviteHash,
     signInUpStep,
-    workspacePublicData?.displayName,
     isGlobalScope,
+    isAppleOrDemoWorkspace,
+    isDefaultDomain,
+    isOnAWorkspace,
+    workspacePublicData?.displayName,
     t,
     workspaceFromInviteHash?.displayName,
   ]);
@@ -152,7 +159,10 @@ export const SignInUp = () => {
       return <SignInUpWorkspaceCreationForm />;
     }
 
-    if (isDefaultDomain && isMultiWorkspaceEnabled) {
+    if (
+      !isDefined(workspaceInviteHash) &&
+      (isGlobalScope || isAppleOrDemoWorkspace || isDefaultDomain)
+    ) {
       return (
         <>
           <SignInUpSsoExchangeTokenEffect />
@@ -177,7 +187,7 @@ export const SignInUp = () => {
       return <SignInUpTOTPVerification />;
     }
 
-    if (isDefined(workspacePublicData) && isOnAWorkspace) {
+    if (isDefined(workspacePublicData) && isOnAWorkspace && !isAppleOrDemoWorkspace) {
       return (
         <>
           <SignInUpWorkspaceScopeFormEffect />
@@ -195,11 +205,13 @@ export const SignInUp = () => {
     );
   }, [
     clientConfigApiStatus.isLoadedOnce,
-    isDefaultDomain,
-    isMultiWorkspaceEnabled,
-    isOnAWorkspace,
     getPublicWorkspaceDataLoading,
+    isAppleOrDemoWorkspace,
+    isDefaultDomain,
+    isGlobalScope,
+    isOnAWorkspace,
     signInUpStep,
+    workspaceInviteHash,
     workspacePublicData,
   ]);
 
@@ -217,7 +229,7 @@ export const SignInUp = () => {
         </ModalContent>
       ) : (
         <SignInUpStandardContent
-          workspacePublicData={workspacePublicData}
+          workspacePublicData={isAppleOrDemoWorkspace ? null : workspacePublicData}
           signInUpForm={signInUpForm}
           signInUpStep={signInUpStep}
           title={title}

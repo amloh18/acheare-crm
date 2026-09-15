@@ -76,6 +76,15 @@ export const ACHARE_FEATURE_DEFINITIONS: AchareFeatureDefinition[] = [
     standardObjectKey: 'interview',
     navigationMenuItemKey: 'allInterviews',
   },
+  {
+    key: AchareFeatureKey.PLACEMENTS,
+    moduleKey: AchareModuleKey.RECRUITMENT,
+    label: 'Placements',
+    description: 'Successful hires and placement records.',
+    icon: 'IconUserCheck',
+    standardObjectKey: 'placement',
+    navigationMenuItemKey: 'allPlacements',
+  },
 
   // ── Team ──────────────────────────────────────────────────────────
   {

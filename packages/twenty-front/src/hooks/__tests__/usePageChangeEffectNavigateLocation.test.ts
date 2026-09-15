@@ -13,7 +13,6 @@ import {
   ACHARE_ONBOARDING_STEP_APP_PATH,
   ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
 } from 'twenty-shared/workspace';
-import type { AchareOnboardingStepKey } from 'twenty-shared/workspace';
 
 const ACHARE_APP_PATHS = Object.values(ACHARE_ONBOARDING_STEP_APP_PATH);
 const ACHARE_ONBOARDING_STATUSES = Object.values(
@@ -566,7 +565,7 @@ describe('usePageChangeEffectNavigateLocation', () => {
 describe('usePageChangeEffectNavigateLocation — Achare onboarding steps', () => {
   const achareSteps = Object.entries(
     ACHARE_ONBOARDING_STEP_ONBOARDING_STATUS,
-  ) as [AchareOnboardingStepKey, string][];
+  ) as [keyof typeof ACHARE_ONBOARDING_STEP_APP_PATH, string][];
 
   it.each(achareSteps)(
     'redirects the %s step to its own route from anywhere else',

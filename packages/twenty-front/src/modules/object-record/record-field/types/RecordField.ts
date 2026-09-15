@@ -5,6 +5,7 @@ export type RecordField = {
   fieldMetadataItemId: string;
   position: number;
   isVisible: boolean;
+  isCalendarImportant?: boolean;
   size: number;
   aggregateOperation?: AggregateOperations | null;
 };

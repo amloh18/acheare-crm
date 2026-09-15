@@ -85,21 +85,15 @@ const getNextOnboardingStatus = ({
 
   const currentOnboardingStatus = currentUser?.onboardingStatus;
 
-  // Legacy Twenty onboarding steps and workspace activation hand over to the Achare wizard.
-  if (
-    currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION ||
-    currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION ||
-    currentOnboardingStatus === OnboardingStatus.SYNC_EMAIL ||
-    currentOnboardingStatus === OnboardingStatus.APPS_INSTALLATION ||
-    currentOnboardingStatus === OnboardingStatus.INVITE_TEAM ||
-    currentOnboardingStatus === OnboardingStatus.BOOK_CALL
-  ) {
+  // Workspace activation hands over to the Achare wizard.
+  if (currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
     return OnboardingStatus.ACHARE_WELCOME;
   }
 
   // Achare onboarding is generated per workspace, so "the next step" is a
   // lookup in *this* workspace's list rather than a fixed chain. Enabling or
   // disabling a module changes the wizard without changing this hook.
+  // This applies to both live workspaces and demo workspaces.
   const achareOnboardingStatuses = getAchareOnboardingStatuses(
     achareOnboardingSteps,
   );
@@ -112,6 +106,40 @@ const getNextOnboardingStatus = ({
       achareOnboardingStatuses[currentAchareStepIndex + 1];
 
     return (nextAchareStatus ?? OnboardingStatus.COMPLETED) as OnboardingStatus;
+  }
+
+  const isDemoWorkspace =
+    currentWorkspace?.id === '20202020-1c25-4d02-bf25-6aeccf7ea419' ||
+    currentWorkspace?.displayName?.toLowerCase() === 'apple';
+
+  if (isDemoWorkspace) {
+    if (currentOnboardingStatus === OnboardingStatus.SYNC_EMAIL) {
+      if (currentWorkspace?.workspaceMembersCount === 1) {
+        return OnboardingStatus.APPS_INSTALLATION;
+      }
+      return OnboardingStatus.PROFILE_CREATION;
+    }
+
+    if (currentOnboardingStatus === OnboardingStatus.APPS_INSTALLATION) {
+      return OnboardingStatus.PROFILE_CREATION;
+    }
+
+    if (currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION) {
+      if (currentWorkspace?.workspaceMembersCount === 1) {
+        return OnboardingStatus.INVITE_TEAM;
+      }
+      return statusAfterInviteTeam;
+    }
+    if (currentOnboardingStatus === OnboardingStatus.INVITE_TEAM) {
+      return statusAfterInviteTeam;
+    }
+    if (
+      currentOnboardingStatus === OnboardingStatus.BOOK_CALL ||
+      currentOnboardingStatus === OnboardingStatus.PLAN_REQUIRED
+    ) {
+      return statusAfterBookCall;
+    }
+    return OnboardingStatus.COMPLETED;
   }
 
   if (currentOnboardingStatus === OnboardingStatus.PLAN_REQUIRED) {

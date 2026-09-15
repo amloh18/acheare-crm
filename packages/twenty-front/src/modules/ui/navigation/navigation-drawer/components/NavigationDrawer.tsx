@@ -60,7 +60,7 @@ const StyledContainer = styled.div<{
   flex-direction: column;
   gap: ${themeCssVariables.spacing[1]};
   height: 100%;
-  padding: ${themeCssVariables.spacing[1]} 0 ${themeCssVariables.spacing[4]}
+  padding: ${themeCssVariables.spacing[1]} 0 ${themeCssVariables.spacing[1]}
     ${themeCssVariables.spacing[2]};
   width: ${({ isExpanded }) =>
     isExpanded ? `var(${NAVIGATION_DRAWER_WIDTH_VAR})` : '100%'};

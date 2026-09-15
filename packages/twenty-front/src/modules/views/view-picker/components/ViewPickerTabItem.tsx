@@ -50,6 +50,7 @@ import { ThemeContext, themeCssVariables } from 'twenty-ui/theme-constants';
 import {
   PermissionFlagType,
   ViewVisibility,
+  ViewCalendarLayout,
 } from '~/generated-metadata/graphql';
 
 const StyledTabContainer = styled.div<{ isActive: boolean }>`
@@ -277,6 +278,18 @@ export const ViewPickerTabItem = ({
           input: {
             type: newType,
             icon: viewTypeIconKeyMapping(newType),
+            mainGroupByFieldMetadataId:
+              newType === ViewType.KANBAN
+                ? availableFieldsForGrouping[0]?.id
+                : null,
+            calendarFieldMetadataId:
+              newType === ViewType.CALENDAR
+                ? availableFieldsForCalendar[0]?.id
+                : null,
+            calendarLayout:
+              newType === ViewType.CALENDAR
+                ? ViewCalendarLayout.MONTH
+                : null,
           },
         });
         changeView(view.id);

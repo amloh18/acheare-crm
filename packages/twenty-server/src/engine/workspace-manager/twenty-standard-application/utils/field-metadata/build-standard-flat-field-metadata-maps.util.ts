@@ -60,9 +60,13 @@ import { buildPayslipLineStandardFlatFieldMetadatas } from 'src/engine/workspace
 import { buildPayrollAdjustmentStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-payrollAdjustment-standard-flat-field-metadata.util';
 import { buildInvoiceStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-invoice-standard-flat-field-metadata.util';
 import { buildPaymentStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-payment-standard-flat-field-metadata.util';
+import { buildCompanyPersonRelationshipStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-companyPersonRelationship-standard-flat-field-metadata.util';
+import { buildApplicationStageHistoryStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-applicationStageHistory-standard-flat-field-metadata.util';
+import { buildPlacementStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-placement-standard-flat-field-metadata.util';
+import { buildInterviewParticipantStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-interviewParticipant-standard-flat-field-metadata.util';
+import { buildPersonExternalIdStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-personExternalId-standard-flat-field-metadata.util';
 import { buildLocationStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-location-standard-flat-field-metadata.util';
 import { buildTeamStandardFlatFieldMetadatas } from 'src/engine/workspace-manager/twenty-standard-application/utils/field-metadata/compute-team-standard-flat-field-metadata.util';
-
 
 type StandardFieldBuilder<P extends AllStandardObjectName> = (
   args: Omit<CreateStandardFieldArgs<P, FieldMetadataType>, 'context'>,
@@ -70,6 +74,13 @@ type StandardFieldBuilder<P extends AllStandardObjectName> = (
 
 const STANDARD_FLAT_FIELD_METADATA_BUILDERS_BY_OBJECT_NAME = {
   payment: buildPaymentStandardFlatFieldMetadatas,
+  companyPersonRelationship:
+    buildCompanyPersonRelationshipStandardFlatFieldMetadatas,
+  applicationStageHistory:
+    buildApplicationStageHistoryStandardFlatFieldMetadatas,
+  placement: buildPlacementStandardFlatFieldMetadatas,
+  interviewParticipant: buildInterviewParticipantStandardFlatFieldMetadatas,
+  personExternalId: buildPersonExternalIdStandardFlatFieldMetadatas,
   invoice: buildInvoiceStandardFlatFieldMetadatas,
   payrollAdjustment: buildPayrollAdjustmentStandardFlatFieldMetadatas,
   payslipLine: buildPayslipLineStandardFlatFieldMetadatas,

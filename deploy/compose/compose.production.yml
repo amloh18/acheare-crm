@@ -1,0 +1,87 @@
+# ==============================================================================
+# Achare — production profile (customer VPS, SMB server)
+# ==============================================================================
+#
+# Differences from local:
+#   * the application port is not published to the host; only Caddy is, on
+#     80/443, and it terminates TLS with an automatically provisioned
+#     certificate for ACHARE_DOMAIN
+#   * everything is served from a single domain (path-based routing), so there
+#     is no CORS surface and no second DNS record. See compose/Caddyfile.
+#   * memory limits and log rotation, sized for a 4–8 GB box
+#
+# Usage: ACHARE_PROFILE=production deploy/scripts/achare start
+#
+# Before first start: add a DNS A/AAAA record for ACHARE_DOMAIN pointing at the
+# host, open ports 80 and 443, and set SERVER_URL=https://<ACHARE_DOMAIN>.
+
+services:
+  server:
+    expose:
+      - "${NODE_PORT:-3000}"
+    deploy:
+      resources:
+        limits:
+          memory: ${ACHARE_SERVER_MEMORY_LIMIT:-1536M}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  worker:
+    deploy:
+      resources:
+        limits:
+          memory: ${ACHARE_WORKER_MEMORY_LIMIT:-512M}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  db:
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis:
+    deploy:
+      resources:
+        limits:
+          memory: ${ACHARE_REDIS_MEMORY_LIMIT:-256M}
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  proxy:
+    image: caddy:2.9-alpine
+    restart: unless-stopped
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      ACHARE_DOMAIN: ${ACHARE_DOMAIN:?ACHARE_DOMAIN must be set in deploy/.env}
+      # Let's Encrypt sends expiry warnings here. Caddy does not validate it.
+      ACHARE_ACME_EMAIL: ${ACHARE_ACME_EMAIL:-noreply@example.com}
+    volumes:
+      - ./compose/Caddyfile:/etc/caddy/Caddyfile:ro
+      - achare-caddy-data:/data
+      - achare-caddy-config:/config
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  achare-caddy-data:
+  achare-caddy-config:

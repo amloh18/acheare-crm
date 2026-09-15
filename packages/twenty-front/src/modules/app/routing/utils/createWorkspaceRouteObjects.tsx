@@ -54,6 +54,12 @@ const DashboardPage = lazy(() =>
   })),
 );
 
+const AttendanceLeavePage = lazy(() =>
+  import('~/pages/attendance-leave/AttendanceLeavePage').then((module) => ({
+    default: module.AttendanceLeavePage,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('~/pages/not-found/NotFound').then((module) => ({
     default: module.NotFound,
@@ -143,6 +149,14 @@ export const createWorkspaceRouteObjects = ({
       element: (
         <LazyRoute>
           <DashboardPage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: AppPath.AttendanceLeavePage,
+      element: (
+        <LazyRoute>
+          <AttendanceLeavePage />
         </LazyRoute>
       ),
     },

@@ -9,6 +9,7 @@ import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-
 import { type BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
 import { type CalendarEventParticipantWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-event-participant.workspace-entity';
 import { type CompanyWorkspaceEntity } from 'src/modules/company/standard-objects/company.workspace-entity';
+import { type CompanyPersonRelationshipWorkspaceEntity } from 'src/modules/company/standard-objects/company-person-relationship.workspace-entity';
 import { type PayrollAdjustmentWorkspaceEntity } from 'src/modules/hr/standard-objects/payrollAdjustment.workspace-entity';
 import { type OnboardingItemWorkspaceEntity } from 'src/modules/hr/standard-objects/onboardingItem.workspace-entity';
 import { type AttendanceCorrectionWorkspaceEntity } from 'src/modules/hr/standard-objects/attendanceCorrection.workspace-entity';
@@ -16,6 +17,7 @@ import { type LeaveRequestWorkspaceEntity } from 'src/modules/hr/standard-object
 import { type DepartmentWorkspaceEntity } from 'src/modules/hr/standard-objects/department.workspace-entity';
 import { type MessageParticipantWorkspaceEntity } from 'src/modules/messaging/common/standard-objects/message-participant.workspace-entity';
 import { type OpportunityWorkspaceEntity } from 'src/modules/opportunity/standard-objects/opportunity.workspace-entity';
+import { type ApplicationStageHistoryWorkspaceEntity } from 'src/modules/recruitment/standard-objects/application-stage-history.workspace-entity';
 import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
 import { type CandidateSubmissionWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate-submission.workspace-entity';
 import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
@@ -92,6 +94,12 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
   submittedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
   hrOwnedSubmissions: Relation<CandidateSubmissionWorkspaceEntity[]>;
   ownedInterviews: Relation<InterviewWorkspaceEntity[]>;
+  ownedCompanyPersonRelationships: Relation<
+    CompanyPersonRelationshipWorkspaceEntity[]
+  >;
+  changedApplicationStageHistories: Relation<
+    ApplicationStageHistoryWorkspaceEntity[]
+  >;
   approvedPayrollAdjustments: Relation<PayrollAdjustmentWorkspaceEntity[]>;
   onboardingItems: Relation<OnboardingItemWorkspaceEntity[]>;
   attendanceCorrections: Relation<AttendanceCorrectionWorkspaceEntity[]>;

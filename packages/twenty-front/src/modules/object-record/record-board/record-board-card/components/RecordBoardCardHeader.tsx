@@ -22,7 +22,7 @@ import { useContext } from 'react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { isDefined } from 'twenty-shared/utils';
 import { ChipVariant } from 'twenty-ui/data-display';
-import { IconEye, IconEyeOff } from 'twenty-ui/icon';
+import { IconChevronDown, IconChevronRight } from 'twenty-ui/icon';
 import { Checkbox, CheckboxVariant, LightIconButton } from 'twenty-ui/input';
 import { useIsMobile, useIsTouchDevice } from 'twenty-ui/utilities';
 
@@ -101,19 +101,17 @@ export const RecordBoardCardHeader = () => {
         </StopPropagationContainer>
       </StyledRecordChipContainer>
 
-      {isCompactModeActive && (
-        <StyledCompactIconContainer className="compact-icon-container">
-          <StopPropagationContainer>
-            <LightIconButton
-              Icon={recordBoardCardIsExpanded ? IconEyeOff : IconEye}
-              accent="tertiary"
-              onClick={() => {
-                setRecordBoardCardIsExpanded(!recordBoardCardIsExpanded);
-              }}
-            />
-          </StopPropagationContainer>
-        </StyledCompactIconContainer>
-      )}
+      <StyledCompactIconContainer className="compact-icon-container">
+        <StopPropagationContainer>
+          <LightIconButton
+            Icon={recordBoardCardIsExpanded ? IconChevronDown : IconChevronRight}
+            accent="tertiary"
+            onClick={() => {
+              setRecordBoardCardIsExpanded(!recordBoardCardIsExpanded);
+            }}
+          />
+        </StopPropagationContainer>
+      </StyledCompactIconContainer>
       {!isMobile && (
         <StyledCheckboxContainer className="checkbox-container">
           <StopPropagationContainer>

@@ -1,21 +1,34 @@
 import { useCallback } from 'react';
 import { useStore } from 'jotai';
 
+import { useContextStoreInstanceId } from '@/context-store/hooks/useContextStoreInstanceId';
+import { contextStoreCurrentViewIdComponentState } from '@/context-store/states/contextStoreCurrentViewIdComponentState';
+import { recordIndexViewTypeState } from '@/object-record/record-index/states/recordIndexViewTypeState';
 import { useAtomComponentStateCallbackState } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateCallbackState';
+import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { usePerformViewApiUpdate } from '@/views/hooks/internal/usePerformViewApiUpdate';
 import { useCanPersistViewChanges } from '@/views/hooks/useCanPersistViewChanges';
+import { ViewType } from '@/views/types/ViewType';
 import { useCloseAndResetViewPicker } from '@/views/view-picker/hooks/useCloseAndResetViewPicker';
+import { viewPickerCalendarFieldMetadataIdComponentState } from '@/views/view-picker/states/viewPickerCalendarFieldMetadataIdComponentState';
 import { viewPickerInputNameComponentState } from '@/views/view-picker/states/viewPickerInputNameComponentState';
 import { viewPickerIsDirtyComponentState } from '@/views/view-picker/states/viewPickerIsDirtyComponentState';
 import { viewPickerIsPersistingComponentState } from '@/views/view-picker/states/viewPickerIsPersistingComponentState';
+import { viewPickerMainGroupByFieldMetadataIdComponentState } from '@/views/view-picker/states/viewPickerMainGroupByFieldMetadataIdComponentState';
 import { viewPickerModeComponentState } from '@/views/view-picker/states/viewPickerModeComponentState';
 import { viewPickerReferenceViewIdComponentState } from '@/views/view-picker/states/viewPickerReferenceViewIdComponentState';
 import { viewPickerSelectedIconComponentState } from '@/views/view-picker/states/viewPickerSelectedIconComponentState';
+import { viewPickerTypeComponentState } from '@/views/view-picker/states/viewPickerTypeComponentState';
 import { viewPickerVisibilityComponentState } from '@/views/view-picker/states/viewPickerVisibilityComponentState';
+import { ViewCalendarLayout } from '~/generated-metadata/graphql';
 
 export const useUpdateViewFromCurrentState = () => {
   const { canPersistChanges } = useCanPersistViewChanges();
   const { closeAndResetViewPicker } = useCloseAndResetViewPicker();
+  const contextStoreInstanceId = useContextStoreInstanceId();
+  const setRecordIndexViewType = useSetAtomComponentState(
+    recordIndexViewTypeState,
+  );
 
   const viewPickerInputNameCallbackState = useAtomComponentStateCallbackState(
     viewPickerInputNameComponentState,
@@ -23,6 +36,20 @@ export const useUpdateViewFromCurrentState = () => {
 
   const viewPickerSelectedIconCallbackState =
     useAtomComponentStateCallbackState(viewPickerSelectedIconComponentState);
+
+  const viewPickerTypeCallbackState = useAtomComponentStateCallbackState(
+    viewPickerTypeComponentState,
+  );
+
+  const viewPickerMainGroupByFieldMetadataIdCallbackState =
+    useAtomComponentStateCallbackState(
+      viewPickerMainGroupByFieldMetadataIdComponentState,
+    );
+
+  const viewPickerCalendarFieldMetadataIdCallbackState =
+    useAtomComponentStateCallbackState(
+      viewPickerCalendarFieldMetadataIdComponentState,
+    );
 
   const viewPickerIsPersistingCallbackState =
     useAtomComponentStateCallbackState(viewPickerIsPersistingComponentState);
@@ -63,7 +90,20 @@ export const useUpdateViewFromCurrentState = () => {
     const viewPickerSelectedIcon = store.get(
       viewPickerSelectedIconCallbackState,
     );
+    const viewPickerType = store.get(viewPickerTypeCallbackState);
+    const viewPickerMainGroupByFieldMetadataId = store.get(
+      viewPickerMainGroupByFieldMetadataIdCallbackState,
+    );
+    const viewPickerCalendarFieldMetadataId = store.get(
+      viewPickerCalendarFieldMetadataIdCallbackState,
+    );
     const visibility = store.get(viewPickerVisibilityCallbackState);
+
+    const currentViewId = store.get(
+      contextStoreCurrentViewIdComponentState.atomFamily({
+        instanceId: contextStoreInstanceId,
+      }),
+    );
 
     try {
       await performViewApiUpdate({
@@ -72,8 +112,25 @@ export const useUpdateViewFromCurrentState = () => {
           name: viewPickerInputName,
           icon: viewPickerSelectedIcon,
           visibility: visibility,
+          type: viewPickerType,
+          mainGroupByFieldMetadataId:
+            viewPickerType === ViewType.KANBAN
+              ? viewPickerMainGroupByFieldMetadataId
+              : null,
+          calendarFieldMetadataId:
+            viewPickerType === ViewType.CALENDAR
+              ? viewPickerCalendarFieldMetadataId
+              : null,
+          calendarLayout:
+            viewPickerType === ViewType.CALENDAR
+              ? ViewCalendarLayout.MONTH
+              : null,
         },
       });
+
+      if (viewPickerReferenceViewId === currentViewId && viewPickerType) {
+        setRecordIndexViewType(viewPickerType);
+      }
     } finally {
       store.set(viewPickerIsPersistingCallbackState, false);
     }
@@ -86,7 +143,13 @@ export const useUpdateViewFromCurrentState = () => {
     viewPickerReferenceViewIdCallbackState,
     viewPickerInputNameCallbackState,
     viewPickerSelectedIconCallbackState,
+    viewPickerTypeCallbackState,
+    viewPickerMainGroupByFieldMetadataIdCallbackState,
+    viewPickerCalendarFieldMetadataIdCallbackState,
     viewPickerVisibilityCallbackState,
+    contextStoreCurrentViewIdComponentState,
+    contextStoreInstanceId,
+    setRecordIndexViewType,
     performViewApiUpdate,
     store,
   ]);

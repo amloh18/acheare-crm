@@ -19,7 +19,7 @@ export const computeStandardAttendanceDayViews = (
       objectName: 'attendanceDay',
       context: {
         viewName: 'allAttendanceDays',
-        name: INDEX_VIEW_NAME,
+        name: i18nLabel(msg({ message: `Attendance`, context: 'view.name' })),
         type: ViewType.TABLE,
         key: ViewKey.INDEX,
         position: 0,

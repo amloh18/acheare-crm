@@ -57,6 +57,238 @@ export const STANDARD_FLAT_OBJECT_METADATA_BUILDERS_BY_OBJECT_NAME = {
       twentyStandardApplicationId,
       now,
     }),
+  placement: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'placement'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'placement',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier: STANDARD_OBJECTS.placement.universalIdentifier,
+        nameSingular: 'placement',
+        namePlural: 'placements',
+        labelSingular: i18nLabel(
+          msg({
+            message: `Placement`,
+            context: 'objectMetadata.labelSingular',
+          }),
+        ),
+        labelPlural: i18nLabel(
+          msg({
+            message: `Placements`,
+            context: 'objectMetadata.labelPlural',
+          }),
+        ),
+        description: i18nLabel(
+          msg({
+            message: `A candidate placed into a client company`,
+            context: 'objectMetadata.description',
+          }),
+        ),
+        icon: 'IconTrophy',
+        openRecordIn: ObjectOpenRecordIn.RECORD_PAGE,
+        isSearchable: true,
+        labelIdentifierFieldMetadataName: 'id',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
+  interviewParticipant: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'interviewParticipant'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'interviewParticipant',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier:
+          STANDARD_OBJECTS.interviewParticipant.universalIdentifier,
+        nameSingular: 'interviewParticipant',
+        namePlural: 'interviewParticipants',
+        labelSingular: i18nLabel(
+          msg({
+            message: `Interview participant`,
+            context: 'objectMetadata.labelSingular',
+          }),
+        ),
+        labelPlural: i18nLabel(
+          msg({
+            message: `Interview participants`,
+            context: 'objectMetadata.labelPlural',
+          }),
+        ),
+        description: i18nLabel(
+          msg({
+            message: `A person taking part in an interview`,
+            context: 'objectMetadata.description',
+          }),
+        ),
+        icon: 'IconUsers',
+        isSystem: true,
+        isAuditLogged: false,
+        isUICreatable: true,
+        labelIdentifierFieldMetadataName: 'id',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
+  personExternalId: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'personExternalId'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'personExternalId',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier:
+          STANDARD_OBJECTS.personExternalId.universalIdentifier,
+        nameSingular: 'personExternalId',
+        namePlural: 'personExternalIds',
+        labelSingular: i18nLabel(
+          msg({
+            message: `External identifier`,
+            context: 'objectMetadata.labelSingular',
+          }),
+        ),
+        labelPlural: i18nLabel(
+          msg({
+            message: `External identifiers`,
+            context: 'objectMetadata.labelPlural',
+          }),
+        ),
+        description: i18nLabel(
+          msg({
+            message: `External system identifier used for import deduplication`,
+            context: 'objectMetadata.description',
+          }),
+        ),
+        icon: 'IconDatabase',
+        isSystem: true,
+        isAuditLogged: false,
+        isUICreatable: false,
+        labelIdentifierFieldMetadataName: 'id',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
+  applicationStageHistory: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'applicationStageHistory'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'applicationStageHistory',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier:
+          STANDARD_OBJECTS.applicationStageHistory.universalIdentifier,
+        nameSingular: 'applicationStageHistory',
+        namePlural: 'applicationStageHistories',
+        labelSingular: i18nLabel(
+          msg({
+            message: `Stage history`,
+            context: 'objectMetadata.labelSingular',
+          }),
+        ),
+        labelPlural: i18nLabel(
+          msg({
+            message: `Stage histories`,
+            context: 'objectMetadata.labelPlural',
+          }),
+        ),
+        description: i18nLabel(
+          msg({
+            message: `Audit trail of a submission moving through the recruitment pipeline`,
+            context: 'objectMetadata.description',
+          }),
+        ),
+        icon: 'IconHistory',
+        isSystem: true,
+        isAuditLogged: false,
+        isUICreatable: false,
+        labelIdentifierFieldMetadataName: 'id',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
+  companyPersonRelationship: ({
+    now,
+    workspaceId,
+    standardObjectMetadataRelatedEntityIds,
+    twentyStandardApplicationId,
+    dependencyFlatEntityMaps,
+  }: Omit<
+    CreateStandardObjectArgs<'companyPersonRelationship'>,
+    'context' | 'objectName'
+  >) =>
+    createStandardObjectFlatMetadata({
+      objectName: 'companyPersonRelationship',
+      dependencyFlatEntityMaps,
+      context: {
+        universalIdentifier:
+          STANDARD_OBJECTS.companyPersonRelationship.universalIdentifier,
+        nameSingular: 'companyPersonRelationship',
+        namePlural: 'companyPersonRelationships',
+        labelSingular: i18nLabel(
+          msg({
+            message: `Company relationship`,
+            context: 'objectMetadata.labelSingular',
+          }),
+        ),
+        labelPlural: i18nLabel(
+          msg({
+            message: `Company relationships`,
+            context: 'objectMetadata.labelPlural',
+          }),
+        ),
+        description: i18nLabel(
+          msg({
+            message: `A person's role and relationship inside a company`,
+            context: 'objectMetadata.description',
+          }),
+        ),
+        icon: 'IconAffiliate',
+        openRecordIn: ObjectOpenRecordIn.RECORD_PAGE,
+        isSearchable: true,
+        labelIdentifierFieldMetadataName: 'id',
+      },
+      workspaceId,
+      standardObjectMetadataRelatedEntityIds,
+      twentyStandardApplicationId,
+      now,
+    }),
   blocklist: ({
     now,
     workspaceId,

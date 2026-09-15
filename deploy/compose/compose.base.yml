@@ -1,0 +1,138 @@
+# ==============================================================================
+# Achare — shared service definitions
+# ==============================================================================
+#
+# This file is never used on its own: it is always combined with one profile.
+# Use the CLI, which wires the files and the env file together:
+#
+#     deploy/scripts/achare start
+#     deploy/scripts/achare doctor
+#
+# Or, by hand, from the repository root:
+#
+#     docker compose --project-directory deploy \
+#       -f deploy/compose/compose.base.yml \
+#       -f deploy/compose/compose.local.yml \
+#       --env-file deploy/.env up -d
+#
+# There is one application image. The server container serves the SPA and the
+# API on a single origin (the frontend build is baked into
+# packages/twenty-server/dist/front); the worker is the same image running a
+# different command. Do not add a separate nginx/front container.
+
+name: achare
+
+x-achare-image: &achare-image "${ACHARE_IMAGE:-ghcr.io/amloh18/achare-server}:${ACHARE_VERSION:-0.1.0}"
+
+# Shared by the server and the worker: the worker opens the same database and
+# storage to process jobs, so it needs the same credentials.
+x-achare-app-env: &achare-app-env
+  NODE_ENV: ${NODE_ENV:-production}
+  NODE_PORT: ${NODE_PORT:-3000}
+  SERVER_URL: ${SERVER_URL:?SERVER_URL must be set in deploy/.env}
+  APP_SECRET: ${APP_SECRET:?APP_SECRET must be set in deploy/.env}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:?ENCRYPTION_KEY must be set in deploy/.env}
+  # Derived from the parts so the Postgres container and the server cannot
+  # disagree, and so a password with URL-hostile characters is safe.
+  PG_DATABASE_URL: postgres://${PG_DATABASE_USER:-achare}:${PG_DATABASE_PASSWORD:?PG_DATABASE_PASSWORD must be set in deploy/.env}@db:5432/${PG_DATABASE_NAME:-default}
+  REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+  STORAGE_TYPE: ${STORAGE_TYPE:-LOCAL}
+  STORAGE_LOCAL_PATH: ${STORAGE_LOCAL_PATH:-/app/packages/twenty-server/.local-storage}
+  # Reported by /readyz and shown in Settings → Admin, so it should match the
+  # image tag being run.
+  APP_VERSION: ${ACHARE_VERSION:-0.1.0}
+  EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-noreply@yourdomain.com}
+  EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-ACHEARE}
+  # Only read when STORAGE_TYPE=S_3.
+  STORAGE_S3_REGION: ${STORAGE_S3_REGION:-}
+  STORAGE_S3_NAME: ${STORAGE_S3_NAME:-}
+  STORAGE_S3_ENDPOINT: ${STORAGE_S3_ENDPOINT:-}
+  STORAGE_S3_ACCESS_KEY_ID: ${STORAGE_S3_ACCESS_KEY_ID:-}
+  STORAGE_S3_SECRET_ACCESS_KEY: ${STORAGE_S3_SECRET_ACCESS_KEY:-}
+  STORAGE_S3_PRESIGNED_URL_BASE: ${STORAGE_S3_PRESIGNED_URL_BASE:-}
+
+services:
+  server:
+    image: *achare-image
+    restart: unless-stopped
+    stop_grace_period: 30s
+    environment:
+      <<: *achare-app-env
+    volumes:
+      - achare-storage:${STORAGE_LOCAL_PATH:-/app/packages/twenty-server/.local-storage}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # /readyz verifies database + migrations + redis + storage, so a container
+    # is only reported healthy once it can actually serve requests. The
+    # entrypoint runs migrations before the server process starts.
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:${NODE_PORT:-3000}/readyz >/dev/null || exit 1",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+
+  worker:
+    image: *achare-image
+    restart: unless-stopped
+    stop_grace_period: 60s
+    command: ["yarn", "worker:prod"]
+    environment:
+      <<: *achare-app-env
+      # Exactly one process may run migrations; the server owns them.
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    volumes:
+      - achare-storage:${STORAGE_LOCAL_PATH:-/app/packages/twenty-server/.local-storage}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      # Migrations live in the server's entrypoint, so workers wait for them.
+      server:
+        condition: service_healthy
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_DATABASE_USER:-achare}
+      POSTGRES_PASSWORD: ${PG_DATABASE_PASSWORD:?PG_DATABASE_PASSWORD must be set in deploy/.env}
+      POSTGRES_DB: ${PG_DATABASE_NAME:-default}
+    volumes:
+      - achare-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${PG_DATABASE_USER:-achare} -d ${PG_DATABASE_NAME:-default}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--maxmemory-policy", "noeviction"]
+    volumes:
+      # BullMQ queue state survives a restart instead of dropping pending jobs.
+      - achare-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  achare-db-data:
+  achare-redis-data:
+  achare-storage:

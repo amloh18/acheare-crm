@@ -1,4 +1,3 @@
-import { NavigationDrawerOpenedSection } from '@/navigation-menu-item/display/sections/components/NavigationDrawerOpenedSection';
 import { NavigationDrawerWorkspaceSectionSkeletonLoader } from '@/object-metadata/components/NavigationDrawerWorkspaceSectionSkeletonLoader';
 import { AchareNavigationContent } from '@/navigation/components/AchareNavigationContent';
 import { isLayoutCustomizationModeEnabledState } from '@/layout-customization/states/isLayoutCustomizationModeEnabledState';
@@ -38,7 +37,9 @@ export const MainNavigationDrawerScrollableItems = () => {
 
   return (
     <StyledScrollableItemsContainer>
-      <NavigationDrawerOpenedSection />
+      {/* The Achare module list below is the single source of pages: every
+          object is already listed under its category, so no separate
+          "Opened" section is rendered on top of it. */}
       <Suspense fallback={<NavigationDrawerWorkspaceSectionSkeletonLoader />}>
         <FavoritesSectionDispatcher />
         {isLayoutCustomizationModeEnabled ? (

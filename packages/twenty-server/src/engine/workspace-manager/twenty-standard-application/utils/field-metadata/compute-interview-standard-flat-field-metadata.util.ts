@@ -745,6 +745,36 @@ export const buildInterviewStandardFlatFieldMetadatas = ({
     now,
   }),
 
+  interviewParticipants: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'interviewParticipants',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Participants`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `People taking part in this interview`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUsers',
+      isNullable: true,
+      targetObjectName: 'interviewParticipant',
+      targetFieldName: 'interview',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   taskTargets: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

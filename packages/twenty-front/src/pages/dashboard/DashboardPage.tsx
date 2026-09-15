@@ -1,263 +1,559 @@
+import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { styled } from '@linaria/react';
-import { PageContainer } from '@/ui/layout/page/components/PageContainer';
-import { Section } from 'twenty-ui/layout';
-import { themeCssVariables } from 'twenty-ui/theme-constants';
+import { useLingui } from '@lingui/react/macro';
 import {
-  IconTargetArrow,
-  IconBriefcase,
-  IconUsers,
-  IconClock,
-  IconCoins,
-  IconCalendarEvent,
-  IconTrendingUp,
-  IconCheckbox,
-} from 'twenty-ui/icon';
+  CoreObjectNameSingular,
+  OrderByDirection,
+  SidePanelPages,
+} from 'twenty-shared/types';
+import { PageLayoutType } from '~/generated-metadata/graphql';
+import { PageContainer } from '@/ui/layout/page/components/PageContainer';
+import { PageCardLayout } from '@/ui/layout/page/components/PageCardLayout';
+import { RecordIndexSkeletonLoader } from '@/object-record/record-index/components/RecordIndexSkeletonLoader';
+import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
+import { useCreateOneRecord } from '@/object-record/hooks/useCreateOneRecord';
+import { useDestroyOneRecord } from '@/object-record/hooks/useDestroyOneRecord';
+import { useDuplicateDashboard } from '@/dashboards/hooks/useDuplicateDashboard';
+import { useIsDashboardPageLayoutInEditMode } from '@/page-layout/hooks/useIsDashboardPageLayoutInEditMode';
+import { useSetIsPageLayoutInEditMode } from '@/page-layout/hooks/useSetIsPageLayoutInEditMode';
+import { useSavePageLayout } from '@/page-layout/hooks/useSavePageLayout';
+import { useSavePageLayoutWidgetsData } from '@/page-layout/hooks/useSavePageLayoutWidgetsData';
+import { useResetDraftPageLayoutToPersistedPageLayout } from '@/page-layout/hooks/useResetDraftPageLayoutToPersistedPageLayout';
+import { useSidePanelMenu } from '@/side-panel/hooks/useSidePanelMenu';
+import { useNavigatePageLayoutSidePanel } from '@/side-panel/pages/page-layout/hooks/useNavigatePageLayoutSidePanel';
+import { getTabListInstanceIdFromPageLayoutAndRecord } from '@/page-layout/utils/getTabListInstanceIdFromPageLayoutAndRecord';
+import { PageLayoutComponentInstanceContext } from '@/page-layout/states/contexts/PageLayoutComponentInstanceContext';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
+import { Button } from 'twenty-ui/input';
+import { IconChartBar, IconPlus } from 'twenty-ui/icon';
+import { themeCssVariables } from 'twenty-ui/theme-constants';
 
+import { DashboardPageHeader } from '@/dashboards/components/DashboardPageHeader';
+import { DashboardViewBar } from '@/dashboards/components/DashboardViewBar';
+import { DashboardContentRenderer } from '@/dashboards/components/DashboardContentRenderer';
+import { DashboardCreateDialog } from '@/dashboards/components/DashboardCreateDialog';
+import { DashboardRenameDialog } from '@/dashboards/components/DashboardRenameDialog';
+import { type DashboardViewItem } from '@/dashboards/components/DashboardViewTab';
+import { EmployeeDashboard } from '~/pages/dashboard/employee/EmployeeDashboard';
+import { AdminDashboard } from '~/pages/dashboard/admin/AdminDashboard';
 import { useAchareRole } from '@/achare/hooks/useAchareRole';
-import { AchareRoleSwitcherBar } from '@/achare/components/AchareRoleSwitcherBar';
-import { KPIWidget } from '@/achare/widgets/KPIWidget';
-import { RecruitmentPipelineWidget } from '@/achare/widgets/RecruitmentPipelineWidget';
-import { SalesPipelineWidget } from '@/achare/widgets/SalesPipelineWidget';
-import { AttendanceTodayWidget } from '@/achare/widgets/AttendanceTodayWidget';
-import { PayrollSummaryWidget } from '@/achare/widgets/PayrollSummaryWidget';
-import { UpcomingInterviewsWidget } from '@/achare/widgets/UpcomingInterviewsWidget';
-import { OpenJobsWidget } from '@/achare/widgets/OpenJobsWidget';
-import { QuickActionsWidget } from '@/achare/widgets/QuickActionsWidget';
 
-const StyledDashboard = styled.div`
+export const BUILTIN_EMPLOYEE_DASHBOARD_ID = '__builtin_employee_dashboard__';
+export const BUILTIN_ADMIN_DASHBOARD_ID = '__builtin_admin_dashboard__';
+
+type DashboardRecord = {
+  id: string;
+  title?: string;
+  position?: number;
+  pageLayoutId?: string;
+};
+
+const StyledEmptyContainer = styled.div`
+  align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: ${themeCssVariables.spacing[4]};
-  padding: ${themeCssVariables.spacing[4]} 0;
-  width: 100%;
-  box-sizing: border-box;
+  height: 100%;
+  justify-content: center;
+  padding: ${themeCssVariables.spacing[8]};
+  text-align: center;
 `;
 
-const StyledKPIGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: ${themeCssVariables.spacing[3]};
+const StyledEmptyIcon = styled.div`
+  align-items: center;
+  background: ${themeCssVariables.background.transparent.light};
+  border-radius: 50%;
+  color: ${themeCssVariables.font.color.tertiary};
+  display: flex;
+  height: 64px;
+  justify-content: center;
+  margin-bottom: ${themeCssVariables.spacing[4]};
+  width: 64px;
 `;
 
-const StyledTwoColumnGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: ${themeCssVariables.spacing[4]};
-
-  @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
-  }
+const StyledEmptyTitle = styled.h2`
+  color: ${themeCssVariables.font.color.primary};
+  font-size: ${themeCssVariables.font.size.lg};
+  font-weight: ${themeCssVariables.font.weight.semiBold};
+  margin: 0 0 ${themeCssVariables.spacing[2]} 0;
 `;
+
+const StyledEmptySubtitle = styled.p`
+  color: ${themeCssVariables.font.color.secondary};
+  font-size: ${themeCssVariables.font.size.sm};
+  margin: 0 0 ${themeCssVariables.spacing[6]} 0;
+  max-width: 400px;
+`;
+
+type DashboardBuiltinLayoutProps = {
+  dashboards: DashboardViewItem[];
+  activeDashboard: DashboardViewItem;
+  onSelectDashboard: (id: string) => void;
+  onOpenCreateDialog: () => void;
+  onOpenRenameDialog: (dash: DashboardViewItem) => void;
+  refetchDashboards: () => Promise<unknown>;
+};
+
+const DashboardBuiltinLayout = ({
+  dashboards,
+  activeDashboard,
+  onSelectDashboard,
+  onOpenCreateDialog,
+  onOpenRenameDialog,
+  refetchDashboards,
+}: DashboardBuiltinLayoutProps) => {
+  return (
+    <PageCardLayout
+      header={
+        <DashboardPageHeader
+          isEditMode={false}
+          canDelete={false}
+          onOpenCreateDialog={onOpenCreateDialog}
+          onEnterEditMode={() => {}}
+          onAddWidget={() => {}}
+          onCancelEdit={() => {}}
+          onSaveEdit={async () => {}}
+          onDuplicate={() => {}}
+          onDelete={() => {}}
+        />
+      }
+      secondaryBar={
+        <DashboardViewBar
+          dashboards={dashboards}
+          activeDashboardId={activeDashboard.id}
+          isEditMode={false}
+          onSelectDashboard={onSelectDashboard}
+          onOpenCreateDialog={onOpenCreateDialog}
+          onOpenRenameDialog={onOpenRenameDialog}
+          onDuplicated={async (newId) => {
+            await refetchDashboards();
+            onSelectDashboard(newId);
+          }}
+          onDeleted={async () => {
+            await refetchDashboards();
+            const remaining = dashboards.filter(
+              (d) => d.id !== activeDashboard.id,
+            );
+            if (remaining.length > 0) {
+              onSelectDashboard(remaining[0].id);
+            }
+          }}
+          onEnterEditMode={() => {}}
+        />
+      }
+    >
+      {activeDashboard.id === BUILTIN_ADMIN_DASHBOARD_ID ? (
+        <AdminDashboard />
+      ) : (
+        <EmployeeDashboard />
+      )}
+    </PageCardLayout>
+  );
+};
+
+type DashboardActiveLayoutProps = {
+  dashboards: DashboardViewItem[];
+  activeDashboard: DashboardViewItem;
+  pageLayoutId: string;
+  onSelectDashboard: (id: string) => void;
+  onOpenCreateDialog: () => void;
+  onOpenRenameDialog: (dash: DashboardViewItem) => void;
+  refetchDashboards: () => Promise<unknown>;
+};
+
+const DashboardActiveLayout = ({
+  dashboards,
+  activeDashboard,
+  pageLayoutId,
+  onSelectDashboard,
+  onOpenCreateDialog,
+  onOpenRenameDialog,
+  refetchDashboards,
+}: DashboardActiveLayoutProps) => {
+  const { t } = useLingui();
+  const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useSnackBar();
+
+  const isEditMode = useIsDashboardPageLayoutInEditMode(pageLayoutId);
+  const { setIsPageLayoutInEditMode } =
+    useSetIsPageLayoutInEditMode(pageLayoutId);
+  const { savePageLayout } = useSavePageLayout(pageLayoutId);
+  const { savePageLayoutWidgetsData } = useSavePageLayoutWidgetsData();
+  const { closeSidePanelMenu } = useSidePanelMenu();
+  const { navigatePageLayoutSidePanel } = useNavigatePageLayoutSidePanel();
+
+  const tabListInstanceId = getTabListInstanceIdFromPageLayoutAndRecord({
+    pageLayoutId,
+    layoutType: PageLayoutType.DASHBOARD,
+    targetRecordIdentifier: {
+      id: activeDashboard.id,
+      targetObjectNameSingular: CoreObjectNameSingular.Dashboard,
+    },
+  });
+
+  const { resetDraftPageLayoutToPersistedPageLayout } =
+    useResetDraftPageLayoutToPersistedPageLayout({
+      pageLayoutId,
+      tabListInstanceId,
+    });
+
+  const { destroyOneRecord } = useDestroyOneRecord({
+    objectNameSingular: CoreObjectNameSingular.Dashboard,
+  });
+
+  const { duplicateDashboard } = useDuplicateDashboard();
+
+  const handleSelectDashboardWithCleanup = (id: string) => {
+    if (isEditMode) {
+      setIsPageLayoutInEditMode(false);
+      closeSidePanelMenu();
+    }
+    onSelectDashboard(id);
+  };
+
+  const handleEnterEditMode = () => {
+    setIsPageLayoutInEditMode(true);
+  };
+
+  const handleAddWidget = () => {
+    setIsPageLayoutInEditMode(true);
+    navigatePageLayoutSidePanel({
+      sidePanelPage: SidePanelPages.PageLayoutDashboardWidgetTypeSelect,
+      resetNavigationStack: true,
+    });
+  };
+
+  const handleCancelEdit = () => {
+    closeSidePanelMenu();
+    resetDraftPageLayoutToPersistedPageLayout();
+    setIsPageLayoutInEditMode(false);
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      const result = await savePageLayout();
+      if (result.status === 'successful') {
+        await savePageLayoutWidgetsData(pageLayoutId);
+        closeSidePanelMenu();
+        setIsPageLayoutInEditMode(false);
+        enqueueSuccessSnackBar({ message: t`Dashboard layout saved` });
+      }
+    } catch {
+      enqueueErrorSnackBar({ message: t`Failed to save dashboard layout` });
+    }
+  };
+
+  const handleDuplicate = async () => {
+    try {
+      const duplicated = await duplicateDashboard(activeDashboard.id);
+      if (duplicated) {
+        enqueueSuccessSnackBar({ message: t`Dashboard duplicated` });
+        await refetchDashboards();
+        handleSelectDashboardWithCleanup(duplicated.id);
+      }
+    } catch {
+      enqueueErrorSnackBar({ message: t`Failed to duplicate dashboard` });
+    }
+  };
+
+  const handleDelete = async () => {
+    if (dashboards.length <= 1) return;
+    try {
+      await destroyOneRecord(activeDashboard.id);
+      enqueueSuccessSnackBar({ message: t`Dashboard deleted` });
+      await refetchDashboards();
+      const remaining = dashboards.filter((d) => d.id !== activeDashboard.id);
+      if (remaining.length > 0) {
+        handleSelectDashboardWithCleanup(remaining[0].id);
+      }
+    } catch {
+      enqueueErrorSnackBar({ message: t`Failed to delete dashboard` });
+    }
+  };
+
+  return (
+    <PageLayoutComponentInstanceContext.Provider
+      value={{ instanceId: pageLayoutId }}
+    >
+      <PageCardLayout
+        header={
+          <DashboardPageHeader
+            isEditMode={isEditMode}
+            canDelete={dashboards.length > 1}
+            onOpenCreateDialog={onOpenCreateDialog}
+            onEnterEditMode={handleEnterEditMode}
+            onAddWidget={handleAddWidget}
+            onCancelEdit={handleCancelEdit}
+            onSaveEdit={handleSaveEdit}
+            onDuplicate={handleDuplicate}
+            onDelete={handleDelete}
+          />
+        }
+        secondaryBar={
+          <DashboardViewBar
+            dashboards={dashboards}
+            activeDashboardId={activeDashboard.id}
+            isEditMode={isEditMode}
+            onSelectDashboard={handleSelectDashboardWithCleanup}
+            onOpenCreateDialog={onOpenCreateDialog}
+            onOpenRenameDialog={onOpenRenameDialog}
+            onDuplicated={async (newId) => {
+              await refetchDashboards();
+              handleSelectDashboardWithCleanup(newId);
+            }}
+            onDeleted={async () => {
+              await refetchDashboards();
+              const remaining = dashboards.filter(
+                (d) => d.id !== activeDashboard.id,
+              );
+              if (remaining.length > 0) {
+                handleSelectDashboardWithCleanup(remaining[0].id);
+              }
+            }}
+            onEnterEditMode={handleEnterEditMode}
+          />
+        }
+      >
+        <DashboardContentRenderer
+          key={activeDashboard.id}
+          activeDashboard={activeDashboard}
+        />
+      </PageCardLayout>
+    </PageLayoutComponentInstanceContext.Provider>
+  );
+};
 
 export const DashboardPage = () => {
+  const { t } = useLingui();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useSnackBar();
   const { role } = useAchareRole();
+
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [renameTarget, setRenameTarget] = useState<DashboardViewItem | null>(
+    null,
+  );
+
+  const {
+    records: rawDashboards,
+    loading,
+    error,
+    refetch,
+  } = useFindManyRecords<DashboardRecord>({
+    objectNameSingular: CoreObjectNameSingular.Dashboard,
+    recordGqlFields: {
+      id: true,
+      title: true,
+      position: true,
+      pageLayoutId: true,
+    },
+    orderBy: [{ position: OrderByDirection.AscNullsLast }],
+  });
+
+  const { createOneRecord } = useCreateOneRecord({
+    objectNameSingular: CoreObjectNameSingular.Dashboard,
+  });
+
+  const builtinEmployeeDashboard: DashboardViewItem = useMemo(
+    () => ({
+      id: BUILTIN_EMPLOYEE_DASHBOARD_ID,
+      title: t`My Dashboard`,
+    }),
+    [t],
+  );
+
+  const builtinAdminDashboard: DashboardViewItem = useMemo(
+    () => ({
+      id: BUILTIN_ADMIN_DASHBOARD_ID,
+      title: t`Admin Dashboard`,
+    }),
+    [t],
+  );
+
+  const dbDashboards: DashboardViewItem[] = useMemo(
+    () =>
+      rawDashboards.map((dash) => ({
+        id: dash.id,
+        title: dash.title || t`Untitled Dashboard`,
+        pageLayoutId: dash.pageLayoutId,
+      })),
+    [rawDashboards, t],
+  );
+
+  const dashboards: DashboardViewItem[] = useMemo(() => {
+    const builtins: DashboardViewItem[] = [];
+    if (role === 'admin') {
+      builtins.push(builtinAdminDashboard);
+    }
+    builtins.push(builtinEmployeeDashboard);
+    return [...builtins, ...dbDashboards];
+  }, [role, builtinAdminDashboard, builtinEmployeeDashboard, dbDashboards]);
+
+  const urlViewId = searchParams.get('viewId');
+
+  const defaultDashboard = useMemo(() => {
+    if (role === 'admin') {
+      return builtinAdminDashboard;
+    }
+    return builtinEmployeeDashboard;
+  }, [role, builtinAdminDashboard, builtinEmployeeDashboard]);
+
+  const activeDashboard = useMemo(() => {
+    if (urlViewId) {
+      const match = dashboards.find((d) => d.id === urlViewId);
+      if (match) {
+        return match;
+      }
+    }
+    return defaultDashboard;
+  }, [dashboards, urlViewId, defaultDashboard]);
+
+  const handleSelectDashboard = (id: string) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set('viewId', id);
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
+  const handleCreateDefault = async () => {
+    try {
+      const res = await createOneRecord({
+        title: 'Overview',
+      });
+      if (res) {
+        enqueueSuccessSnackBar({ message: t`Created Overview dashboard` });
+        await refetch?.();
+        handleSelectDashboard(res.id);
+      }
+    } catch {
+      enqueueErrorSnackBar({ message: t`Failed to create dashboard` });
+    }
+  };
+
+  const hasLoaded = !loading || dbDashboards.length > 0;
+
+  const isBuiltinDashboard =
+    activeDashboard.id === BUILTIN_EMPLOYEE_DASHBOARD_ID ||
+    activeDashboard.id === BUILTIN_ADMIN_DASHBOARD_ID;
+
+  const activeDashboardHasPageLayout =
+    !isBuiltinDashboard && (activeDashboard as DashboardViewItem).pageLayoutId;
 
   return (
     <PageContainer>
-      <Section>
-        <StyledDashboard>
-          {/* Persona Switcher */}
-          <AchareRoleSwitcherBar />
+      {!hasLoaded ? (
+        <RecordIndexSkeletonLoader />
+      ) : error ? (
+        <PageCardLayout
+          header={
+            <DashboardPageHeader
+              isEditMode={false}
+              canDelete={false}
+              onOpenCreateDialog={() => setIsCreateDialogOpen(true)}
+              onEnterEditMode={() => {}}
+              onAddWidget={() => {}}
+              onCancelEdit={() => {}}
+              onSaveEdit={async () => {}}
+              onDuplicate={() => {}}
+              onDelete={() => {}}
+            />
+          }
+        >
+          <StyledEmptyContainer>
+            <StyledEmptyIcon>
+              <IconChartBar size={36} />
+            </StyledEmptyIcon>
+            <StyledEmptyTitle>{t`Unable to load dashboards`}</StyledEmptyTitle>
+            <StyledEmptySubtitle>
+              {t`There was an error loading your dashboards. Please try again.`}
+            </StyledEmptySubtitle>
+          </StyledEmptyContainer>
+        </PageCardLayout>
+      ) : isBuiltinDashboard ? (
+        <DashboardBuiltinLayout
+          key={activeDashboard.id}
+          dashboards={dashboards}
+          activeDashboard={activeDashboard}
+          onSelectDashboard={handleSelectDashboard}
+          onOpenCreateDialog={() => setIsCreateDialogOpen(true)}
+          onOpenRenameDialog={(dash) => setRenameTarget(dash)}
+          refetchDashboards={async () => {
+            await refetch?.();
+          }}
+        />
+      ) : activeDashboardHasPageLayout ? (
+        <DashboardActiveLayout
+          key={activeDashboard.id}
+          dashboards={dashboards}
+          activeDashboard={activeDashboard}
+          pageLayoutId={
+            (activeDashboard as DashboardViewItem).pageLayoutId as string
+          }
+          onSelectDashboard={handleSelectDashboard}
+          onOpenCreateDialog={() => setIsCreateDialogOpen(true)}
+          onOpenRenameDialog={(dash) => setRenameTarget(dash)}
+          refetchDashboards={async () => {
+            await refetch?.();
+          }}
+        />
+      ) : (
+        <PageCardLayout
+          header={
+            <DashboardPageHeader
+              isEditMode={false}
+              canDelete={false}
+              onOpenCreateDialog={() => setIsCreateDialogOpen(true)}
+              onEnterEditMode={() => {}}
+              onAddWidget={() => {}}
+              onCancelEdit={() => {}}
+              onSaveEdit={async () => {}}
+              onDuplicate={() => {}}
+              onDelete={() => {}}
+            />
+          }
+        >
+          <StyledEmptyContainer>
+            <StyledEmptyIcon>
+              <IconChartBar size={36} />
+            </StyledEmptyIcon>
+            <StyledEmptyTitle>{t`No Dashboards Yet`}</StyledEmptyTitle>
+            <StyledEmptySubtitle>
+              {t`Create your first dashboard view to start adding widgets and visualizing your data.`}
+            </StyledEmptySubtitle>
+            <Button
+              variant="primary"
+              Icon={IconPlus}
+              title={t`Create Dashboard`}
+              onClick={handleCreateDefault}
+            />
+          </StyledEmptyContainer>
+        </PageCardLayout>
+      )}
 
-          {/* ADMIN / FOUNDER VIEW */}
-          {role === 'admin' && (
-            <>
-              <StyledKPIGrid>
-                <KPIWidget
-                  title="Revenue Pipeline"
-                  value="$309,500"
-                  Icon={IconTargetArrow}
-                  delta="+18.4%"
-                  subtext="vs last month"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Active Openings"
-                  value="14 Jobs"
-                  Icon={IconBriefcase}
-                  delta="4 High Priority"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Headcount"
-                  value="48 Members"
-                  Icon={IconUsers}
-                  delta="+3 this month"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Attendance Today"
-                  value="92%"
-                  Icon={IconClock}
-                  delta="42 Clocked In"
-                  isPositive
-                />
-              </StyledKPIGrid>
+      <DashboardCreateDialog
+        isOpen={isCreateDialogOpen}
+        onClose={() => setIsCreateDialogOpen(false)}
+        onCreated={async (newDash) => {
+          await refetch?.();
+          handleSelectDashboard(newDash.id);
+        }}
+      />
 
-              <StyledTwoColumnGrid>
-                <RecruitmentPipelineWidget />
-                <SalesPipelineWidget />
-              </StyledTwoColumnGrid>
-
-              <StyledTwoColumnGrid>
-                <AttendanceTodayWidget />
-                <PayrollSummaryWidget />
-              </StyledTwoColumnGrid>
-
-              <StyledTwoColumnGrid>
-                <OpenJobsWidget />
-                <UpcomingInterviewsWidget />
-              </StyledTwoColumnGrid>
-
-              <QuickActionsWidget role="admin" />
-            </>
-          )}
-
-          {/* RECRUITER VIEW */}
-          {role === 'recruiter' && (
-            <>
-              <StyledKPIGrid>
-                <KPIWidget
-                  title="Active Openings"
-                  value="14 Jobs"
-                  Icon={IconBriefcase}
-                  delta="4 new this week"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Candidates in Pipeline"
-                  value="67 Candidates"
-                  Icon={IconUsers}
-                  delta="+12 sourced today"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Interviews This Week"
-                  value="11 Scheduled"
-                  Icon={IconCalendarEvent}
-                  delta="3 today"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Offers Extended"
-                  value="4 Offers"
-                  Icon={IconCoins}
-                  delta="2 Accepted"
-                  isPositive
-                />
-              </StyledKPIGrid>
-
-              <RecruitmentPipelineWidget />
-
-              <StyledTwoColumnGrid>
-                <OpenJobsWidget />
-                <UpcomingInterviewsWidget />
-              </StyledTwoColumnGrid>
-
-              <QuickActionsWidget role="recruiter" />
-            </>
-          )}
-
-          {/* BDE / SALES VIEW */}
-          {role === 'bde' && (
-            <>
-              <StyledKPIGrid>
-                <KPIWidget
-                  title="Total Pipeline ARR"
-                  value="$410,000"
-                  Icon={IconTargetArrow}
-                  delta="+24% target pacing"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Closed Won (Q3)"
-                  value="$128,500"
-                  Icon={IconCoins}
-                  delta="19 Accounts"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Win Rate"
-                  value="68%"
-                  Icon={IconTrendingUp}
-                  delta="+5% vs avg"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Open Deals"
-                  value="25 Deals"
-                  Icon={IconCheckbox}
-                  delta="8 Discovery"
-                  isPositive
-                />
-              </StyledKPIGrid>
-
-              <SalesPipelineWidget />
-              <QuickActionsWidget role="bde" />
-            </>
-          )}
-
-          {/* PEOPLE & HR VIEW */}
-          {role === 'hr' && (
-            <>
-              <StyledKPIGrid>
-                <KPIWidget
-                  title="Total Headcount"
-                  value="48 Staff"
-                  Icon={IconUsers}
-                  delta="5 Departments"
-                  isPositive
-                />
-                <KPIWidget
-                  title="Today's Attendance"
-                  value="42 Present"
-                  Icon={IconClock}
-                  delta="3 Late"
-                  isPositive={false}
-                />
-                <KPIWidget
-                  title="Pending Leaves"
-                  value="3 Requests"
-                  Icon={IconCalendarEvent}
-                  delta="Requires review"
-                  isPositive={false}
-                />
-                <KPIWidget
-                  title="August Payroll"
-                  value="$148,650"
-                  Icon={IconCoins}
-                  delta="Processed & Paid"
-                  isPositive
-                />
-              </StyledKPIGrid>
-
-              <StyledTwoColumnGrid>
-                <AttendanceTodayWidget />
-                <PayrollSummaryWidget />
-              </StyledTwoColumnGrid>
-
-              <QuickActionsWidget role="hr" />
-            </>
-          )}
-
-          {/* EMPLOYEE SELF-SERVICE VIEW */}
-          {role === 'employee' && (
-            <>
-              <AttendanceTodayWidget />
-              <StyledTwoColumnGrid>
-                <PayrollSummaryWidget
-                  periodName="August 2026 Payslip"
-                  totalNet="$4,850.00"
-                  employeeCount={1}
-                  status="PAID"
-                  payDate="Aug 31, 2026"
-                />
-                <QuickActionsWidget role="employee" />
-              </StyledTwoColumnGrid>
-            </>
-          )}
-        </StyledDashboard>
-      </Section>
+      {renameTarget && (
+        <DashboardRenameDialog
+          isOpen={true}
+          dashboardId={renameTarget.id}
+          initialTitle={renameTarget.title}
+          onClose={() => setRenameTarget(null)}
+          onRenamed={async () => {
+            await refetch?.();
+          }}
+        />
+      )}
     </PageContainer>
   );
 };

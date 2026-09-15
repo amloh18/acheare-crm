@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
-import { IconBriefcase, IconChevronRight } from 'twenty-ui/icon';
+import { IconBriefcase, IconChevronRight, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -41,6 +41,24 @@ const StyledViewAll = styled.button`
   &:hover {
     color: ${themeCssVariables.font.color.primary};
   }
+`;
+
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
 `;
 
 const StyledList = styled.div`
@@ -147,7 +165,12 @@ const DEFAULT_JOBS: JobItem[] = [
   },
 ];
 
-export const OpenJobsWidget = () => {
+interface OpenJobsWidgetProps {
+  loading?: boolean;
+  error?: boolean;
+}
+
+export const OpenJobsWidget = ({ loading, error }: OpenJobsWidgetProps) => {
   const navigate = useNavigate();
 
   return (
@@ -163,25 +186,41 @@ export const OpenJobsWidget = () => {
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledList>
-        {DEFAULT_JOBS.map((job) => (
-          <StyledItem key={job.id} onClick={() => navigate('/objects/requirements')}>
-            <StyledItemLeft>
-              <StyledJobTitle>{job.title}</StyledJobTitle>
-              <StyledJobMeta>
-                <span>{job.location}</span>
-                <span>•</span>
-                <StyledPriority priority={job.priority}>{job.priority} PRIORITY</StyledPriority>
-              </StyledJobMeta>
-            </StyledItemLeft>
-            <StyledItemRight>
-              <StyledApplicantBadge>
-                {job.applicants} applicants
-              </StyledApplicantBadge>
-            </StyledItemRight>
-          </StyledItem>
-        ))}
-      </StyledList>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading jobs...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load jobs</StyledEmptyText>
+        </StyledEmptyState>
+      ) : DEFAULT_JOBS.length === 0 ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>No open positions</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <StyledList>
+          {DEFAULT_JOBS.map((job) => (
+            <StyledItem key={job.id} onClick={() => navigate('/objects/requirements')}>
+              <StyledItemLeft>
+                <StyledJobTitle>{job.title}</StyledJobTitle>
+                <StyledJobMeta>
+                  <span>{job.location}</span>
+                  <span>•</span>
+                  <StyledPriority priority={job.priority}>{job.priority} PRIORITY</StyledPriority>
+                </StyledJobMeta>
+              </StyledItemLeft>
+              <StyledItemRight>
+                <StyledApplicantBadge>
+                  {job.applicants} applicants
+                </StyledApplicantBadge>
+              </StyledItemRight>
+            </StyledItem>
+          ))}
+        </StyledList>
+      )}
     </StyledCard>
   );
 };

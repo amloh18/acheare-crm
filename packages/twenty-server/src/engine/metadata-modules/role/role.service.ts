@@ -50,6 +50,8 @@ import { InjectWorkspaceScopedRepository } from 'src/engine/twenty-orm/workspace
 import { WorkspaceScopedRepository } from 'src/engine/twenty-orm/workspace-scoped-repository/workspace-scoped-repository';
 import { WorkspaceMigrationBuilderException } from 'src/engine/workspace-manager/workspace-migration/exceptions/workspace-migration-builder-exception';
 import { WorkspaceMigrationValidateBuildAndRunService } from 'src/engine/workspace-manager/workspace-migration/services/workspace-migration-validate-build-and-run-service';
+import { RolePermissionFlagService } from 'src/engine/metadata-modules/role-permission-flag/role-permission-flag.service';
+import { DEFAULT_MEMBER_ROLE_RESTRICTED_FLAGS } from 'src/engine/metadata-modules/role/constants/default-member-role-permission-flags';
 
 @Injectable()
 export class RoleService {
@@ -64,6 +66,7 @@ export class RoleService {
     private readonly applicationService: ApplicationService,
     private readonly apiKeyRoleService: ApiKeyRoleService,
     private readonly aiAgentRoleService: AiAgentRoleService,
+    private readonly rolePermissionFlagService: RolePermissionFlagService,
   ) {}
 
   public async getWorkspaceRoles(workspaceId: string): Promise<RoleDTO[]> {
@@ -457,7 +460,7 @@ export class RoleService {
     ownerFlatApplication: FlatApplication;
     workspaceId: string;
   }): Promise<RoleDTO> {
-    return this.createRole({
+    const memberRole = await this.createRole({
       input: {
         label: MEMBER_ROLE_LABEL,
         description: 'Member role',
@@ -475,6 +478,19 @@ export class RoleService {
       ownerFlatApplication,
       workspaceId,
     });
+
+    // Apply default restricted permission flags for Member role
+    if (DEFAULT_MEMBER_ROLE_RESTRICTED_FLAGS.length > 0) {
+      await this.rolePermissionFlagService.upsertPermissionFlags({
+        workspaceId,
+        input: {
+          roleId: memberRole.id,
+          permissionFlagKeys: DEFAULT_MEMBER_ROLE_RESTRICTED_FLAGS,
+        },
+      });
+    }
+
+    return memberRole;
   }
 
   public async createGuestRole({

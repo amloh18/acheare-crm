@@ -1,0 +1,68 @@
+# =============================================================================
+# Achare — desktop profile (Tauri / Electron appliance)
+# =============================================================================
+#
+# Differences from local:
+#   * No host-published ports — the desktop shell connects to 127.0.0.1:4242
+#     internally, and the server binds to localhost only.
+#   * Data is stored in the OS application directory, not in the project tree.
+#   * No Redis — the worker is disabled for single-user desktop mode
+#     (BullMQ jobs are deferred or processed inline).
+#   * Minimal resource footprint — sized for a laptop, not a server.
+#
+# Usage:
+#   ACHARE_PROFILE=desktop deploy/scripts/achare start
+#
+# In practice the desktop shell (Tauri) manages these containers directly,
+# but this profile lets you test the desktop stack manually.
+
+services:
+  server:
+    ports:
+      - "127.0.0.1:4242:3000"
+    environment:
+      NODE_PORT: "3000"
+      SERVER_URL: "http://127.0.0.1:4242"
+      REDIS_URL: ""
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    volumes:
+      - achare-desktop-storage:/app/packages/twenty-server/.local-storage
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+
+  # Worker is optional in desktop mode — background jobs are best-effort.
+  worker:
+    profiles:
+      - full
+    environment:
+      DISABLE_DB_MIGRATIONS: "true"
+      DISABLE_CRON_JOBS_REGISTRATION: "true"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  db:
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - achare-desktop-db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # Redis is excluded from desktop by default (single-user mode).
+  redis:
+    profiles:
+      - full
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+volumes:
+  achare-desktop-db:
+  achare-desktop-storage:

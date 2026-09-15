@@ -18,7 +18,7 @@ export const useUpdateRecordField = (
     (
       fieldMetadataItemId: string,
       partialRecordField: Partial<
-        Pick<RecordField, 'isVisible' | 'size' | 'position'>
+        Pick<RecordField, 'isVisible' | 'isCalendarImportant' | 'size' | 'position'>
       >,
     ) => {
       const existingRecordFields = store.get(currentRecordFields);

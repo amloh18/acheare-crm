@@ -254,10 +254,46 @@ export class AchareOnboardingService {
       key: AchareSetupStepKeys.ACHARE_SETUP_STATUS,
     });
 
-    // Starting is idempotent: an onboarding already under way keeps its
-    // position, and a completed one is not silently rewound to WELCOME.
-    if (existingStatus === 'IN_PROGRESS' || existingStatus === 'COMPLETED') {
+    // If already in progress, keep position
+    if (existingStatus === 'IN_PROGRESS') {
       return;
+    }
+
+    await this.userVarsService.set({
+      userId,
+      workspaceId,
+      key: AchareSetupStepKeys.ACHARE_SETUP_STATUS,
+      value: 'IN_PROGRESS',
+    });
+
+    await this.userVarsService.set({
+      userId,
+      workspaceId,
+      key: AchareSetupStepKeys.ACHARE_SETUP_CURRENT_STEP,
+      value: 'WELCOME',
+    });
+
+    await this.userVarsService.set({
+      userId,
+      workspaceId,
+      key: AchareSetupStepKeys.ACHARE_SETUP_VERSION,
+      value: ACHARE_SETUP_CURRENT_VERSION,
+    });
+  }
+
+  async restartOnboarding({
+    userId,
+    workspaceId,
+  }: {
+    userId: string;
+    workspaceId: string;
+  }): Promise<void> {
+    for (const key of Object.values(AchareSetupStepKeys)) {
+      await this.userVarsService.delete({
+        userId,
+        workspaceId,
+        key: key as never,
+      });
     }
 
     await this.userVarsService.set({

@@ -432,6 +432,36 @@ export const buildCandidateStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  placements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'placements',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Placements`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Placements of this candidate`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTrophy',
+      isNullable: true,
+      targetObjectName: 'placement',
+      targetFieldName: 'candidate',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   person: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

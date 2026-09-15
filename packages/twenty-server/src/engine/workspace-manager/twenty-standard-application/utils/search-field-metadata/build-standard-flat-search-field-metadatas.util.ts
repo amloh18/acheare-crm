@@ -19,9 +19,12 @@ export const buildStandardFlatSearchFieldMetadatas = <
   twentyStandardApplicationId,
 }: Omit<CreateStandardSearchFieldArgs<O>, 'context'> & {
   searchFields: FieldTypeAndNameMetadata[];
-}): FlatSearchFieldMetadata[] =>
-  searchFields.map((searchField, position) =>
-    createStandardSearchFieldFlatMetadata({
+}): FlatSearchFieldMetadata[] => {
+  const metadatas: FlatSearchFieldMetadata[] = [];
+  let position = 0;
+
+  for (const searchField of searchFields) {
+    const fieldMetadata = createStandardSearchFieldFlatMetadata({
       objectName,
       workspaceId,
       context: {
@@ -32,5 +35,13 @@ export const buildStandardFlatSearchFieldMetadatas = <
       dependencyFlatEntityMaps,
       twentyStandardApplicationId,
       now,
-    }),
-  );
+    });
+
+    if (fieldMetadata) {
+      metadatas.push(fieldMetadata);
+      position++;
+    }
+  }
+
+  return metadatas;
+};

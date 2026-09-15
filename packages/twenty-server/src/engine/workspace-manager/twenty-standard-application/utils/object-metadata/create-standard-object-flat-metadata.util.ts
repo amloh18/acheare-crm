@@ -109,13 +109,13 @@ export const createStandardObjectFlatMetadata = <
     duplicateCriteria,
     shortcut,
     labelIdentifierFieldMetadataId:
-      standardObjectMetadataRelatedEntityIds[nameSingular].fields[
+      standardObjectMetadataRelatedEntityIds[nameSingular]?.fields[
         labelIdentifierFieldMetadataName
-      ].id,
+      ]?.id ?? null,
     imageIdentifierFieldMetadataId: imageIdentifierFieldMetadataName
-      ? standardObjectMetadataRelatedEntityIds[nameSingular].fields[
+      ? standardObjectMetadataRelatedEntityIds[nameSingular]?.fields[
           imageIdentifierFieldMetadataName
-        ].id
+        ]?.id ?? null
       : null,
     targetTableName: 'DEPRECATED',
     fieldIds: [],

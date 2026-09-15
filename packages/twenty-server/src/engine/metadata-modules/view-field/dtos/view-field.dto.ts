@@ -31,6 +31,9 @@ export class ViewFieldDTO {
   @Field({ nullable: false, defaultValue: true })
   isVisible: boolean;
 
+  @Field({ nullable: false, defaultValue: false })
+  isCalendarImportant: boolean;
+
   @Field({ nullable: false, defaultValue: 0 })
   size: number;
 

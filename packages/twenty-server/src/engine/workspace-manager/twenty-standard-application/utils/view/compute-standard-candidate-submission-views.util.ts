@@ -14,29 +14,33 @@ export const computeStandardCandidateSubmissionViews = (
   args: Omit<CreateStandardViewArgs<'candidateSubmission'>, 'context'>,
 ): Record<string, FlatView> => {
   return {
-    allSubmissions: createStandardViewFlatMetadata({
-      ...args,
-      objectName: 'candidateSubmission',
-      context: {
-        viewName: 'allSubmissions',
-        name: INDEX_VIEW_NAME,
-        type: ViewType.TABLE,
-        key: ViewKey.INDEX,
-        position: 0,
-        icon: 'IconTable',
-      },
-    }),
     byStage: createStandardViewFlatMetadata({
       ...args,
       objectName: 'candidateSubmission',
       context: {
         viewName: 'byStage',
-        name: i18nLabel(msg({ message: `Pipeline`, context: 'view.name' })),
+        name: i18nLabel(
+          msg({ message: `Recruitment Pipeline`, context: 'view.name' }),
+        ),
         type: ViewType.KANBAN,
-        key: null,
-        position: 1,
+        key: ViewKey.INDEX,
+        position: 0,
         icon: 'IconLayoutKanban',
         mainGroupByFieldName: 'stage',
+      },
+    }),
+    allSubmissions: createStandardViewFlatMetadata({
+      ...args,
+      objectName: 'candidateSubmission',
+      context: {
+        viewName: 'allSubmissions',
+        name: i18nLabel(
+          msg({ message: `All Applications`, context: 'view.name' }),
+        ),
+        type: ViewType.TABLE,
+        key: null,
+        position: 1,
+        icon: 'IconTable',
       },
     }),
     candidateSubmissionRecordPageFields: createStandardViewFlatMetadata({

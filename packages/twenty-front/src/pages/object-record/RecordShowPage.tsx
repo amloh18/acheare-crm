@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { FeatureFlagKey } from 'twenty-shared/types';
+import { Navigate, useParams } from 'react-router-dom';
+import { AppPath, CoreObjectNameSingular, FeatureFlagKey } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 
 import { WorkspaceRouteUnavailable } from '@/app/routing/components/WorkspaceRouteUnavailable';
@@ -154,6 +154,19 @@ export const RecordShowPage = () => {
     })
   ) {
     return <WorkspaceRouteUnavailable />;
+  }
+
+  if (
+    !isInSidePanel &&
+    parameters.objectNameSingular === CoreObjectNameSingular.Dashboard &&
+    isDefined(parameters.objectRecordId)
+  ) {
+    return (
+      <Navigate
+        to={`${AppPath.Dashboard}?viewId=${parameters.objectRecordId}`}
+        replace
+      />
+    );
   }
 
   return <RecordShowPageContent parameters={parameters} />;

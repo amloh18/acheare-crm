@@ -21,7 +21,9 @@ export const StyledContainer = styled.div<{
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   padding: calc(${themeCssVariables.spacing[1]} - 1px);
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  position: relative;
   width: fit-content;
+  z-index: 10;
 
   &:hover {
     background-color: ${({ disabled }) =>

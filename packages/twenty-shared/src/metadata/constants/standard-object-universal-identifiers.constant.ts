@@ -65,6 +65,11 @@ export const STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS = {
   department: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
   team: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
   location: '5efc8bfe-d939-5eed-bfe0-fb9712387e26',
+  companyPersonRelationship: 'd4e5f6a7-0001-4000-8000-000000000001',
+  applicationStageHistory: 'd4e5f6a7-0002-4000-8000-000000000002',
+  placement: 'd4e5f6a7-0003-4000-8000-000000000003',
+  interviewParticipant: 'd4e5f6a7-0004-4000-8000-000000000004',
+  personExternalId: 'd4e5f6a7-0005-4000-8000-000000000005',
 } as const;
 
 export type StandardObjectWithUniversalIdentifierName =

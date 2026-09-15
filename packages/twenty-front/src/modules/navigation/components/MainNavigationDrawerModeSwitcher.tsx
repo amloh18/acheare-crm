@@ -56,8 +56,12 @@ const StyledMode = styled.button<{ isActive: boolean; isExpanded: boolean }>`
   height: ${themeCssVariables.spacing[7]};
   justify-content: ${({ isExpanded }) =>
     isExpanded ? 'flex-start' : 'center'};
+  /* Left padding matches NavigationDrawerItem (spacing[1]) so the mode icon
+     shares the same vertical axis as the section item icons below it. */
   padding: ${({ isExpanded }) =>
-    isExpanded ? `0 ${themeCssVariables.spacing['1.5']}` : '0'};
+    isExpanded
+      ? `0 ${themeCssVariables.spacing['1.5']} 0 ${themeCssVariables.spacing[1]}`
+      : '0'};
   transition:
     background calc(${themeCssVariables.animation.duration.fast} * 1s) ease,
     color calc(${themeCssVariables.animation.duration.fast} * 1s) ease,

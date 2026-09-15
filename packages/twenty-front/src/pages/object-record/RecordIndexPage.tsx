@@ -13,8 +13,8 @@ import { useAtomFamilyStateValue } from '@/ui/utilities/state/jotai/hooks/useAto
 import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
 import { isUndefined } from '@sniptt/guards';
 import { lazy, Suspense } from 'react';
-import { useParams } from 'react-router-dom';
-import { FeatureFlagKey } from 'twenty-shared/types';
+import { Navigate, useParams } from 'react-router-dom';
+import { AppPath, CoreObjectNameSingular, FeatureFlagKey } from 'twenty-shared/types';
 
 const WorkflowCoreIndexPage = lazy(() =>
   import('~/pages/object-core/WorkflowCoreIndexPage').then((module) => ({
@@ -43,6 +43,10 @@ export const RecordIndexPage = () => {
   const routeObjectMetadataItem = objectMetadataItems.find(
     (objectMetadataItem) => objectMetadataItem.namePlural === objectNamePlural,
   );
+
+  if (routeObjectMetadataItem?.nameSingular === CoreObjectNameSingular.Dashboard) {
+    return <Navigate to={AppPath.Dashboard} replace />;
+  }
 
   if (
     workspaceSurface.type === 'side-panel' &&

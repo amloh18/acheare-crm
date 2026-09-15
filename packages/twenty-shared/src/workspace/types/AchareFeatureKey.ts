@@ -20,6 +20,7 @@ export enum AchareFeatureKey {
   CANDIDATES = 'CANDIDATES',
   SUBMISSIONS = 'SUBMISSIONS',
   INTERVIEWS = 'INTERVIEWS',
+  PLACEMENTS = 'PLACEMENTS',
 
   // ── Team ──────────────────────────────────────────────────────────
   EMPLOYEES = 'EMPLOYEES',

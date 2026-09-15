@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
-import { IconChevronRight, IconUserPlus } from 'twenty-ui/icon';
+import { IconChevronRight, IconUserPlus, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -43,6 +43,24 @@ const StyledViewAll = styled.button`
   }
 `;
 
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
+`;
+
 const StyledStages = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -80,6 +98,8 @@ interface PipelineStageData {
 
 interface RecruitmentPipelineWidgetProps {
   stages?: PipelineStageData[];
+  loading?: boolean;
+  error?: boolean;
 }
 
 const DEFAULT_STAGES: PipelineStageData[] = [
@@ -92,6 +112,8 @@ const DEFAULT_STAGES: PipelineStageData[] = [
 
 export const RecruitmentPipelineWidget = ({
   stages = DEFAULT_STAGES,
+  loading,
+  error,
 }: RecruitmentPipelineWidgetProps) => {
   const navigate = useNavigate();
 
@@ -108,14 +130,30 @@ export const RecruitmentPipelineWidget = ({
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledStages>
-        {stages.map((st) => (
-          <StyledStageItem key={st.stage} color={st.color}>
-            <StyledStageLabel>{st.stage}</StyledStageLabel>
-            <StyledStageCount>{st.count}</StyledStageCount>
-          </StyledStageItem>
-        ))}
-      </StyledStages>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading pipeline...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load pipeline</StyledEmptyText>
+        </StyledEmptyState>
+      ) : stages.length === 0 ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>No candidates in pipeline</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <StyledStages>
+          {stages.map((st) => (
+            <StyledStageItem key={st.stage} color={st.color}>
+              <StyledStageLabel>{st.stage}</StyledStageLabel>
+              <StyledStageCount>{st.count}</StyledStageCount>
+            </StyledStageItem>
+          ))}
+        </StyledStages>
+      )}
     </StyledCard>
   );
 };

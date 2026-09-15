@@ -69,7 +69,7 @@ const ALL_ACTIONS: ActionItem[] = [
   { label: 'Add Candidate', path: '/objects/candidates', Icon: IconUserPlus, roles: ['admin', 'recruiter'] },
   { label: 'New Deal', path: '/objects/opportunities', Icon: IconTargetArrow, roles: ['admin', 'bde'] },
   { label: 'Add Employee', path: '/objects/employees', Icon: IconUsers, roles: ['admin', 'hr'] },
-  { label: 'Request Leave', path: '/objects/leaveRequests', Icon: IconCalendar, roles: ['admin', 'hr', 'employee'] },
+  { label: 'Request Leave', path: '/attendance-leave', Icon: IconCalendar, roles: ['admin', 'hr', 'employee'] },
   { label: 'Process Payroll', path: '/objects/payrollPeriods', Icon: IconCreditCard, roles: ['admin', 'hr'] },
 ];
 

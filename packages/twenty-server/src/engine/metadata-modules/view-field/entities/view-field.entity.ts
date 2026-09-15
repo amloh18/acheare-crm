@@ -24,6 +24,7 @@ import { OverridableEntity } from 'src/engine/workspace-manager/types/overridabl
 
 export type ViewFieldOverrides = {
   isVisible?: boolean;
+  isCalendarImportant?: boolean;
   size?: number;
   position?: number;
   aggregateOperation?: AggregateOperations | null;
@@ -61,6 +62,9 @@ export class ViewFieldEntity
 
   @Column({ nullable: false, default: true })
   isVisible: boolean;
+
+  @Column({ nullable: false, default: false })
+  isCalendarImportant: boolean;
 
   @Column({ nullable: false, type: 'int', default: 0 })
   size: number;

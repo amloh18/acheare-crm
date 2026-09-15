@@ -173,6 +173,7 @@ export const ObjectSortDropdownButton = () => {
     <Dropdown
       dropdownId={OBJECT_SORT_DROPDOWN_ID}
       dropdownOffset={{ y: 8 }}
+      dropdownPlacement="bottom-end"
       onOpen={handleDropdownOpen}
       clickableComponent={
         <StyledHeaderDropdownButton isUnfolded={isDropdownOpen}>

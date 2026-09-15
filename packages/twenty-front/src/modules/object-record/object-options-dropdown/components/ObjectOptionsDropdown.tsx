@@ -45,6 +45,7 @@ export const ObjectOptionsDropdown = ({
       <Dropdown
         dropdownId={OBJECT_OPTIONS_DROPDOWN_ID}
         dropdownOffset={{ y: DROPDOWN_OFFSET_Y }}
+        dropdownPlacement="bottom-end"
         clickableComponent={
           <StyledHeaderDropdownButton isUnfolded={isDropdownOpen}>
             <Trans>Options</Trans>

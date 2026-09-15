@@ -14,29 +14,33 @@ export const computeStandardInterviewViews = (
   args: Omit<CreateStandardViewArgs<'interview'>, 'context'>,
 ): Record<string, FlatView> => {
   return {
-    allInterviews: createStandardViewFlatMetadata({
-      ...args,
-      objectName: 'interview',
-      context: {
-        viewName: 'allInterviews',
-        name: INDEX_VIEW_NAME,
-        type: ViewType.TABLE,
-        key: ViewKey.INDEX,
-        position: 0,
-        icon: 'IconTable',
-        calendarFieldName: 'scheduledAt',
-      },
-    }),
     byScheduledAt: createStandardViewFlatMetadata({
       ...args,
       objectName: 'interview',
       context: {
         viewName: 'byScheduledAt',
-        name: i18nLabel(msg({ message: `Calendar`, context: 'view.name' })),
+        name: i18nLabel(
+          msg({ message: `Interview Calendar`, context: 'view.name' }),
+        ),
         type: ViewType.CALENDAR,
+        key: ViewKey.INDEX,
+        position: 0,
+        icon: 'IconCalendar',
+        calendarFieldName: 'scheduledAt',
+      },
+    }),
+    allInterviews: createStandardViewFlatMetadata({
+      ...args,
+      objectName: 'interview',
+      context: {
+        viewName: 'allInterviews',
+        name: i18nLabel(
+          msg({ message: `All Interviews`, context: 'view.name' }),
+        ),
+        type: ViewType.TABLE,
         key: null,
         position: 1,
-        icon: 'IconCalendar',
+        icon: 'IconTable',
         calendarFieldName: 'scheduledAt',
       },
     }),

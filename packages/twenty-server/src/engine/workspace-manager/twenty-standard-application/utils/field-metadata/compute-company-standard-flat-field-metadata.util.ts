@@ -688,6 +688,39 @@ export const buildCompanyStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  companyPersonRelationships: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'companyPersonRelationships',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({
+          message: `Company relationships`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `People linked to this company`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconAffiliate',
+      isNullable: true,
+      targetObjectName: 'companyPersonRelationship',
+      targetFieldName: 'company',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   timelineActivities: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

@@ -14,29 +14,29 @@ export const computeStandardTaskViews = (
   args: Omit<CreateStandardViewArgs<'task'>, 'context'>,
 ): Record<string, FlatView> => {
   return {
-    allTasks: createStandardViewFlatMetadata({
-      ...args,
-      objectName: 'task',
-      context: {
-        viewName: 'allTasks',
-        name: INDEX_VIEW_NAME,
-        type: ViewType.TABLE,
-        key: ViewKey.INDEX,
-        position: 0,
-        icon: 'IconTable',
-      },
-    }),
     byStatus: createStandardViewFlatMetadata({
       ...args,
       objectName: 'task',
       context: {
         viewName: 'byStatus',
-        name: i18nLabel(msg({ message: `By Status`, context: 'view.name' })),
+        name: i18nLabel(msg({ message: `My Tasks`, context: 'view.name' })),
         type: ViewType.KANBAN,
-        key: null,
-        position: 1,
+        key: ViewKey.INDEX,
+        position: 0,
         icon: 'IconLayoutKanban',
         mainGroupByFieldName: 'status',
+      },
+    }),
+    allTasks: createStandardViewFlatMetadata({
+      ...args,
+      objectName: 'task',
+      context: {
+        viewName: 'allTasks',
+        name: i18nLabel(msg({ message: `All Tasks`, context: 'view.name' })),
+        type: ViewType.TABLE,
+        key: null,
+        position: 1,
+        icon: 'IconTable',
       },
     }),
     assignedToMe: createStandardViewFlatMetadata({

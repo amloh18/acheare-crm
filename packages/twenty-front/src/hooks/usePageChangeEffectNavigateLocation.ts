@@ -205,16 +205,12 @@ export const usePageChangeEffectNavigateLocation = () => {
     }
   }
 
-  const achareOnboardingPaths = Object.values(ACHARE_ONBOARDING_STEP_APP_PATH);
-  const isAchareOnboardingPath = someMatchingLocationOf(achareOnboardingPaths);
-
   if (
     onboardingStatus === OnboardingStatus.COMPLETED &&
     someMatchingLocationOf([
       ...ONBOARDING_PATHS,
       ...ONGOING_USER_CREATION_PATHS,
     ]) &&
-    !isAchareOnboardingPath &&
     !isMatchingLocation(location, AppPath.ResetPassword) &&
     isLogged &&
     isOnAWorkspace
@@ -222,6 +218,16 @@ export const usePageChangeEffectNavigateLocation = () => {
     if (
       isMatchingLocation(location, AppPath.PlanRequiredSuccess) &&
       isOnboardingCheckoutPending
+    ) {
+      return;
+    }
+
+    const isDemoOnboarding =
+      location.search.includes('demo=true') ||
+      location.search.includes('mode=demo');
+    if (
+      isDemoOnboarding &&
+      isMatchingLocation(location, AppPath.AchareWelcome)
     ) {
       return;
     }

@@ -95,6 +95,7 @@ export class TwentyStandardApplicationService {
       );
 
     if (validateAndBuildResult.status === 'fail') {
+      console.error('FAILED WORKSPACE MIGRATION REPORT:', JSON.stringify(validateAndBuildResult.report, null, 2));
       throw new WorkspaceMigrationBuilderException(
         validateAndBuildResult,
         'Multiple validation errors occurred while synchronizing twenty-standard application',

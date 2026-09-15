@@ -53,6 +53,25 @@ const ACHARE_STD_UUIDS = {
   intCalendarVfCandidate: 'd3ad1ccb-236a-46aa-862e-e0f6b5df7ac4',
   intCalendarVfScheduledAt: 'f8bb1ac1-4e26-4c4d-84da-0d8c99c9d70c',
   intCalendarVfMode: '82a5a0a9-f79b-4a52-a095-813a5706a372',
+  cprCompanyIdIndex: 'f4a5b6c7-0101-4000-8000-000000000101',
+  cprPersonIdIndex: 'f4a5b6c7-0102-4000-8000-000000000102',
+  cprRelationshipOwnerIdIndex: 'f4a5b6c7-0103-4000-8000-000000000103',
+  cprStatusIndex: 'f4a5b6c7-0104-4000-8000-000000000104',
+  cprSearchVectorGinIndex: 'f4a5b6c7-0105-4000-8000-000000000105',
+  ashSubmissionIdIndex: 'f4a5b6c7-0301-4000-8000-000000000301',
+  ashChangedByIdIndex: 'f4a5b6c7-0302-4000-8000-000000000302',
+  ashToStageIndex: 'f4a5b6c7-0303-4000-8000-000000000303',
+  ashSearchVectorGinIndex: 'f4a5b6c7-0304-4000-8000-000000000304',
+  plcSubmissionIdIndex: 'f4a5b6c7-0501-4000-8000-000000000501',
+  plcCandidateIdIndex: 'f4a5b6c7-0502-4000-8000-000000000502',
+  plcStatusIndex: 'f4a5b6c7-0503-4000-8000-000000000503',
+  plcSearchVectorGinIndex: 'f4a5b6c7-0504-4000-8000-000000000504',
+  ivpInterviewIdIndex: 'f4a5b6c7-0601-4000-8000-000000000601',
+  ivpPersonIdIndex: 'f4a5b6c7-0602-4000-8000-000000000602',
+  ivpSearchVectorGinIndex: 'f4a5b6c7-0603-4000-8000-000000000603',
+  pexPersonIdIndex: 'f4a5b6c7-0701-4000-8000-000000000701',
+  pexSourceIndex: 'f4a5b6c7-0702-4000-8000-000000000702',
+  pexSearchVectorGinIndex: 'f4a5b6c7-0703-4000-8000-000000000703',
 } as const;
 
 // Important notice:
@@ -409,6 +428,7 @@ export const STANDARD_OBJECTS = {
           'updatedAt',
           'updatedBy',
           'people',
+          'companyPersonRelationships',
           'taskTargets',
           'noteTargets',
           'opportunities',
@@ -990,6 +1010,9 @@ export const STANDARD_OBJECTS = {
           'updatedBy',
           'avatarFile',
           'pointOfContactForOpportunities',
+          'companyPersonRelationships',
+          'interviewParticipants',
+          'externalIds',
           'taskTargets',
           'noteTargets',
           'attachments',
@@ -1650,6 +1673,7 @@ export const STANDARD_OBJECTS = {
           'timelineActivities',
           'candidateSubmissions',
           'interviews',
+          'placements',
         ],
         viewFieldGroupNames: {
           candidate: 'Candidate',
@@ -1791,6 +1815,8 @@ export const STANDARD_OBJECTS = {
             'attachments',
             'timelineActivities',
             'interviews',
+            'applicationStageHistories',
+            'placements',
           ],
           viewFieldGroupNames: {
             submission: 'Submission',
@@ -1879,6 +1905,7 @@ export const STANDARD_OBJECTS = {
           'status',
           'result',
           'feedback',
+          'interviewParticipants',
           'createdAt',
           'createdBy',
           'updatedAt',
@@ -1995,6 +2022,287 @@ export const STANDARD_OBJECTS = {
           system: 'System',
         },
       }),
+    },
+  },
+  placement: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+    fields: STANDARD_OBJECT_FIELDS.placement,
+    indexes: {
+      submissionIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.plcSubmissionIdIndex,
+      },
+      candidateIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.plcCandidateIdIndex,
+      },
+      statusIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.plcStatusIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.plcSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allPlacements: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+        fields: STANDARD_OBJECT_FIELDS.placement,
+        viewFieldNames: [
+          'candidate',
+          'submission',
+          'placementDate',
+          'joiningDate',
+          'placementFee',
+          'feeStatus',
+          'status',
+          'createdAt',
+        ],
+      }),
+      placementRecordPageFields: buildStandardObjectRecordPageFieldsView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+        fields: STANDARD_OBJECT_FIELDS.placement,
+        viewFieldNames: [
+          'candidate',
+          'submission',
+          'placementDate',
+          'joiningDate',
+          'replacementDueDate',
+          'placementFee',
+          'salary',
+          'feeStatus',
+          'status',
+          'notes',
+          'createdAt',
+          'createdBy',
+          'updatedAt',
+          'updatedBy',
+        ],
+        viewFieldGroupNames: {
+          placement: 'Placement',
+          commercial: 'Commercial',
+          system: 'System',
+        },
+      }),
+    },
+  },
+  interviewParticipant: {
+    universalIdentifier:
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+    fields: STANDARD_OBJECT_FIELDS.interviewParticipant,
+    indexes: {
+      interviewIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ivpInterviewIdIndex,
+      },
+      personIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ivpPersonIdIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ivpSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allInterviewParticipants: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+        fields: STANDARD_OBJECT_FIELDS.interviewParticipant,
+        viewFieldNames: [
+          'person',
+          'interview',
+          'role',
+          'response',
+          'createdAt',
+        ],
+      }),
+      interviewParticipantRecordPageFields:
+        buildStandardObjectRecordPageFieldsView({
+          objectUniversalIdentifier:
+            STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+          fields: STANDARD_OBJECT_FIELDS.interviewParticipant,
+          viewFieldNames: [
+            'person',
+            'interview',
+            'role',
+            'response',
+            'feedback',
+            'createdAt',
+            'createdBy',
+            'updatedAt',
+            'updatedBy',
+          ],
+          viewFieldGroupNames: {
+            participant: 'Participant',
+            system: 'System',
+          },
+        }),
+    },
+  },
+  personExternalId: {
+    universalIdentifier: STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+    fields: STANDARD_OBJECT_FIELDS.personExternalId,
+    indexes: {
+      personIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.pexPersonIdIndex,
+      },
+      sourceIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.pexSourceIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.pexSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allPersonExternalIds: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+        fields: STANDARD_OBJECT_FIELDS.personExternalId,
+        viewFieldNames: [
+          'person',
+          'source',
+          'externalId',
+          'externalUrl',
+          'syncedAt',
+        ],
+      }),
+      personExternalIdRecordPageFields:
+        buildStandardObjectRecordPageFieldsView({
+          objectUniversalIdentifier:
+            STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+          fields: STANDARD_OBJECT_FIELDS.personExternalId,
+          viewFieldNames: [
+            'person',
+            'source',
+            'externalId',
+            'externalUrl',
+            'syncedAt',
+            'createdAt',
+            'createdBy',
+            'updatedAt',
+            'updatedBy',
+          ],
+          viewFieldGroupNames: {
+            external: 'External',
+            system: 'System',
+          },
+        }),
+    },
+  },
+  applicationStageHistory: {
+    universalIdentifier:
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+    fields: STANDARD_OBJECT_FIELDS.applicationStageHistory,
+    indexes: {
+      submissionIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ashSubmissionIdIndex,
+      },
+      changedByIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ashChangedByIdIndex,
+      },
+      toStageIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ashToStageIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.ashSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allApplicationStageHistories: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+        fields: STANDARD_OBJECT_FIELDS.applicationStageHistory,
+        viewFieldNames: [
+          'submission',
+          'fromStage',
+          'toStage',
+          'changedBy',
+          'changedAt',
+          'reason',
+        ],
+      }),
+      applicationStageHistoryRecordPageFields:
+        buildStandardObjectRecordPageFieldsView({
+          objectUniversalIdentifier:
+            STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+          fields: STANDARD_OBJECT_FIELDS.applicationStageHistory,
+          viewFieldNames: [
+            'submission',
+            'fromStage',
+            'toStage',
+            'changedBy',
+            'changedAt',
+            'reason',
+            'createdAt',
+            'createdBy',
+            'updatedAt',
+            'updatedBy',
+          ],
+          viewFieldGroupNames: {
+            overview: 'Overview',
+            system: 'System',
+          },
+        }),
+    },
+  },
+  companyPersonRelationship: {
+    universalIdentifier:
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+    fields: STANDARD_OBJECT_FIELDS.companyPersonRelationship,
+    indexes: {
+      companyIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.cprCompanyIdIndex,
+      },
+      personIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.cprPersonIdIndex,
+      },
+      relationshipOwnerIdIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.cprRelationshipOwnerIdIndex,
+      },
+      statusIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.cprStatusIndex,
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: ACHARE_STD_UUIDS.cprSearchVectorGinIndex,
+      },
+    },
+    views: {
+      allCompanyPersonRelationships: buildStandardObjectIndexView({
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+        fields: STANDARD_OBJECT_FIELDS.companyPersonRelationship,
+        viewFieldNames: [
+          'person',
+          'company',
+          'jobTitle',
+          'relationshipType',
+          'isPrimary',
+          'relationshipOwner',
+          'status',
+          'createdAt',
+        ],
+      }),
+      companyPersonRelationshipRecordPageFields:
+        buildStandardObjectRecordPageFieldsView({
+          objectUniversalIdentifier:
+            STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+          fields: STANDARD_OBJECT_FIELDS.companyPersonRelationship,
+          viewFieldNames: [
+            'person',
+            'company',
+            'jobTitle',
+            'department',
+            'relationshipType',
+            'isPrimary',
+            'relationshipOwner',
+            'status',
+            'createdAt',
+            'createdBy',
+            'updatedAt',
+            'updatedBy',
+          ],
+          viewFieldGroupNames: {
+            overview: 'Overview',
+            system: 'System',
+          },
+        }),
     },
   },
   team: {

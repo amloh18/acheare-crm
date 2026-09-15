@@ -1,0 +1,42 @@
+# ==============================================================================
+# Achare — single-domain ingress
+# ==============================================================================
+#
+# One domain, everything on one origin. The server container serves both the
+# API and the SPA build (baked in at packages/twenty-server/dist/front), so
+# there are no cross-origin requests and no second DNS record to configure.
+#
+# /healthz is public so external uptime monitors can watch the process.
+#
+# /readyz is deliberately denied (404): its body names dependencies and
+# migration counts, which is useful inside the compose network and to
+# `achare doctor`, and not useful to the public internet. Caddy orders `handle`
+# blocks by path specificity, so this block wins over the catch-all below.
+
+{
+	# Let's Encrypt account email. Only used for expiry warnings.
+	email {$ACHARE_ACME_EMAIL:noreply@example.com}
+}
+
+{$ACHARE_DOMAIN} {
+	encode zstd gzip
+
+	handle /healthz {
+		reverse_proxy server:3000
+	}
+
+	handle /readyz {
+		respond 404
+	}
+
+	handle {
+		reverse_proxy server:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}

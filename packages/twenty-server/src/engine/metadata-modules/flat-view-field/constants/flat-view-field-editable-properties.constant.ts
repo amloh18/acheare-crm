@@ -2,6 +2,7 @@ import { type MetadataEntityPropertyName } from 'src/engine/metadata-modules/fla
 
 export const FLAT_VIEW_FIELD_EDITABLE_PROPERTIES = [
   'isVisible',
+  'isCalendarImportant',
   'size',
   'position',
   'aggregateOperation',

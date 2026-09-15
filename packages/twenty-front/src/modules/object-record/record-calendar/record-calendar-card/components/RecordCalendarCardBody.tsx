@@ -5,7 +5,7 @@ import { useRecordCalendarContextOrThrow } from '@/object-record/record-calendar
 import { recordCalendarCardHoverPositionComponentState } from '@/object-record/record-calendar/record-calendar-card/states/recordCalendarCardHoverPositionComponentState';
 import { getRecordCalendarCardInstanceIdPrefix } from '@/object-record/record-calendar/record-calendar-card/utils/getRecordCalendarCardInstanceIdPrefix';
 import { RecordCardBodyContainer } from '@/object-record/record-card/components/RecordCardBodyContainer';
-import { visibleRecordFieldsComponentSelector } from '@/object-record/record-field/states/visibleRecordFieldsComponentSelector';
+import { calendarImportantRecordFieldsComponentSelector } from '@/object-record/record-field/states/calendarImportantRecordFieldsComponentSelector';
 import {
   FieldContext,
   type RecordUpdateHook,
@@ -58,14 +58,15 @@ export const RecordCalendarCardBody = ({
     objectPermissionsByObjectMetadataId,
   } = useRecordIndexContextOrThrow();
 
-  const visibleRecordFields = useAtomComponentSelectorValue(
-    visibleRecordFieldsComponentSelector,
+  const calendarImportantFields = useAtomComponentSelectorValue(
+    calendarImportantRecordFieldsComponentSelector,
   );
 
-  const visibleRecordFieldsExceptLabelIdentifier = visibleRecordFields.filter(
-    (recordField) =>
-      recordField.fieldMetadataItemId !== labelIdentifierFieldMetadataItem?.id,
-  );
+  const calendarImportantFieldsExceptLabelIdentifier =
+    calendarImportantFields.filter(
+      (recordField) =>
+        recordField.fieldMetadataItemId !== labelIdentifierFieldMetadataItem?.id,
+    );
 
   const setRecordCalendarCardHoverPosition = useSetAtomComponentState(
     recordCalendarCardHoverPositionComponentState,
@@ -79,7 +80,7 @@ export const RecordCalendarCardBody = ({
     <RecordCardBodyContainer
       padding={`0 ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[1]}`}
     >
-      {visibleRecordFieldsExceptLabelIdentifier.map((recordField, index) => {
+      {calendarImportantFieldsExceptLabelIdentifier.map((recordField, index) => {
         const correspondingFieldDefinition =
           fieldDefinitionByFieldMetadataItemId[recordField.fieldMetadataItemId];
         const fieldMetadataItem =

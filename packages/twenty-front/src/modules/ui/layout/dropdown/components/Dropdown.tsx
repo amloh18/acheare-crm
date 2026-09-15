@@ -21,11 +21,12 @@ import {
   autoUpdate,
   flip,
   offset,
+  shift,
   size,
   useFloating,
 } from '@floating-ui/react';
 import { styled } from '@linaria/react';
-import { type MouseEvent, type ReactNode, useCallback } from 'react';
+import { type MouseEvent, type ReactNode, useCallback, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { type Keys } from 'react-hotkeys-hook';
 import { isDefined } from 'twenty-shared/utils';
@@ -133,9 +134,20 @@ export const Dropdown = ({
     : (middlewareBoundaryPadding.bottomDesktop ??
       DROPDOWN_BOUNDARY_BOTTOM_PADDING_DESKTOP);
 
+  const [boundaryElement, setBoundaryElement] = useState<
+    HTMLElement | undefined
+  >(undefined);
+
   const boundaryOptions = {
-    boundary: document.querySelector('#root') ?? undefined,
+    boundary:
+      boundaryElement ??
+      (typeof document !== 'undefined'
+        ? (document.querySelector<HTMLElement>('[data-page-card="true"]') ??
+          document.querySelector<HTMLElement>('#root') ??
+          undefined)
+        : undefined),
     padding: {
+      top: 8,
       right:
         middlewareBoundaryPadding.right ?? DROPDOWN_BOUNDARY_HORIZONTAL_PADDING,
       left:
@@ -149,15 +161,18 @@ export const Dropdown = ({
     middleware: [
       ...offsetMiddleware,
       flip({
+        flipAlignment: false,
+        fallbackStrategy: 'initialPlacement',
+        crossAxis: false,
+        ...boundaryOptions,
+      }),
+      shift({
         ...boundaryOptions,
       }),
       size({
         apply: ({ availableHeight, availableWidth, y: floatingY }) => {
           flushSync(() => {
-            const maxHeightToApply =
-              availableHeight < DROPDOWN_RESIZE_MIN_HEIGHT
-                ? DROPDOWN_RESIZE_MIN_HEIGHT
-                : availableHeight;
+            const maxHeightToApply = Math.max(0, availableHeight);
 
             const maxWidthToApply =
               availableWidth < DROPDOWN_RESIZE_MIN_WIDTH
@@ -175,6 +190,28 @@ export const Dropdown = ({
     whileElementsMounted: autoUpdate,
     strategy: dropdownStrategy,
   });
+
+  const setReference = useCallback(
+    (node: HTMLElement | null) => {
+      refs.setReference(node);
+      if (node) {
+        const card = node.closest<HTMLElement>(
+          '[data-page-card="true"], [data-page-surface="main"], [data-page-surface="side-panel"]',
+        );
+        if (card) {
+          setBoundaryElement(card);
+          return;
+        }
+      }
+      setBoundaryElement(
+        (typeof document !== 'undefined'
+          ? (document.querySelector<HTMLElement>('[data-page-card="true"]') ??
+            document.querySelector<HTMLElement>('#root'))
+          : null) ?? undefined,
+      );
+    },
+    [refs],
+  );
 
   const handleClickableComponentClick = useCallback(
     async (event: MouseEvent) => {
@@ -201,7 +238,7 @@ export const Dropdown = ({
     >
       {isDefined(clickableComponent) ? (
         <StyledClickableComponent
-          ref={refs.setReference}
+          ref={setReference}
           onClick={handleClickableComponentClick}
           aria-controls={`${scopedDropdownId}-options`}
           aria-expanded={isDropdownOpen}
@@ -212,7 +249,7 @@ export const Dropdown = ({
           {clickableComponent}
         </StyledClickableComponent>
       ) : (
-        <StyledDropdownFallbackAnchor ref={refs.setReference} />
+        <StyledDropdownFallbackAnchor ref={setReference} />
       )}
       {isDropdownOpen && (
         <DropdownInternalContainer

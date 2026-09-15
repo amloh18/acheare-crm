@@ -38,6 +38,7 @@ export const ACHARE_MODULES: Record<AchareModuleKey, AchareModuleDefinition> = {
       AchareFeatureKey.CANDIDATES,
       AchareFeatureKey.SUBMISSIONS,
       AchareFeatureKey.INTERVIEWS,
+      AchareFeatureKey.PLACEMENTS,
     ],
     hasOnboardingStep: true,
     recommendedRoles: ['Recruiter'],

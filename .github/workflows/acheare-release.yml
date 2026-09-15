@@ -1,0 +1,169 @@
+# =============================================================================
+# Achare — Release & Image Build
+# =============================================================================
+#
+# Builds the Achare server and landing images, pushes them to GitHub Container
+# Registry (GHCR) with semantic version tags and commit SHA tags.
+#
+# Trigger:
+#   - Push a tag matching v*.*.* (e.g., v0.1.0)
+#   - Manual dispatch with a version input
+#
+# Images produced:
+#   ghcr.io/amloh18/achare-server:<version>
+#   ghcr.io/amloh18/achare-server:sha-<short-sha>
+#   ghcr.io/amloh18/achare-landing:<version>
+#   ghcr.io/amloh18/achare-landing:sha-<short-sha>
+
+name: Achare Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g., 0.1.0). If empty, reads from VERSION file."
+        required: false
+        type: string
+
+env:
+  REGISTRY: ghcr.io
+  SERVER_IMAGE: ghcr.io/amloh18/achare-server
+  LANDING_IMAGE: ghcr.io/amloh18/achare-landing
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Resolve the version string
+  # ---------------------------------------------------------------------------
+  resolve-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      sha: ${{ steps.version.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION="${{ inputs.version }}"
+          elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          else
+            VERSION="$(cat VERSION | tr -d '[:space:]')"
+          fi
+          SHORT_SHA="$(git rev-parse --short HEAD)"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "sha=${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "Building version: ${VERSION} (sha: ${SHORT_SHA})"
+
+  # ---------------------------------------------------------------------------
+  # Build & push the server image (combined server + frontend)
+  # ---------------------------------------------------------------------------
+  build-server:
+    needs: resolve-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push server image
+        uses: docker/build-push-action@v6
+        with:
+          context: twenty-upstream/
+          file: twenty-upstream/deploy/docker/server.Dockerfile
+          target: achare-server
+          push: true
+          tags: |
+            ${{ env.SERVER_IMAGE }}:${{ needs.resolve-version.outputs.version }}
+            ${{ env.SERVER_IMAGE }}:sha-${{ needs.resolve-version.outputs.sha }}
+          build-args: |
+            ACHARE_VERSION=${{ needs.resolve-version.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ---------------------------------------------------------------------------
+  # Build & push the landing page image
+  # ---------------------------------------------------------------------------
+  build-landing:
+    needs: resolve-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push landing image
+        uses: docker/build-push-action@v6
+        with:
+          context: twenty-upstream/
+          file: twenty-upstream/deploy/docker/landing.Dockerfile
+          push: true
+          tags: |
+            ${{ env.LANDING_IMAGE }}:${{ needs.resolve-version.outputs.version }}
+            ${{ env.LANDING_IMAGE }}:sha-${{ needs.resolve-version.outputs.sha }}
+          build-args: |
+            ACHARE_VERSION=${{ needs.resolve-version.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ---------------------------------------------------------------------------
+  # Update the VERSION file on the repo
+  # ---------------------------------------------------------------------------
+  tag-release:
+    needs: [resolve-version, build-server, build-landing]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify VERSION matches tag
+        run: |
+          FILE_VERSION="$(cat VERSION | tr -d '[:space:]')"
+          TAG_VERSION="${{ needs.resolve-version.outputs.version }}"
+          if [ "$FILE_VERSION" != "$TAG_VERSION" ]; then
+            echo "::warning::VERSION file ($FILE_VERSION) does not match tag ($TAG_VERSION)"
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## Achare ${{ needs.resolve-version.outputs.version }}
+
+            ### Images
+            - `${{ env.SERVER_IMAGE }}:${{ needs.resolve-version.outputs.version }}`
+            - `${{ env.LANDING_IMAGE }}:${{ needs.resolve-version.outputs.version }}`
+
+            ### Upgrade
+            ```bash
+            cd twenty-upstream
+            # Update VERSION if needed
+            echo "${{ needs.resolve-version.outputs.version }}" > VERSION
+            deploy/scripts/achare update
+            ```

@@ -22,6 +22,11 @@ class UpdateViewFieldInputUpdates {
   isVisible?: boolean;
 
   @IsOptional()
+  @IsBoolean()
+  @Field({ nullable: true })
+  isCalendarImportant?: boolean;
+
+  @IsOptional()
   @IsNumber()
   @Field({ nullable: true })
   size?: number;

@@ -19,11 +19,14 @@ export const computeStandardLeaveRequestViews = (
       objectName: 'leaveRequest',
       context: {
         viewName: 'allLeaveRequests',
-        name: INDEX_VIEW_NAME,
-        type: ViewType.TABLE,
+        name: i18nLabel(
+          msg({ message: `Leave Calendar`, context: 'view.name' }),
+        ),
+        type: ViewType.CALENDAR,
         key: ViewKey.INDEX,
         position: 0,
-        icon: 'IconVacation',
+        icon: 'IconCalendar',
+        calendarFieldName: 'startDate',
       },
     }),
   leaveRequestRecordPageFields: createStandardViewFlatMetadata({

@@ -5,6 +5,8 @@ import {
   IconCalendarEvent,
   IconChevronRight,
   IconVideo,
+  IconDatabase,
+  IconAlertTriangle,
 } from 'twenty-ui/icon';
 
 const StyledCard = styled.div`
@@ -45,6 +47,24 @@ const StyledViewAll = styled.button`
   &:hover {
     color: ${themeCssVariables.font.color.primary};
   }
+`;
+
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
 `;
 
 const StyledList = styled.div`
@@ -133,7 +153,12 @@ const DEFAULT_INTERVIEWS: InterviewItem[] = [
   },
 ];
 
-export const UpcomingInterviewsWidget = () => {
+interface UpcomingInterviewsWidgetProps {
+  loading?: boolean;
+  error?: boolean;
+}
+
+export const UpcomingInterviewsWidget = ({ loading, error }: UpcomingInterviewsWidgetProps) => {
   const navigate = useNavigate();
 
   return (
@@ -149,20 +174,36 @@ export const UpcomingInterviewsWidget = () => {
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledList>
-        {DEFAULT_INTERVIEWS.map((interview) => (
-          <StyledItem key={interview.id}>
-            <StyledItemLeft>
-              <StyledCandidateName>{interview.candidateName}</StyledCandidateName>
-              <StyledJobTitle>{interview.jobTitle}</StyledJobTitle>
-            </StyledItemLeft>
-            <StyledItemRight>
-              <StyledTimeBadge>{interview.scheduledTime}</StyledTimeBadge>
-              <StyledRoundBadge>{interview.round}</StyledRoundBadge>
-            </StyledItemRight>
-          </StyledItem>
-        ))}
-      </StyledList>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading interviews...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load interviews</StyledEmptyText>
+        </StyledEmptyState>
+      ) : DEFAULT_INTERVIEWS.length === 0 ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>No upcoming interviews</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <StyledList>
+          {DEFAULT_INTERVIEWS.map((interview) => (
+            <StyledItem key={interview.id}>
+              <StyledItemLeft>
+                <StyledCandidateName>{interview.candidateName}</StyledCandidateName>
+                <StyledJobTitle>{interview.jobTitle}</StyledJobTitle>
+              </StyledItemLeft>
+              <StyledItemRight>
+                <StyledTimeBadge>{interview.scheduledTime}</StyledTimeBadge>
+                <StyledRoundBadge>{interview.round}</StyledRoundBadge>
+              </StyledItemRight>
+            </StyledItem>
+          ))}
+        </StyledList>
+      )}
     </StyledCard>
   );
 };

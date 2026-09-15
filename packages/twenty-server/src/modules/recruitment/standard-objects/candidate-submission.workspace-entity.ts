@@ -3,9 +3,11 @@ import { type CurrencyMetadata } from 'twenty-shared/types';
 import { BaseWorkspaceEntity } from 'src/engine/twenty-orm/base.workspace-entity';
 import { type EntityRelation } from 'src/engine/workspace-manager/workspace-migration/types/entity-relation.interface';
 import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
+import { type ApplicationStageHistoryWorkspaceEntity } from 'src/modules/recruitment/standard-objects/application-stage-history.workspace-entity';
 import { type CandidateWorkspaceEntity } from 'src/modules/recruitment/standard-objects/candidate.workspace-entity';
 import { type InterviewWorkspaceEntity } from 'src/modules/recruitment/standard-objects/interview.workspace-entity';
 import { type NoteTargetWorkspaceEntity } from 'src/modules/note/standard-objects/note-target.workspace-entity';
+import { type PlacementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/placement.workspace-entity';
 import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standard-objects/requirement.workspace-entity';
 import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { type TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
@@ -32,6 +34,10 @@ export class CandidateSubmissionWorkspaceEntity extends BaseWorkspaceEntity {
   hrOwnerId: string | null;
 
   interviews: EntityRelation<InterviewWorkspaceEntity[]>;
+  applicationStageHistories: EntityRelation<
+    ApplicationStageHistoryWorkspaceEntity[]
+  >;
+  placements: EntityRelation<PlacementWorkspaceEntity[]>;
   taskTargets: EntityRelation<TaskTargetWorkspaceEntity[]>;
   noteTargets: EntityRelation<NoteTargetWorkspaceEntity[]>;
   attachments: EntityRelation<AttachmentWorkspaceEntity[]>;

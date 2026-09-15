@@ -78,23 +78,30 @@ export class WorkspaceDomainsService {
       relations: ['workspaceSsoIdentityProviders'],
     });
 
-    if (workspaces.length > 1) {
-      Logger.warn(
-        `${workspaces.length} workspaces found in database. In single-workspace mode, there should be only one workspace. The Apple seed workspace will be used as fallback if present.`,
-      );
-    }
+    // In Acheare, prefer user-created agency workspaces over the seeded demo workspace.
+    const nonSeedWorkspace = workspaces.find(
+      (workspace) => workspace.id !== SEED_APPLE_WORKSPACE_ID,
+    );
 
-    const foundWorkspace =
-      workspaces.find(
-        (workspace) => workspace.id === SEED_APPLE_WORKSPACE_ID,
-      ) ?? workspaces[0];
+    const foundWorkspace = nonSeedWorkspace ?? workspaces[0];
 
     assertIsDefinedOrThrow(foundWorkspace, WorkspaceNotFoundDefaultError);
 
     return foundWorkspace;
   }
 
-  async getWorkspaceByOriginOrDefaultWorkspace(origin: string) {
+  async getWorkspaceByOriginOrDefaultWorkspace(origin: string, email?: string) {
+    if (email?.toLowerCase().endsWith('@apple.dev')) {
+      const appleWorkspace = await this.workspaceRepository.findOne({
+        where: { id: SEED_APPLE_WORKSPACE_ID },
+        relations: ['workspaceSsoIdentityProviders'],
+      });
+
+      if (appleWorkspace) {
+        return appleWorkspace;
+      }
+    }
+
     const { workspace } = await this.resolveWorkspaceAndPublicDomain(origin);
 
     return workspace;
@@ -285,5 +292,12 @@ export class WorkspaceDomainsService {
 
   async findByCustomDomain(customDomain: string) {
     return this.workspaceRepository.findOne({ where: { customDomain } });
+  }
+
+  async findWorkspaceById(id: string) {
+    return this.workspaceRepository.findOne({
+      where: { id },
+      relations: ['workspaceSsoIdentityProviders'],
+    });
   }
 }

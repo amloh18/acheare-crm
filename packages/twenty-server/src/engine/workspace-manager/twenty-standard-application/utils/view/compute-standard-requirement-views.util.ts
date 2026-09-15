@@ -19,7 +19,9 @@ export const computeStandardRequirementViews = (
       objectName: 'requirement',
       context: {
         viewName: 'allRequirements',
-        name: INDEX_VIEW_NAME,
+        name: i18nLabel(
+          msg({ message: `All Job Openings`, context: 'view.name' }),
+        ),
         type: ViewType.TABLE,
         key: ViewKey.INDEX,
         position: 0,
@@ -31,7 +33,9 @@ export const computeStandardRequirementViews = (
       objectName: 'requirement',
       context: {
         viewName: 'byStatus',
-        name: i18nLabel(msg({ message: `By Status`, context: 'view.name' })),
+        name: i18nLabel(
+          msg({ message: `Hiring Pipeline`, context: 'view.name' }),
+        ),
         type: ViewType.KANBAN,
         key: null,
         position: 1,

@@ -1,0 +1,37 @@
+# ==============================================================================
+# Achare — local profile (laptop, home lab, single box)
+# ==============================================================================
+#
+# Differences from production:
+#   * ports are published on the host so the app is reachable at
+#     http://localhost:3000
+#   * storage is bind-mounted so uploaded files are inspectable and easy to
+#     back up by hand
+#   * no reverse proxy and no TLS — nothing terminates HTTPS here
+#   * no memory limits
+#
+# Usage: deploy/scripts/achare start           (profile: local)
+
+services:
+  server:
+    ports:
+      - "${NODE_PORT:-3000}:${NODE_PORT:-3000}"
+    volumes:
+      - type: bind
+        source: ${ACHARE_STORAGE_PATH:-./.data/storage}
+        target: ${STORAGE_LOCAL_PATH:-/app/packages/twenty-server/.local-storage}
+
+  worker:
+    volumes:
+      - type: bind
+        source: ${ACHARE_STORAGE_PATH:-./.data/storage}
+        target: ${STORAGE_LOCAL_PATH:-/app/packages/twenty-server/.local-storage}
+
+  # Published so psql / redis-cli can be pointed at the stack while debugging.
+  db:
+    ports:
+      - "${PG_DATABASE_PORT:-5432}:5432"
+
+  redis:
+    ports:
+      - "${REDIS_PORT:-6379}:6379"

@@ -19,7 +19,9 @@ export const computeStandardOpportunityViews = (
       objectName: 'opportunity',
       context: {
         viewName: 'allOpportunities',
-        name: INDEX_VIEW_NAME,
+        name: i18nLabel(
+          msg({ message: `All Opportunities`, context: 'view.name' }),
+        ),
         type: ViewType.TABLE,
         key: ViewKey.INDEX,
         position: 0,
@@ -31,10 +33,12 @@ export const computeStandardOpportunityViews = (
       objectName: 'opportunity',
       context: {
         viewName: 'byStage',
-        name: i18nLabel(msg({ message: `By Stage`, context: 'view.name' })),
+        name: i18nLabel(
+          msg({ message: `Sales Pipeline`, context: 'view.name' }),
+        ),
         type: ViewType.KANBAN,
         key: null,
-        position: 2,
+        position: 1,
         icon: 'IconLayoutKanban',
         mainGroupByFieldName: 'stage',
         kanbanAggregateOperation: AggregateOperations.SUM,

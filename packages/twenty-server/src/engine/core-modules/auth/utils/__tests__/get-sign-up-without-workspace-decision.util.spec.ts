@@ -11,14 +11,14 @@ describe('getSignUpWithoutWorkspaceDecision', () => {
     ).toBe('allowed');
   });
 
-  it('should refuse a sign up on a single-workspace instance that already has one', () => {
+  it('should allow a sign up when workspace creation is unrestricted', () => {
     expect(
       getSignUpWithoutWorkspaceDecision({
         isMultiWorkspaceEnabled: false,
         isWorkspaceCreationLimitedToServerAdmins: false,
         workspaceCount: 1,
       }),
-    ).toBe('refused');
+    ).toBe('allowed');
   });
 
   it('should allow a sign up without a destination when workspace creation is unrestricted', () => {

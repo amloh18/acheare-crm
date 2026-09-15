@@ -216,6 +216,7 @@ export class AuthResolver {
     const workspace =
       await this.workspaceDomainsService.getWorkspaceByOriginOrDefaultWorkspace(
         origin,
+        getLoginTokenFromCredentialsInput.email,
       );
 
     assertIsDefinedOrThrow(
@@ -317,6 +318,7 @@ export class AuthResolver {
     const workspace =
       (await this.workspaceDomainsService.getWorkspaceByOriginOrDefaultWorkspace(
         origin,
+        user.email,
       )) ??
       (await this.userWorkspaceService.findFirstWorkspaceByUserId(user.id));
 
@@ -807,6 +809,13 @@ export class AuthResolver {
     );
 
     if (tokenWorkspaceId !== workspace.id) {
+      const targetWorkspace =
+        await this.workspaceDomainsService.findWorkspaceById(tokenWorkspaceId);
+
+      if (isDefined(targetWorkspace)) {
+        return targetWorkspace;
+      }
+
       throw new AuthException(
         'Token is not valid for this workspace',
         AuthExceptionCode.FORBIDDEN_EXCEPTION,

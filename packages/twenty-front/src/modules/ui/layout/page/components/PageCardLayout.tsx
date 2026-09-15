@@ -132,7 +132,7 @@ export const PageCardLayout = ({
 
   if (workspaceSurface.type === 'side-panel') {
     return (
-      <StyledSidePanelSurface data-page-surface="side-panel">
+      <StyledSidePanelSurface data-page-surface="side-panel" data-page-card="true">
         {header}
         <StyledPrintHidden>{secondaryBar}</StyledPrintHidden>
         {body}
@@ -143,7 +143,7 @@ export const PageCardLayout = ({
   return (
     <StyledRoot data-page-surface="main">
       <StyledMainCardWrapper>
-        <StyledCard>
+        <StyledCard data-page-card="true">
           {shouldShowInformationBanner && (
             <StyledPrintHidden>
               <InformationBannerWrapper />

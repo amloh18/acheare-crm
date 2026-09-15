@@ -18,13 +18,9 @@ export const getSignUpWithoutWorkspaceDecision = ({
     return 'allowed';
   }
 
-  if (!isMultiWorkspaceEnabled) {
-    return 'refused';
+  if (isWorkspaceCreationLimitedToServerAdmins) {
+    return 'requiresDestination';
   }
 
-  if (!isWorkspaceCreationLimitedToServerAdmins) {
-    return 'allowed';
-  }
-
-  return 'requiresDestination';
+  return 'allowed';
 };

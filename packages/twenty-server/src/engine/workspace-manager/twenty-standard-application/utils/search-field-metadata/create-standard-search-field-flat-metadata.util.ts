@@ -34,16 +34,26 @@ export const createStandardSearchFieldFlatMetadata = <
   dependencyFlatEntityMaps: { flatFieldMetadataMaps, flatObjectMetadataMaps },
   twentyStandardApplicationId,
   now,
-}: CreateStandardSearchFieldArgs<O>): FlatSearchFieldMetadata => {
-  const objectFields = STANDARD_OBJECTS[objectName].fields;
+}: CreateStandardSearchFieldArgs<O>): FlatSearchFieldMetadata | null => {
+  const objectFields = STANDARD_OBJECTS[objectName]?.fields;
 
   const objectMetadataId =
-    standardObjectMetadataRelatedEntityIds[objectName].id;
+    standardObjectMetadataRelatedEntityIds[objectName]?.id;
   const fieldMetadataId =
-    standardObjectMetadataRelatedEntityIds[objectName].fields[fieldName].id;
+    standardObjectMetadataRelatedEntityIds[objectName]?.fields?.[fieldName]?.id;
 
   const objectMetadataUniversalIdentifier =
-    STANDARD_OBJECTS[objectName].universalIdentifier;
+    STANDARD_OBJECTS[objectName]?.universalIdentifier;
+
+  if (
+    !objectFields ||
+    !objectMetadataId ||
+    !fieldMetadataId ||
+    !objectMetadataUniversalIdentifier
+  ) {
+    return null;
+  }
+
   const flatObjectMetadata =
     findFlatEntityByUniversalIdentifierOrThrow<UniversalFlatObjectMetadata>({
       universalIdentifier: objectMetadataUniversalIdentifier,
@@ -51,7 +61,11 @@ export const createStandardSearchFieldFlatMetadata = <
     });
 
   const fieldMetadataUniversalIdentifier =
-    objectFields[fieldName as keyof typeof objectFields].universalIdentifier;
+    (objectFields as any)[fieldName]?.universalIdentifier;
+  if (!fieldMetadataUniversalIdentifier) {
+    return null;
+  }
+
   const flatFieldMetadata =
     findFlatEntityByUniversalIdentifierOrThrow<UniversalFlatFieldMetadata>({
       universalIdentifier: fieldMetadataUniversalIdentifier,
@@ -59,12 +73,15 @@ export const createStandardSearchFieldFlatMetadata = <
     });
 
   const tsVectorFieldMetadataId =
-    standardObjectMetadataRelatedEntityIds[objectName].fields[
+    standardObjectMetadataRelatedEntityIds[objectName]?.fields?.[
       SEARCH_VECTOR_FIELD.name as AllStandardObjectFieldName<O>
-    ].id;
+    ]?.id;
   const tsVectorFieldMetadataUniversalIdentifier =
-    objectFields[SEARCH_VECTOR_FIELD.name as keyof typeof objectFields]
-      .universalIdentifier;
+    (objectFields as any)[SEARCH_VECTOR_FIELD.name]?.universalIdentifier;
+
+  if (!tsVectorFieldMetadataId || !tsVectorFieldMetadataUniversalIdentifier) {
+    return null;
+  }
 
   return {
     id: v4(),

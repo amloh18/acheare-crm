@@ -1076,6 +1076,72 @@ export const buildWorkspaceMemberStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  changedApplicationStageHistories: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'changedApplicationStageHistories',
+      label: i18nLabel(
+        msg({
+          message: `Stage changes made`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Pipeline stage changes made by the workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconHistory',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'applicationStageHistory',
+      targetFieldName: 'changedBy',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  ownedCompanyPersonRelationships: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'ownedCompanyPersonRelationships',
+      label: i18nLabel(
+        msg({
+          message: `Owned company relationships`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Company relationships owned by the workspace member`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconAffiliate',
+      isNullable: true,
+      isUIEditable: false,
+      targetObjectName: 'companyPersonRelationship',
+      targetFieldName: 'relationshipOwner',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   ownedInterviews: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

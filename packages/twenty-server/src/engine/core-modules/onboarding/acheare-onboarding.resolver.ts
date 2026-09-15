@@ -28,10 +28,10 @@ import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.ent
 import { WorkspaceFeatureService } from 'src/engine/core-modules/workspace-feature/services/workspace-feature.service';
 import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
-import { SettingsPermissionGuard } from 'src/engine/guards/settings-permission.guard';
+
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
-import { PermissionFlagType } from 'twenty-shared/constants';
+
 import { type AchareFeatureKey } from 'twenty-shared/workspace';
 
 @UseGuards(WorkspaceAuthGuard, UserAuthGuard)
@@ -101,7 +101,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async startAchareOnboarding(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -111,14 +110,24 @@ export class AchareOnboardingResolver {
       workspaceId: workspace.id,
     });
 
+    await this.achareOnboardingService.completeStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+      step: 'WELCOME',
+    });
+
+    const currentStep = await this.advanceToNextStep({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
     return {
       success: true,
-      currentStep: 'WELCOME',
+      currentStep: currentStep ?? 'BASIC_SETUP',
     };
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareBasicSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -146,7 +155,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async setAchareSetupMode(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -187,7 +195,6 @@ export class AchareOnboardingResolver {
    * whatever is selected here.
    */
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareFeatureSelection(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -214,7 +221,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareAgencySetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -235,7 +241,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareTeamSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -256,7 +261,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareCrmImport(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -277,7 +281,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareRecruitmentSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -298,7 +301,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareHrSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -327,7 +329,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAcharePayrollSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -356,7 +357,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareFinanceSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -385,7 +385,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareDocumentsSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -414,7 +413,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async completeAchareDashboardSetup(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -454,7 +452,6 @@ export class AchareOnboardingResolver {
   }
 
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async finishAchareOnboarding(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,
@@ -470,13 +467,28 @@ export class AchareOnboardingResolver {
     };
   }
 
+  @Mutation(() => AchareSetupSuccessDTO)
+  async restartAchareOnboarding(
+    @AuthUser() user: AuthContextUser,
+    @AuthWorkspace() workspace: WorkspaceEntity,
+  ): Promise<AchareSetupSuccessDTO> {
+    await this.achareOnboardingService.restartOnboarding({
+      userId: user.id,
+      workspaceId: workspace.id,
+    });
+
+    return {
+      success: true,
+      currentStep: 'WELCOME',
+    };
+  }
+
   /**
    * Skips a step and moves on. Skippability is decided by the service (only
    * module steps with a skip key can be skipped), so an unknown or
    * non-skippable step is rejected rather than silently completing.
    */
   @Mutation(() => AchareSetupSuccessDTO)
-  @UseGuards(SettingsPermissionGuard(PermissionFlagType.WORKSPACE))
   async skipAchareSetupStep(
     @AuthUser() user: AuthContextUser,
     @AuthWorkspace() workspace: WorkspaceEntity,

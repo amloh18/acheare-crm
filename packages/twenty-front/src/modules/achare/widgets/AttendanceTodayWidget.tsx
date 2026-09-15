@@ -6,6 +6,7 @@ import {
   IconChevronRight,
   IconLogin2,
   IconLogout,
+  IconAlertTriangle,
 } from 'twenty-ui/icon';
 import { useCheckInMutation } from '@/hr/hooks/useCheckInMutation';
 import { useCheckOutMutation } from '@/hr/hooks/useCheckOutMutation';
@@ -50,6 +51,24 @@ const StyledViewAll = styled.button`
   &:hover {
     color: ${themeCssVariables.font.color.primary};
   }
+`;
+
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
 `;
 
 const StyledStatsRow = styled.div`
@@ -150,6 +169,8 @@ interface AttendanceTodayWidgetProps {
   absent?: number;
   onLeave?: number;
   currentAttendanceStatus?: string;
+  loading?: boolean;
+  error?: boolean;
 }
 
 export const AttendanceTodayWidget = ({
@@ -158,6 +179,8 @@ export const AttendanceTodayWidget = ({
   absent = 2,
   onLeave = 4,
   currentAttendanceStatus = 'PRESENT',
+  loading,
+  error,
 }: AttendanceTodayWidgetProps) => {
   const navigate = useNavigate();
   const [checkIn] = useCheckInMutation();
@@ -200,59 +223,72 @@ export const AttendanceTodayWidget = ({
           <IconClock size={18} />
           <span>Today's Attendance</span>
         </StyledTitleWrap>
-        <StyledViewAll onClick={() => navigate('/objects/attendanceDays')}>
+        <StyledViewAll onClick={() => navigate('/attendance-leave')}>
           <span>View Log</span>
           <IconChevronRight size={14} />
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledStatsRow>
-        <StyledStatBox toneColor="#10b981">
-          <StyledStatValue>{present}</StyledStatValue>
-          <StyledStatLabel>Present</StyledStatLabel>
-        </StyledStatBox>
-        <StyledStatBox toneColor="#f59e0b">
-          <StyledStatValue>{late}</StyledStatValue>
-          <StyledStatLabel>Late</StyledStatLabel>
-        </StyledStatBox>
-        <StyledStatBox toneColor="#ef4444">
-          <StyledStatValue>{absent}</StyledStatValue>
-          <StyledStatLabel>Absent</StyledStatLabel>
-        </StyledStatBox>
-        <StyledStatBox toneColor="#8b5cf6">
-          <StyledStatValue>{onLeave}</StyledStatValue>
-          <StyledStatLabel>On Leave</StyledStatLabel>
-        </StyledStatBox>
-      </StyledStatsRow>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading attendance data...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load attendance</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <>
+          <StyledStatsRow>
+            <StyledStatBox toneColor="#10b981">
+              <StyledStatValue>{present}</StyledStatValue>
+              <StyledStatLabel>Present</StyledStatLabel>
+            </StyledStatBox>
+            <StyledStatBox toneColor="#f59e0b">
+              <StyledStatValue>{late}</StyledStatValue>
+              <StyledStatLabel>Late</StyledStatLabel>
+            </StyledStatBox>
+            <StyledStatBox toneColor="#ef4444">
+              <StyledStatValue>{absent}</StyledStatValue>
+              <StyledStatLabel>Absent</StyledStatLabel>
+            </StyledStatBox>
+            <StyledStatBox toneColor="#8b5cf6">
+              <StyledStatValue>{onLeave}</StyledStatValue>
+              <StyledStatLabel>On Leave</StyledStatLabel>
+            </StyledStatBox>
+          </StyledStatsRow>
 
-      <StyledPunchRow>
-        <StyledPunchInfo>
-          <StyledPunchStatus>
-            Status: {userStatus === 'PRESENT' ? 'Clocked In' : 'Not Clocked In'}
-          </StyledPunchStatus>
-          <StyledPunchTime>
-            {checkInTime ? `Punched in at ${checkInTime}` : 'Ready for duty'}
-          </StyledPunchTime>
-        </StyledPunchInfo>
-        <StyledPunchButtons>
-          <StyledActionButton
-            variant="primary"
-            disabled={userStatus === 'PRESENT'}
-            onClick={handleCheckIn}
-          >
-            <IconLogin2 size={14} />
-            <span>Clock In</span>
-          </StyledActionButton>
-          <StyledActionButton
-            variant="secondary"
-            disabled={userStatus !== 'PRESENT'}
-            onClick={handleCheckOut}
-          >
-            <IconLogout size={14} />
-            <span>Clock Out</span>
-          </StyledActionButton>
-        </StyledPunchButtons>
-      </StyledPunchRow>
+          <StyledPunchRow>
+            <StyledPunchInfo>
+              <StyledPunchStatus>
+                Status: {userStatus === 'PRESENT' ? 'Clocked In' : 'Not Clocked In'}
+              </StyledPunchStatus>
+              <StyledPunchTime>
+                {checkInTime ? `Punched in at ${checkInTime}` : 'Ready for duty'}
+              </StyledPunchTime>
+            </StyledPunchInfo>
+            <StyledPunchButtons>
+              <StyledActionButton
+                variant="primary"
+                disabled={userStatus === 'PRESENT'}
+                onClick={handleCheckIn}
+              >
+                <IconLogin2 size={14} />
+                <span>Clock In</span>
+              </StyledActionButton>
+              <StyledActionButton
+                variant="secondary"
+                disabled={userStatus !== 'PRESENT'}
+                onClick={handleCheckOut}
+              >
+                <IconLogout size={14} />
+                <span>Clock Out</span>
+              </StyledActionButton>
+            </StyledPunchButtons>
+          </StyledPunchRow>
+        </>
+      )}
     </StyledCard>
   );
 };

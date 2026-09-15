@@ -44,6 +44,11 @@ export const ACHARE_FEATURE_DEPENDENCIES: Partial<
     AchareFeatureKey.CANDIDATES,
     AchareFeatureKey.REQUIREMENTS,
   ],
+  [AchareFeatureKey.PLACEMENTS]: [
+    AchareFeatureKey.CANDIDATES,
+    AchareFeatureKey.REQUIREMENTS,
+    AchareFeatureKey.SUBMISSIONS,
+  ],
 
   // Finance chain: payments settle invoices.
   [AchareFeatureKey.PAYMENTS]: [AchareFeatureKey.INVOICES],

@@ -38,10 +38,16 @@ const StyledButtonRow = styled.div`
   max-width: 320px;
 `;
 
+import { currentUserState } from '@/auth/states/currentUserState';
+import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
+import { OnboardingStatus } from '~/generated-metadata/graphql';
+import { isDefined } from 'twenty-shared/utils';
+
 export const AchareWelcome = () => {
   const { t } = useLingui();
   const navigate = useNavigate();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
+  const setCurrentUser = useSetAtomState(currentUserState);
   const [startOnboarding] = useAchareStartOnboardingMutation();
   const [finishOnboarding] = useFinishAchareOnboardingMutation();
   const [isNavigating, setIsNavigating] = useState(false);
@@ -50,21 +56,31 @@ export const AchareWelcome = () => {
     setIsNavigating(true);
     try {
       await startOnboarding();
+      setCurrentUser((current) =>
+        isDefined(current)
+          ? { ...current, onboardingStatus: OnboardingStatus.ACHARE_WELCOME }
+          : current,
+      );
       setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
     } catch {
       setIsNavigating(false);
     }
-  }, [startOnboarding, setNextOnboardingStatus]);
+  }, [startOnboarding, setCurrentUser, setNextOnboardingStatus]);
 
   const handleDoThisLater = useCallback(async () => {
     setIsNavigating(true);
     try {
       await finishOnboarding();
+      setCurrentUser((current) =>
+        isDefined(current)
+          ? { ...current, onboardingStatus: OnboardingStatus.COMPLETED }
+          : current,
+      );
       navigate('/dashboard');
     } catch {
       setIsNavigating(false);
     }
-  }, [finishOnboarding, navigate]);
+  }, [finishOnboarding, setCurrentUser, navigate]);
 
   return (
     <StyledOnboardingStepPage>

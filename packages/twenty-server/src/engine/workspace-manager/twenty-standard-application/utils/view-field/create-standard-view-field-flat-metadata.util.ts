@@ -21,6 +21,7 @@ export type CreateStandardViewFieldOptions<
   fieldName: AllStandardObjectFieldName<O>;
   position: number;
   isVisible: boolean;
+  isCalendarImportant?: boolean;
   size: number;
   aggregateOperation?: AggregateOperations | null;
   viewFieldGroupName?: AllStandardObjectViewFieldGroupName<O, V> | null;
@@ -46,6 +47,7 @@ export const createStandardViewFieldFlatMetadata = <
     fieldName,
     position,
     isVisible,
+    isCalendarImportant = false,
     size,
     aggregateOperation = null,
     viewFieldGroupName = null,
@@ -130,6 +132,7 @@ export const createStandardViewFieldFlatMetadata = <
     viewFieldGroupUniversalIdentifier,
     position,
     isVisible,
+    isCalendarImportant,
     size,
     aggregateOperation,
     isActive: true,

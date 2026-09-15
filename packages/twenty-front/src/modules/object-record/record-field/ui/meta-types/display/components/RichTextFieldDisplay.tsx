@@ -1,6 +1,7 @@
 import { useRichTextFieldDisplay } from '@/object-record/record-field/ui/meta-types/hooks/useRichTextFieldDisplay';
 import { getFirstNonEmptyLineOfRichText } from '@/blocknote-editor/utils/getFirstNonEmptyLineOfRichText';
 import { parseInitialBlocknote } from '@/blocknote-editor/utils/parseInitialBlocknote';
+import { TextDisplay } from 'twenty-ui/data-display';
 
 export const RichTextFieldDisplay = () => {
   const { fieldValue } = useRichTextFieldDisplay();
@@ -8,8 +9,6 @@ export const RichTextFieldDisplay = () => {
   const blocks = parseInitialBlocknote(fieldValue?.blocknote) ?? null;
 
   return (
-    <div>
-      <span>{getFirstNonEmptyLineOfRichText(blocks)}</span>
-    </div>
+    <TextDisplay text={getFirstNonEmptyLineOfRichText(blocks) ?? ''} />
   );
 };

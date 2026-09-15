@@ -31,11 +31,9 @@ import { useAtomComponentFamilyStateValue } from '@/ui/utilities/state/jotai/hoo
 import { useAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useAtomComponentState';
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
-import { useGetCurrentViewOnly } from '@/views/hooks/useGetCurrentViewOnly';
 import { styled } from '@linaria/react';
 import { useContext } from 'react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
-import { AnimatedEaseInOut } from 'twenty-ui/layout';
 import { useDebouncedCallback } from 'use-debounce';
 import { useDisableDragSelectOnPointerDown } from '@/ui/utilities/drag-select/hooks/useDisableDragSelectOnPointerDown';
 
@@ -73,10 +71,6 @@ export const RecordBoardCard = () => {
   const primaryDraggedRecordId = useAtomComponentStateValue(
     primaryDraggedRecordIdComponentState,
   );
-
-  const { currentView } = useGetCurrentViewOnly();
-
-  const isCompactModeActive = currentView?.isCompact ?? false;
 
   const [recordBoardCardIsExpanded, setRecordBoardCardIsExpanded] =
     useAtomComponentState(
@@ -151,7 +145,7 @@ export const RecordBoardCard = () => {
   };
 
   const onMouseLeaveBoard = useDebouncedCallback(() => {
-    if (isCompactModeActive && recordBoardCardIsExpanded) {
+    if (recordBoardCardIsExpanded) {
       setRecordBoardCardIsExpanded(false);
     }
   }, 800);
@@ -193,12 +187,7 @@ export const RecordBoardCard = () => {
               isDragging={isDraggingThisCard}
             >
               <RecordBoardCardHeader />
-              <AnimatedEaseInOut
-                isOpen={recordBoardCardIsExpanded || !isCompactModeActive}
-                initial={false}
-              >
-                <RecordBoardCardBody />
-              </AnimatedEaseInOut>
+              <RecordBoardCardBody />
             </RecordCard>
           </StyledCardContainer>
           {!isDragOverlay && (

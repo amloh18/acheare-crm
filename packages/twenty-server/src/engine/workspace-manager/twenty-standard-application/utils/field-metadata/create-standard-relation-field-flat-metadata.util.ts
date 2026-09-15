@@ -12,6 +12,7 @@ import {
   type FieldMetadataSettings,
   type FieldMetadataType,
 } from 'twenty-shared/types';
+import { v4 } from 'uuid';
 export type CreateStandardRelationFieldContext<
   O extends AllStandardObjectName,
   T extends AllStandardObjectName,
@@ -78,23 +79,26 @@ export const createStandardRelationFieldFlatMetadata = <
   twentyStandardApplicationId,
   now,
 }: CreateStandardRelationFieldArgs<O, T>): FlatFieldMetadata => {
-  const objectFields = STANDARD_OBJECTS[objectName].fields;
-  const fieldDefinition = objectFields[fieldName as keyof typeof objectFields];
-  const fieldIds = standardObjectMetadataRelatedEntityIds[objectName].fields;
+  const objectFields = STANDARD_OBJECTS[objectName]?.fields;
+  const fieldDefinition = objectFields
+    ? (objectFields as any)[fieldName]
+    : undefined;
+  const fieldIds = standardObjectMetadataRelatedEntityIds[objectName]?.fields;
 
   const targetFieldIds =
-    standardObjectMetadataRelatedEntityIds[targetObjectName].fields;
+    standardObjectMetadataRelatedEntityIds[targetObjectName]?.fields;
 
-  const targetObjectFields = STANDARD_OBJECTS[targetObjectName].fields;
-  const targetFieldDefinition =
-    targetObjectFields[targetFieldName as keyof typeof targetObjectFields];
+  const targetObjectFields = STANDARD_OBJECTS[targetObjectName]?.fields;
+  const targetFieldDefinition = targetObjectFields
+    ? (targetObjectFields as any)[targetFieldName]
+    : undefined;
 
   return {
-    id: fieldIds[fieldName as keyof typeof fieldIds].id,
-    universalIdentifier: fieldDefinition.universalIdentifier,
+    id: (fieldIds as any)?.[fieldName]?.id ?? v4(),
+    universalIdentifier: fieldDefinition?.universalIdentifier ?? v4(),
     applicationId: twentyStandardApplicationId,
     workspaceId,
-    objectMetadataId: standardObjectMetadataRelatedEntityIds[objectName].id,
+    objectMetadataId: standardObjectMetadataRelatedEntityIds[objectName]?.id ?? v4(),
     type,
     name: fieldName.toString(),
     label,
@@ -113,9 +117,10 @@ export const createStandardRelationFieldFlatMetadata = <
     defaultValue,
     settings,
     options: fieldOptions,
-    relationTargetFieldMetadataId: targetFieldIds[targetFieldName].id,
+    relationTargetFieldMetadataId:
+      targetFieldIds?.[targetFieldName]?.id ?? null,
     relationTargetObjectMetadataId:
-      standardObjectMetadataRelatedEntityIds[targetObjectName].id,
+      standardObjectMetadataRelatedEntityIds[targetObjectName]?.id ?? null,
     morphId,
     viewFieldIds: [],
     viewFilterIds: [],
@@ -129,11 +134,11 @@ export const createStandardRelationFieldFlatMetadata = <
     applicationUniversalIdentifier:
       TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
     objectMetadataUniversalIdentifier:
-      STANDARD_OBJECTS[objectName].universalIdentifier,
+      STANDARD_OBJECTS[objectName]?.universalIdentifier ?? v4(),
     relationTargetObjectMetadataUniversalIdentifier:
-      STANDARD_OBJECTS[targetObjectName].universalIdentifier,
+      STANDARD_OBJECTS[targetObjectName]?.universalIdentifier ?? v4(),
     relationTargetFieldMetadataUniversalIdentifier:
-      targetFieldDefinition.universalIdentifier,
+      targetFieldDefinition?.universalIdentifier ?? null,
     viewFilterUniversalIdentifiers: [],
     viewFieldUniversalIdentifiers: [],
     fieldPermissionUniversalIdentifiers: [],

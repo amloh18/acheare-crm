@@ -596,6 +596,16 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
     ),
+    companyPersonRelationships: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+      }),
+    },
     name: { universalIdentifier: '20202020-4d99-4e2e-a84c-4a27837b1ece' },
     domainName: {
       universalIdentifier: '20202020-0c28-43d8-8ba5-3659924d3489',
@@ -1215,6 +1225,36 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
     ),
+    companyPersonRelationships: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+      }),
+    },
+    interviewParticipants: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+      }),
+    },
+    externalIds: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+      }),
+    },
     name: { universalIdentifier: '20202020-3875-44d5-8c33-a6239011cab8' },
     emails: { universalIdentifier: '20202020-3c51-43fa-8b6e-af39e29368ab' },
     linkedinLink: {
@@ -1330,6 +1370,12 @@ export const STANDARD_OBJECT_FIELDS = {
     },
     city: {
       universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea5',
+    },
+    emailNormalized: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea6',
+    },
+    phoneNormalized: {
+      universalIdentifier: '8a112233-4455-4667-8899-aabbccddeea7',
     },
   },
   recordShare: {
@@ -1631,6 +1677,26 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
     ),
+    ownedCompanyPersonRelationships: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+      }),
+    },
+    changedApplicationStageHistories: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+      }),
+    },
     name: { universalIdentifier: '20202020-e914-43a6-9c26-3603c59065f4' },
     colorScheme: {
       universalIdentifier: '20202020-66bc-47f2-adac-f2ef7c598b63',
@@ -1921,6 +1987,16 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
     ),
+    placements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+      }),
+    },
     name: { universalIdentifier: '7966163a-8059-41e7-b74f-bab4c7a176d4' },
     person: { universalIdentifier: 'a6f08d76-c6c3-4178-bfac-9a34feef93bb' },
     source: { universalIdentifier: '3a50fed5-e39a-40a7-b819-6f6983ee5c43' },
@@ -2015,6 +2091,26 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
     ),
+    applicationStageHistories: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+      }),
+    },
+    placements: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+      }),
+    },
     name: { universalIdentifier: 'c3fb9a17-bdca-4d12-b51f-94b668714a89' },
     candidate: {
       universalIdentifier: '9553ae7e-2a92-4f34-8dec-a12331d3333e',
@@ -2101,6 +2197,16 @@ export const STANDARD_OBJECT_FIELDS = {
     ...buildStandardObjectSystemFields(
       STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
     ),
+    interviewParticipants: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+      }),
+    },
     title: { universalIdentifier: 'f0aa68ed-d40f-422b-ac90-c52ce24737d8' },
     submission: {
       universalIdentifier: 'ae2619f3-9293-4fd1-a194-2bb41937062a',
@@ -3751,6 +3857,203 @@ export const STANDARD_OBJECT_FIELDS = {
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.team,
         relationTargetObjectUniversalIdentifier:
           STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.timelineActivity,
+      }),
+    },
+  },
+  companyPersonRelationship: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+    ),
+    jobTitle: {
+      universalIdentifier: 'e4f5a6b7-0001-4000-8000-000000000001',
+    },
+    department: {
+      universalIdentifier: 'e4f5a6b7-0001-4000-8000-000000000002',
+    },
+    relationshipType: {
+      universalIdentifier: 'e4f5a6b7-0001-4000-8000-000000000003',
+    },
+    isPrimary: {
+      universalIdentifier: 'e4f5a6b7-0001-4000-8000-000000000004',
+    },
+    status: {
+      universalIdentifier: 'e4f5a6b7-0001-4000-8000-000000000005',
+    },
+    company: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.company,
+      }),
+    },
+    person: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+      }),
+    },
+    relationshipOwner: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.companyPersonRelationship,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+      }),
+    },
+  },
+  applicationStageHistory: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+    ),
+    fromStage: {
+      universalIdentifier: 'e4f5a6b7-0002-4000-8000-000000000001',
+    },
+    toStage: {
+      universalIdentifier: 'e4f5a6b7-0002-4000-8000-000000000002',
+    },
+    changedAt: {
+      universalIdentifier: 'e4f5a6b7-0002-4000-8000-000000000003',
+    },
+    reason: {
+      universalIdentifier: 'e4f5a6b7-0002-4000-8000-000000000004',
+    },
+    submission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    changedBy: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.applicationStageHistory,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.workspaceMember,
+      }),
+    },
+  },
+  placement: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+    ),
+    placementDate: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000001',
+    },
+    joiningDate: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000002',
+    },
+    replacementDueDate: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000003',
+    },
+    placementFee: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000004',
+    },
+    salary: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000005',
+    },
+    feeStatus: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000006',
+    },
+    status: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000007',
+    },
+    notes: {
+      universalIdentifier: 'e4f5a6b7-0003-4000-8000-000000000008',
+    },
+    submission: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidateSubmission,
+      }),
+    },
+    candidate: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.placement,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.candidate,
+      }),
+    },
+  },
+  interviewParticipant: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+    ),
+    role: {
+      universalIdentifier: 'e4f5a6b7-0004-4000-8000-000000000001',
+    },
+    response: {
+      universalIdentifier: 'e4f5a6b7-0004-4000-8000-000000000002',
+    },
+    feedback: {
+      universalIdentifier: 'e4f5a6b7-0004-4000-8000-000000000003',
+    },
+    interview: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interview,
+      }),
+    },
+    person: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.interviewParticipant,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
+      }),
+    },
+  },
+  personExternalId: {
+    ...buildStandardObjectSystemFields(
+      STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+    ),
+    source: {
+      universalIdentifier: 'e4f5a6b7-0005-4000-8000-000000000001',
+    },
+    externalId: {
+      universalIdentifier: 'e4f5a6b7-0005-4000-8000-000000000002',
+    },
+    externalUrl: {
+      universalIdentifier: 'e4f5a6b7-0005-4000-8000-000000000003',
+    },
+    syncedAt: {
+      universalIdentifier: 'e4f5a6b7-0005-4000-8000-000000000004',
+    },
+    person: {
+      universalIdentifier: getSystemRelationFieldUniversalIdentifier({
+        applicationUniversalIdentifier:
+          TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
+        objectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.personExternalId,
+        relationTargetObjectUniversalIdentifier:
+          STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS.person,
       }),
     },
   },

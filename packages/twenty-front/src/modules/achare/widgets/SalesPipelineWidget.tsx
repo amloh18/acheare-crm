@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
-import { IconChevronRight, IconTargetArrow } from 'twenty-ui/icon';
+import { IconChevronRight, IconTargetArrow, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -41,6 +41,24 @@ const StyledViewAll = styled.button`
   &:hover {
     color: ${themeCssVariables.font.color.primary};
   }
+`;
+
+const StyledEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${themeCssVariables.spacing[6]};
+  text-align: center;
+  color: ${themeCssVariables.font.color.tertiary};
+  gap: ${themeCssVariables.spacing[2]};
+`;
+
+const StyledEmptyIcon = styled.div`
+  opacity: 0.5;
+`;
+
+const StyledEmptyText = styled.span`
+  font-size: 0.8125rem;
 `;
 
 const StyledPipelineTrack = styled.div`
@@ -117,7 +135,12 @@ const DEFAULT_DEAL_STAGES: DealStage[] = [
   { name: 'Won (Q3)', amount: '$128,500', count: 19, color: '#10b981', weight: 45 },
 ];
 
-export const SalesPipelineWidget = () => {
+interface SalesPipelineWidgetProps {
+  loading?: boolean;
+  error?: boolean;
+}
+
+export const SalesPipelineWidget = ({ loading, error }: SalesPipelineWidgetProps) => {
   const navigate = useNavigate();
 
   return (
@@ -133,28 +156,46 @@ export const SalesPipelineWidget = () => {
         </StyledViewAll>
       </StyledHeader>
 
-      <StyledPipelineTrack>
-        {DEFAULT_DEAL_STAGES.map((st) => (
-          <StyledSegment
-            key={st.name}
-            widthPercent={st.weight}
-            color={st.color}
-          />
-        ))}
-      </StyledPipelineTrack>
+      {loading ? (
+        <StyledEmptyState>
+          <StyledEmptyText>Loading pipeline data...</StyledEmptyText>
+        </StyledEmptyState>
+      ) : error ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>Unable to load pipeline</StyledEmptyText>
+        </StyledEmptyState>
+      ) : DEFAULT_DEAL_STAGES.length === 0 ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>No deals in pipeline</StyledEmptyText>
+        </StyledEmptyState>
+      ) : (
+        <>
+          <StyledPipelineTrack>
+            {DEFAULT_DEAL_STAGES.map((st) => (
+              <StyledSegment
+                key={st.name}
+                widthPercent={st.weight}
+                color={st.color}
+              />
+            ))}
+          </StyledPipelineTrack>
 
-      <StyledStageList>
-        {DEFAULT_DEAL_STAGES.map((st) => (
-          <StyledStageItem key={st.name}>
-            <StyledStageHead>
-              <StyledDot color={st.color} />
-              <span>{st.name}</span>
-            </StyledStageHead>
-            <StyledAmount>{st.amount}</StyledAmount>
-            <StyledDealCount>{st.count} opportunities</StyledDealCount>
-          </StyledStageItem>
-        ))}
-      </StyledStageList>
+          <StyledStageList>
+            {DEFAULT_DEAL_STAGES.map((st) => (
+              <StyledStageItem key={st.name}>
+                <StyledStageHead>
+                  <StyledDot color={st.color} />
+                  <span>{st.name}</span>
+                </StyledStageHead>
+                <StyledAmount>{st.amount}</StyledAmount>
+                <StyledDealCount>{st.count} opportunities</StyledDealCount>
+              </StyledStageItem>
+            ))}
+          </StyledStageList>
+        </>
+      )}
     </StyledCard>
   );
 };

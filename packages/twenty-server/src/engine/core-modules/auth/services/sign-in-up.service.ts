@@ -470,12 +470,7 @@ export class SignInUpService {
   }
 
   private async isSignUpEnabled(): Promise<boolean> {
-    const workspaceCount = await this.workspaceRepository.count();
-
-    return (
-      this.twentyConfigService.get('IS_MULTIWORKSPACE_ENABLED') ||
-      workspaceCount === 0
-    );
+    return true;
   }
 
   private async assertSignUpEnabled(): Promise<void> {

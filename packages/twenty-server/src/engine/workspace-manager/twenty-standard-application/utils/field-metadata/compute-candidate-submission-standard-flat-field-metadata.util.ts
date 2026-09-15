@@ -735,6 +735,69 @@ export const buildCandidateSubmissionStandardFlatFieldMetadatas = ({
     now,
   }),
 
+  placements: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'placements',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({ message: `Placements`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Placements created from this submission`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconTrophy',
+      isNullable: true,
+      targetObjectName: 'placement',
+      targetFieldName: 'submission',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  applicationStageHistories: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'applicationStageHistories',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({
+          message: `Stage history`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Pipeline stage changes recorded for this submission`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconHistory',
+      isNullable: true,
+      targetObjectName: 'applicationStageHistory',
+      targetFieldName: 'submission',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   interviews: createStandardRelationFieldFlatMetadata({
     objectName,
     workspaceId,

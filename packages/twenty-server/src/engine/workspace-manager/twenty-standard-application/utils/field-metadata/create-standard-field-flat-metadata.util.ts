@@ -7,6 +7,7 @@ import {
   type FieldMetadataType,
 } from 'twenty-shared/types';
 import { STANDARD_OBJECTS } from 'twenty-shared/metadata';
+import { v4 } from 'uuid';
 
 import { SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME } from 'src/engine/workspace-manager/twenty-standard-application/constants/search-fields-by-standard-object-name.constant';
 import { TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER } from 'twenty-shared/application';
@@ -67,20 +68,22 @@ export const createStandardFieldFlatMetadata = <
   twentyStandardApplicationId,
   now,
 }: CreateStandardFieldArgs<O, T>): FlatFieldMetadata => {
-  const objectFields = STANDARD_OBJECTS[objectName].fields;
-  const fieldDefinition = objectFields[fieldName as keyof typeof objectFields];
-  const fieldIds = standardObjectMetadataRelatedEntityIds[objectName].fields;
+  const objectFields = STANDARD_OBJECTS[objectName]?.fields;
+  const fieldDefinition = objectFields
+    ? (objectFields as any)[fieldName]
+    : undefined;
+  const fieldIds = standardObjectMetadataRelatedEntityIds[objectName]?.fields;
 
   const name = fieldName.toString();
   const searchFields: ReadonlyArray<{ name: string }> =
-    SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME[objectName];
+    SEARCH_FIELDS_BY_STANDARD_OBJECT_NAME[objectName] ?? [];
 
   return {
-    id: fieldIds[fieldName].id,
-    universalIdentifier: fieldDefinition.universalIdentifier,
+    id: (fieldIds as any)?.[fieldName]?.id ?? v4(),
+    universalIdentifier: fieldDefinition?.universalIdentifier ?? v4(),
     applicationId: twentyStandardApplicationId,
     workspaceId,
-    objectMetadataId: standardObjectMetadataRelatedEntityIds[objectName].id,
+    objectMetadataId: standardObjectMetadataRelatedEntityIds[objectName]?.id ?? v4(),
     type,
     name,
     label,
@@ -119,7 +122,7 @@ export const createStandardFieldFlatMetadata = <
     applicationUniversalIdentifier:
       TWENTY_STANDARD_APPLICATION_UNIVERSAL_IDENTIFIER,
     objectMetadataUniversalIdentifier:
-      STANDARD_OBJECTS[objectName].universalIdentifier,
+      STANDARD_OBJECTS[objectName]?.universalIdentifier ?? v4(),
     relationTargetObjectMetadataUniversalIdentifier: null,
     relationTargetFieldMetadataUniversalIdentifier: null,
     viewFilterUniversalIdentifiers: [],

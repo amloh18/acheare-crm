@@ -1033,6 +1033,105 @@ export const buildPersonStandardFlatFieldMetadatas = ({
     twentyStandardApplicationId,
     now,
   }),
+  interviewParticipants: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'interviewParticipants',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({
+          message: `Interview participations`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Interviews this person participates in`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconUsers',
+      isNullable: true,
+      targetObjectName: 'interviewParticipant',
+      targetFieldName: 'person',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  externalIds: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'externalIds',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({
+          message: `External identifiers`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Identifiers of this person in external systems`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconDatabase',
+      isNullable: true,
+      targetObjectName: 'personExternalId',
+      targetFieldName: 'person',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  companyPersonRelationships: createStandardRelationFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      type: FieldMetadataType.RELATION,
+      morphId: null,
+      fieldName: 'companyPersonRelationships',
+      isSystemSideEffect: true,
+      label: i18nLabel(
+        msg({
+          message: `Company relationships`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Company relationships of this person`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconAffiliate',
+      isNullable: true,
+      targetObjectName: 'companyPersonRelationship',
+      targetFieldName: 'person',
+      settings: {
+        relationType: RelationType.ONE_TO_MANY,
+      },
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
   city: createStandardFieldFlatMetadata({
     objectName,
     workspaceId,
@@ -1050,6 +1149,57 @@ export const buildPersonStandardFlatFieldMetadatas = ({
       ),
       icon: 'IconMapPin',
       isNullable: true,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  emailNormalized: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'emailNormalized',
+      type: FieldMetadataType.TEXT,
+      label: i18nLabel(
+        msg({ message: `Email (normalized)`, context: 'fieldMetadata.label' }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Lowercased, trimmed primary email used for deduplication matching`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconMail',
+      isNullable: true,
+      isUIEditable: false,
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  phoneNormalized: createStandardFieldFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      fieldName: 'phoneNormalized',
+      type: FieldMetadataType.TEXT,
+      label: i18nLabel(
+        msg({
+          message: `Phone (normalized)`,
+          context: 'fieldMetadata.label',
+        }),
+      ),
+      description: i18nLabel(
+        msg({
+          message: `Digits-only primary phone used for deduplication matching`,
+          context: 'fieldMetadata.description',
+        }),
+      ),
+      icon: 'IconPhone',
+      isNullable: true,
+      isUIEditable: false,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

@@ -14,6 +14,8 @@ export const createStandardNavigationMenuItemFolderFlatMetadata = ({
   workspaceId,
   twentyStandardApplicationId,
   now,
+  folderId,
+  folderUniversalIdentifier,
 }: {
   universalIdentifier: string;
   name: string;
@@ -23,6 +25,8 @@ export const createStandardNavigationMenuItemFolderFlatMetadata = ({
   workspaceId: string;
   twentyStandardApplicationId: string;
   now: string;
+  folderId?: string | null;
+  folderUniversalIdentifier?: string | null;
 }): FlatNavigationMenuItem => ({
   id: navigationMenuItemId,
   type: NavigationMenuItemType.FOLDER,
@@ -37,8 +41,8 @@ export const createStandardNavigationMenuItemFolderFlatMetadata = ({
   targetObjectMetadataUniversalIdentifier: null,
   viewId: null,
   viewUniversalIdentifier: null,
-  folderId: null,
-  folderUniversalIdentifier: null,
+  folderId: folderId ?? null,
+  folderUniversalIdentifier: folderUniversalIdentifier ?? null,
   pageLayoutId: null,
   pageLayoutUniversalIdentifier: null,
   name,

@@ -422,6 +422,7 @@ export {
   IconTrashX,
   IconTrendingDown,
   IconTrendingUp,
+  IconTrophy,
   IconTypography,
   IconUnderline,
   IconUnlink,

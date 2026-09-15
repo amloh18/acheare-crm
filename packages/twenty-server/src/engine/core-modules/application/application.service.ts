@@ -295,9 +295,17 @@ export class ApplicationService {
     workspaceId: string;
     queryRunner?: QueryRunner;
   }) {
-    const manager = queryRunner?.manager ?? this.applicationRepository;
+    if (queryRunner) {
+      return queryRunner.manager.findOne(ApplicationEntity, {
+        where: {
+          universalIdentifier,
+          workspaceId,
+        },
+        relations: [],
+      });
+    }
 
-    return manager.findOne(ApplicationEntity, {
+    return this.applicationRepository.findOne({
       where: {
         universalIdentifier,
         workspaceId,
