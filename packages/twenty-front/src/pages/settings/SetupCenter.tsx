@@ -80,14 +80,83 @@ const SetupCenterImportDialogHost = ({
   return null;
 };
 
-const StyledCard = styled.div`
-  align-items: center;
+const StyledProgressOverviewCard = styled.div`
   background: ${themeCssVariables.background.primary};
   border: 1px solid ${themeCssVariables.border.color.light};
   border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
   display: flex;
-  gap: ${themeCssVariables.spacing[4]};
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[3]};
+  min-width: 0;
   padding: ${themeCssVariables.spacing[4]};
+`;
+
+const StyledProgressHeader = styled.div`
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${themeCssVariables.spacing[2]};
+  justify-content: space-between;
+`;
+
+const StyledProgressTitle = styled.div`
+  color: ${themeCssVariables.font.color.primary};
+  font-size: ${themeCssVariables.font.size.sm};
+  font-weight: ${themeCssVariables.font.weight.medium};
+`;
+
+const StyledProgressStats = styled.div`
+  color: ${themeCssVariables.font.color.secondary};
+  font-size: ${themeCssVariables.font.size.sm};
+`;
+
+const StyledProgressBarTrack = styled.div`
+  background: ${themeCssVariables.background.secondary};
+  border-radius: 4px;
+  height: 6px;
+  overflow: hidden;
+  width: 100%;
+`;
+
+const StyledProgressBarFill = styled.div<{ percent: number }>`
+  background: ${themeCssVariables.color.blue};
+  border-radius: 4px;
+  height: 100%;
+  transition: width 0.3s ease;
+  width: ${({ percent }) => `${percent}%`};
+`;
+
+const StyledStepsGrid = styled.div`
+  display: grid;
+  gap: ${themeCssVariables.spacing[3]};
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+`;
+
+const StyledStepCard = styled.div`
+  background: ${themeCssVariables.background.primary};
+  border: 1px solid ${themeCssVariables.border.color.light};
+  border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[2]};
+  min-width: 0;
+  overflow: hidden;
+  padding: ${themeCssVariables.spacing[3]};
+  transition: border-color 0.12s ease;
+
+  &:hover {
+    border-color: ${themeCssVariables.border.color.medium};
+  }
+`;
+
+const StyledStepCardTop = styled.div`
+  align-items: center;
+  display: flex;
+  gap: ${themeCssVariables.spacing[2]};
+  justify-content: space-between;
+  min-width: 0;
 `;
 
 const StyledStatusIcon = styled.div<{ status: string }>`
@@ -95,9 +164,9 @@ const StyledStatusIcon = styled.div<{ status: string }>`
   border-radius: 50%;
   display: flex;
   flex-shrink: 0;
-  height: 32px;
+  height: 26px;
   justify-content: center;
-  width: 32px;
+  width: 26px;
 
   background: ${(props) =>
     props.status === 'COMPLETED'
@@ -107,31 +176,67 @@ const StyledStatusIcon = styled.div<{ status: string }>`
         : themeCssVariables.background.secondary};
 `;
 
-const StyledCardContent = styled.div`
+const StyledStatusBadge = styled.span<{ status: string }>`
+  border-radius: ${themeCssVariables.border.radius.pill};
+  font-size: ${themeCssVariables.font.size.xs};
+  font-weight: ${themeCssVariables.font.weight.medium};
+  padding: 2px ${themeCssVariables.spacing[2]};
+  white-space: nowrap;
+
+  background: ${(props) =>
+    props.status === 'COMPLETED'
+      ? themeCssVariables.background.transparent.success
+      : props.status === 'IN_PROGRESS'
+        ? themeCssVariables.background.transparent.orange
+        : themeCssVariables.background.secondary};
+
+  color: ${(props) =>
+    props.status === 'COMPLETED'
+      ? themeCssVariables.color.green
+      : props.status === 'IN_PROGRESS'
+        ? themeCssVariables.color.yellow
+        : themeCssVariables.font.color.tertiary};
+`;
+
+const StyledStepCardBody = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: ${themeCssVariables.spacing[1]};
+  gap: 2px;
+  min-width: 0;
 `;
 
-const StyledCardLabel = styled.div`
+const StyledStepCardTitle = styled.div`
   color: ${themeCssVariables.font.color.primary};
-  font-size: ${themeCssVariables.font.size.md};
+  font-size: ${themeCssVariables.font.size.sm};
   font-weight: ${themeCssVariables.font.weight.medium};
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
-const StyledCardStatus = styled.div`
+const StyledStepCardDescription = styled.div`
   color: ${themeCssVariables.font.color.tertiary};
-  font-size: ${themeCssVariables.font.size.sm};
+  font-size: ${themeCssVariables.font.size.xs};
+  line-height: 1.4;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledNotice = styled.div`
   background: ${themeCssVariables.background.transparent.blue};
   border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
   color: ${themeCssVariables.font.color.secondary};
   font-size: ${themeCssVariables.font.size.sm};
   line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: break-word;
   padding: ${themeCssVariables.spacing[3]} ${themeCssVariables.spacing[4]};
+  word-break: break-word;
 `;
 
 const StyledWarning = styled(StyledNotice)`
@@ -142,6 +247,9 @@ const StyledHint = styled.div`
   color: ${themeCssVariables.font.color.tertiary};
   font-size: ${themeCssVariables.font.size.sm};
   line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const StyledEmptyState = styled.div`
@@ -153,6 +261,7 @@ const StyledEmptyState = styled.div`
 
 const StyledButtonRow = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: ${themeCssVariables.spacing[3]};
 `;
 
@@ -161,26 +270,36 @@ const StyledDemoBanner = styled.div`
   background: ${themeCssVariables.background.secondary};
   border: 1px dashed ${themeCssVariables.border.color.medium};
   border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
+  gap: ${themeCssVariables.spacing[3]};
   justify-content: space-between;
+  min-width: 0;
   padding: ${themeCssVariables.spacing[4]};
 `;
 
 const StyledDemoText = styled.div`
   display: flex;
+  flex: 1 1 280px;
   flex-direction: column;
   gap: ${themeCssVariables.spacing[1]};
+  min-width: 0;
 `;
 
 const StyledDemoTitle = styled.div`
   color: ${themeCssVariables.font.color.primary};
   font-size: ${themeCssVariables.font.size.md};
   font-weight: ${themeCssVariables.font.weight.medium};
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const StyledDemoSubtitle = styled.div`
   color: ${themeCssVariables.font.color.secondary};
   font-size: ${themeCssVariables.font.size.sm};
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const getStatusIcon = (status: AchareSetupStepStatus['status']) => {
@@ -438,29 +557,65 @@ export const SetupCenter = () => {
               </StyledEmptyState>
             )}
             {!isProgressLoading && stepsToShow.length > 0 && (
-              <StyledHint>
-                {t`${completedStepCount} of ${stepsToShow.length} steps done.`}
-              </StyledHint>
+              <>
+                <StyledProgressOverviewCard>
+                  <StyledProgressHeader>
+                    <StyledProgressTitle>{t`Step progress`}</StyledProgressTitle>
+                    <StyledProgressStats>
+                      {t`${completedStepCount} of ${stepsToShow.length} steps completed`} (
+                      {Math.round((completedStepCount / stepsToShow.length) * 100)}%)
+                    </StyledProgressStats>
+                  </StyledProgressHeader>
+                  <StyledProgressBarTrack>
+                    <StyledProgressBarFill
+                      percent={Math.round(
+                        (completedStepCount / stepsToShow.length) * 100,
+                      )}
+                    />
+                  </StyledProgressBarTrack>
+                </StyledProgressOverviewCard>
+                <StyledStepsGrid>
+                  {stepsToShow.map((item) => (
+                    <StyledStepCard key={item.step}>
+                      <StyledStepCardTop>
+                        <StyledStatusIcon status={item.status}>
+                          {getStatusIcon(item.status)}
+                        </StyledStatusIcon>
+                        <StyledStatusBadge status={item.status}>
+                          {item.status === 'COMPLETED'
+                            ? t`Completed`
+                            : item.status === 'IN_PROGRESS'
+                              ? t`In progress`
+                              : item.status === 'SKIPPED'
+                                ? t`Skipped`
+                                : t`Not started`}
+                        </StyledStatusBadge>
+                      </StyledStepCardTop>
+                      <StyledStepCardBody>
+                        <StyledStepCardTitle title={item.label}>
+                          {item.label}
+                        </StyledStepCardTitle>
+                        <StyledStepCardDescription
+                          title={describeStatus(item.status, {
+                            completed: t`Step completed`,
+                            inProgress: t`Setup in progress`,
+                            skipped: t`Skipped in wizard`,
+                            notStarted: t`Not started`,
+                          })}
+                        >
+                          {describeStatus(item.status, {
+                            completed: t`Step completed`,
+                            inProgress: t`Setup in progress`,
+                            skipped: t`Skipped in wizard`,
+                            notStarted: t`Not started`,
+                          })}
+                        </StyledStepCardDescription>
+                      </StyledStepCardBody>
+                    </StyledStepCard>
+                  ))}
+                </StyledStepsGrid>
+              </>
             )}
-            {!isProgressLoading &&
-              stepsToShow.map((item) => (
-                <StyledCard key={item.step}>
-                  <StyledStatusIcon status={item.status}>
-                    {getStatusIcon(item.status)}
-                  </StyledStatusIcon>
-                  <StyledCardContent>
-                    <StyledCardLabel>{item.label}</StyledCardLabel>
-                    <StyledCardStatus>
-                      {describeStatus(item.status, {
-                        completed: t`Completed`,
-                        inProgress: t`In progress`,
-                        skipped: t`Skipped — the module can be enabled below`,
-                        notStarted: t`Not started`,
-                      })}
-                    </StyledCardStatus>
-                  </StyledCardContent>
-                </StyledCard>
-              ))}
           </StyledSection>
         </Section>
 

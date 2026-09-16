@@ -60,6 +60,24 @@ const AttendanceLeavePage = lazy(() =>
   })),
 );
 
+const MyPayslipsPage = lazy(() =>
+  import('~/pages/hr/MyPayslipsPage').then((module) => ({
+    default: module.MyPayslipsPage,
+  })),
+);
+
+const MyDocumentsPage = lazy(() =>
+  import('~/pages/hr/MyDocumentsPage').then((module) => ({
+    default: module.MyDocumentsPage,
+  })),
+);
+
+const AnnouncementsPage = lazy(() =>
+  import('~/pages/hr/AnnouncementsPage').then((module) => ({
+    default: module.AnnouncementsPage,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('~/pages/not-found/NotFound').then((module) => ({
     default: module.NotFound,
@@ -157,6 +175,30 @@ export const createWorkspaceRouteObjects = ({
       element: (
         <LazyRoute>
           <AttendanceLeavePage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: AppPath.MyPayslipsPage,
+      element: (
+        <LazyRoute>
+          <MyPayslipsPage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: AppPath.MyDocumentsPage,
+      element: (
+        <LazyRoute>
+          <MyDocumentsPage />
+        </LazyRoute>
+      ),
+    },
+    {
+      path: AppPath.AnnouncementsPage,
+      element: (
+        <LazyRoute>
+          <AnnouncementsPage />
         </LazyRoute>
       ),
     },

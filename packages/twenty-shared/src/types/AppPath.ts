@@ -48,6 +48,9 @@ export enum AppPath {
 
   // Achare Custom Pages
   AttendanceLeavePage = '/attendance-leave',
+  MyPayslipsPage = '/my-payslips',
+  MyDocumentsPage = '/my-documents',
+  AnnouncementsPage = '/announcements',
 
   Settings = `settings`,
   SettingsCatchAll = `/${Settings}/*`,

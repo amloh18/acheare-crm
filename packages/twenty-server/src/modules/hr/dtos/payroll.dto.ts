@@ -176,3 +176,12 @@ export class PayrollCalculationResultDTO {
   @Field(() => [PayrollErrorDTO])
   errors: PayrollErrorDTO[];
 }
+
+@ObjectType('PayslipPdfResult')
+export class PayslipPdfResultDTO {
+  @Field(() => String)
+  base64Data: string;
+
+  @Field(() => String)
+  fileName: string;
+}

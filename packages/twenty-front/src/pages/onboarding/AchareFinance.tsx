@@ -66,9 +66,10 @@ export const AchareFinance = () => {
   return (
     <AchareModuleSetupStep
       title={t`Finance Setup`}
-      subtitle={t`Invoicing and payments, ready for your first billable client.`}
+      subtitle={t`Turn on invoicing and payment tracking for your agency.`}
       items={FINANCE_SETUP_ITEMS}
       note={t`Skipping only hides the Finance navigation for now — nothing is deleted, and you can turn it back on any time from Settings.`}
+      actionLabel={t`Enable Finance`}
       isNavigating={isNavigating}
       onContinue={handleContinue}
       onSkip={handleSkip}

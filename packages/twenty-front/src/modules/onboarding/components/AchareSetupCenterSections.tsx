@@ -55,74 +55,139 @@ const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
   border: 1px solid ${themeCssVariables.border.color.light};
   border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: ${themeCssVariables.spacing[2]};
+  gap: ${themeCssVariables.spacing[3]};
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: ${themeCssVariables.spacing[4]};
+  transition: border-color 0.12s ease;
+
+  &:hover {
+    border-color: ${themeCssVariables.border.color.medium};
+  }
 `;
 
 const StyledCardHeader = styled.div`
   align-items: center;
   display: flex;
   gap: ${themeCssVariables.spacing[2]};
+  justify-content: space-between;
+  min-width: 0;
 `;
 
 const StyledCardTitle = styled.div`
   color: ${themeCssVariables.font.color.primary};
   font-size: ${themeCssVariables.font.size.md};
   font-weight: ${themeCssVariables.font.weight.medium};
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const StyledFeatureCountBadge = styled.span`
+  background: ${themeCssVariables.background.secondary};
+  border-radius: ${themeCssVariables.border.radius.pill};
+  color: ${themeCssVariables.font.color.tertiary};
+  flex-shrink: 0;
+  font-size: ${themeCssVariables.font.size.xs};
+  padding: 1px ${themeCssVariables.spacing[2]};
 `;
 
 const StyledFeatureList = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: ${themeCssVariables.spacing[1]};
-  margin-top: ${themeCssVariables.spacing[1]};
+  min-width: 0;
 `;
 
 const StyledFeatureLink = styled.button`
   align-items: center;
   background: none;
   border: none;
+  border-radius: ${themeCssVariables.border.radius.sm};
   color: ${themeCssVariables.font.color.secondary};
   cursor: pointer;
   display: flex;
   font-size: ${themeCssVariables.font.size.sm};
-  gap: ${themeCssVariables.spacing[1]};
+  gap: ${themeCssVariables.spacing[2]};
   justify-content: space-between;
-  padding: ${themeCssVariables.spacing[1]} 0;
+  min-width: 0;
+  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
   text-align: left;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  width: 100%;
 
   &:hover {
+    background: ${themeCssVariables.background.secondary};
     color: ${themeCssVariables.font.color.primary};
   }
 
   &:disabled {
     color: ${themeCssVariables.font.color.tertiary};
     cursor: default;
+
+    &:hover {
+      background: none;
+    }
   }
 `;
 
-const StyledImportRow = styled.div`
-  align-items: center;
+const StyledFeatureLabel = styled.span`
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const StyledImportSection = styled.div`
+  border-top: 1px dashed ${themeCssVariables.border.color.light};
   display: flex;
+  flex-direction: column;
   gap: ${themeCssVariables.spacing[2]};
-  margin-top: ${themeCssVariables.spacing[2]};
+  margin-top: auto;
+  min-width: 0;
+  padding-top: ${themeCssVariables.spacing[3]};
+`;
+
+const StyledImportSectionLabel = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: ${themeCssVariables.font.size.xs};
+  font-weight: ${themeCssVariables.font.weight.medium};
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+`;
+
+const StyledImportButtonsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${themeCssVariables.spacing[1]};
+  min-width: 0;
 `;
 
 const StyledImportButton = styled.button`
   align-items: center;
-  background: none;
+  background: ${themeCssVariables.background.secondary};
   border: 1px solid ${themeCssVariables.border.color.light};
-  border-radius: ${themeCssVariables.border.radius.sm};
+  border-radius: ${themeCssVariables.border.radius.pill};
+  box-sizing: border-box;
   color: ${themeCssVariables.font.color.secondary};
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   font-size: ${themeCssVariables.font.size.xs};
   gap: ${themeCssVariables.spacing[1]};
-  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
+  max-width: 100%;
+  min-width: 0;
+  padding: 3px ${themeCssVariables.spacing[2]};
+  transition: all 0.12s ease;
 
   &:hover {
+    background: ${themeCssVariables.background.primary};
     border-color: ${themeCssVariables.border.color.blue};
     color: ${themeCssVariables.font.color.primary};
   }
@@ -130,7 +195,15 @@ const StyledImportButton = styled.button`
   &:disabled {
     color: ${themeCssVariables.font.color.tertiary};
     cursor: default;
+    opacity: 0.6;
   }
+`;
+
+const StyledImportButtonText = styled.span`
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 type AchareSetupCenterSection = {
@@ -201,7 +274,10 @@ export const AchareSetupCenterSections = ({
       {sections.map((section) => (
         <StyledCard key={section.moduleKey}>
           <StyledCardHeader>
-            <StyledCardTitle>{section.title}</StyledCardTitle>
+            <StyledCardTitle title={section.title}>{section.title}</StyledCardTitle>
+            <StyledFeatureCountBadge>
+              {section.features.length}
+            </StyledFeatureCountBadge>
           </StyledCardHeader>
           <StyledFeatureList>
             {section.features.map((feature) => {
@@ -215,6 +291,7 @@ export const AchareSetupCenterSections = ({
                 <StyledFeatureLink
                   key={feature}
                   type="button"
+                  title={featureLabel}
                   disabled={objectNamePlural === undefined}
                   onClick={() => {
                     if (objectNamePlural !== undefined) {
@@ -222,7 +299,7 @@ export const AchareSetupCenterSections = ({
                     }
                   }}
                 >
-                  {featureLabel}
+                  <StyledFeatureLabel>{featureLabel}</StyledFeatureLabel>
                   {objectNamePlural !== undefined && (
                     <IconArrowUpRight
                       size={12}
@@ -236,31 +313,37 @@ export const AchareSetupCenterSections = ({
           {section.features.some(
             (feature) => objectNameSingularByFeature[feature] !== undefined,
           ) && (
-            <StyledImportRow>
-              {section.features
-                .filter(
-                  (feature) =>
-                    objectNameSingularByFeature[feature] !== undefined,
-                )
-                .map((feature) => (
-                  <StyledImportButton
-                    key={feature}
-                    type="button"
-                    disabled={onImportClick === undefined}
-                    onClick={() =>
-                      onImportClick?.(
-                        objectNameSingularByFeature[feature] as string,
-                      )
-                    }
-                  >
-                    <IconFileImport
-                      size={12}
-                      color={themeCssVariables.font.color.tertiary}
-                    />
-                    {t`Import ${ACHARE_FEATURES[feature].label}`}
-                  </StyledImportButton>
-                ))}
-            </StyledImportRow>
+            <StyledImportSection>
+              <StyledImportSectionLabel>{t`Import data`}</StyledImportSectionLabel>
+              <StyledImportButtonsContainer>
+                {section.features
+                  .filter(
+                    (feature) =>
+                      objectNameSingularByFeature[feature] !== undefined,
+                  )
+                  .map((feature) => (
+                    <StyledImportButton
+                      key={feature}
+                      type="button"
+                      title={t`Import ${ACHARE_FEATURES[feature].label}`}
+                      disabled={onImportClick === undefined}
+                      onClick={() =>
+                        onImportClick?.(
+                          objectNameSingularByFeature[feature] as string,
+                        )
+                      }
+                    >
+                      <IconFileImport
+                        size={12}
+                        color={themeCssVariables.font.color.tertiary}
+                      />
+                      <StyledImportButtonText>
+                        {ACHARE_FEATURES[feature].label}
+                      </StyledImportButtonText>
+                    </StyledImportButton>
+                  ))}
+              </StyledImportButtonsContainer>
+            </StyledImportSection>
           )}
         </StyledCard>
       ))}

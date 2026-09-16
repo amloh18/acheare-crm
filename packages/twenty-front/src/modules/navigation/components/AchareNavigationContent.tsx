@@ -9,6 +9,7 @@ import {
   AchareFeatureKey,
 } from 'twenty-shared/workspace';
 import {
+  IconBell,
   IconBriefcase,
   IconBuildingSkyscraper,
   IconCalendar,
@@ -292,6 +293,24 @@ export const AchareNavigationContent = () => {
           path: '/attendance-leave',
           Icon: IconClock,
           featureKey: AchareFeatureKey.ATTENDANCE,
+        },
+        {
+          label: t`My Payslips`,
+          path: '/my-payslips',
+          Icon: IconCreditCard,
+          featureKey: AchareFeatureKey.PAYSLIPS,
+        },
+        {
+          label: t`My Documents`,
+          path: '/my-documents',
+          Icon: IconFile,
+          featureKey: AchareFeatureKey.DOCUMENTS,
+        },
+        {
+          label: t`Announcements`,
+          path: '/announcements',
+          Icon: IconBell,
+          featureKey: AchareFeatureKey.ANNOUNCEMENTS,
         },
         {
           label: t`Departments`,

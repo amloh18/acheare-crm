@@ -64,9 +64,10 @@ export const AchareDocuments = () => {
   return (
     <AchareModuleSetupStep
       title={t`Documents Setup`}
-      subtitle={t`Keep company and employee documents attached to the right records.`}
+      subtitle={t`Attach company and employee documents to the right records.`}
       items={DOCUMENTS_SETUP_ITEMS}
       note={t`Skipping only hides the Documents navigation for now — nothing is deleted, and you can turn it back on any time from Settings.`}
+      actionLabel={t`Enable Documents`}
       isNavigating={isNavigating}
       onContinue={handleContinue}
       onSkip={handleSkip}

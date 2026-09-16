@@ -6,6 +6,7 @@ import { LeaveService } from 'src/modules/hr/services/leave.service';
 import { SalaryService } from 'src/modules/hr/services/salary.service';
 import { PayrollCalculationService } from 'src/modules/hr/services/payroll-calculation.service';
 import { PayrollLifecycleService } from 'src/modules/hr/services/payroll-lifecycle.service';
+import { PayslipPdfService } from 'src/modules/hr/services/payslip-pdf.service';
 import { RosterService } from 'src/modules/hr/services/roster.service';
 import { MyWorkspaceService } from 'src/modules/hr/services/my-workspace.service';
 import { AdminAttendanceService } from 'src/modules/hr/services/admin-attendance.service';
@@ -32,6 +33,7 @@ import { LocationResolver } from 'src/modules/hr/resolvers/location.resolver';
     SalaryService,
     PayrollCalculationService,
     PayrollLifecycleService,
+    PayslipPdfService,
     RosterService,
     MyWorkspaceService,
     AdminAttendanceService,

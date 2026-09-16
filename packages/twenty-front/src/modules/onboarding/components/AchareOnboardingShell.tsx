@@ -200,8 +200,8 @@ export const AchareOnboardingShell = ({
             <OnboardingStepAnimatedItem index={0}>
               <StyledBrandMark>
                 <StyledBrandLogo
-                  src="/images/integrations/acheare-logo.svg"
-                  alt=""
+                  src="/images/integrations/acheare-logo.png"
+                  alt="Achare"
                 />
               </StyledBrandMark>
             </OnboardingStepAnimatedItem>
@@ -252,6 +252,7 @@ export const AchareOnboardingShell = ({
             <StyledFooterSide>
               <MainButton
                 title={continueLabel ?? t`Continue`}
+                variant="primary"
                 onClick={onContinue}
                 disabled={isBusy || isContinueDisabled}
               />

@@ -43,8 +43,10 @@ const StyledModuleCard = styled.div<{
         ? themeCssVariables.border.color.blue
         : themeCssVariables.border.color.light};
   border-radius: ${themeCssVariables.border.radius.md};
+  box-sizing: border-box;
   display: flex;
   gap: ${themeCssVariables.spacing[3]};
+  min-width: 0;
   padding: ${themeCssVariables.spacing[4]};
   transition:
     background 0.12s ease,
@@ -115,25 +117,33 @@ const StyledModuleText = styled.div`
 const StyledModuleLabelRow = styled.div`
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: ${themeCssVariables.spacing[2]};
+  min-width: 0;
 `;
 
 const StyledModuleLabel = styled.div`
   color: ${themeCssVariables.font.color.primary};
   font-size: ${themeCssVariables.font.size.sm};
   font-weight: ${themeCssVariables.font.weight.medium};
+  min-width: 0;
 `;
 
 const StyledModuleCount = styled.span`
   color: ${themeCssVariables.font.color.tertiary};
+  flex-shrink: 0;
   font-size: ${themeCssVariables.font.size.xs};
   margin-left: auto;
+  white-space: nowrap;
 `;
 
 const StyledModuleDescription = styled.div`
   color: ${themeCssVariables.font.color.secondary};
   font-size: ${themeCssVariables.font.size.sm};
   line-height: 1.5;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const StyledFeatureTagRow = styled.div`
@@ -141,17 +151,24 @@ const StyledFeatureTagRow = styled.div`
   flex-wrap: wrap;
   gap: ${themeCssVariables.spacing[2]};
   margin-top: ${themeCssVariables.spacing[2]};
+  min-width: 0;
 `;
 
 const StyledFeatureTag = styled.span`
   align-items: center;
   background: ${themeCssVariables.background.secondary};
   border-radius: ${themeCssVariables.border.radius.pill};
+  box-sizing: border-box;
   color: ${themeCssVariables.font.color.tertiary};
   display: inline-flex;
   font-size: ${themeCssVariables.font.size.xs};
   gap: ${themeCssVariables.spacing[1]};
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledFeatureTagButton = styled.button<{ isSelected: boolean }>`
@@ -164,6 +181,7 @@ const StyledFeatureTagButton = styled.button<{ isSelected: boolean }>`
         ? themeCssVariables.border.color.blue
         : themeCssVariables.border.color.medium};
   border-radius: ${themeCssVariables.border.radius.pill};
+  box-sizing: border-box;
   color: ${({ isSelected }) =>
     isSelected
       ? themeCssVariables.font.color.primary
@@ -173,10 +191,15 @@ const StyledFeatureTagButton = styled.button<{ isSelected: boolean }>`
   font-family: inherit;
   font-size: ${themeCssVariables.font.size.xs};
   gap: ${themeCssVariables.spacing[1]};
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
+  text-overflow: ellipsis;
   transition:
     border-color 0.12s ease,
     color 0.12s ease;
+  white-space: nowrap;
 
   &:hover:not(:disabled) {
     border-color: ${themeCssVariables.border.color.blue};

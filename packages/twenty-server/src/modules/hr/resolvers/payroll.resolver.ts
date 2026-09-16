@@ -12,6 +12,7 @@ import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
 import { AchareRoleGuard, ROLES_KEY } from 'src/modules/hr/guards/achare-role.guard';
 import { PayrollLifecycleService, PayrollPeriodStatus } from 'src/modules/hr/services/payroll-lifecycle.service';
+import { PayslipPdfService } from 'src/modules/hr/services/payslip-pdf.service';
 import {
   CreatePayrollPeriodInputDTO,
   TransitionPayrollPeriodInputDTO,
@@ -20,6 +21,7 @@ import {
   PayrollPeriodDTO,
   PayslipDTO,
   PayrollCalculationResultDTO,
+  PayslipPdfResultDTO,
 } from 'src/modules/hr/dtos/payroll.dto';
 
 @UseGuards(WorkspaceAuthGuard, UserAuthGuard)
@@ -27,7 +29,10 @@ import {
 @UseFilters(PreventNestToAutoLogGraphqlErrorsFilter)
 @MetadataResolver()
 export class PayrollResolver {
-  constructor(private readonly payrollLifecycleService: PayrollLifecycleService) {}
+  constructor(
+    private readonly payrollLifecycleService: PayrollLifecycleService,
+    private readonly payslipPdfService: PayslipPdfService,
+  ) {}
 
   @Mutation(() => PayrollPeriodDTO)
   async createPayrollPeriod(
@@ -153,6 +158,22 @@ export class PayrollResolver {
     );
 
     return payslips.map((p) => this.mapPayslip(p));
+  }
+
+  @Query(() => PayslipPdfResultDTO)
+  async generatePayslipPdf(
+    @Args('payslipId') payslipId: string,
+    @AuthWorkspace() workspace: WorkspaceEntity,
+  ): Promise<PayslipPdfResultDTO> {
+    const buffer = await this.payslipPdfService.generatePayslipPdf(
+      payslipId,
+      workspace.id,
+    );
+
+    return {
+      base64Data: buffer.toString('base64'),
+      fileName: `payslip-${payslipId}.pdf`,
+    };
   }
 
   private mapPayrollPeriod(period: any): PayrollPeriodDTO {
