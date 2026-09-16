@@ -1,4 +1,5 @@
 import { type FlatIndexMetadata } from 'src/engine/metadata-modules/flat-index-metadata/types/flat-index-metadata.type';
+import { IndexType } from 'twenty-shared/types';
 import { type AllStandardObjectIndexName } from 'src/engine/workspace-manager/twenty-standard-application/types/all-standard-object-index-name.type';
 import {
   type CreateStandardIndexArgs,
@@ -47,6 +48,20 @@ export const buildAttendanceDayStandardFlatIndexMetadatas = ({
     context: {
       indexName: 'workDateIndex',
       relatedFieldNames: ['workDate'],
+    },
+    standardObjectMetadataRelatedEntityIds,
+    dependencyFlatEntityMaps,
+    twentyStandardApplicationId,
+    now,
+  }),
+  searchVectorGinIndex: createStandardIndexFlatMetadata({
+    objectName,
+    workspaceId,
+    context: {
+      indexName: 'searchVectorGinIndex',
+      relatedFieldNames: ['searchVector'],
+      indexType: IndexType.GIN,
+      hasDeterministicUniversalIdentifier: true,
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

@@ -86,7 +86,7 @@ export const DashboardRenameDialog = ({
       await updateOneRecord({
         objectNameSingular: CoreObjectNameSingular.Dashboard,
         idToUpdate: dashboardId,
-        values: {
+        updateOneRecordInput: {
           title: trimmedTitle,
         },
       });

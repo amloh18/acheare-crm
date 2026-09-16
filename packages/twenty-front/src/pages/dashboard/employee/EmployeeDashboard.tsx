@@ -100,6 +100,10 @@ const StyledContainer = styled.div`
   gap: ${themeCssVariables.spacing[5]};
   padding: ${themeCssVariables.spacing[6]};
   max-width: 1400px;
+
+  @media (max-width: 768px) {
+    padding: ${themeCssVariables.spacing[4]};
+  }
 `;
 
 const StyledGreeting = styled.h1`
@@ -120,6 +124,10 @@ const StyledTopRow = styled.div`
   grid-template-columns: 1fr auto;
   gap: ${themeCssVariables.spacing[5]};
   align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledEmployeeCard = styled.div`
@@ -130,12 +138,22 @@ const StyledEmployeeCard = styled.div`
   display: flex;
   align-items: center;
   gap: ${themeCssVariables.spacing[4]};
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const StyledEmployeeInfo = styled.div`
   display: flex;
   align-items: center;
   gap: ${themeCssVariables.spacing[4]};
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: ${themeCssVariables.spacing[2]};
+  }
 `;
 
 const StyledDetailItem = styled.div`
@@ -183,7 +201,12 @@ const StyledClockCard = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${themeCssVariables.spacing[3]};
-  min-width: 320px;
+  min-width: 280px;
+
+  @media (max-width: 640px) {
+    min-width: auto;
+    width: 100%;
+  }
 `;
 
 const StyledClockHeader = styled.div`
@@ -272,6 +295,14 @@ const StyledKPIRow = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: ${themeCssVariables.spacing[4]};
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledKPICard = styled.div`
@@ -284,6 +315,7 @@ const StyledKPICard = styled.div`
   gap: ${themeCssVariables.spacing[2]};
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  min-width: 0;
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -339,6 +371,12 @@ const StyledTabsRow = styled.div`
   display: flex;
   gap: 0;
   border-bottom: 1px solid ${themeCssVariables.border.color.light};
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const StyledTab = styled.button<{ isActive: boolean }>`
@@ -366,6 +404,10 @@ const StyledTabContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: ${themeCssVariables.spacing[5]};
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledTabPanel = styled.div`
@@ -373,6 +415,7 @@ const StyledTabPanel = styled.div`
   border: 1px solid ${themeCssVariables.border.color.light};
   border-radius: ${themeCssVariables.border.radius.md};
   padding: ${themeCssVariables.spacing[4]};
+  overflow-x: auto;
 `;
 
 const StyledTabPanelHeader = styled.div`
@@ -409,6 +452,7 @@ const StyledViewAll = styled.button`
 const StyledTaskTable = styled.table`
   width: 100%;
   border-collapse: collapse;
+  min-width: 500px;
 `;
 
 const StyledTh = styled.th`
@@ -560,6 +604,7 @@ export const EmployeeDashboard = () => {
 
   const [activeTab, setActiveTab] = useState<TabKey>('tasks');
   const [isOnBreak, setIsOnBreak] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState('00:00:00');
 
   const { data: myWorkspaceData, loading: myDataLoading, error: myDataError } = useMyWorkspaceData();
   const myData = myWorkspaceData?.myWorkspaceData;
@@ -590,27 +635,10 @@ export const EmployeeDashboard = () => {
     );
   }
 
-  if (myDataError || tasksError) {
-    return (
-      <PageContainer>
-        <StyledStateContainer>
-          <StyledStateIcon>
-            <IconAlertTriangle size={40} />
-          </StyledStateIcon>
-          <StyledStateTitle>{t`Unable to load dashboard`}</StyledStateTitle>
-          <StyledStateDescription>
-            {t`There was an error loading your workspace data. Please try again.`}
-          </StyledStateDescription>
-        </StyledStateContainer>
-      </PageContainer>
-    );
-  }
+  const safeTasks: TaskRecord[] = tasks ?? [];
 
   const firstName = currentWorkspaceMember?.name?.firstName ?? 'Employee';
-  const employeeCode = (currentWorkspaceMember as any)?.employeeCode ?? 'EMP-001';
   const jobTitle = currentWorkspaceMember?.jobTitle ?? 'Team Member';
-  const employmentType = (currentWorkspaceMember as any)?.employmentType ?? 'Full-time';
-  const workLocation = (currentWorkspaceMember as any)?.workLocation ?? 'Office';
   const employeeStatus = (currentWorkspaceMember as any)?.status ?? 'ACTIVE';
   const avatarUrl = currentWorkspaceMember?.avatarUrl;
 
@@ -619,8 +647,6 @@ export const EmployeeDashboard = () => {
   const workedMinutes = myData?.workedMinutes ?? 0;
   const leaveBalance = myData?.leaveBalanceDays ?? 0;
   const pendingTasks = myData?.stats?.pendingTasks ?? 0;
-
-  const [elapsedTime, setElapsedTime] = useState('00:00:00');
 
   const formatElapsed = (minutes: number) => {
     const h = Math.floor(minutes / 60);
@@ -634,18 +660,84 @@ export const EmployeeDashboard = () => {
 
   const handleCheckIn = async () => {
     try {
-      await checkIn({ variables: { input: {} } });
-      enqueueSuccessSnackBar({ message: 'Clocked in successfully' });
-    } catch (err) {
-      enqueueErrorSnackBar({
-        message: err instanceof Error ? err.message : 'Check-in failed',
+      let latitude: number | undefined;
+      let longitude: number | undefined;
+
+      if (navigator.geolocation) {
+        const position = await new Promise<GeolocationPosition>(
+          (resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 0,
+            });
+          },
+        );
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      }
+
+      const result = await checkIn({
+        variables: {
+          input: {
+            ...(latitude != null && { latitude }),
+            ...(longitude != null && { longitude }),
+          },
+        },
       });
+
+      const eventData = result?.data?.checkIn;
+      if (eventData?.isRemote && eventData?.approvalStatus === 'PENDING') {
+        enqueueSuccessSnackBar({
+          message: 'Remote clock-in submitted, pending admin approval',
+        });
+      } else {
+        enqueueSuccessSnackBar({ message: 'Clocked in successfully' });
+      }
+    } catch (err) {
+      if (err instanceof GeolocationPositionError) {
+        enqueueErrorSnackBar({
+          message: 'Location access is required for clock-in',
+        });
+      } else {
+        enqueueErrorSnackBar({
+          message: err instanceof Error ? err.message : 'Check-in failed',
+        });
+      }
     }
   };
 
   const handleCheckOut = async () => {
     try {
-      await checkOut({ variables: { input: {} } });
+      let latitude: number | undefined;
+      let longitude: number | undefined;
+
+      if (navigator.geolocation) {
+        try {
+          const position = await new Promise<GeolocationPosition>(
+            (resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(resolve, reject, {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0,
+              });
+            },
+          );
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
+        } catch {
+          // Clock-out can be from anywhere, so ignore geolocation errors
+        }
+      }
+
+      await checkOut({
+        variables: {
+          input: {
+            ...(latitude != null && { latitude }),
+            ...(longitude != null && { longitude }),
+          },
+        },
+      });
       enqueueSuccessSnackBar({ message: 'Clocked out successfully' });
     } catch (err) {
       enqueueErrorSnackBar({
@@ -727,19 +819,11 @@ export const EmployeeDashboard = () => {
               <StyledEmployeeInfo>
                 <StyledDetailItem>
                   <StyledDetailValue>{firstName}</StyledDetailValue>
-                  <StyledDetailLabel>{employeeCode}</StyledDetailLabel>
+                  <StyledDetailLabel>{t`Name`}</StyledDetailLabel>
                 </StyledDetailItem>
                 <StyledDetailItem>
                   <StyledDetailValue>{jobTitle}</StyledDetailValue>
                   <StyledDetailLabel>{t`Job Title`}</StyledDetailLabel>
-                </StyledDetailItem>
-                <StyledDetailItem>
-                  <StyledDetailValue>{employmentType}</StyledDetailValue>
-                  <StyledDetailLabel>{t`Employment Type`}</StyledDetailLabel>
-                </StyledDetailItem>
-                <StyledDetailItem>
-                  <StyledDetailValue>{workLocation}</StyledDetailValue>
-                  <StyledDetailLabel>{t`Work Location`}</StyledDetailLabel>
                 </StyledDetailItem>
               </StyledEmployeeInfo>
               <StyledStatusBadge status={employeeStatus}>
@@ -888,7 +972,7 @@ export const EmployeeDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {tasks.slice(0, 6).map((task) => (
+                    {safeTasks.slice(0, 6).map((task) => (
                       <tr key={task.id}>
                         <StyledTd>
                           <StyledTaskCheckbox
@@ -920,7 +1004,7 @@ export const EmployeeDashboard = () => {
                         </StyledTd>
                       </tr>
                     ))}
-                    {tasks.length === 0 && !tasksLoading && (
+                    {safeTasks.length === 0 && !tasksLoading && (
                       <tr>
                         <StyledTd colSpan={5} style={{ textAlign: 'center', padding: '24px' }}>
                           {t`No tasks assigned yet`}
@@ -1025,7 +1109,7 @@ export const EmployeeDashboard = () => {
                   {t`View All`} <IconChevronRight size={14} />
                 </StyledViewAll>
               </StyledTabPanelHeader>
-              {myData?.pendingLeaveRequestList?.length > 0 ? (
+              {(myData?.pendingLeaveRequestList?.length ?? 0) > 0 ? (
                 <StyledTaskTable>
                   <thead>
                     <tr>
@@ -1069,7 +1153,7 @@ export const EmployeeDashboard = () => {
                   <span>{t`My Payslips`}</span>
                 </StyledTabPanelTitle>
               </StyledTabPanelHeader>
-              {myData?.recentPayslipList?.length > 0 ? (
+              {(myData?.recentPayslipList?.length ?? 0) > 0 ? (
                 <StyledTaskTable>
                   <thead>
                     <tr>

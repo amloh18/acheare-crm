@@ -1,47 +1,35 @@
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
+import { AchareNote } from '@/onboarding/components/AchareNote';
 import { useAchareStartOnboardingMutation } from '@/onboarding/hooks/useAchareStartOnboardingMutation';
 import { useFinishAchareOnboardingMutation } from '@/onboarding/hooks/useFinishAchareOnboardingMutation';
-import { useLingui } from '@lingui/react/macro';
-import { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { styled } from '@linaria/react';
-import { msg } from '@lingui/core/macro';
-import { MainButton } from 'twenty-ui/input';
-import { themeCssVariables } from 'twenty-ui/theme-constants';
-
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${themeCssVariables.spacing[8]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
-
-const StyledLogo = styled.img`
-  width: 64px;
-  height: 64px;
-  border-radius: ${themeCssVariables.border.radius.lg};
-`;
-
-const StyledButtonRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[3]};
-  width: 100%;
-  max-width: 320px;
-`;
-
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { currentUserState } from '@/auth/states/currentUserState';
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
-import { OnboardingStatus } from '~/generated-metadata/graphql';
+import { styled } from '@linaria/react';
+import { i18n } from '@lingui/core';
+import { useLingui } from '@lingui/react/macro';
+import { msg } from '@lingui/core/macro';
+import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { isDefined } from 'twenty-shared/utils';
+import { IconClock } from 'twenty-ui/icon';
+import { themeCssVariables } from 'twenty-ui/theme-constants';
+import { OnboardingStatus } from '~/generated-metadata/graphql';
+
+const StyledHighlightList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[1]};
+  margin: ${themeCssVariables.spacing[2]} 0 0;
+  padding-left: ${themeCssVariables.spacing[5]};
+`;
+
+const WELCOME_HIGHLIGHTS = [
+  msg`Your agency details and working week.`,
+  msg`Which modules your team needs.`,
+  msg`Your hiring pipeline and leave policy.`,
+  msg`Dashboards for each role.`,
+];
 
 export const AchareWelcome = () => {
   const { t } = useLingui();
@@ -83,43 +71,30 @@ export const AchareWelcome = () => {
   }, [finishOnboarding, setCurrentUser, navigate]);
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledContent>
-            <StyledLogo
-              src="/images/integrations/acheare-logo.svg"
-              alt="Achare logo"
-            />
-            <StyledOnboardingStepTitle>
-              {t`Welcome to Achare`}
-            </StyledOnboardingStepTitle>
-          </StyledContent>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Your recruitment agency workspace is ready. Let's get a few things configured so Achare works the way your team works.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledButtonRow>
-          <MainButton
-            title={t`Get Started`}
-            onClick={handleGetStarted}
-            disabled={isNavigating}
-            fullWidth
-          />
-          <MainButton
-            title={t`I'll do this later`}
-            onClick={handleDoThisLater}
-            disabled={isNavigating}
-            fullWidth
-            variant="secondary"
-          />
-        </StyledButtonRow>
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+    <AchareOnboardingShell
+      title={t`Welcome to Achare`}
+      subtitle={t`Let's set your workspace up the way your agency actually works. It takes about five minutes, and every answer can be changed later.`}
+      onContinue={handleGetStarted}
+      continueLabel={t`Get started`}
+      onSkip={handleDoThisLater}
+      skipLabel={t`I'll do this later`}
+      isLoading={isNavigating}
+      hideBack
+      footnote={t`You can stop at any point — your progress is saved and you will pick up where you left off.`}
+    >
+      <AchareNote
+        tone="info"
+        icon={
+          <IconClock size={14} color={themeCssVariables.font.color.tertiary} />
+        }
+      >
+        {t`We'll ask about:`}
+        <StyledHighlightList>
+          {WELCOME_HIGHLIGHTS.map((highlight) => (
+            <li key={highlight.id}>{i18n._(highlight)}</li>
+          ))}
+        </StyledHighlightList>
+      </AchareNote>
+    </AchareOnboardingShell>
   );
 };

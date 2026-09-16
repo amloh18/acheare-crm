@@ -57,6 +57,10 @@ export enum EngineComponentKey {
   CANCEL_MESSAGE_CAMPAIGN = 'CANCEL_MESSAGE_CAMPAIGN',
   DUPLICATE_MESSAGE_CAMPAIGN = 'DUPLICATE_MESSAGE_CAMPAIGN',
   EMAIL_BLOCK_SETTINGS = 'EMAIL_BLOCK_SETTINGS',
+  CLOCK_IN = 'CLOCK_IN',
+  REQUEST_LEAVE = 'REQUEST_LEAVE',
+  VIEW_MY_PAYSLIPS = 'VIEW_MY_PAYSLIPS',
+  RUN_PAYROLL = 'RUN_PAYROLL',
 
   // TODO: Remove deprecated keys once upgrade:1-21:refactor-navigation-commands has run on all workspaces
   // Deprecated: replaced by NAVIGATION engine key with payload

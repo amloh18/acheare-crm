@@ -1,10 +1,11 @@
 import { AchareFeatureCompositionEditor } from '@/onboarding/components/AchareFeatureCompositionEditor';
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareNote } from '@/onboarding/components/AchareNote';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
+import {
+  AchareSelectableCard,
+  AchareSelectableCardGroup,
+} from '@/onboarding/components/AchareSelectableCard';
 import { useCompleteAchareFeatureSelectionMutation } from '@/onboarding/hooks/useCompleteAchareFeatureSelectionMutation';
 import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
@@ -12,6 +13,7 @@ import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useMemo, useState } from 'react';
+import { IconInfoCircle } from 'twenty-ui/icon';
 import {
   ACHARE_FEATURES,
   ACHARE_FEATURE_PRESETS,
@@ -24,95 +26,24 @@ import {
   getMissingAchareFeatureDependencies,
   resolveAchareFeatureDependencies,
 } from 'twenty-shared/workspace';
-import { MainButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { GetWorkspaceFeatureConfigurationDocument } from '~/generated-metadata/graphql';
-
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[5]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
-
-const StyledSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[3]};
-`;
-
-const StyledSectionTitle = styled.div`
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.sm};
-  font-weight: ${themeCssVariables.font.weight.medium};
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-`;
-
-const StyledPresetGrid = styled.div`
-  display: grid;
-  gap: ${themeCssVariables.spacing[3]};
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-`;
-
-const StyledPresetCard = styled.button<{ isSelected: boolean }>`
-  background: ${({ isSelected }) =>
-    isSelected
-      ? themeCssVariables.background.transparent.blue
-      : themeCssVariables.background.primary};
-  border: 1px solid
-    ${({ isSelected }) =>
-      isSelected
-        ? themeCssVariables.border.color.blue
-        : themeCssVariables.border.color.medium};
-  border-radius: ${themeCssVariables.border.radius.md};
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[1]};
-  padding: ${themeCssVariables.spacing[4]};
-  text-align: left;
-  transition: all 0.15s ease;
-
-  &:hover {
-    border-color: ${themeCssVariables.border.color.blue};
-  }
-`;
-
-const StyledPresetLabel = styled.div`
-  color: ${themeCssVariables.font.color.primary};
-  font-size: ${themeCssVariables.font.size.sm};
-  font-weight: ${themeCssVariables.font.weight.semiBold};
-`;
-
-const StyledPresetDescription = styled.div`
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.xs};
-  line-height: 1.5;
-`;
-
-const StyledNotice = styled.div`
-  background: ${themeCssVariables.background.transparent.blue};
-  border-radius: ${themeCssVariables.border.radius.md};
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.sm};
-  line-height: 1.5;
-  padding: ${themeCssVariables.spacing[3]} ${themeCssVariables.spacing[4]};
-`;
 
 const StyledStepChipRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${themeCssVariables.spacing[1]};
+  gap: ${themeCssVariables.spacing[2]};
 `;
 
 const StyledStepChip = styled.span`
-  background: ${themeCssVariables.background.secondary};
-  border-radius: ${themeCssVariables.border.radius.sm};
+  align-items: center;
+  background: ${themeCssVariables.background.primary};
+  border: 1px solid ${themeCssVariables.border.color.light};
+  border-radius: ${themeCssVariables.border.radius.pill};
   color: ${themeCssVariables.font.color.secondary};
+  display: inline-flex;
   font-size: ${themeCssVariables.font.size.xs};
-  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
+  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[3]};
 `;
 
 const DEFAULT_PRESET_KEY: AchareFeaturePresetKey = 'RECRUITMENT_AGENCY';
@@ -128,7 +59,8 @@ const DEFAULT_PRESET_KEY: AchareFeaturePresetKey = 'RECRUITMENT_AGENCY';
 export const AchareFeatureSelection = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
-  const [completeFeatureSelection] = useCompleteAchareFeatureSelectionMutation();
+  const [completeFeatureSelection] =
+    useCompleteAchareFeatureSelectionMutation();
   const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
 
@@ -159,18 +91,21 @@ export const AchareFeatureSelection = () => {
     [selectedFeatures],
   );
 
-  const handleSelectPreset = useCallback((presetKey: AchareFeaturePresetKey) => {
-    setSelectedPresetKey(presetKey);
+  const handleSelectPreset = useCallback(
+    (presetKey: AchareFeaturePresetKey) => {
+      setSelectedPresetKey(presetKey);
 
-    const preset = ACHARE_FEATURE_PRESETS[presetKey];
+      const preset = ACHARE_FEATURE_PRESETS[presetKey];
 
-    // "Custom" keeps whatever the user already chose.
-    if (preset.features.length === 0) {
-      return;
-    }
+      // "Custom" keeps whatever the user already chose.
+      if (preset.features.length === 0) {
+        return;
+      }
 
-    setSelectedFeatures(resolveAchareFeatureDependencies(preset.features));
-  }, []);
+      setSelectedFeatures(resolveAchareFeatureDependencies(preset.features));
+    },
+    [],
+  );
 
   const handleToggleModule = useCallback((moduleKey: AchareModuleKey) => {
     setSelectedPresetKey('CUSTOM');
@@ -226,82 +161,73 @@ export const AchareFeatureSelection = () => {
   ]);
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`Which modules do you need?`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Pick the parts of Achare your team will use. Your navigation, permissions, dashboards and the rest of setup adapt to your choice.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledContent>
-          <StyledSection>
-            <StyledSectionTitle>{t`Start from a preset`}</StyledSectionTitle>
-            <StyledPresetGrid>
-              {Object.values(ACHARE_FEATURE_PRESETS).map((preset) => (
-                <StyledPresetCard
-                  key={preset.key}
-                  isSelected={preset.key === selectedPresetKey}
-                  onClick={() => handleSelectPreset(preset.key)}
-                  disabled={isNavigating}
-                >
-                  <StyledPresetLabel>{preset.label}</StyledPresetLabel>
-                  <StyledPresetDescription>
-                    {preset.description}
-                  </StyledPresetDescription>
-                </StyledPresetCard>
-              ))}
-            </StyledPresetGrid>
-          </StyledSection>
-
-          <StyledSection>
-            <StyledSectionTitle>{t`Modules`}</StyledSectionTitle>
-            <AchareFeatureCompositionEditor
-              selectedFeatures={selectedFeatures}
-              onToggleModule={handleToggleModule}
-              onToggleFeature={handleToggleFeature}
+    <AchareOnboardingShell
+      title={t`Which parts of Achare do you need?`}
+      subtitle={t`Pick the modules your team will use. Your navigation, permissions, dashboards and the rest of setup all follow this choice.`}
+      onContinue={handleContinue}
+      isLoading={isNavigating}
+      isContinueDisabled={selectedFeatures.length === 0}
+      footnote={t`You can turn modules on or off any time from Settings → Setup Center. Nothing is deleted when you turn something off.`}
+    >
+      <AchareFieldGroup
+        label={t`Start from a preset`}
+        hint={t`A preset just pre-selects modules for you. You can change anything in the list below afterwards.`}
+      >
+        <AchareSelectableCardGroup layout="grid">
+          {Object.values(ACHARE_FEATURE_PRESETS).map((preset) => (
+            <AchareSelectableCard
+              key={preset.key}
+              role="radio"
+              title={preset.label}
+              description={preset.description}
+              isSelected={preset.key === selectedPresetKey}
+              onClick={() => handleSelectPreset(preset.key)}
               disabled={isNavigating}
             />
-          </StyledSection>
+          ))}
+        </AchareSelectableCardGroup>
+      </AchareFieldGroup>
 
-          {autoEnabledFeatures.length > 0 && (
-            <StyledNotice>
-              {t`Also turning on`}{' '}
-              {autoEnabledFeatures
-                .map((feature) => ACHARE_FEATURES[feature].label)
-                .join(', ')}{' '}
-              {t`— they are required by the modules you picked.`}
-            </StyledNotice>
-          )}
-
-          <StyledSection>
-            <StyledSectionTitle>{t`Your setup steps`}</StyledSectionTitle>
-            <StyledStepChipRow>
-              {generatedSteps.map((step) => (
-                <StyledStepChip key={step}>
-                  {ACHARE_ONBOARDING_STEP_LABEL[step]}
-                </StyledStepChip>
-              ))}
-            </StyledStepChipRow>
-          </StyledSection>
-        </StyledContent>
-      </OnboardingStepAnimatedItem>
-
-      <OnboardingStepAnimatedItem index={3}>
-        <MainButton
-          title={t`Continue`}
-          onClick={handleContinue}
+      <AchareFieldGroup
+        label={t`Modules`}
+        hint={t`Turn a whole module on, or fine-tune the individual items inside it.`}
+      >
+        <AchareFeatureCompositionEditor
+          selectedFeatures={selectedFeatures}
+          onToggleModule={handleToggleModule}
+          onToggleFeature={handleToggleFeature}
           disabled={isNavigating}
-          fullWidth
         />
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+      </AchareFieldGroup>
+
+      {autoEnabledFeatures.length > 0 && (
+        <AchareNote
+          tone="info"
+          icon={
+            <IconInfoCircle
+              size={14}
+              color={themeCssVariables.font.color.tertiary}
+            />
+          }
+        >
+          {t`We will also turn on ${autoEnabledFeatures
+            .map((feature) => ACHARE_FEATURES[feature].label)
+            .join(', ')} — the modules you picked need them to work.`}
+        </AchareNote>
+      )}
+
+      <AchareFieldGroup
+        label={t`Your setup steps`}
+        hint={t`This is the setup you will be walked through, based on the modules above.`}
+      >
+        <StyledStepChipRow>
+          {generatedSteps.map((step) => (
+            <StyledStepChip key={step}>
+              {ACHARE_ONBOARDING_STEP_LABEL[step]}
+            </StyledStepChip>
+          ))}
+        </StyledStepChipRow>
+      </AchareFieldGroup>
+    </AchareOnboardingShell>
   );
 };

@@ -1,4 +1,4 @@
-import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
+import { SetMetadata, UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Mutation, Query } from '@nestjs/graphql';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
@@ -9,6 +9,7 @@ import { AuthWorkspaceMemberId } from 'src/engine/decorators/auth/auth-workspace
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
+import { AchareRoleGuard, ROLES_KEY } from 'src/modules/hr/guards/achare-role.guard';
 import { MyWorkspaceService } from 'src/modules/hr/services/my-workspace.service';
 import { AnnouncementWorkspaceEntity } from 'src/modules/hr/standard-objects/announcement.workspace-entity';
 import {
@@ -23,6 +24,8 @@ import {
 export class AnnouncementResolver {
   constructor(private readonly myWorkspaceService: MyWorkspaceService) {}
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => AnnouncementDTO)
   async publishAnnouncement(
     @Args('input') input: PublishAnnouncementInputDTO,

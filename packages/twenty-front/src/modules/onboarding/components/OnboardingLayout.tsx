@@ -16,6 +16,11 @@ type OnboardingLayoutProps = {
   onBack?: () => void;
   isBackDisabled?: boolean;
   freeCredits?: number;
+  /**
+   * The Achare steps draw their own rail, heading and action bar, so the
+   * shared header would only duplicate the brand and the back affordance.
+   */
+  isHeaderHidden?: boolean;
 };
 
 export const OnboardingLayout = ({
@@ -23,13 +28,16 @@ export const OnboardingLayout = ({
   onBack,
   isBackDisabled,
   freeCredits,
+  isHeaderHidden = false,
 }: OnboardingLayoutProps) => (
   <StyledBackground>
-    <OnboardingHeader
-      onBack={onBack}
-      isBackDisabled={isBackDisabled}
-      freeCredits={freeCredits}
-    />
+    {!isHeaderHidden && (
+      <OnboardingHeader
+        onBack={onBack}
+        isBackDisabled={isBackDisabled}
+        freeCredits={freeCredits}
+      />
+    )}
     {children}
   </StyledBackground>
 );

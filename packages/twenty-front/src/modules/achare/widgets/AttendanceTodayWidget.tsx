@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +11,10 @@ import {
 } from 'twenty-ui/icon';
 import { useCheckInMutation } from '@/hr/hooks/useCheckInMutation';
 import { useCheckOutMutation } from '@/hr/hooks/useCheckOutMutation';
+import { useAllEmployeesAttendance } from '@/hr/hooks/useAdminAttendance';
+import { useMyWorkspaceData } from '@/hr/hooks/useMyWorkspaceData';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -163,33 +166,61 @@ const StyledActionButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
   }
 `;
 
-interface AttendanceTodayWidgetProps {
-  present?: number;
-  late?: number;
-  absent?: number;
-  onLeave?: number;
-  currentAttendanceStatus?: string;
-  loading?: boolean;
-  error?: boolean;
-}
+const getTodayRange = () => {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59).toISOString();
+  return { startDate: start, endDate: end };
+};
 
-export const AttendanceTodayWidget = ({
-  present = 42,
-  late = 3,
-  absent = 2,
-  onLeave = 4,
-  currentAttendanceStatus = 'PRESENT',
-  loading,
-  error,
-}: AttendanceTodayWidgetProps) => {
+export const AttendanceTodayWidget = () => {
   const navigate = useNavigate();
   const [checkIn] = useCheckInMutation();
   const [checkOut] = useCheckOutMutation();
   const { enqueueSuccessSnackBar, enqueueErrorSnackBar } = useSnackBar();
-  const [userStatus, setUserStatus] = useState(currentAttendanceStatus);
-  const [checkInTime, setCheckInTime] = useState<string | null>(
-    currentAttendanceStatus === 'PRESENT' ? '09:12 AM' : null,
-  );
+
+  const { startDate, endDate } = getTodayRange();
+
+  const {
+    data: attendanceData,
+    loading: attendanceLoading,
+  } = useAllEmployeesAttendance({ startDate, endDate }) as { data: any; loading: boolean };
+
+  const {
+    data: myData,
+    loading: myLoading,
+  } = useMyWorkspaceData() as { data: any; loading: boolean };
+
+  const attendanceSummary = attendanceData?.getAllEmployeesAttendance;
+
+  const [userStatus, setUserStatus] = useState<string | null>(null);
+  const [checkInTime, setCheckInTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (myData?.myWorkspaceData) {
+      const ws = myData.myWorkspaceData;
+      if (ws.attendanceStatus === 'PRESENT') {
+        setUserStatus('PRESENT');
+        if (ws.firstCheckIn) {
+          try {
+            const date = new Date(ws.firstCheckIn);
+            setCheckInTime(date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+          } catch {
+            setCheckInTime('09:00 AM');
+          }
+        }
+      } else if (ws.attendanceStatus === 'CHECKED_OUT') {
+        setUserStatus('CHECKED_OUT');
+      } else {
+        setUserStatus(null);
+      }
+    }
+  }, [myData]);
+
+  const present = attendanceSummary?.presentToday ?? 0;
+  const late = attendanceSummary?.lateEntry ?? 0;
+  const onLeaveCount = attendanceSummary?.onLeave ?? 0;
+  const absent = attendanceSummary?.absent ?? 0;
 
   const handleCheckIn = async () => {
     try {
@@ -216,6 +247,8 @@ export const AttendanceTodayWidget = ({
     }
   };
 
+  const isLoading = attendanceLoading || myLoading;
+
   return (
     <StyledCard>
       <StyledHeader>
@@ -229,14 +262,9 @@ export const AttendanceTodayWidget = ({
         </StyledViewAll>
       </StyledHeader>
 
-      {loading ? (
+      {isLoading ? (
         <StyledEmptyState>
           <StyledEmptyText>Loading attendance data...</StyledEmptyText>
-        </StyledEmptyState>
-      ) : error ? (
-        <StyledEmptyState>
-          <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
-          <StyledEmptyText>Unable to load attendance</StyledEmptyText>
         </StyledEmptyState>
       ) : (
         <>
@@ -254,7 +282,7 @@ export const AttendanceTodayWidget = ({
               <StyledStatLabel>Absent</StyledStatLabel>
             </StyledStatBox>
             <StyledStatBox toneColor="#8b5cf6">
-              <StyledStatValue>{onLeave}</StyledStatValue>
+              <StyledStatValue>{onLeaveCount}</StyledStatValue>
               <StyledStatLabel>On Leave</StyledStatLabel>
             </StyledStatBox>
           </StyledStatsRow>
@@ -262,7 +290,7 @@ export const AttendanceTodayWidget = ({
           <StyledPunchRow>
             <StyledPunchInfo>
               <StyledPunchStatus>
-                Status: {userStatus === 'PRESENT' ? 'Clocked In' : 'Not Clocked In'}
+                Status: {userStatus === 'PRESENT' ? 'Clocked In' : userStatus === 'CHECKED_OUT' ? 'Checked Out' : 'Not Clocked In'}
               </StyledPunchStatus>
               <StyledPunchTime>
                 {checkInTime ? `Punched in at ${checkInTime}` : 'Ready for duty'}

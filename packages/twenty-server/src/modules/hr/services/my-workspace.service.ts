@@ -39,74 +39,99 @@ export class MyWorkspaceService {
   ): Promise<MyWorkspaceData> {
     return this.workspaceOrmManager.executeInWorkspaceContext(
       async () => {
+        const safeGetRepository = <T>(name: string) => {
+          try {
+            return this.workspaceOrmManager.getRepository<T>(name);
+          } catch {
+            return null;
+          }
+        };
+
         const employeeRepository =
-          this.workspaceOrmManager.getRepository<EmployeeWorkspaceEntity>(
-            'employee',
-          );
-
+          safeGetRepository<EmployeeWorkspaceEntity>('employee');
         const attendanceRepository =
-          this.workspaceOrmManager.getRepository<AttendanceDayWorkspaceEntity>(
-            'attendanceDay',
-          );
-
+          safeGetRepository<AttendanceDayWorkspaceEntity>('attendanceDay');
         const leaveRequestRepository =
-          this.workspaceOrmManager.getRepository<LeaveRequestWorkspaceEntity>(
-            'leaveRequest',
-          );
-
+          safeGetRepository<LeaveRequestWorkspaceEntity>('leaveRequest');
         const leaveBalanceRepository =
-          this.workspaceOrmManager.getRepository<LeaveBalanceWorkspaceEntity>(
-            'leaveBalance',
-          );
-
+          safeGetRepository<LeaveBalanceWorkspaceEntity>('leaveBalance');
         const payslipRepository =
-          this.workspaceOrmManager.getRepository<PayslipWorkspaceEntity>(
-            'payslip',
-          );
-
+          safeGetRepository<PayslipWorkspaceEntity>('payslip');
         const announcementRepository =
-          this.workspaceOrmManager.getRepository<AnnouncementWorkspaceEntity>(
-            'announcement',
-          );
+          safeGetRepository<AnnouncementWorkspaceEntity>('announcement');
 
-        const employee = await employeeRepository.findOne({
-          where: { personId: userId },
-        });
+        let employee: EmployeeWorkspaceEntity | null = null;
+        if (employeeRepository) {
+          try {
+            employee = await employeeRepository.findOne({
+              where: { personId: userId },
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query employee: ${e}`);
+          }
+        }
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const attendanceToday = employee
-          ? await attendanceRepository.findOne({
+        let attendanceToday: AttendanceDayWorkspaceEntity | null = null;
+        if (employee && attendanceRepository) {
+          try {
+            attendanceToday = await attendanceRepository.findOne({
               where: { employeeId: employee.id, workDate: today },
-            })
-          : null;
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query attendanceDay: ${e}`);
+          }
+        }
 
-        const pendingLeaveRequests = employee
-          ? await leaveRequestRepository.find({
+        let pendingLeaveRequests: LeaveRequestWorkspaceEntity[] = [];
+        if (employee && leaveRequestRepository) {
+          try {
+            pendingLeaveRequests = await leaveRequestRepository.find({
               where: {
                 employeeId: employee.id,
                 status: 'PENDING',
               },
-            })
-          : [];
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query leaveRequest: ${e}`);
+          }
+        }
 
         const currentYear = new Date().getFullYear();
-        const leaveBalances = employee
-          ? await leaveBalanceRepository.find({
+        let leaveBalances: LeaveBalanceWorkspaceEntity[] = [];
+        if (employee && leaveBalanceRepository) {
+          try {
+            leaveBalances = await leaveBalanceRepository.find({
               where: { employeeId: employee.id, year: currentYear },
-            })
-          : [];
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query leaveBalance: ${e}`);
+          }
+        }
 
-        const recentPayslips = employee
-          ? await payslipRepository.find({
+        let recentPayslips: PayslipWorkspaceEntity[] = [];
+        if (employee && payslipRepository) {
+          try {
+            recentPayslips = await payslipRepository.find({
               where: { employeeId: employee.id },
-            })
-          : [];
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query payslip: ${e}`);
+          }
+        }
 
-        const announcements = await announcementRepository.find({
-          where: { isPublished: true },
-        });
+        let announcements: AnnouncementWorkspaceEntity[] = [];
+        if (announcementRepository) {
+          try {
+            announcements = await announcementRepository.find({
+              where: { isPublished: true },
+            });
+          } catch (e) {
+            this.logger.warn(`Failed to query announcement: ${e}`);
+          }
+        }
 
         const activeAnnouncements = announcements.filter((a) => {
           if (a.expiresAt && new Date(a.expiresAt) < today) {
@@ -184,15 +209,25 @@ export class MyWorkspaceService {
   ): Promise<AnnouncementWorkspaceEntity[]> {
     return this.workspaceOrmManager.executeInWorkspaceContext(
       async () => {
-        const announcementRepository =
-          this.workspaceOrmManager.getRepository<AnnouncementWorkspaceEntity>(
-            'announcement',
-          );
+        let announcementRepository: any = null;
+        try {
+          announcementRepository =
+            this.workspaceOrmManager.getRepository<AnnouncementWorkspaceEntity>(
+              'announcement',
+            );
+        } catch {
+          return [];
+        }
 
-        const employeeRepository =
-          this.workspaceOrmManager.getRepository<EmployeeWorkspaceEntity>(
-            'employee',
-          );
+        let employeeRepository: any = null;
+        try {
+          employeeRepository =
+            this.workspaceOrmManager.getRepository<EmployeeWorkspaceEntity>(
+              'employee',
+            );
+        } catch {
+          return [];
+        }
 
         const employee = await employeeRepository.findOne({
           where: { id: employeeId },

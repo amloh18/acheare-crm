@@ -1,18 +1,14 @@
 import { currentUserState } from '@/auth/states/currentUserState';
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
 import { useCompleteAchareBasicSetupMutation } from '@/onboarding/hooks/useCompleteAchareBasicSetupMutation';
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useUpdateWorkspaceMemberSettings } from '@/settings/profile/hooks/useUpdateWorkspaceMemberSettings';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { TextInput } from '@/ui/input/components/TextInput';
 import { Select } from '@/ui/input/components/Select';
+import { TextInput } from '@/ui/input/components/TextInput';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
@@ -24,34 +20,28 @@ import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { isDefined } from 'twenty-shared/utils';
-import { MainButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { z } from 'zod';
 
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${themeCssVariables.spacing[6]};
-  max-width: 100%;
-  padding-bottom: ${themeCssVariables.spacing[4]};
-  width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-`;
-
-const StyledRow = styled.div`
-  display: flex;
-  gap: ${themeCssVariables.spacing[3]};
+  gap: ${themeCssVariables.spacing[8]};
   width: 100%;
 `;
 
-const StyledField = styled.div`
-  flex: 1;
-  min-width: 0;
+const StyledRow = styled.div`
+  display: grid;
+  gap: ${themeCssVariables.spacing[3]};
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 `;
 
-const StyledButtonContainer = styled.div`
-  display: flex;
-  max-width: 100%;
-  width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
+const StyledField = styled.div`
+  min-width: 0;
 `;
 
 const countryOptions = [
@@ -81,7 +71,9 @@ const timezoneOptions = [
 ];
 
 const validationSchema = z.object({
-  agencyName: z.string().min(1, { error: i18n._(msg`Agency name is required`) }),
+  agencyName: z
+    .string()
+    .min(1, { error: i18n._(msg`Agency name is required`) }),
   country: z.string().min(1, { error: i18n._(msg`Country is required`) }),
   timezone: z.string().min(1, { error: i18n._(msg`Timezone is required`) }),
   currency: z.string().min(1, { error: i18n._(msg`Currency is required`) }),
@@ -121,6 +113,7 @@ export const AchareBasicSetup = () => {
 
   const onSubmit: SubmitHandler<Form> = useCallback(
     async (data) => {
+      setIsNavigating(true);
       try {
         if (currentWorkspaceMember?.id) {
           await updateWorkspaceMemberSettings({
@@ -159,8 +152,7 @@ export const AchareBasicSetup = () => {
         });
 
         setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
-        setIsNavigating(true);
-      } catch (error: any) {
+      } catch (error) {
         setIsNavigating(false);
         enqueueErrorSnackBar({
           apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
@@ -178,28 +170,28 @@ export const AchareBasicSetup = () => {
   );
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`Basic Setup`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Tell us about your agency and yourself.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledForm>
+    <AchareOnboardingShell
+      title={t`Tell us about your agency`}
+      subtitle={t`Your workspace name, region and currency. Achare uses these for invoices, payroll and every date it shows you.`}
+      onContinue={handleSubmit(onSubmit)}
+      isLoading={isNavigating || isSubmitting}
+      isContinueDisabled={!isValid}
+      footnote={t`Your name is what your teammates will see on records you create.`}
+    >
+      <StyledForm>
+        <AchareFieldGroup
+          label={t`Your agency`}
+          hint={t`Shown across the app and on anything you send to clients.`}
+        >
           <Controller
             name="agencyName"
             control={control}
-            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+            render={({
+              field: { onChange, onBlur, value },
+              fieldState: { error },
+            }) => (
               <TextInput
-                label={t`Agency / Company Name`}
+                label={t`Agency / company name`}
                 value={value}
                 onBlur={onBlur}
                 onChange={onChange}
@@ -209,24 +201,20 @@ export const AchareBasicSetup = () => {
               />
             )}
           />
-
           <StyledRow>
             <StyledField>
               <Controller
                 name="country"
                 control={control}
-                render={({ field: { onChange, value }, fieldState: { error } }) => (
-                  <>
-                    <Select
-                      label={t`Country`}
-                      value={value}
-                      onChange={onChange}
-                      options={countryOptions}
-                      fullWidth
-                      dropdownId="achare-country-select"
-                    />
-                    {error?.message && <span>{error.message}</span>}
-                  </>
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    label={t`Country`}
+                    value={value}
+                    onChange={onChange}
+                    options={countryOptions}
+                    fullWidth
+                    dropdownId="achare-country-select"
+                  />
                 )}
               />
             </StyledField>
@@ -234,49 +222,50 @@ export const AchareBasicSetup = () => {
               <Controller
                 name="currency"
                 control={control}
-                render={({ field: { onChange, value }, fieldState: { error } }) => (
-                  <>
-                    <Select
-                      label={t`Currency`}
-                      value={value}
-                      onChange={onChange}
-                      options={currencyOptions}
-                      fullWidth
-                      dropdownId="achare-currency-select"
-                    />
-                    {error?.message && <span>{error.message}</span>}
-                  </>
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    label={t`Currency`}
+                    value={value}
+                    onChange={onChange}
+                    options={currencyOptions}
+                    fullWidth
+                    dropdownId="achare-currency-select"
+                  />
                 )}
               />
             </StyledField>
           </StyledRow>
-
           <Controller
             name="timezone"
             control={control}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <>
-                <Select
-                  label={t`Timezone`}
-                  value={value}
-                  onChange={onChange}
-                  options={timezoneOptions}
-                  fullWidth
-                  dropdownId="achare-timezone-select"
-                />
-                {error?.message && <span>{error.message}</span>}
-              </>
+            render={({ field: { onChange, value } }) => (
+              <Select
+                label={t`Timezone`}
+                value={value}
+                onChange={onChange}
+                options={timezoneOptions}
+                fullWidth
+                dropdownId="achare-timezone-select"
+              />
             )}
           />
+        </AchareFieldGroup>
 
+        <AchareFieldGroup
+          label={t`About you`}
+          hint={t`You are the workspace owner, so this is the name that appears on your account.`}
+        >
           <StyledRow>
             <StyledField>
               <Controller
                 name="firstName"
                 control={control}
-                render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
                   <TextInput
-                    label={t`First Name`}
+                    label={t`First name`}
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
@@ -290,9 +279,12 @@ export const AchareBasicSetup = () => {
               <Controller
                 name="lastName"
                 control={control}
-                render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
                   <TextInput
-                    label={t`Last Name`}
+                    label={t`Last name`}
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
@@ -303,19 +295,8 @@ export const AchareBasicSetup = () => {
               />
             </StyledField>
           </StyledRow>
-        </StyledForm>
-      </OnboardingStepAnimatedItem>
-
-      <OnboardingStepAnimatedItem index={3}>
-        <StyledButtonContainer>
-          <MainButton
-            title={t`Continue`}
-            onClick={handleSubmit(onSubmit)}
-            disabled={!isValid || isSubmitting || isNavigating}
-            fullWidth
-          />
-        </StyledButtonContainer>
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+        </AchareFieldGroup>
+      </StyledForm>
+    </AchareOnboardingShell>
   );
 };

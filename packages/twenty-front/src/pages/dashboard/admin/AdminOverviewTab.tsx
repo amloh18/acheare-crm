@@ -50,7 +50,8 @@ export const AdminOverviewTab = () => {
     loading: employeesLoading,
     error: employeesError,
   } = useFindManyRecords({
-    objectNameSingular: CoreObjectNameSingular.Person,
+    objectNameSingular: 'employee' as CoreObjectNameSingular,
+    recordGqlFields: { id: true, status: true },
   });
 
   const {

@@ -1,4 +1,4 @@
-import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
+import { SetMetadata, UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Mutation, Query } from '@nestjs/graphql';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
@@ -9,6 +9,7 @@ import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorat
 import { AuthWorkspaceMemberId } from 'src/engine/decorators/auth/auth-workspace-member-id.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
+import { AchareRoleGuard, ROLES_KEY } from 'src/modules/hr/guards/achare-role.guard';
 import { AdminAttendanceService } from 'src/modules/hr/services/admin-attendance.service';
 import { LeaveService } from 'src/modules/hr/services/leave.service';
 import {
@@ -90,6 +91,8 @@ export class AdminAttendanceResolver {
     return this.leaveService.getLeaveBalance(employeeId, year, workspace.id);
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => Boolean)
   async approveLeaveRequest(
     @Args('leaveRequestId') leaveRequestId: string,
@@ -105,6 +108,8 @@ export class AdminAttendanceResolver {
     return true;
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => Boolean)
   async rejectLeaveRequest(
     @Args('leaveRequestId') leaveRequestId: string,

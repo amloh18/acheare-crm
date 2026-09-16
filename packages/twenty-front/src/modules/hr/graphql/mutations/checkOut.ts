@@ -8,6 +8,11 @@ export const CHECK_OUT = gql`
       eventType
       timestamp
       source
+      latitude
+      longitude
+      locationName
+      isRemote
+      approvalStatus
     }
   }
 `;

@@ -7,12 +7,21 @@ import { PrefetchPlanRequiredStepEffect } from '@/onboarding/effect-components/P
 import { useGoBackToPreviousOnboardingStep } from '@/onboarding/hooks/useGoBackToPreviousOnboardingStep';
 import { useOnboardingFreeCreditsTotal } from '@/onboarding/hooks/useOnboardingFreeCreditsTotal';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
+import { useLocation } from 'react-router-dom';
 import { isDefined } from 'twenty-shared/utils';
+
+/**
+ * Every Achare onboarding route lives under this prefix. Those steps render
+ * their own chrome (progress rail, heading, action bar), so the shared
+ * onboarding header is suppressed for them.
+ */
+const ACHARE_ONBOARDING_ROUTE_PREFIX = '/acheare/';
 
 export const OnboardingStepLayout = () => {
   const onboardingConfig = useAtomStateValue(onboardingConfigState);
   const freeCreditsTotal = useOnboardingFreeCreditsTotal();
   const currentUser = useAtomStateValue(currentUserState);
+  const { pathname } = useLocation();
   const {
     goBackToPreviousOnboardingStep,
     isGoingBackToPreviousOnboardingStep,
@@ -22,8 +31,11 @@ export const OnboardingStepLayout = () => {
     currentUser?.previousOnboardingStatus,
   );
 
+  const isAchareStep = pathname.startsWith(ACHARE_ONBOARDING_ROUTE_PREFIX);
+
   return (
     <OnboardingLayout
+      isHeaderHidden={isAchareStep}
       onBack={
         hasPreviousOnboardingStep
           ? () => {

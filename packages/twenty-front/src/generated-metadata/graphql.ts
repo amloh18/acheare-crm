@@ -224,6 +224,10 @@ export type AchareWorkspaceFeatureMutationSuccess = {
   success: Scalars['Boolean']['output'];
 };
 
+export type ActivateEmployeeInput = {
+  employeeId: Scalars['String']['input'];
+};
+
 export type ActivateWorkspaceInput = {
   /** Deprecated: the workspace name is set at creation (signUpInNewWorkspace) and this field is ignored during activation. Kept for backward compatibility. */
   displayName?: InputMaybe<Scalars['String']['input']>;
@@ -395,6 +399,38 @@ export type AiSystemPromptSection = {
   title: Scalars['String']['output'];
 };
 
+export type AllEmployeesAttendanceInput = {
+  departmentId?: InputMaybe<Scalars['String']['input']>;
+  endDate: Scalars['String']['input'];
+  startDate: Scalars['String']['input'];
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AllEmployeesAttendanceSummary = {
+  __typename?: 'AllEmployeesAttendanceSummary';
+  absent: Scalars['Float']['output'];
+  employees: Array<EmployeeAttendanceRow>;
+  lateEntry: Scalars['Float']['output'];
+  onLeave: Scalars['Float']['output'];
+  presentToday: Scalars['Float']['output'];
+  totalEmployees: Scalars['Float']['output'];
+};
+
+export type AllLeaveRequestsInput = {
+  employeeId?: InputMaybe<Scalars['String']['input']>;
+  leaveTypeId?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AllLeaveRequestsResult = {
+  __typename?: 'AllLeaveRequestsResult';
+  approvedCount: Scalars['Float']['output'];
+  pendingCount: Scalars['Float']['output'];
+  rejectedCount: Scalars['Float']['output'];
+  requests: Array<LeaveRequestWithEmployee>;
+  totalCount: Scalars['Float']['output'];
+};
+
 export enum AllMetadataName {
   agent = 'agent',
   applicationVariable = 'applicationVariable',
@@ -440,6 +476,17 @@ export enum AnalyticsType {
   PAGEVIEW = 'PAGEVIEW',
   TRACK = 'TRACK'
 }
+
+export type Announcement = {
+  __typename?: 'Announcement';
+  audience?: Maybe<Scalars['String']['output']>;
+  authorId?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  expiresAt?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  publishAt?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+};
 
 export type ApiConfig = {
   __typename?: 'ApiConfig';
@@ -710,6 +757,52 @@ export type ApprovedAccessDomain = {
   domain: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
   isValidated: Scalars['Boolean']['output'];
+};
+
+export type AssignDepartmentInput = {
+  departmentId: Scalars['String']['input'];
+  employeeId: Scalars['String']['input'];
+};
+
+export type AssignManagerInput = {
+  employeeId: Scalars['String']['input'];
+  managerId: Scalars['String']['input'];
+};
+
+export type AssignTeamInput = {
+  employeeId: Scalars['String']['input'];
+  teamId: Scalars['String']['input'];
+};
+
+export type AttendanceCorrection = {
+  __typename?: 'AttendanceCorrection';
+  employeeId: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  reason?: Maybe<Scalars['String']['output']>;
+  reviewedAt?: Maybe<Scalars['String']['output']>;
+  status: Scalars['String']['output'];
+  workDate: Scalars['String']['output'];
+};
+
+export type AttendanceEvent = {
+  __typename?: 'AttendanceEvent';
+  employeeId: Scalars['String']['output'];
+  eventType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  source: Scalars['String']['output'];
+  timestamp?: Maybe<Scalars['String']['output']>;
+};
+
+export type AttendanceSummary = {
+  __typename?: 'AttendanceSummary';
+  absent: Scalars['Float']['output'];
+  halfDay: Scalars['Float']['output'];
+  holidays: Scalars['Float']['output'];
+  late: Scalars['Float']['output'];
+  leave: Scalars['Float']['output'];
+  present: Scalars['Float']['output'];
+  totalOvertimeMinutes: Scalars['Float']['output'];
+  totalWorkedMinutes: Scalars['Float']['output'];
 };
 
 export type AuthBypassProviders = {
@@ -1067,6 +1160,11 @@ export type BooleanFieldComparison = {
   isNot?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type CalculatePayrollInput = {
+  employeeIds: Array<Scalars['String']['input']>;
+  periodId: Scalars['String']['input'];
+};
+
 export type CalendarChannel = {
   __typename?: 'CalendarChannel';
   connectedAccountId: Scalars['UUID']['output'];
@@ -1143,6 +1241,11 @@ export type CampaignAudiencePreviewDto = {
   withoutEmail: Scalars['Int']['output'];
 };
 
+export type CancelLeaveInput = {
+  employeeId: Scalars['String']['input'];
+  leaveRequestId: Scalars['String']['input'];
+};
+
 export type CancelMessageCampaignInput = {
   campaignId: Scalars['String']['input'];
 };
@@ -1186,6 +1289,16 @@ export type ChatStreamError = {
   __typename?: 'ChatStreamError';
   code: Scalars['String']['output'];
   message: Scalars['String']['output'];
+};
+
+export type CheckInInput = {
+  employeeId?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CheckOutInput = {
+  employeeId?: InputMaybe<Scalars['String']['input']>;
+  timestamp?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CheckUserExist = {
@@ -1358,6 +1471,33 @@ export type ConnectionParametersInput = {
   password?: InputMaybe<Scalars['String']['input']>;
   port: Scalars['Float']['input'];
   username?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ConversionHistoryEntry = {
+  __typename?: 'ConversionHistoryEntry';
+  candidateId: Scalars['String']['output'];
+  candidateName: Scalars['String']['output'];
+  convertedAt: Scalars['String']['output'];
+  employeeId: Scalars['String']['output'];
+};
+
+export type ConversionResult = {
+  __typename?: 'ConversionResult';
+  candidateId: Scalars['String']['output'];
+  employeeId: Scalars['String']['output'];
+  onboardingItemsCreated: Scalars['Float']['output'];
+};
+
+export type ConvertCandidateToEmployeeInput = {
+  candidateId: Scalars['String']['input'];
+  departmentId?: InputMaybe<Scalars['String']['input']>;
+  designationId?: InputMaybe<Scalars['String']['input']>;
+  employeeCode?: InputMaybe<Scalars['String']['input']>;
+  joiningDate?: InputMaybe<Scalars['String']['input']>;
+  locationId?: InputMaybe<Scalars['String']['input']>;
+  managerId?: InputMaybe<Scalars['String']['input']>;
+  submissionId: Scalars['String']['input'];
+  teamId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateAgentInput = {
@@ -1602,6 +1742,13 @@ export type CreatePageLayoutWidgetInput = {
   type: WidgetType;
 };
 
+export type CreatePayrollPeriodInput = {
+  endDate: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  payDate: Scalars['String']['input'];
+  startDate: Scalars['String']['input'];
+};
+
 export type CreateRoleInput = {
   canAccessAllTools?: InputMaybe<Scalars['Boolean']['input']>;
   canBeAssignedToAgents?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1645,6 +1792,7 @@ export type CreateViewFieldInput = {
   aggregateOperation?: InputMaybe<AggregateOperations>;
   fieldMetadataId: Scalars['UUID']['input'];
   id?: InputMaybe<Scalars['UUID']['input']>;
+  isCalendarImportant?: InputMaybe<Scalars['Boolean']['input']>;
   isVisible?: InputMaybe<Scalars['Boolean']['input']>;
   position?: InputMaybe<Scalars['Float']['input']>;
   size?: InputMaybe<Scalars['Float']['input']>;
@@ -1739,6 +1887,11 @@ export enum DatabaseEventAction {
   UPDATED = 'UPDATED',
   UPSERTED = 'UPSERTED'
 }
+
+export type DeactivateEmployeeInput = {
+  employeeId: Scalars['String']['input'];
+  reason: Scalars['String']['input'];
+};
 
 export type DeleteApprovedAccessDomainInput = {
   id: Scalars['UUID']['input'];
@@ -1949,6 +2102,42 @@ export enum EmailingDomainTenantStatus {
 export type EmailsConfiguration = {
   __typename?: 'EmailsConfiguration';
   configurationType: WidgetConfigurationType;
+};
+
+export type Employee = {
+  __typename?: 'Employee';
+  departmentId?: Maybe<Scalars['String']['output']>;
+  designationId?: Maybe<Scalars['String']['output']>;
+  employeeCode?: Maybe<Scalars['String']['output']>;
+  employmentType?: Maybe<Scalars['String']['output']>;
+  exitDate?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  joiningDate?: Maybe<Scalars['String']['output']>;
+  locationId?: Maybe<Scalars['String']['output']>;
+  managerId?: Maybe<Scalars['String']['output']>;
+  personId?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  teamId?: Maybe<Scalars['String']['output']>;
+};
+
+export type EmployeeAttendanceDay = {
+  __typename?: 'EmployeeAttendanceDay';
+  day: Scalars['Float']['output'];
+  hours?: Maybe<Scalars['String']['output']>;
+  lateMinutes?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  workedMinutes?: Maybe<Scalars['Float']['output']>;
+};
+
+export type EmployeeAttendanceRow = {
+  __typename?: 'EmployeeAttendanceRow';
+  days: Array<EmployeeAttendanceDay>;
+  departmentId?: Maybe<Scalars['String']['output']>;
+  departmentName?: Maybe<Scalars['String']['output']>;
+  employeeId: Scalars['String']['output'];
+  initials?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  role?: Maybe<Scalars['String']['output']>;
 };
 
 export enum EngineComponentKey {
@@ -2552,6 +2741,17 @@ export type InviteSuggestion = {
   email: Scalars['String']['output'];
 };
 
+export type InvoiceSummary = {
+  __typename?: 'InvoiceSummary';
+  amount: Scalars['Float']['output'];
+  companyId?: Maybe<Scalars['String']['output']>;
+  dueDate?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  outstanding: Scalars['Float']['output'];
+  paidAmount: Scalars['Float']['output'];
+  status: Scalars['String']['output'];
+};
+
 /** Job state in the queue */
 export enum JobState {
   ACTIVE = 'ACTIVE',
@@ -2572,6 +2772,57 @@ export type JobStatus = {
   jobId: Scalars['String']['output'];
   startedAt?: Maybe<Scalars['Float']['output']>;
   state: JobState;
+};
+
+export type LeaveBalance = {
+  __typename?: 'LeaveBalance';
+  employeeId: Scalars['String']['output'];
+  entitled: Scalars['Float']['output'];
+  id: Scalars['String']['output'];
+  leaveTypeId: Scalars['String']['output'];
+  pending: Scalars['Float']['output'];
+  used: Scalars['Float']['output'];
+  year: Scalars['Float']['output'];
+};
+
+export type LeaveRequest = {
+  __typename?: 'LeaveRequest';
+  days: Scalars['Float']['output'];
+  employeeId: Scalars['String']['output'];
+  endDate: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  leaveTypeId: Scalars['String']['output'];
+  reason: Scalars['String']['output'];
+  reviewNotes?: Maybe<Scalars['String']['output']>;
+  reviewedAt?: Maybe<Scalars['String']['output']>;
+  reviewedById?: Maybe<Scalars['String']['output']>;
+  startDate: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+};
+
+export type LeaveRequestWithEmployee = {
+  __typename?: 'LeaveRequestWithEmployee';
+  days: Scalars['Float']['output'];
+  employeeId: Scalars['String']['output'];
+  employeeName?: Maybe<Scalars['String']['output']>;
+  endDate: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  leaveTypeId?: Maybe<Scalars['String']['output']>;
+  leaveTypeName?: Maybe<Scalars['String']['output']>;
+  reason: Scalars['String']['output'];
+  reviewNotes?: Maybe<Scalars['String']['output']>;
+  reviewedAt?: Maybe<Scalars['String']['output']>;
+  startDate: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+};
+
+export type LeaveType = {
+  __typename?: 'LeaveType';
+  annualQuota: Scalars['Float']['output'];
+  id: Scalars['String']['output'];
+  isActive: Scalars['Boolean']['output'];
+  isPaid: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type LineChartConfiguration = {
@@ -2716,6 +2967,12 @@ export type LogicFunctionLogsInput = {
 export type LoginToken = {
   __typename?: 'LoginToken';
   loginToken: AuthToken;
+};
+
+export type MarkPayslipPaidInput = {
+  paymentMethod?: InputMaybe<Scalars['String']['input']>;
+  paymentReference?: InputMaybe<Scalars['String']['input']>;
+  payslipId: Scalars['String']['input'];
 };
 
 export type MarketplaceApp = {
@@ -3027,19 +3284,30 @@ export enum ModelFamily {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  activateEmployee: Employee;
   activateSkill: Skill;
   activateWorkspace: Workspace;
   addQueryToEventStream: Scalars['Boolean']['output'];
   answerAgentChatQuestion: SendChatMessageResult;
+  approveLeave: LeaveRequest;
+  approveLeaveRequest: Scalars['Boolean']['output'];
+  approvePayroll: PayrollPeriod;
   archiveChatThread: AgentChatThread;
+  assignDepartment: Employee;
+  assignManager: Employee;
   assignRoleToAgent: Scalars['Boolean']['output'];
   assignRoleToApiKey: Scalars['Boolean']['output'];
+  assignTeam: Employee;
   authorizeApp: AuthorizeApp;
+  calculatePayroll: PayrollCalculationResult;
+  cancelLeave: LeaveRequest;
   cancelMessageCampaign: CancelMessageCampaignOutputDto;
   cancelSwitchBillingInterval: BillingUpdate;
   cancelSwitchBillingPlan: BillingUpdate;
   cancelSwitchResourceCreditPrice: BillingUpdate;
   checkCustomDomainValidRecords?: Maybe<DomainValidRecords>;
+  checkIn: AttendanceEvent;
+  checkOut: AttendanceEvent;
   checkPublicDomainValidRecords?: Maybe<DomainValidRecords>;
   checkoutSession: BillingSession;
   claimApplicationRegistrationOwnership: ApplicationRegistration;
@@ -3057,6 +3325,7 @@ export type Mutation = {
   completeApplicationFileUploads: CompleteApplicationFileUploadsResult;
   completeBookCallOnboardingStep: OnboardingStepSuccess;
   completeFileUpload: FileWithSignedUrl;
+  convertCandidateToEmployee: ConversionResult;
   createApiKey: ApiKey;
   createApplicationFileUploads: CreateApplicationFileUploadsResult;
   createApplicationRegistration: CreateApplicationRegistration;
@@ -3071,6 +3340,7 @@ export type Mutation = {
   createEmailingDomain: EmailingDomain;
   createFileUpload: FileUploadTarget;
   createFrontComponent: FrontComponent;
+  createInvoice: InvoiceSummary;
   createManyNavigationMenuItems: Array<NavigationMenuItem>;
   createManyViewFieldGroups: Array<ViewFieldGroup>;
   createManyViewFields: Array<ViewField>;
@@ -3088,6 +3358,7 @@ export type Mutation = {
   createPageLayout: PageLayout;
   createPageLayoutTab: PageLayoutTab;
   createPageLayoutWidget: PageLayoutWidget;
+  createPayrollPeriod: PayrollPeriod;
   createPublicDomain: PublicDomain;
   createSAMLIdentityProvider: SetupSso;
   createSkill: Skill;
@@ -3101,6 +3372,7 @@ export type Mutation = {
   createViewGroup: ViewGroup;
   createViewSort: ViewSort;
   createWebhook: Webhook;
+  deactivateEmployee: Employee;
   deactivateSkill: Skill;
   deleteAppKeyValue: Scalars['Boolean']['output'];
   deleteApplicationRegistration: Scalars['Boolean']['output'];
@@ -3180,7 +3452,13 @@ export type Mutation = {
   installApplication: Application;
   /** @deprecated Use installApplication instead */
   installMarketplaceApp: Scalars['Boolean']['output'];
+  lockPayroll: PayrollPeriod;
+  markPayslipPaid: Payslip;
+  publishAnnouncement: Announcement;
+  recordPayment: PaymentResult;
   refreshEnterpriseValidityToken: Scalars['Boolean']['output'];
+  rejectLeave: LeaveRequest;
+  rejectLeaveRequest: Scalars['Boolean']['output'];
   releaseEnterpriseServerBinding: EnterpriseLicenseInfoDto;
   removeQueryFromEventStream: Scalars['Boolean']['output'];
   removeRoleFromAgent: Scalars['Boolean']['output'];
@@ -3188,6 +3466,8 @@ export type Mutation = {
   renewApplicationToken: ApplicationTokenPair;
   renewToken: AuthTokens;
   reportAppConnectionAuthFailure: Scalars['Boolean']['output'];
+  requestAttendanceCorrection: AttendanceCorrection;
+  requestLeave: LeaveRequest;
   resendEmailVerificationToken: ResendEmailVerificationToken;
   resendWorkspaceInvitation: SendInvitations;
   resetCommandMenuItem: CommandMenuItem;
@@ -3195,7 +3475,9 @@ export type Mutation = {
   resetPageLayoutToDefault: PageLayout;
   resetPageLayoutWidgetToDefault: PageLayoutWidget;
   resetTimelineActivityType: TimelineActivityType;
+  restartAchareOnboarding: AchareSetupSuccess;
   retryChatMessage: SendChatMessageResult;
+  reviewAttendanceCorrection: AttendanceCorrection;
   revokeAllOtherUserSessions: Scalars['Int']['output'];
   revokeApiKey?: Maybe<ApiKey>;
   revokeApplicationAuthorization: Scalars['Boolean']['output'];
@@ -3233,6 +3515,8 @@ export type Mutation = {
   syncMarketplaceCatalog: Scalars['Boolean']['output'];
   trackAnalytics: Analytics;
   transferApplicationRegistrationOwnership: ApplicationRegistration;
+  transitionPayrollPeriodStatus: PayrollPeriod;
+  transitionToNoticePeriod: Employee;
   triggerInstallApplicationJob: TriggerInstallApplicationJobResult;
   triggerInstallAppsOnboardingStep: OnboardingStepSuccess;
   triggerUninstallApplicationJob: TriggerUninstallApplicationJobResult;
@@ -3246,6 +3530,7 @@ export type Mutation = {
   updateCommandMenuItem: CommandMenuItem;
   updateEmailGroupChannel: MessageChannel;
   updateFrontComponent: FrontComponent;
+  updateInvoiceStatus: InvoiceSummary;
   updateLabPublicFeatureFlag: FeatureFlag;
   updateManyNavigationMenuItems: Array<NavigationMenuItem>;
   updateManyViewGroups: Array<ViewGroup>;
@@ -3301,6 +3586,11 @@ export type Mutation = {
 };
 
 
+export type MutationActivateEmployeeArgs = {
+  input: ActivateEmployeeInput;
+};
+
+
 export type MutationActivateSkillArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -3325,8 +3615,33 @@ export type MutationAnswerAgentChatQuestionArgs = {
 };
 
 
+export type MutationApproveLeaveArgs = {
+  input: ReviewLeaveInput;
+};
+
+
+export type MutationApproveLeaveRequestArgs = {
+  leaveRequestId: Scalars['String']['input'];
+};
+
+
+export type MutationApprovePayrollArgs = {
+  periodId: Scalars['String']['input'];
+};
+
+
 export type MutationArchiveChatThreadArgs = {
   id: Scalars['UUID']['input'];
+};
+
+
+export type MutationAssignDepartmentArgs = {
+  input: AssignDepartmentInput;
+};
+
+
+export type MutationAssignManagerArgs = {
+  input: AssignManagerInput;
 };
 
 
@@ -3342,6 +3657,11 @@ export type MutationAssignRoleToApiKeyArgs = {
 };
 
 
+export type MutationAssignTeamArgs = {
+  input: AssignTeamInput;
+};
+
+
 export type MutationAuthorizeAppArgs = {
   clientId: Scalars['String']['input'];
   codeChallenge?: InputMaybe<Scalars['String']['input']>;
@@ -3352,8 +3672,28 @@ export type MutationAuthorizeAppArgs = {
 };
 
 
+export type MutationCalculatePayrollArgs = {
+  input: CalculatePayrollInput;
+};
+
+
+export type MutationCancelLeaveArgs = {
+  input: CancelLeaveInput;
+};
+
+
 export type MutationCancelMessageCampaignArgs = {
   input: CancelMessageCampaignInput;
+};
+
+
+export type MutationCheckInArgs = {
+  input: CheckInInput;
+};
+
+
+export type MutationCheckOutArgs = {
+  input: CheckOutInput;
 };
 
 
@@ -3447,6 +3787,11 @@ export type MutationCompleteFileUploadArgs = {
 };
 
 
+export type MutationConvertCandidateToEmployeeArgs = {
+  input: ConvertCandidateToEmployeeInput;
+};
+
+
 export type MutationCreateApiKeyArgs = {
   input: CreateApiKeyInput;
 };
@@ -3510,6 +3855,17 @@ export type MutationCreateFileUploadArgs = {
 
 export type MutationCreateFrontComponentArgs = {
   input: CreateFrontComponentInput;
+};
+
+
+export type MutationCreateInvoiceArgs = {
+  amount: Scalars['Float']['input'];
+  companyId: Scalars['String']['input'];
+  dueDate: Scalars['String']['input'];
+  invoiceDate: Scalars['String']['input'];
+  notes?: InputMaybe<Scalars['String']['input']>;
+  opportunityId?: InputMaybe<Scalars['String']['input']>;
+  requirementId?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -3601,6 +3957,11 @@ export type MutationCreatePageLayoutWidgetArgs = {
 };
 
 
+export type MutationCreatePayrollPeriodArgs = {
+  input: CreatePayrollPeriodInput;
+};
+
+
 export type MutationCreatePublicDomainArgs = {
   applicationId: Scalars['String']['input'];
   domain: Scalars['String']['input'];
@@ -3668,6 +4029,11 @@ export type MutationCreateViewSortArgs = {
 
 export type MutationCreateWebhookArgs = {
   input: CreateWebhookInput;
+};
+
+
+export type MutationDeactivateEmployeeArgs = {
+  input: DeactivateEmployeeInput;
 };
 
 
@@ -4028,6 +4394,37 @@ export type MutationInstallMarketplaceAppArgs = {
 };
 
 
+export type MutationLockPayrollArgs = {
+  periodId: Scalars['String']['input'];
+};
+
+
+export type MutationMarkPayslipPaidArgs = {
+  input: MarkPayslipPaidInput;
+};
+
+
+export type MutationPublishAnnouncementArgs = {
+  input: PublishAnnouncementInput;
+};
+
+
+export type MutationRecordPaymentArgs = {
+  input: RecordPaymentInput;
+};
+
+
+export type MutationRejectLeaveArgs = {
+  input: ReviewLeaveInput;
+};
+
+
+export type MutationRejectLeaveRequestArgs = {
+  leaveRequestId: Scalars['String']['input'];
+  reviewNotes?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type MutationRemoveQueryFromEventStreamArgs = {
   input: RemoveQueryFromEventStreamInput;
 };
@@ -4056,6 +4453,16 @@ export type MutationRenewTokenArgs = {
 
 export type MutationReportAppConnectionAuthFailureArgs = {
   input: ReportAppConnectionAuthFailureInput;
+};
+
+
+export type MutationRequestAttendanceCorrectionArgs = {
+  input: RequestAttendanceCorrectionInput;
+};
+
+
+export type MutationRequestLeaveArgs = {
+  input: RequestLeaveInput;
 };
 
 
@@ -4098,6 +4505,11 @@ export type MutationResetTimelineActivityTypeArgs = {
 export type MutationRetryChatMessageArgs = {
   modelId?: InputMaybe<Scalars['String']['input']>;
   threadId: Scalars['UUID']['input'];
+};
+
+
+export type MutationReviewAttendanceCorrectionArgs = {
+  input: ReviewAttendanceCorrectionInput;
 };
 
 
@@ -4287,6 +4699,16 @@ export type MutationTransferApplicationRegistrationOwnershipArgs = {
 };
 
 
+export type MutationTransitionPayrollPeriodStatusArgs = {
+  input: TransitionPayrollPeriodInput;
+};
+
+
+export type MutationTransitionToNoticePeriodArgs = {
+  input: TransitionEmployeeStatusInput;
+};
+
+
 export type MutationTriggerInstallApplicationJobArgs = {
   input: TriggerInstallApplicationJobInput;
 };
@@ -4351,6 +4773,12 @@ export type MutationUpdateEmailGroupChannelArgs = {
 
 export type MutationUpdateFrontComponentArgs = {
   input: UpdateFrontComponentInput;
+};
+
+
+export type MutationUpdateInvoiceStatusArgs = {
+  invoiceId: Scalars['String']['input'];
+  status: Scalars['String']['input'];
 };
 
 
@@ -4634,6 +5062,72 @@ export type MutationVerifyEmailingDomainArgs = {
 
 export type MutationVerifyTwoFactorAuthenticationMethodForAuthenticatedUserArgs = {
   otp: Scalars['String']['input'];
+};
+
+export type MyWorkspaceAnnouncement = {
+  __typename?: 'MyWorkspaceAnnouncement';
+  body?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  publishAt?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type MyWorkspaceData = {
+  __typename?: 'MyWorkspaceData';
+  announcementCount: Scalars['Float']['output'];
+  announcementList: Array<MyWorkspaceAnnouncement>;
+  attendanceStatus?: Maybe<Scalars['String']['output']>;
+  employeeId?: Maybe<Scalars['String']['output']>;
+  firstCheckIn?: Maybe<Scalars['String']['output']>;
+  hasEmployeeRecord: Scalars['Boolean']['output'];
+  lastCheckOut?: Maybe<Scalars['String']['output']>;
+  leaveBalanceDays: Scalars['Float']['output'];
+  leaveBalanceList: Array<MyWorkspaceLeaveBalance>;
+  pendingLeaveRequestList: Array<MyWorkspaceLeaveRequest>;
+  pendingLeaveRequests: Scalars['Float']['output'];
+  recentPayslipCount: Scalars['Float']['output'];
+  recentPayslipList: Array<MyWorkspacePayslip>;
+  stats: MyWorkspaceStats;
+  workedMinutes?: Maybe<Scalars['Float']['output']>;
+};
+
+export type MyWorkspaceLeaveBalance = {
+  __typename?: 'MyWorkspaceLeaveBalance';
+  available: Scalars['Float']['output'];
+  entitled: Scalars['Float']['output'];
+  id: Scalars['String']['output'];
+  leaveTypeId?: Maybe<Scalars['String']['output']>;
+  pending: Scalars['Float']['output'];
+  used: Scalars['Float']['output'];
+  year?: Maybe<Scalars['Float']['output']>;
+};
+
+export type MyWorkspaceLeaveRequest = {
+  __typename?: 'MyWorkspaceLeaveRequest';
+  days?: Maybe<Scalars['Float']['output']>;
+  endDate?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  leaveTypeId?: Maybe<Scalars['String']['output']>;
+  reason?: Maybe<Scalars['String']['output']>;
+  startDate?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+};
+
+export type MyWorkspacePayslip = {
+  __typename?: 'MyWorkspacePayslip';
+  currencyCode?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  netPayAmountMicros?: Maybe<Scalars['Float']['output']>;
+  paidAt?: Maybe<Scalars['String']['output']>;
+  paymentStatus?: Maybe<Scalars['String']['output']>;
+  payrollPeriodId?: Maybe<Scalars['String']['output']>;
+};
+
+export type MyWorkspaceStats = {
+  __typename?: 'MyWorkspaceStats';
+  pendingTasks: Scalars['Float']['output'];
+  unreadNotifications: Scalars['Float']['output'];
+  upcomingLeave: Scalars['Float']['output'];
 };
 
 export type NativeModelCapabilities = {
@@ -5006,6 +5500,62 @@ export type PathCommandMenuItemPayload = {
   path: Scalars['String']['output'];
 };
 
+export type PaymentResult = {
+  __typename?: 'PaymentResult';
+  invoiceStatus: Scalars['String']['output'];
+  remainingOutstanding: Scalars['Float']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type PayrollCalculationResult = {
+  __typename?: 'PayrollCalculationResult';
+  errors: Array<PayrollError>;
+  payslipsCreated: Scalars['Float']['output'];
+  period: PayrollPeriod;
+};
+
+export type PayrollError = {
+  __typename?: 'PayrollError';
+  employeeId: Scalars['String']['output'];
+  error: Scalars['String']['output'];
+};
+
+export type PayrollPeriod = {
+  __typename?: 'PayrollPeriod';
+  employeeCount: Scalars['Float']['output'];
+  endDate: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  payDate: Scalars['String']['output'];
+  startDate: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  totalAdjustments: Scalars['Float']['output'];
+  totalDeductions: Scalars['Float']['output'];
+  totalGross: Scalars['Float']['output'];
+  totalNet: Scalars['Float']['output'];
+};
+
+export type Payslip = {
+  __typename?: 'Payslip';
+  currency: Scalars['String']['output'];
+  employeeId: Scalars['String']['output'];
+  grossEarnings: Scalars['Float']['output'];
+  id: Scalars['String']['output'];
+  netPay: Scalars['Float']['output'];
+  overtimeMinutes: Scalars['Float']['output'];
+  paidAt?: Maybe<Scalars['String']['output']>;
+  paidLeaveDays: Scalars['Float']['output'];
+  paymentMethod?: Maybe<Scalars['String']['output']>;
+  paymentReference?: Maybe<Scalars['String']['output']>;
+  paymentStatus: Scalars['String']['output'];
+  payrollPeriodId: Scalars['String']['output'];
+  presentDays: Scalars['Float']['output'];
+  totalAdjustments: Scalars['Float']['output'];
+  totalDeductions: Scalars['Float']['output'];
+  unpaidLeaveDays: Scalars['Float']['output'];
+  workingDays: Scalars['Float']['output'];
+};
+
 export enum PermissionFlagType {
   AI = 'AI',
   AI_SETTINGS = 'AI_SETTINGS',
@@ -5158,10 +5708,22 @@ export type PublicWorkspaceDataSummary = {
   logo?: Maybe<Scalars['String']['output']>;
 };
 
+export type PublishAnnouncementInput = {
+  audience?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  expiresAt?: InputMaybe<Scalars['String']['input']>;
+  targetDepartmentIds?: InputMaybe<Array<Scalars['String']['input']>>;
+  targetTeamIds?: InputMaybe<Array<Scalars['String']['input']>>;
+  title: Scalars['String']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   acheareSetupProgress: AchareSetupProgress;
   agentTurns: Array<AgentTurn>;
+  allEmployeesAttendance: AllEmployeesAttendanceSummary;
+  allLeaveRequests: AllLeaveRequestsResult;
+  announcementsForEmployee: Array<Announcement>;
   apiKey?: Maybe<ApiKey>;
   apiKeys: Array<ApiKey>;
   appConnection: AppConnection;
@@ -5170,6 +5732,8 @@ export type Query = {
   applicationConnectionProviders: Array<ApplicationConnectionProvider>;
   applicationRegistrationTarballUrl?: Maybe<Scalars['String']['output']>;
   applicationSdkClientChecksums?: Maybe<SdkClientChecksums>;
+  attendanceSummary: AttendanceSummary;
+  availableLeaveDays: Scalars['Float']['output'];
   barChartData: BarChartData;
   billingPortalSession: BillingSession;
   callRecordingIdForCalendarEvent?: Maybe<Scalars['UUID']['output']>;
@@ -5182,10 +5746,14 @@ export type Query = {
   checkWorkspaceSubdomainAvailability: SubdomainAvailabilityDto;
   commandMenuItem?: Maybe<CommandMenuItem>;
   commandMenuItems: Array<CommandMenuItem>;
+  conversionHistory: Array<ConversionHistoryEntry>;
   currentUser: User;
   currentUserApplicationAuthorizations: Array<ApplicationAuthorization>;
   currentUserSessions: Array<UserSession>;
   currentWorkspace: Workspace;
+  employeeLeaveBalance: Array<LeaveBalance>;
+  employeePayslips: Array<Payslip>;
+  employeesByDepartment: Array<Employee>;
   enterpriseCheckoutSession?: Maybe<Scalars['String']['output']>;
   enterprisePortalSession?: Maybe<Scalars['String']['output']>;
   enterpriseSubscriptionStatus?: Maybe<EnterpriseSubscriptionStatusDto>;
@@ -5258,6 +5826,8 @@ export type Query = {
   getWorkspaceCreationDefaults: WorkspaceCreationDefaultsDto;
   githubClaimAuthorizationUrl: Scalars['String']['output'];
   isApplicationStopped: Scalars['Boolean']['output'];
+  leaveBalance: Array<LeaveBalance>;
+  leaveTypes: Array<LeaveType>;
   lineChartData: LineChartData;
   listPlans: Array<BillingPlan>;
   messageSuppressions: MessageSuppressionList;
@@ -5268,17 +5838,22 @@ export type Query = {
   myConnectedAccounts: Array<ConnectedAccountPublicDto>;
   myMessageChannels: Array<MessageChannel>;
   myMessageFolders: Array<MessageFolder>;
+  myWorkspaceData: MyWorkspaceData;
   navigationMenuItem?: Maybe<NavigationMenuItem>;
   navigationMenuItems: Array<NavigationMenuItem>;
   object: Object;
   objectRecordCounts: Array<ObjectRecordCount>;
   objects: ObjectConnection;
+  outstandingForCompany: InvoiceSummary;
+  overdueInvoices: Array<InvoiceSummary>;
+  payslipsForPeriod: Array<Payslip>;
   pieChartData: PieChartData;
   previewMessageCampaignAudience: CampaignAudiencePreviewDto;
   publicMarketplaceAppDetail: MarketplaceAppDetail;
   publicMarketplaceApps: Array<MarketplaceApp>;
   skill?: Maybe<Skill>;
   skills: Array<Skill>;
+  teamMembers: Array<Employee>;
   timelineActivityTypes: Array<TimelineActivityType>;
   unsubscribeTopics: Array<UnsubscribeTopic>;
   usageLimits: Array<UsageLimit>;
@@ -5291,6 +5866,21 @@ export type Query = {
 
 export type QueryAgentTurnsArgs = {
   agentId: Scalars['UUID']['input'];
+};
+
+
+export type QueryAllEmployeesAttendanceArgs = {
+  input: AllEmployeesAttendanceInput;
+};
+
+
+export type QueryAllLeaveRequestsArgs = {
+  input?: InputMaybe<AllLeaveRequestsInput>;
+};
+
+
+export type QueryAnnouncementsForEmployeeArgs = {
+  employeeId: Scalars['String']['input'];
 };
 
 
@@ -5327,6 +5917,19 @@ export type QueryApplicationRegistrationTarballUrlArgs = {
 
 export type QueryApplicationSdkClientChecksumsArgs = {
   applicationId: Scalars['UUID']['input'];
+};
+
+
+export type QueryAttendanceSummaryArgs = {
+  employeeId: Scalars['String']['input'];
+  endDate: Scalars['String']['input'];
+  startDate: Scalars['String']['input'];
+};
+
+
+export type QueryAvailableLeaveDaysArgs = {
+  employeeId: Scalars['String']['input'];
+  leaveTypeId: Scalars['String']['input'];
 };
 
 
@@ -5379,6 +5982,22 @@ export type QueryCheckWorkspaceSubdomainAvailabilityArgs = {
 
 export type QueryCommandMenuItemArgs = {
   id: Scalars['UUID']['input'];
+};
+
+
+export type QueryEmployeeLeaveBalanceArgs = {
+  employeeId: Scalars['String']['input'];
+  year: Scalars['Float']['input'];
+};
+
+
+export type QueryEmployeePayslipsArgs = {
+  employeeId: Scalars['String']['input'];
+};
+
+
+export type QueryEmployeesByDepartmentArgs = {
+  departmentId: Scalars['String']['input'];
 };
 
 
@@ -5656,6 +6275,12 @@ export type QueryIsApplicationStoppedArgs = {
 };
 
 
+export type QueryLeaveBalanceArgs = {
+  employeeId: Scalars['String']['input'];
+  year: Scalars['Float']['input'];
+};
+
+
 export type QueryLineChartDataArgs = {
   input: LineChartDataInput;
 };
@@ -5707,6 +6332,16 @@ export type QueryObjectsArgs = {
 };
 
 
+export type QueryOutstandingForCompanyArgs = {
+  companyId: Scalars['String']['input'];
+};
+
+
+export type QueryPayslipsForPeriodArgs = {
+  periodId: Scalars['String']['input'];
+};
+
+
 export type QueryPieChartDataArgs = {
   input: PieChartDataInput;
 };
@@ -5732,6 +6367,11 @@ export type QuerySkillArgs = {
 };
 
 
+export type QueryTeamMembersArgs = {
+  managerId: Scalars['String']['input'];
+};
+
+
 export type QueryValidatePasswordResetTokenArgs = {
   passwordResetToken: Scalars['String']['input'];
 };
@@ -5752,6 +6392,14 @@ export type RecordIdentifier = {
   id: Scalars['UUID']['output'];
   imageIdentifier?: Maybe<Scalars['String']['output']>;
   labelIdentifier: Scalars['String']['output'];
+};
+
+export type RecordPaymentInput = {
+  amount: Scalars['Float']['input'];
+  invoiceId: Scalars['String']['input'];
+  paymentDate: Scalars['String']['input'];
+  paymentMethod?: InputMaybe<Scalars['String']['input']>;
+  reference?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type RecordTableConfiguration = {
@@ -5787,9 +6435,37 @@ export type ReportAppConnectionAuthFailureInput = {
   reason?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type RequestAttendanceCorrectionInput = {
+  employeeId: Scalars['String']['input'];
+  reason: Scalars['String']['input'];
+  requestedCheckIn: Scalars['String']['input'];
+  requestedCheckOut: Scalars['String']['input'];
+  workDate: Scalars['String']['input'];
+};
+
+export type RequestLeaveInput = {
+  employeeId: Scalars['String']['input'];
+  endDate: Scalars['String']['input'];
+  leaveTypeId: Scalars['String']['input'];
+  reason: Scalars['String']['input'];
+  startDate: Scalars['String']['input'];
+};
+
 export type ResendEmailVerificationToken = {
   __typename?: 'ResendEmailVerificationToken';
   success: Scalars['Boolean']['output'];
+};
+
+export type ReviewAttendanceCorrectionInput = {
+  approved: Scalars['Boolean']['input'];
+  correctionId: Scalars['String']['input'];
+  reviewNotes?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReviewLeaveInput = {
+  approved: Scalars['Boolean']['input'];
+  leaveRequestId: Scalars['String']['input'];
+  reviewNotes?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type RevokeApiKeyInput = {
@@ -6259,6 +6935,16 @@ export type TransientToken = {
   transientToken: AuthToken;
 };
 
+export type TransitionEmployeeStatusInput = {
+  employeeId: Scalars['String']['input'];
+  newStatus: Scalars['String']['input'];
+};
+
+export type TransitionPayrollPeriodInput = {
+  newStatus: Scalars['String']['input'];
+  periodId: Scalars['String']['input'];
+};
+
 export type TriggerInstallApplicationJobInput = {
   universalIdentifier: Scalars['String']['input'];
 };
@@ -6662,6 +7348,7 @@ export type UpdateViewFieldInput = {
 
 export type UpdateViewFieldInputUpdates = {
   aggregateOperation?: InputMaybe<AggregateOperations>;
+  isCalendarImportant?: InputMaybe<Scalars['Boolean']['input']>;
   isVisible?: InputMaybe<Scalars['Boolean']['input']>;
   position?: InputMaybe<Scalars['Float']['input']>;
   size?: InputMaybe<Scalars['Float']['input']>;
@@ -7155,6 +7842,7 @@ export type ViewField = {
   fieldMetadataId: Scalars['UUID']['output'];
   id: Scalars['UUID']['output'];
   isActive: Scalars['Boolean']['output'];
+  isCalendarImportant: Scalars['Boolean']['output'];
   /** @deprecated isOverridden is deprecated */
   isOverridden?: Maybe<Scalars['Boolean']['output']>;
   isSystemSideEffect: Scalars['Boolean']['output'];
@@ -8742,6 +9430,11 @@ export type GoBackToPreviousOnboardingStepMutationVariables = Exact<{ [key: stri
 
 
 export type GoBackToPreviousOnboardingStepMutation = { __typename?: 'Mutation', goBackToPreviousOnboardingStep: { __typename?: 'OnboardingStepNavigation', onboardingStatus?: OnboardingStatus | null, previousOnboardingStatus?: OnboardingStatus | null } };
+
+export type RestartAchareOnboardingMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RestartAchareOnboardingMutation = { __typename?: 'Mutation', restartAchareOnboarding: { __typename?: 'AchareSetupSuccess', success: boolean, currentStep?: string | null } };
 
 export type SetAchareSetupModeMutationVariables = Exact<{
   mode: Scalars['String']['input'];
@@ -10386,6 +11079,7 @@ export const CompleteBookCallOnboardingStepDocument = {"kind":"Document","defini
 export const EnrichWorkspaceCompanyDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"EnrichWorkspaceCompany"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enrichWorkspaceCompany"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"outcome"}},{"kind":"Field","name":{"kind":"Name","value":"enrichment"}},{"kind":"Field","name":{"kind":"Name","value":"personOutcome"}},{"kind":"Field","name":{"kind":"Name","value":"personEnrichment"}},{"kind":"Field","name":{"kind":"Name","value":"isBookCallOnboardingStepPending"}}]}}]}}]} as unknown as DocumentNode<EnrichWorkspaceCompanyMutation, EnrichWorkspaceCompanyMutationVariables>;
 export const FinishAchareOnboardingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"FinishAchareOnboarding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"finishAchareOnboarding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"currentStep"}}]}}]}}]} as unknown as DocumentNode<FinishAchareOnboardingMutation, FinishAchareOnboardingMutationVariables>;
 export const GoBackToPreviousOnboardingStepDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"GoBackToPreviousOnboardingStep"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"goBackToPreviousOnboardingStep"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"onboardingStatus"}},{"kind":"Field","name":{"kind":"Name","value":"previousOnboardingStatus"}}]}}]}}]} as unknown as DocumentNode<GoBackToPreviousOnboardingStepMutation, GoBackToPreviousOnboardingStepMutationVariables>;
+export const RestartAchareOnboardingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RestartAchareOnboarding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"restartAchareOnboarding"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"currentStep"}}]}}]}}]} as unknown as DocumentNode<RestartAchareOnboardingMutation, RestartAchareOnboardingMutationVariables>;
 export const SetAchareSetupModeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetAchareSetupMode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"mode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setAchareSetupMode"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"mode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"mode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"currentStep"}}]}}]}}]} as unknown as DocumentNode<SetAchareSetupModeMutation, SetAchareSetupModeMutationVariables>;
 export const SkipAchareSetupStepDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SkipAchareSetupStep"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"step"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"skipAchareSetupStep"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"step"},"value":{"kind":"Variable","name":{"kind":"Name","value":"step"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"currentStep"}}]}}]}}]} as unknown as DocumentNode<SkipAchareSetupStepMutation, SkipAchareSetupStepMutationVariables>;
 export const SkipSyncEmailOnboardingStepDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SkipSyncEmailOnboardingStep"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"isAutoSkipped"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"skipSyncEmailOnboardingStep"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"isAutoSkipped"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isAutoSkipped"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<SkipSyncEmailOnboardingStepMutation, SkipSyncEmailOnboardingStepMutationVariables>;

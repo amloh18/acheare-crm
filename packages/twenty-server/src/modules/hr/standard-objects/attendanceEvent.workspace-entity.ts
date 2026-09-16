@@ -8,6 +8,11 @@ export class AttendanceEventWorkspaceEntity extends BaseWorkspaceEntity {
   timestamp: Date | null;
   eventType: string | null;
   source: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  locationName: string | null;
+  isRemote: boolean;
+  approvalStatus: string | null;
 
   employee: EntityRelation<EmployeeWorkspaceEntity>;
   employeeId: string | null;

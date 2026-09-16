@@ -1,4 +1,4 @@
-import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
+import { SetMetadata, UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Mutation, Query } from '@nestjs/graphql';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
@@ -10,6 +10,7 @@ import { AuthUser } from 'src/engine/decorators/auth/auth-user.decorator';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
+import { AchareRoleGuard, ROLES_KEY } from 'src/modules/hr/guards/achare-role.guard';
 import { PayrollLifecycleService, PayrollPeriodStatus } from 'src/modules/hr/services/payroll-lifecycle.service';
 import {
   CreatePayrollPeriodInputDTO,
@@ -79,6 +80,8 @@ export class PayrollResolver {
     };
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => PayrollPeriodDTO)
   async approvePayroll(
     @Args('periodId') periodId: string,
@@ -94,6 +97,8 @@ export class PayrollResolver {
     return this.mapPayrollPeriod(period);
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => PayrollPeriodDTO)
   async lockPayroll(
     @Args('periodId') periodId: string,
@@ -107,6 +112,8 @@ export class PayrollResolver {
     return this.mapPayrollPeriod(period);
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => PayslipDTO)
   async markPayslipPaid(
     @Args('input') input: MarkPayslipPaidInputDTO,

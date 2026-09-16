@@ -49,7 +49,9 @@ export const AchareDocuments = () => {
   const handleSkip = useCallback(async () => {
     setIsNavigating(true);
     try {
-      await completeDocumentsSetup({ variables: { input: { skipSetup: true } } });
+      await completeDocumentsSetup({
+        variables: { input: { skipSetup: true } },
+      });
       setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
     } catch (error) {
       setIsNavigating(false);

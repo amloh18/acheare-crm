@@ -14,6 +14,7 @@ export class AttendanceDayWorkspaceEntity extends BaseWorkspaceEntity {
   lateMinutes: number | null;
   earlyDepartureMinutes: number | null;
   overtimeMinutes: number | null;
+  hasRemoteCheckIn: boolean;
 
   employee: EntityRelation<EmployeeWorkspaceEntity>;
   employeeId: string | null;

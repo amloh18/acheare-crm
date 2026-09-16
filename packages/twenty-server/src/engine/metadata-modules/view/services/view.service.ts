@@ -35,6 +35,9 @@ import { InjectWorkspaceScopedRepository } from 'src/engine/twenty-orm/workspace
 import { WorkspaceScopedRepository } from 'src/engine/twenty-orm/workspace-scoped-repository/workspace-scoped-repository';
 import { WorkspaceMigrationBuilderException } from 'src/engine/workspace-manager/workspace-migration/exceptions/workspace-migration-builder-exception';
 import { WorkspaceMigrationValidateBuildAndRunService } from 'src/engine/workspace-manager/workspace-migration/services/workspace-migration-validate-build-and-run-service';
+import { WorkspaceMigrationV2Exception } from 'src/engine/workspace-manager/workspace-migration.exception';
+import { WorkspaceMigrationRunnerException } from 'src/engine/workspace-manager/workspace-migration/workspace-migration-runner/exceptions/workspace-migration-runner.exception';
+import { ViewException, ViewExceptionCode } from 'src/engine/metadata-modules/view/exceptions/view.exception';
 
 @Injectable()
 export class ViewService {
@@ -249,22 +252,37 @@ export class ViewService {
           workspaceCustomFlatApplication.universalIdentifier,
       });
 
-    const validateAndBuildResult =
-      await this.workspaceMigrationValidateBuildAndRunService.validateBuildAndRunWorkspaceMigration(
-        {
-          allFlatEntityOperationByMetadataName: {
-            view: {
-              flatEntityToCreate: [],
-              flatEntityToDelete: [],
-              flatEntityToUpdate: [optimisticallyUpdatedFlatViewWithDeletedAt],
+    let validateAndBuildResult;
+
+    try {
+      validateAndBuildResult =
+        await this.workspaceMigrationValidateBuildAndRunService.validateBuildAndRunWorkspaceMigration(
+          {
+            allFlatEntityOperationByMetadataName: {
+              view: {
+                flatEntityToCreate: [],
+                flatEntityToDelete: [],
+                flatEntityToUpdate: [optimisticallyUpdatedFlatViewWithDeletedAt],
+              },
             },
+            workspaceId,
+            isSystemBuild: false,
+            applicationUniversalIdentifier:
+              workspaceCustomFlatApplication.universalIdentifier,
           },
-          workspaceId,
-          isSystemBuild: false,
-          applicationUniversalIdentifier:
-            workspaceCustomFlatApplication.universalIdentifier,
-        },
-      );
+        );
+    } catch (error) {
+      if (
+        error instanceof WorkspaceMigrationV2Exception ||
+        error instanceof WorkspaceMigrationRunnerException
+      ) {
+        throw new ViewException(
+          `Failed to delete view: ${error.message}`,
+          ViewExceptionCode.VIEW_MODIFY_PERMISSION_DENIED,
+        );
+      }
+      throw error;
+    }
 
     if (validateAndBuildResult.status === 'fail') {
       throw new WorkspaceMigrationBuilderException(
@@ -333,26 +351,41 @@ export class ViewService {
 
     const now = new Date().toISOString();
 
-    const validateAndBuildResult =
-      await this.workspaceMigrationValidateBuildAndRunService.validateBuildAndRunWorkspaceMigration(
-        {
-          allFlatEntityOperationByMetadataName: {
-            view: {
-              flatEntityToCreate: [],
-              flatEntityToDelete: shouldDeactivate
-                ? []
-                : [flatViewFromDestroyInput],
-              flatEntityToUpdate: shouldDeactivate
-                ? [{ ...existingFlatView, isActive: false, updatedAt: now }]
-                : [],
+    let validateAndBuildResult;
+
+    try {
+      validateAndBuildResult =
+        await this.workspaceMigrationValidateBuildAndRunService.validateBuildAndRunWorkspaceMigration(
+          {
+            allFlatEntityOperationByMetadataName: {
+              view: {
+                flatEntityToCreate: [],
+                flatEntityToDelete: shouldDeactivate
+                  ? []
+                  : [flatViewFromDestroyInput],
+                flatEntityToUpdate: shouldDeactivate
+                  ? [{ ...existingFlatView, isActive: false, updatedAt: now }]
+                  : [],
+              },
             },
+            workspaceId,
+            isSystemBuild: false,
+            applicationUniversalIdentifier:
+              workspaceCustomFlatApplication.universalIdentifier,
           },
-          workspaceId,
-          isSystemBuild: false,
-          applicationUniversalIdentifier:
-            workspaceCustomFlatApplication.universalIdentifier,
-        },
-      );
+        );
+    } catch (error) {
+      if (
+        error instanceof WorkspaceMigrationV2Exception ||
+        error instanceof WorkspaceMigrationRunnerException
+      ) {
+        throw new ViewException(
+          `Failed to destroy view: ${error.message}`,
+          ViewExceptionCode.VIEW_MODIFY_PERMISSION_DENIED,
+        );
+      }
+      throw error;
+    }
 
     if (validateAndBuildResult.status === 'fail') {
       throw new WorkspaceMigrationBuilderException(

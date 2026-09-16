@@ -43,6 +43,7 @@ export const BUILTIN_EMPLOYEE_DASHBOARD_ID = '__builtin_employee_dashboard__';
 export const BUILTIN_ADMIN_DASHBOARD_ID = '__builtin_admin_dashboard__';
 
 type DashboardRecord = {
+  __typename: string;
   id: string;
   title?: string;
   position?: number;
@@ -123,6 +124,7 @@ const DashboardBuiltinLayout = ({
           dashboards={dashboards}
           activeDashboardId={activeDashboard.id}
           isEditMode={false}
+          canDelete={dashboards.length > 1}
           onSelectDashboard={onSelectDashboard}
           onOpenCreateDialog={onOpenCreateDialog}
           onOpenRenameDialog={onOpenRenameDialog}
@@ -140,6 +142,9 @@ const DashboardBuiltinLayout = ({
             }
           }}
           onEnterEditMode={() => {}}
+          onAddWidget={() => {}}
+          onDuplicate={() => {}}
+          onDelete={() => {}}
         />
       }
     >
@@ -294,6 +299,7 @@ const DashboardActiveLayout = ({
             dashboards={dashboards}
             activeDashboardId={activeDashboard.id}
             isEditMode={isEditMode}
+            canDelete={dashboards.length > 1}
             onSelectDashboard={handleSelectDashboardWithCleanup}
             onOpenCreateDialog={onOpenCreateDialog}
             onOpenRenameDialog={onOpenRenameDialog}
@@ -311,6 +317,9 @@ const DashboardActiveLayout = ({
               }
             }}
             onEnterEditMode={handleEnterEditMode}
+            onAddWidget={handleAddWidget}
+            onDuplicate={handleDuplicate}
+            onDelete={handleDelete}
           />
         }
       >
@@ -342,6 +351,7 @@ export const DashboardPage = () => {
   } = useFindManyRecords<DashboardRecord>({
     objectNameSingular: CoreObjectNameSingular.Dashboard,
     recordGqlFields: {
+      __typename: true,
       id: true,
       title: true,
       position: true,

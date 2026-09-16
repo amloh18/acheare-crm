@@ -16,6 +16,7 @@ import {
   IconPlus,
   IconCheck,
   IconX,
+  IconMap,
 } from 'twenty-ui/icon';
 import { Button } from 'twenty-ui/input';
 import { useModal } from '@/ui/layout/modal/hooks/useModal';
@@ -34,10 +35,12 @@ import {
 } from '@/hr/hooks/useAdminAttendance';
 import { useRequestLeaveMutation } from '@/hr/hooks/useRequestLeaveMutation';
 import { useMyWorkspaceData } from '@/hr/hooks/useMyWorkspaceData';
+import { usePendingRemoteCheckIns } from '@/hr/hooks/usePendingRemoteCheckIns';
 
 const ATTENDANCE_LEAVE_TABS = [
   { id: 'attendance', title: 'Attendance', Icon: IconClock },
   { id: 'leave', title: 'Leave', Icon: IconCalendar },
+  { id: 'remote', title: 'Remote Check-ins', Icon: IconMap },
 ];
 
 const StyledContent = styled.div`
@@ -437,6 +440,7 @@ export const AttendanceLeavePage = () => {
   const [requestLeave] = useRequestLeaveMutation();
   const [approveLeaveRequest] = useApproveLeaveRequest();
   const [rejectLeaveRequest] = useRejectLeaveRequest();
+  const { pendingCheckIns, approveRemoteCheckIn, refetch: refetchPending } = usePendingRemoteCheckIns() as any;
 
   const today = new Date();
   const startOfWeek = new Date(today);
@@ -505,6 +509,21 @@ export const AttendanceLeavePage = () => {
       console.error('Failed to reject leave:', error);
     }
   }, [rejectLeaveRequest]);
+
+  const handleApproveRemoteCheckIn = useCallback(async (eventId: string, approved: boolean) => {
+    try {
+      await approveRemoteCheckIn({
+        variables: {
+          input: {
+            eventId,
+            approved,
+          },
+        },
+      });
+    } catch (error) {
+      console.error('Failed to approve/reject remote check-in:', error);
+    }
+  }, [approveRemoteCheckIn]);
 
   const filteredEmployees = useMemo(() => {
     if (!attendanceData?.allEmployeesAttendance?.employees) return [];
@@ -850,6 +869,13 @@ export const AttendanceLeavePage = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {myWorkspaceData?.myWorkspaceData?.pendingLeaveRequestList?.length === 0 && (
+                    <tr>
+                      <td colSpan={5} style={{ textAlign: 'center', padding: '20px' }}>
+                        {t`No leave requests yet`}
+                      </td>
+                    </tr>
+                  )}
                   {myWorkspaceData?.myWorkspaceData?.pendingLeaveRequestList?.map((leave: any) => (
                     <tr key={leave.id}>
                       <StyledGridCell>{leave.leaveTypeId}</StyledGridCell>
@@ -865,6 +891,119 @@ export const AttendanceLeavePage = () => {
                       </StyledGridCell>
                     </tr>
                   ))}
+                </tbody>
+              </StyledGrid>
+            </StyledAttendanceGrid>
+          )}
+
+          {!isAdmin && activeTabId === 'attendance' && (
+            <StyledAttendanceGrid>
+              <StyledGrid>
+                <thead>
+                  <tr>
+                    <StyledGridHeader>{t`Date`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Status`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Clock In`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Clock Out`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Hours Worked`}</StyledGridHeader>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <StyledGridCell>
+                      {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+                    </StyledGridCell>
+                    <StyledGridCell>
+                      <StyledStatusBadge $status={myWorkspaceData?.myWorkspaceData?.attendanceStatus === 'PRESENT' ? 'present' : 'absent'}>
+                        {myWorkspaceData?.myWorkspaceData?.attendanceStatus === 'PRESENT' ? t`Present` : t`Not Checked In`}
+                      </StyledStatusBadge>
+                    </StyledGridCell>
+                    <StyledGridCell>
+                      {myWorkspaceData?.myWorkspaceData?.firstCheckIn
+                        ? new Date(myWorkspaceData.myWorkspaceData.firstCheckIn).toLocaleTimeString()
+                        : '--'}
+                    </StyledGridCell>
+                    <StyledGridCell>
+                      {myWorkspaceData?.myWorkspaceData?.lastCheckOut
+                        ? new Date(myWorkspaceData.myWorkspaceData.lastCheckOut).toLocaleTimeString()
+                        : '--'}
+                    </StyledGridCell>
+                    <StyledGridCell>
+                      {myWorkspaceData?.myWorkspaceData?.workedMinutes
+                        ? `${Math.floor(myWorkspaceData.myWorkspaceData.workedMinutes / 60)}h ${myWorkspaceData.myWorkspaceData.workedMinutes % 60}m`
+                        : '0h 0m'}
+                    </StyledGridCell>
+                  </tr>
+                </tbody>
+              </StyledGrid>
+              <div style={{ padding: '16px', textAlign: 'center', color: themeCssVariables.font.color.secondary, fontSize: '13px' }}>
+                {t`Full attendance history is available in the detailed view.`}
+              </div>
+            </StyledAttendanceGrid>
+          )}
+
+          {isAdmin && activeTabId === 'remote' && (
+            <StyledAttendanceGrid>
+              <StyledGrid>
+                <thead>
+                  <tr>
+                    <StyledGridHeader>{t`Employee`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Date`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Time`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Location`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Status`}</StyledGridHeader>
+                    <StyledGridHeader>{t`Actions`}</StyledGridHeader>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pendingCheckIns.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: 'center', padding: '24px', color: themeCssVariables.font.color.secondary }}>
+                        {t`No pending remote check-ins`}
+                      </td>
+                    </tr>
+                  ) : (
+                    pendingCheckIns.map((checkIn: any) => (
+                      <tr key={checkIn.id}>
+                        <StyledGridCell>{checkIn.employeeId}</StyledGridCell>
+                        <StyledGridCell>
+                          {checkIn.timestamp ? new Date(checkIn.timestamp).toLocaleDateString() : '--'}
+                        </StyledGridCell>
+                        <StyledGridCell>
+                          {checkIn.timestamp ? new Date(checkIn.timestamp).toLocaleTimeString() : '--'}
+                        </StyledGridCell>
+                        <StyledGridCell>
+                          {checkIn.locationName || 'Remote'}
+                          {checkIn.latitude && checkIn.longitude && (
+                            <div style={{ fontSize: '11px', color: themeCssVariables.font.color.secondary }}>
+                              {checkIn.latitude.toFixed(4)}, {checkIn.longitude.toFixed(4)}
+                            </div>
+                          )}
+                        </StyledGridCell>
+                        <StyledGridCell>
+                          <StyledStatusBadge $status={checkIn.approvalStatus || 'PENDING'}>
+                            {checkIn.approvalStatus || 'PENDING'}
+                          </StyledStatusBadge>
+                        </StyledGridCell>
+                        <StyledGridCell>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <Button
+                              variant="secondary"
+                              Icon={IconCheck}
+                              onClick={() => handleApproveRemoteCheckIn(checkIn.id, true)}
+                              title={t`Approve`}
+                            />
+                            <Button
+                              variant="secondary"
+                              Icon={IconX}
+                              onClick={() => handleApproveRemoteCheckIn(checkIn.id, false)}
+                              title={t`Reject`}
+                            />
+                          </div>
+                        </StyledGridCell>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </StyledGrid>
             </StyledAttendanceGrid>

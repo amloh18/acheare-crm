@@ -2,10 +2,7 @@ import { useLingui } from '@lingui/react/macro';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@linaria/react';
-import {
-  ACHARE_FEATURES,
-  AchareFeatureKey,
-} from 'twenty-shared/workspace';
+import { ACHARE_FEATURES, AchareFeatureKey } from 'twenty-shared/workspace';
 import { AppPath } from 'twenty-shared/types';
 import { getAppPath } from 'twenty-shared/utils';
 import { IconArrowUpRight, IconFileImport } from 'twenty-ui/icon';
@@ -19,9 +16,7 @@ import { themeCssVariables } from 'twenty-ui/theme-constants';
  * routes. Objects absent from this map have no list route and only show
  * feature chips.
  */
-const ACHARE_SECTION_OBJECT_LINKS: Partial<
-  Record<AchareFeatureKey, string>
-> = {
+const ACHARE_SECTION_OBJECT_LINKS: Partial<Record<AchareFeatureKey, string>> = {
   [AchareFeatureKey.COMPANIES]: 'companies',
   [AchareFeatureKey.CONTACTS]: 'people',
   [AchareFeatureKey.OPPORTUNITIES]: 'opportunities',

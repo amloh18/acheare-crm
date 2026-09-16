@@ -1,7 +1,10 @@
+import { useMemo } from 'react';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
 import { IconChevronRight, IconCoins, IconCreditCard, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
+import { CoreObjectNameSingular } from 'twenty-shared/types';
+import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -99,26 +102,55 @@ const StyledStatusBadge = styled.span<{ status?: string }>`
   width: fit-content;
 `;
 
-interface PayrollSummaryWidgetProps {
-  periodName?: string;
-  totalNet?: string;
-  employeeCount?: number;
-  status?: string;
-  payDate?: string;
-  loading?: boolean;
-  error?: boolean;
-}
+const formatDate = (dateString: string) => {
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch {
+    return dateString;
+  }
+};
 
-export const PayrollSummaryWidget = ({
-  periodName = 'August 2026 Cycle',
-  totalNet = '$148,650.00',
-  employeeCount = 48,
-  status = 'PAID',
-  payDate = 'Aug 31, 2026',
-  loading,
-  error,
-}: PayrollSummaryWidgetProps) => {
+const formatCurrency = (micros: number) => {
+  const amount = micros / 1_000_000;
+  if (amount >= 1_000_000) {
+    return `$${(amount / 1_000_000).toFixed(1)}M`;
+  }
+  if (amount >= 1_000) {
+    return `$${(amount / 1_000).toFixed(1)}K`;
+  }
+  return `$${amount.toFixed(0)}`;
+};
+
+export const PayrollSummaryWidget = () => {
   const navigate = useNavigate();
+
+  const { records: periods, loading, error } = useFindManyRecords({
+    objectNameSingular: 'payrollPeriod' as CoreObjectNameSingular,
+    recordGqlFields: {
+      id: true,
+      label: true,
+      status: true,
+      startDate: true,
+      endDate: true,
+      totalNetPay: true,
+      employeeCount: true,
+    },
+    orderBy: [{ startDate: 'DescNullsLast' }],
+    limit: 1,
+  });
+
+  const latestPeriod = useMemo(() => {
+    if (periods.length === 0) return null;
+    const period = periods[0] as any;
+    return {
+      label: period.label || 'Current Period',
+      status: period.status || 'ACTIVE',
+      totalNetPay: period.totalNetPay || 0,
+      employeeCount: period.employeeCount || 0,
+      endDate: period.endDate,
+    };
+  }, [periods]);
 
   return (
     <StyledCard>
@@ -142,25 +174,32 @@ export const PayrollSummaryWidget = ({
           <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
           <StyledEmptyText>Unable to load payroll data</StyledEmptyText>
         </StyledEmptyState>
+      ) : !latestPeriod ? (
+        <StyledEmptyState>
+          <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
+          <StyledEmptyText>No payroll data available</StyledEmptyText>
+        </StyledEmptyState>
       ) : (
         <StyledContentGrid>
           <StyledDataBlock>
             <StyledDataLabel>Active Cycle</StyledDataLabel>
-            <StyledDataValue>{periodName}</StyledDataValue>
-            <StyledStatusBadge>{status}</StyledStatusBadge>
+            <StyledDataValue>{latestPeriod.label}</StyledDataValue>
+            <StyledStatusBadge>{latestPeriod.status}</StyledStatusBadge>
           </StyledDataBlock>
 
           <StyledDataBlock>
             <StyledDataLabel>Total Net Disbursed</StyledDataLabel>
-            <StyledDataValue>{totalNet}</StyledDataValue>
-            <span style={{ fontSize: '0.75rem', color: themeCssVariables.font.color.tertiary }}>
-              Processed on {payDate}
-            </span>
+            <StyledDataValue>{formatCurrency(latestPeriod.totalNetPay)}</StyledDataValue>
+            {latestPeriod.endDate && (
+              <span style={{ fontSize: '0.75rem', color: themeCssVariables.font.color.tertiary }}>
+                Processed on {formatDate(latestPeriod.endDate)}
+              </span>
+            )}
           </StyledDataBlock>
 
           <StyledDataBlock>
             <StyledDataLabel>Headcount Paid</StyledDataLabel>
-            <StyledDataValue>{employeeCount} Employees</StyledDataValue>
+            <StyledDataValue>{latestPeriod.employeeCount} Employees</StyledDataValue>
             <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 500 }}>
               100% On Time
             </span>

@@ -1,59 +1,32 @@
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareNote } from '@/onboarding/components/AchareNote';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
+import { AchareOptionChips } from '@/onboarding/components/AchareOptionChips';
 import { useCompleteAchareRecruitmentSetupMutation } from '@/onboarding/hooks/useCompleteAchareRecruitmentSetupMutation';
-import { Checkbox } from 'twenty-ui/input';
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
-import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
-import { useCallback, useState } from 'react';
-import { MainButton } from 'twenty-ui/input';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
+import { IconInfoCircle } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
-
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[6]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
-
-const StyledSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[3]};
-`;
-
-const StyledSectionTitle = styled.div`
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.sm};
-  font-weight: ${themeCssVariables.font.weight.medium};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
-const StyledCheckboxRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${themeCssVariables.spacing[2]};
-`;
 
 const DEFAULT_SOURCES = [
   'LinkedIn',
   'Job Portal',
   'Referral',
   'Database',
-  'Walk-in',
   'Website',
   'Employee Referral',
-  'Client Referral',
-  'Other',
 ];
+
+const EXTRA_SOURCES = ['Walk-in', 'Client Referral', 'Other'];
 
 const DEFAULT_PIPELINE = [
   'Sourced',
@@ -70,6 +43,16 @@ const DEFAULT_PIPELINE = [
   'Dropped',
 ];
 
+const toOptions = (values: string[]) =>
+  values.map((value) => ({ value, label: value }));
+
+/**
+ * Recruitment setup.
+ *
+ * The pipeline is a *sequence*, so the stages render as numbered chips in flow
+ * order rather than as an unordered grid — previously the same twelve
+ * unlabelled checkboxes gave no clue which stage followed which.
+ */
 export const AchareRecruitment = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
@@ -77,21 +60,36 @@ export const AchareRecruitment = () => {
     useCompleteAchareRecruitmentSetupMutation();
   const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
-  const [selectedSources, setSelectedSources] = useState<string[]>(
-    DEFAULT_SOURCES,
-  );
+
+  const [selectedSources, setSelectedSources] =
+    useState<string[]>(DEFAULT_SOURCES);
   const [selectedPipeline, setSelectedPipeline] =
     useState<string[]>(DEFAULT_PIPELINE);
 
-  const toggleItem = (
-    item: string,
-    list: string[],
-    setter: (val: string[]) => void,
-  ) => {
-    setter(
-      list.includes(item) ? list.filter((i) => i !== item) : [...list, item],
-    );
-  };
+  /** Values the user typed in, kept so their chips stay visible. */
+  const [customSources, setCustomSources] = useState<string[]>([]);
+  const [customStages, setCustomStages] = useState<string[]>([]);
+
+  const sourceOptions = useMemo(
+    () => toOptions([...DEFAULT_SOURCES, ...EXTRA_SOURCES, ...customSources]),
+    [customSources],
+  );
+
+  const stageOptions = useMemo(
+    () => toOptions([...DEFAULT_PIPELINE, ...customStages]),
+    [customStages],
+  );
+
+  const toggle = useCallback(
+    (value: string, setter: Dispatch<SetStateAction<string[]>>) => {
+      setter((previous) =>
+        previous.includes(value)
+          ? previous.filter((candidate) => candidate !== value)
+          : [...previous, value],
+      );
+    },
+    [],
+  );
 
   const handleContinue = useCallback(async () => {
     setIsNavigating(true);
@@ -120,64 +118,63 @@ export const AchareRecruitment = () => {
   ]);
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`Recruitment Setup`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Configure candidate sources and hiring pipeline stages.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledContent>
-          <StyledSection>
-            <StyledSectionTitle>{t`Candidate Sources`}</StyledSectionTitle>
-            <StyledCheckboxRow>
-              {DEFAULT_SOURCES.map((source) => (
-                <Checkbox
-                  key={source}
-                  checked={selectedSources.includes(source)}
-                  onChange={() =>
-                    toggleItem(source, selectedSources, setSelectedSources)
-                  }
-                  aria-label={source}
-                />
-              ))}
-            </StyledCheckboxRow>
-          </StyledSection>
-
-          <StyledSection>
-            <StyledSectionTitle>{t`Hiring Pipeline`}</StyledSectionTitle>
-            <StyledCheckboxRow>
-              {DEFAULT_PIPELINE.map((stage) => (
-                <Checkbox
-                  key={stage}
-                  checked={selectedPipeline.includes(stage)}
-                  onChange={() =>
-                    toggleItem(stage, selectedPipeline, setSelectedPipeline)
-                  }
-                  aria-label={stage}
-                />
-              ))}
-            </StyledCheckboxRow>
-          </StyledSection>
-        </StyledContent>
-      </OnboardingStepAnimatedItem>
-
-      <OnboardingStepAnimatedItem index={3}>
-        <MainButton
-          title={t`Continue`}
-          onClick={handleContinue}
+    <AchareOnboardingShell
+      title={t`How does hiring work here?`}
+      subtitle={t`Tell Achare where your candidates come from and the stages they move through, so every requirement follows the same process.`}
+      onContinue={handleContinue}
+      isLoading={isNavigating}
+      isContinueDisabled={selectedPipeline.length === 0}
+      footnote={t`Nothing here is permanent — you can rename, reorder or add stages later from Settings.`}
+    >
+      <AchareFieldGroup
+        label={t`Where do your candidates come from?`}
+        hint={t`These become the options you pick from when you add a candidate.`}
+        counter={t`${selectedSources.length} selected`}
+      >
+        <AchareOptionChips
+          options={sourceOptions}
+          selected={selectedSources}
+          onToggle={(value) => toggle(value, setSelectedSources)}
+          onAddOption={(value) =>
+            setCustomSources((previous) =>
+              previous.includes(value) ? previous : [...previous, value],
+            )
+          }
+          addOptionPlaceholder={t`e.g. Naukri`}
           disabled={isNavigating}
-          fullWidth
         />
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+      </AchareFieldGroup>
+
+      <AchareFieldGroup
+        label={t`What stages does a candidate go through?`}
+        hint={t`The numbers show the order a candidate moves in. Turn off any stage you do not use.`}
+        counter={t`${selectedPipeline.length} stages`}
+      >
+        <AchareOptionChips
+          options={stageOptions}
+          selected={selectedPipeline}
+          onToggle={(value) => toggle(value, setSelectedPipeline)}
+          onAddOption={(value) =>
+            setCustomStages((previous) =>
+              previous.includes(value) ? previous : [...previous, value],
+            )
+          }
+          addOptionPlaceholder={t`e.g. Technical round`}
+          isOrdered
+          disabled={isNavigating}
+        />
+        <AchareNote
+          tone="info"
+          icon={
+            <IconInfoCircle
+              size={14}
+              color={themeCssVariables.font.color.tertiary}
+            />
+          }
+        >
+          {t`Keep at least one "closing" stage such as Rejected or Dropped so candidates can be taken out of the pipeline cleanly.`}
+        </AchareNote>
+      </AchareFieldGroup>
+    </AchareOnboardingShell>
   );
 };

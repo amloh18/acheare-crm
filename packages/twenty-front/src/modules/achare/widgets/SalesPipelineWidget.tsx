@@ -1,7 +1,30 @@
+import { useMemo } from 'react';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
 import { IconChevronRight, IconTargetArrow, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
+import { CoreObjectNameSingular } from 'twenty-shared/types';
+import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
+
+const STAGE_COLORS: Record<string, string> = {
+  NEW: '#38bdf8',
+  QUALIFIED: '#3b82f6',
+  PROPOSAL: '#8b5cf6',
+  NEGOTIATION: '#f59e0b',
+  CUSTOMER: '#10b981',
+  INACTIVE: '#6b7280',
+};
+
+const STAGE_LABELS: Record<string, string> = {
+  NEW: 'New',
+  QUALIFIED: 'Qualified',
+  PROPOSAL: 'Proposal',
+  NEGOTIATION: 'Negotiation',
+  CUSTOMER: 'Won',
+  INACTIVE: 'Lost',
+};
+
+const STAGE_ORDER = ['NEW', 'QUALIFIED', 'PROPOSAL', 'NEGOTIATION', 'CUSTOMER', 'INACTIVE'];
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -120,28 +143,46 @@ const StyledDealCount = styled.div`
   color: ${themeCssVariables.font.color.secondary};
 `;
 
-interface DealStage {
-  name: string;
-  amount: string;
-  count: number;
-  color: string;
-  weight: number;
-}
-
-const DEFAULT_DEAL_STAGES: DealStage[] = [
-  { name: 'Discovery', amount: '$42,000', count: 8, color: '#38bdf8', weight: 20 },
-  { name: 'Proposal', amount: '$85,000', count: 12, color: '#f59e0b', weight: 35 },
-  { name: 'Negotiation', amount: '$54,000', count: 5, color: '#a855f7', weight: 25 },
-  { name: 'Won (Q3)', amount: '$128,500', count: 19, color: '#10b981', weight: 45 },
-];
-
-interface SalesPipelineWidgetProps {
-  loading?: boolean;
-  error?: boolean;
-}
-
-export const SalesPipelineWidget = ({ loading, error }: SalesPipelineWidgetProps) => {
+export const SalesPipelineWidget = () => {
   const navigate = useNavigate();
+
+  const { records: opportunities, loading, error } = useFindManyRecords({
+    objectNameSingular: CoreObjectNameSingular.Opportunity,
+    recordGqlFields: {
+      id: true,
+      stage: true,
+      amount: { amountMicros: true, currencyCode: true },
+    },
+  });
+
+  const stages = useMemo(() => {
+    const grouped: Record<string, { count: number; totalMicros: number }> = {};
+
+    for (const stage of STAGE_ORDER) {
+      grouped[stage] = { count: 0, totalMicros: 0 };
+    }
+
+    for (const opp of opportunities as any[]) {
+      const stage = opp.stage || 'NEW';
+      if (!grouped[stage]) {
+        grouped[stage] = { count: 0, totalMicros: 0 };
+      }
+      grouped[stage].count++;
+      grouped[stage].totalMicros += opp.amount?.amountMicros ?? 0;
+    }
+
+    const totalCount = opportunities.length || 1;
+
+    return STAGE_ORDER
+      .filter((stage) => grouped[stage].count > 0)
+      .map((stage) => ({
+        name: STAGE_LABELS[stage] || stage,
+        amount: `${(grouped[stage].totalMicros / 1_000_000).toFixed(1)}`,
+        count: grouped[stage].count,
+        color: STAGE_COLORS[stage] || '#6b7280',
+        weight: (grouped[stage].count / totalCount) * 100,
+      }));
+  }, [opportunities]);
 
   return (
     <StyledCard>
@@ -165,7 +206,7 @@ export const SalesPipelineWidget = ({ loading, error }: SalesPipelineWidgetProps
           <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
           <StyledEmptyText>Unable to load pipeline</StyledEmptyText>
         </StyledEmptyState>
-      ) : DEFAULT_DEAL_STAGES.length === 0 ? (
+      ) : stages.length === 0 ? (
         <StyledEmptyState>
           <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
           <StyledEmptyText>No deals in pipeline</StyledEmptyText>
@@ -173,7 +214,7 @@ export const SalesPipelineWidget = ({ loading, error }: SalesPipelineWidgetProps
       ) : (
         <>
           <StyledPipelineTrack>
-            {DEFAULT_DEAL_STAGES.map((st) => (
+            {stages.map((st) => (
               <StyledSegment
                 key={st.name}
                 widthPercent={st.weight}
@@ -183,13 +224,13 @@ export const SalesPipelineWidget = ({ loading, error }: SalesPipelineWidgetProps
           </StyledPipelineTrack>
 
           <StyledStageList>
-            {DEFAULT_DEAL_STAGES.map((st) => (
+            {stages.map((st) => (
               <StyledStageItem key={st.name}>
                 <StyledStageHead>
                   <StyledDot color={st.color} />
                   <span>{st.name}</span>
                 </StyledStageHead>
-                <StyledAmount>{st.amount}</StyledAmount>
+                <StyledAmount>${st.amount}K</StyledAmount>
                 <StyledDealCount>{st.count} opportunities</StyledDealCount>
               </StyledStageItem>
             ))}

@@ -1,4 +1,4 @@
-import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
+import { SetMetadata, UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Mutation, Query } from '@nestjs/graphql';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
@@ -8,6 +8,7 @@ import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.ent
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 import { UserAuthGuard } from 'src/engine/guards/user-auth.guard';
+import { AchareRoleGuard, ROLES_KEY } from 'src/modules/hr/guards/achare-role.guard';
 import { EmployeeLifecycleService } from 'src/modules/hr/services/employee-lifecycle.service';
 import {
   ActivateEmployeeInputDTO,
@@ -26,6 +27,8 @@ import {
 export class EmployeeLifecycleResolver {
   constructor(private readonly employeeLifecycleService: EmployeeLifecycleService) {}
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => EmployeeDTO)
   async activateEmployee(
     @Args('input') input: ActivateEmployeeInputDTO,
@@ -39,6 +42,8 @@ export class EmployeeLifecycleResolver {
     return this.mapEmployee(employee);
   }
 
+  @UseGuards(AchareRoleGuard)
+  @SetMetadata(ROLES_KEY, ['admin', 'hr'])
   @Mutation(() => EmployeeDTO)
   async deactivateEmployee(
     @Args('input') input: DeactivateEmployeeInputDTO,

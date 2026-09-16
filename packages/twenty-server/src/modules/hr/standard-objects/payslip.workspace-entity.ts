@@ -4,6 +4,7 @@ import { type EntityRelation } from 'src/engine/workspace-manager/workspace-migr
 import { type PayrollPeriodWorkspaceEntity } from 'src/modules/hr/standard-objects/payrollPeriod.workspace-entity';
 import { type EmployeeWorkspaceEntity } from 'src/modules/hr/standard-objects/employee.workspace-entity';
 import { type PayslipLineWorkspaceEntity } from 'src/modules/hr/standard-objects/payslipLine.workspace-entity';
+import { type AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 
 export class PayslipWorkspaceEntity extends BaseWorkspaceEntity {
   currency: string | null;
@@ -26,4 +27,5 @@ export class PayslipWorkspaceEntity extends BaseWorkspaceEntity {
   employee: EntityRelation<EmployeeWorkspaceEntity>;
   employeeId: string | null;
   lines: EntityRelation<PayslipLineWorkspaceEntity[]> | null;
+  attachments: EntityRelation<AttachmentWorkspaceEntity[]> | null;
 }

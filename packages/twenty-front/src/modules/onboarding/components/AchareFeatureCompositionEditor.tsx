@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react';
+import { useLingui } from '@lingui/react/macro';
 import {
   ACHARE_FEATURES,
   ACHARE_MODULES,
@@ -6,7 +7,7 @@ import {
   type AchareFeatureKey,
   type AchareModuleKey,
 } from 'twenty-shared/workspace';
-import { useIcons } from 'twenty-ui/icon';
+import { IconCheck, useIcons } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 export type AchareFeatureCompositionEditorProps = {
@@ -35,18 +36,24 @@ const StyledModuleCard = styled.div<{
   background: ${({ isSelected, isPartiallySelected }) =>
     isSelected || isPartiallySelected
       ? themeCssVariables.background.transparent.blue
-      : themeCssVariables.background.secondary};
+      : themeCssVariables.background.primary};
   border: 1px solid
     ${({ isSelected, isPartiallySelected }) =>
       isSelected || isPartiallySelected
         ? themeCssVariables.border.color.blue
-        : 'transparent'};
+        : themeCssVariables.border.color.light};
   border-radius: ${themeCssVariables.border.radius.md};
   display: flex;
   gap: ${themeCssVariables.spacing[3]};
-  padding: ${themeCssVariables.spacing[3]} ${themeCssVariables.spacing[4]};
-  transition: border-color 0.15s ease;
+  padding: ${themeCssVariables.spacing[4]};
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
   width: 100%;
+
+  &:hover {
+    border-color: ${themeCssVariables.border.color.blue};
+  }
 `;
 
 const StyledModuleToggle = styled.button`
@@ -60,6 +67,11 @@ const StyledModuleToggle = styled.button`
 
   &:disabled {
     cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeCssVariables.border.color.blue};
+    outline-offset: 2px;
   }
 `;
 
@@ -77,18 +89,19 @@ const StyledModuleIndicator = styled.div<{
       isSelected || isPartiallySelected
         ? themeCssVariables.color.blue
         : themeCssVariables.border.color.medium};
-  border-radius: 50%;
+  border-radius: ${themeCssVariables.border.radius.sm};
   display: flex;
-  height: 16px;
+  height: 18px;
   justify-content: center;
-  width: 16px;
+  margin-top: 1px;
+  width: 18px;
 `;
 
-const StyledModuleDot = styled.div`
+const StyledModuleDash = styled.div`
   background: ${themeCssVariables.font.color.inverted};
-  border-radius: 50%;
-  height: 6px;
-  width: 6px;
+  border-radius: 1px;
+  height: 2px;
+  width: 8px;
 `;
 
 const StyledModuleText = styled.div`
@@ -102,13 +115,19 @@ const StyledModuleText = styled.div`
 const StyledModuleLabelRow = styled.div`
   align-items: center;
   display: flex;
-  gap: ${themeCssVariables.spacing[1]};
+  gap: ${themeCssVariables.spacing[2]};
 `;
 
 const StyledModuleLabel = styled.div`
   color: ${themeCssVariables.font.color.primary};
-  font-size: ${themeCssVariables.font.size.md};
+  font-size: ${themeCssVariables.font.size.sm};
   font-weight: ${themeCssVariables.font.weight.medium};
+`;
+
+const StyledModuleCount = styled.span`
+  color: ${themeCssVariables.font.color.tertiary};
+  font-size: ${themeCssVariables.font.size.xs};
+  margin-left: auto;
 `;
 
 const StyledModuleDescription = styled.div`
@@ -120,39 +139,58 @@ const StyledModuleDescription = styled.div`
 const StyledFeatureTagRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${themeCssVariables.spacing[1]};
-  margin-top: ${themeCssVariables.spacing[1]};
+  gap: ${themeCssVariables.spacing[2]};
+  margin-top: ${themeCssVariables.spacing[2]};
 `;
 
 const StyledFeatureTag = styled.span`
-  background: ${themeCssVariables.background.primary};
-  border-radius: ${themeCssVariables.border.radius.sm};
+  align-items: center;
+  background: ${themeCssVariables.background.secondary};
+  border-radius: ${themeCssVariables.border.radius.pill};
   color: ${themeCssVariables.font.color.tertiary};
+  display: inline-flex;
   font-size: ${themeCssVariables.font.size.xs};
-  padding: 1px ${themeCssVariables.spacing[2]};
+  gap: ${themeCssVariables.spacing[1]};
+  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
 `;
 
 const StyledFeatureTagButton = styled.button<{ isSelected: boolean }>`
+  align-items: center;
   background: ${({ isSelected }) =>
-    isSelected
-      ? themeCssVariables.background.primary
-      : themeCssVariables.background.secondary};
+    isSelected ? themeCssVariables.background.primary : 'transparent'};
   border: 1px solid
     ${({ isSelected }) =>
       isSelected
         ? themeCssVariables.border.color.blue
-        : themeCssVariables.border.color.light};
-  border-radius: ${themeCssVariables.border.radius.sm};
+        : themeCssVariables.border.color.medium};
+  border-radius: ${themeCssVariables.border.radius.pill};
   color: ${({ isSelected }) =>
     isSelected
-      ? themeCssVariables.font.color.secondary
+      ? themeCssVariables.font.color.primary
       : themeCssVariables.font.color.tertiary};
   cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
   font-size: ${themeCssVariables.font.size.xs};
-  padding: 1px ${themeCssVariables.spacing[2]};
+  gap: ${themeCssVariables.spacing[1]};
+  padding: ${themeCssVariables.spacing[1]} ${themeCssVariables.spacing[2]};
+  transition:
+    border-color 0.12s ease,
+    color 0.12s ease;
+
+  &:hover:not(:disabled) {
+    border-color: ${themeCssVariables.border.color.blue};
+    color: ${themeCssVariables.font.color.primary};
+  }
 
   &:disabled {
     cursor: default;
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${themeCssVariables.border.color.blue};
+    outline-offset: 2px;
   }
 `;
 
@@ -171,6 +209,7 @@ export const AchareFeatureCompositionEditor = ({
   onToggleFeature,
   disabled = false,
 }: AchareFeatureCompositionEditorProps) => {
+  const { t } = useLingui();
   const { getIcon } = useIcons();
   const selectedFeatureSet = new Set(selectedFeatures);
 
@@ -197,23 +236,35 @@ export const AchareFeatureCompositionEditor = ({
               type="button"
               onClick={() => onToggleModule(moduleKey)}
               disabled={disabled}
-              aria-label={module.label}
+              aria-label={
+                isSelected
+                  ? t`Turn off ${module.label}`
+                  : t`Turn on ${module.label}`
+              }
               aria-pressed={isSelected}
             >
               <StyledModuleIndicator
                 isSelected={isSelected}
                 isPartiallySelected={isPartiallySelected}
               >
-                {(isSelected || isPartiallySelected) && <StyledModuleDot />}
+                {isSelected && (
+                  <IconCheck
+                    size={12}
+                    color={themeCssVariables.font.color.inverted}
+                  />
+                )}
+                {isPartiallySelected && <StyledModuleDash />}
               </StyledModuleIndicator>
             </StyledModuleToggle>
             <StyledModuleText>
               <StyledModuleLabelRow>
-                <Icon
-                  size={14}
-                  color={themeCssVariables.font.color.tertiary}
-                />
+                <Icon size={14} color={themeCssVariables.font.color.tertiary} />
                 <StyledModuleLabel>{module.label}</StyledModuleLabel>
+                <StyledModuleCount>
+                  {selectedCount === 0
+                    ? t`Off`
+                    : t`${selectedCount} of ${module.features.length} on`}
+                </StyledModuleCount>
               </StyledModuleLabelRow>
               <StyledModuleDescription>
                 {module.description}
@@ -236,6 +287,7 @@ export const AchareFeatureCompositionEditor = ({
                       disabled={disabled}
                       aria-pressed={isFeatureSelected}
                     >
+                      {isFeatureSelected && <IconCheck size={10} />}
                       {featureLabel}
                     </StyledFeatureTagButton>
                   );

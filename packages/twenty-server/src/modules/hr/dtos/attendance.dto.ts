@@ -7,6 +7,12 @@ export class CheckInInputDTO {
 
   @Field(() => String, { nullable: true })
   timestamp?: string;
+
+  @Field(() => Number, { nullable: true })
+  latitude?: number;
+
+  @Field(() => Number, { nullable: true })
+  longitude?: number;
 }
 
 @InputType('CheckOutInput')
@@ -16,6 +22,12 @@ export class CheckOutInputDTO {
 
   @Field(() => String, { nullable: true })
   timestamp?: string;
+
+  @Field(() => Number, { nullable: true })
+  latitude?: number;
+
+  @Field(() => Number, { nullable: true })
+  longitude?: number;
 }
 
 @InputType('RequestAttendanceCorrectionInput')
@@ -48,6 +60,18 @@ export class ReviewAttendanceCorrectionInputDTO {
   reviewNotes?: string;
 }
 
+@InputType('ApproveRemoteCheckInInput')
+export class ApproveRemoteCheckInInputDTO {
+  @Field(() => String)
+  eventId: string;
+
+  @Field(() => Boolean)
+  approved: boolean;
+
+  @Field(() => String, { nullable: true })
+  reviewNotes?: string;
+}
+
 @ObjectType('AttendanceEvent')
 export class AttendanceEventDTO {
   @Field(() => String)
@@ -64,6 +88,21 @@ export class AttendanceEventDTO {
 
   @Field(() => String)
   source: string;
+
+  @Field(() => Number, { nullable: true })
+  latitude: number | null;
+
+  @Field(() => Number, { nullable: true })
+  longitude: number | null;
+
+  @Field(() => String, { nullable: true })
+  locationName: string | null;
+
+  @Field(() => Boolean)
+  isRemote: boolean;
+
+  @Field(() => String, { nullable: true })
+  approvalStatus: string | null;
 }
 
 @ObjectType('AttendanceCorrection')

@@ -1,6 +1,7 @@
 import { RELATION_NESTED_QUERY_KEYWORDS } from 'twenty-shared/constants';
 import { FieldMetadataType, type ObjectRecord } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
+import { Logger } from '@nestjs/common';
 import { type EntityTarget, type ObjectLiteral } from 'typeorm';
 import { type QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { v4 } from 'uuid';
@@ -419,7 +420,25 @@ export class RelationNestedQueries {
             ].every(([field, value]) => record[field] === value),
           );
 
-          if (recordToConnect.length !== 1) {
+          if (recordToConnect.length === 0) {
+            const conditionStr =
+              connectQueryConfig.recordToConnectConditionByEntityIndex[index]
+                .map(([field, value]) => `${field}=${value}`)
+                .join(', ');
+
+            Logger.warn(
+              `Relation connect skipped: no matching record found for ${connectQueryConfig.connectFieldName} [${conditionStr}]. Record will be created without this relation.`,
+            );
+
+            entity = {
+              ...entity,
+              [connectQueryConfig.connectFieldName]: null,
+            };
+
+            continue;
+          }
+
+          if (recordToConnect.length > 1) {
             const { errorMessage, userFriendlyMessage } =
               formatConnectRecordNotFoundErrorMessage(
                 connectQueryConfig.connectFieldName,

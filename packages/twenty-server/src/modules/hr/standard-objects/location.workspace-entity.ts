@@ -14,6 +14,10 @@ export class LocationWorkspaceEntity extends BaseWorkspaceEntity {
   country: string | null;
   timezone: string | null;
   status: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  geofenceRadiusMeters: number | null;
+  isActive: boolean;
 
   employees: EntityRelation<EmployeeWorkspaceEntity[]> | null;
   taskTargets: EntityRelation<TaskTargetWorkspaceEntity[]> | null;

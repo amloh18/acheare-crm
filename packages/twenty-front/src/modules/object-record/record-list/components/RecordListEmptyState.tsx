@@ -56,7 +56,7 @@ export const RecordListEmptyState = () => {
       objectPermissions={objectPermissions}
       isSoftDeleteFilterActive={hasAnySoftDeleteFilterOnView}
       onRemoveSoftDeleteFilter={handleRemoveSoftDeleteFilter}
-      onGoToSettings={() => navigate(SettingsPath.Integrations)}
+      onGoToSettings={() => navigate(SettingsPath.Objects)}
     />
   );
 };

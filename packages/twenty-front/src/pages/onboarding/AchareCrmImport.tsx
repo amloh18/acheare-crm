@@ -1,84 +1,18 @@
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
+import {
+  AchareSelectableCard,
+  AchareSelectableCardGroup,
+} from '@/onboarding/components/AchareSelectableCard';
 import { useCompleteAchareCrmImportMutation } from '@/onboarding/hooks/useCompleteAchareCrmImportMutation';
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useOpenObjectRecordsSpreadsheetImportDialog } from '@/object-record/spreadsheet-import/hooks/useOpenObjectRecordsSpreadsheetImportDialog';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { IconDatabase, IconFileImport } from 'twenty-ui/icon';
-import { styled } from '@linaria/react';
+import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
-import { MainButton } from 'twenty-ui/input';
-import { themeCssVariables } from 'twenty-ui/theme-constants';
 
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[6]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
-
-const StyledOptionCard = styled.button`
-  align-items: center;
-  background: ${themeCssVariables.background.primary};
-  border: 1px solid ${themeCssVariables.border.color.medium};
-  border-radius: ${themeCssVariables.border.radius.md};
-  cursor: pointer;
-  display: flex;
-  gap: ${themeCssVariables.spacing[4]};
-  padding: ${themeCssVariables.spacing[5]};
-  text-align: left;
-  transition: all 0.15s ease;
-  width: 100%;
-
-  &:hover {
-    border-color: ${themeCssVariables.border.color.blue};
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-`;
-
-const StyledIconContainer = styled.div`
-  align-items: center;
-  background: ${themeCssVariables.background.secondary};
-  border-radius: ${themeCssVariables.border.radius.md};
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  width: 40px;
-`;
-
-const StyledOptionContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[1]};
-  flex: 1;
-`;
-
-const StyledOptionTitle = styled.div`
-  color: ${themeCssVariables.font.color.primary};
-  font-size: ${themeCssVariables.font.size.md};
-  font-weight: ${themeCssVariables.font.weight.semiBold};
-`;
-
-const StyledOptionDescription = styled.div`
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.sm};
-`;
-
-const StyledButtonRow = styled.div`
-  display: flex;
-  gap: ${themeCssVariables.spacing[3]};
-  width: 100%;
-`;
+type ImportChoice = 'FRESH' | 'COMPANIES' | 'CONTACTS';
 
 export const AchareCrmImport = () => {
   const { t } = useLingui();
@@ -86,6 +20,7 @@ export const AchareCrmImport = () => {
   const [completeCrmImport] = useCompleteAchareCrmImportMutation();
   const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
+  const [choice, setChoice] = useState<ImportChoice>('FRESH');
 
   const { openObjectRecordsSpreadsheetImportDialog: openCompanyImport } =
     useOpenObjectRecordsSpreadsheetImportDialog('company');
@@ -93,115 +28,86 @@ export const AchareCrmImport = () => {
   const { openObjectRecordsSpreadsheetImportDialog: openPersonImport } =
     useOpenObjectRecordsSpreadsheetImportDialog('person');
 
-  const handleStartFresh = useCallback(async () => {
-    setIsNavigating(true);
-    try {
-      await completeCrmImport({
-        variables: { input: { skipImport: true } },
-      });
-      setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
-    } catch {
-      setIsNavigating(false);
-    }
-  }, [completeCrmImport, setNextOnboardingStatus]);
+  const handleContinue = useCallback(() => {
+    if (choice === 'FRESH') {
+      setIsNavigating(true);
+      void completeCrmImport({ variables: { input: { skipImport: true } } })
+        .then(() => {
+          setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
+        })
+        .catch((error) => {
+          setIsNavigating(false);
+          enqueueErrorSnackBar({
+            apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
+          });
+        });
 
-  const handleImportCompanies = useCallback(() => {
-    openCompanyImport({
+      return;
+    }
+
+    const openImport =
+      choice === 'COMPANIES' ? openCompanyImport : openPersonImport;
+
+    openImport({
       onSubmit: async () => {
         // The import dialog creates the records; advancing the wizard here
         // only works because the caller's onSubmit is invoked after the
         // records are created (see useOpenObjectRecordsSpreadsheetImportDialog).
-        await completeCrmImport({
-          variables: { input: { hasData: true } },
-        });
+        await completeCrmImport({ variables: { input: { hasData: true } } });
         setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
       },
     } as never);
-  }, [openCompanyImport, completeCrmImport, setNextOnboardingStatus]);
-
-  const handleImportPeople = useCallback(() => {
-    openPersonImport({
-      onSubmit: async () => {
-        await completeCrmImport({
-          variables: { input: { hasData: true } },
-        });
-        setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
-      },
-    } as never);
-  }, [openPersonImport, completeCrmImport, setNextOnboardingStatus]);
+  }, [
+    choice,
+    openCompanyImport,
+    openPersonImport,
+    completeCrmImport,
+    setNextOnboardingStatus,
+    enqueueErrorSnackBar,
+  ]);
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`CRM Data Import`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Do you already have client/company data?`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledContent>
-          <StyledOptionCard onClick={handleStartFresh} disabled={isNavigating}>
-            <StyledIconContainer>
-              <IconDatabase size={20} color={themeCssVariables.color.blue} />
-            </StyledIconContainer>
-            <StyledOptionContent>
-              <StyledOptionTitle>{t`Start Fresh`}</StyledOptionTitle>
-              <StyledOptionDescription>
-                {t`I'll add companies and contacts as I go.`}
-              </StyledOptionDescription>
-            </StyledOptionContent>
-          </StyledOptionCard>
-
-          <StyledOptionCard onClick={handleImportCompanies} disabled={isNavigating}>
-            <StyledIconContainer>
-              <IconFileImport
-                size={20}
-                color={themeCssVariables.color.blue}
-              />
-            </StyledIconContainer>
-            <StyledOptionContent>
-              <StyledOptionTitle>{t`Import Companies`}</StyledOptionTitle>
-              <StyledOptionDescription>
-                {t`Upload a CSV with your existing companies.`}
-              </StyledOptionDescription>
-            </StyledOptionContent>
-          </StyledOptionCard>
-
-          <StyledOptionCard onClick={handleImportPeople} disabled={isNavigating}>
-            <StyledIconContainer>
-              <IconFileImport
-                size={20}
-                color={themeCssVariables.color.blue}
-              />
-            </StyledIconContainer>
-            <StyledOptionContent>
-              <StyledOptionTitle>{t`Import Contacts`}</StyledOptionTitle>
-              <StyledOptionDescription>
-                {t`Upload a CSV with your existing contacts.`}
-              </StyledOptionDescription>
-            </StyledOptionContent>
-          </StyledOptionCard>
-        </StyledContent>
-      </OnboardingStepAnimatedItem>
-
-      <OnboardingStepAnimatedItem index={3}>
-        <StyledButtonRow>
-          <MainButton
-            title={t`Skip for now`}
-            onClick={handleStartFresh}
+    <AchareOnboardingShell
+      title={t`Do you already have client data?`}
+      subtitle={t`Bring your existing companies and contacts across so Achare starts with your real book of business, or begin with an empty workspace.`}
+      onContinue={handleContinue}
+      continueLabel={
+        choice === 'FRESH' ? t`Start with an empty workspace` : t`Choose a file`
+      }
+      isLoading={isNavigating}
+      footnote={t`Imports are matched on name and email, so re-importing later updates existing records instead of duplicating them.`}
+    >
+      <AchareFieldGroup
+        label={t`How would you like to start?`}
+        hint={t`You can import at any time later from Settings → Setup Center.`}
+      >
+        <AchareSelectableCardGroup>
+          <AchareSelectableCard
+            role="radio"
+            title={t`Start with an empty workspace`}
+            description={t`Nothing is imported. Add companies and contacts as you go.`}
+            isSelected={choice === 'FRESH'}
+            onClick={() => setChoice('FRESH')}
             disabled={isNavigating}
-            fullWidth
-            variant="secondary"
           />
-        </StyledButtonRow>
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+          <AchareSelectableCard
+            role="radio"
+            title={t`Import companies from a CSV`}
+            description={t`Upload a spreadsheet of your clients and accounts.`}
+            isSelected={choice === 'COMPANIES'}
+            onClick={() => setChoice('COMPANIES')}
+            disabled={isNavigating}
+          />
+          <AchareSelectableCard
+            role="radio"
+            title={t`Import contacts from a CSV`}
+            description={t`Upload a spreadsheet of the people you deal with.`}
+            isSelected={choice === 'CONTACTS'}
+            onClick={() => setChoice('CONTACTS')}
+            disabled={isNavigating}
+          />
+        </AchareSelectableCardGroup>
+      </AchareFieldGroup>
+    </AchareOnboardingShell>
   );
 };

@@ -1,76 +1,17 @@
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareNote } from '@/onboarding/components/AchareNote';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
 import { useCompleteAchareTeamSetupMutation } from '@/onboarding/hooks/useCompleteAchareTeamSetupMutation';
-import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { TextInput } from '@/ui/input/components/TextInput';
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { Select } from '@/ui/input/components/Select';
-import { IconPlus, IconTrash } from 'twenty-ui/icon';
+import { TextInput } from '@/ui/input/components/TextInput';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
-import { MainButton } from 'twenty-ui/input';
+import { IconInfoCircle, IconPlus, IconTrash } from 'twenty-ui/icon';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
-
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[6]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
-
-const StyledMemberRow = styled.div`
-  display: flex;
-  gap: ${themeCssVariables.spacing[2]};
-  align-items: flex-end;
-`;
-
-const StyledField = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const StyledAddButton = styled.button`
-  align-items: center;
-  background: none;
-  border: 1px dashed ${themeCssVariables.border.color.medium};
-  border-radius: ${themeCssVariables.border.radius.md};
-  color: ${themeCssVariables.font.color.secondary};
-  cursor: pointer;
-  display: flex;
-  gap: ${themeCssVariables.spacing[2]};
-  padding: ${themeCssVariables.spacing[3]};
-  width: 100%;
-  transition: all 0.15s ease;
-
-  &:hover {
-    border-color: ${themeCssVariables.border.color.blue};
-    color: ${themeCssVariables.font.color.primary};
-  }
-`;
-
-const StyledRemoveButton = styled.button`
-  align-items: center;
-  background: none;
-  border: none;
-  color: ${themeCssVariables.font.color.tertiary};
-  cursor: pointer;
-  display: flex;
-  height: 36px;
-  justify-content: center;
-  width: 36px;
-  transition: color 0.15s ease;
-
-  &:hover {
-    color: ${themeCssVariables.color.red};
-  }
-`;
 
 const ROLE_OPTIONS = [
   { label: 'Admin', value: 'Admin' },
@@ -93,6 +34,88 @@ const emptyMember: TeamMember = {
   role: 'Recruiter',
 };
 
+const StyledMemberGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${themeCssVariables.spacing[3]};
+`;
+
+const StyledMemberHeader = styled.div`
+  color: ${themeCssVariables.font.color.tertiary};
+  display: grid;
+  font-size: ${themeCssVariables.font.size.xs};
+  gap: ${themeCssVariables.spacing[3]};
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr)
+    140px 28px;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
+`;
+
+const StyledMemberRow = styled.div`
+  align-items: center;
+  display: grid;
+  gap: ${themeCssVariables.spacing[3]};
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr)
+    140px 28px;
+
+  @media (max-width: 760px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+`;
+
+const StyledRemoveButton = styled.button`
+  align-items: center;
+  background: none;
+  border: none;
+  color: ${themeCssVariables.font.color.tertiary};
+  cursor: pointer;
+  display: flex;
+  height: 28px;
+  justify-content: center;
+  padding: 0;
+  width: 28px;
+
+  &:hover:not(:disabled) {
+    color: ${themeCssVariables.color.red};
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+`;
+
+const StyledAddButton = styled.button`
+  align-items: center;
+  background: none;
+  border: 1px dashed ${themeCssVariables.border.color.medium};
+  border-radius: ${themeCssVariables.border.radius.md};
+  color: ${themeCssVariables.font.color.secondary};
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: ${themeCssVariables.font.size.sm};
+  gap: ${themeCssVariables.spacing[2]};
+  justify-content: center;
+  padding: ${themeCssVariables.spacing[3]};
+  transition: all 0.15s ease;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    border-color: ${themeCssVariables.border.color.blue};
+    color: ${themeCssVariables.font.color.primary};
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+`;
+
 export const AchareTeam = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
@@ -106,121 +129,162 @@ export const AchareTeam = () => {
     field: keyof TeamMember,
     value: string,
   ) => {
-    setMembers((prev) =>
-      prev.map((m, i) => (i === index ? { ...m, [field]: value } : m)),
+    setMembers((previous) =>
+      previous.map((member, candidateIndex) =>
+        candidateIndex === index ? { ...member, [field]: value } : member,
+      ),
     );
   };
 
   const addMember = () => {
-    setMembers((prev) => [...prev, { ...emptyMember }]);
+    setMembers((previous) => [...previous, { ...emptyMember }]);
   };
 
   const removeMember = (index: number) => {
-    setMembers((prev) => prev.filter((_, i) => i !== index));
+    setMembers((previous) =>
+      previous.filter((_, candidateIndex) => candidateIndex !== index),
+    );
   };
 
-  const handleContinue = useCallback(async () => {
-    setIsNavigating(true);
-    try {
-      const validMembers = members.filter(
-        (m) => m.firstName && m.email,
-      );
-
-      await completeTeamSetup({
-        variables: {
-          input: {
-            members: validMembers,
+  const submitMembers = useCallback(
+    async (membersToSend: TeamMember[]) => {
+      setIsNavigating(true);
+      try {
+        await completeTeamSetup({
+          variables: {
+            input: {
+              members: membersToSend,
+            },
           },
-        },
-      });
-      setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
-    } catch (error: any) {
-      setIsNavigating(false);
-      enqueueErrorSnackBar({
-        apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
-      });
-    }
-  }, [members, completeTeamSetup, setNextOnboardingStatus, enqueueErrorSnackBar]);
+        });
+        setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
+      } catch (error) {
+        setIsNavigating(false);
+        enqueueErrorSnackBar({
+          apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
+        });
+      }
+    },
+    [completeTeamSetup, setNextOnboardingStatus, enqueueErrorSnackBar],
+  );
+
+  const handleContinue = useCallback(() => {
+    // Rows the user left half-filled are dropped rather than sent as broken
+    // invites; the field group tells them which fields are required.
+    void submitMembers(
+      members.filter(
+        (member) =>
+          member.firstName.trim().length > 0 && member.email.trim().length > 0,
+      ),
+    );
+  }, [members, submitMembers]);
+
+  const handleSkip = useCallback(() => {
+    void submitMembers([]);
+  }, [submitMembers]);
+
+  const incompleteCount = members.filter(
+    (member) =>
+      (member.firstName.trim().length > 0 || member.email.trim().length > 0) &&
+      !(member.firstName.trim().length > 0 && member.email.trim().length > 0),
+  ).length;
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`Invite Your Team`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`Add team members and assign their roles. You can skip this and add them later.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
+    <AchareOnboardingShell
+      title={t`Who else is on your team?`}
+      subtitle={t`Invite the people who will use Achare. Each one gets an email and lands in the role you pick, with the right access from day one.`}
+      onContinue={handleContinue}
+      onSkip={handleSkip}
+      skipLabel={t`Invite them later`}
+      isLoading={isNavigating}
+      footnote={t`Roles decide what someone can see. You can change a person's role any time from Settings → Members.`}
+    >
+      <AchareFieldGroup
+        label={t`Team members`}
+        hint={t`First name and email are required. Last name is optional.`}
+        counter={t`${members.length} rows`}
+        error={
+          incompleteCount > 0
+            ? t`${incompleteCount} row(s) are missing a first name or email and will not be invited.`
+            : undefined
+        }
+      >
+        <StyledMemberGrid>
+          <StyledMemberHeader>
+            <span>{t`First name`}</span>
+            <span>{t`Last name`}</span>
+            <span>{t`Email`}</span>
+            <span>{t`Role`}</span>
+            <span />
+          </StyledMemberHeader>
 
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledContent>
           {members.map((member, index) => (
             <StyledMemberRow key={index}>
-              <StyledField>
-                <TextInput
-                  label={t`First Name`}
-                  value={member.firstName}
-                  onChange={(e) => updateMember(index, 'firstName', e)}
-                  placeholder={t`Rahul`}
-                  fullWidth
-                />
-              </StyledField>
-              <StyledField>
-                <TextInput
-                  label={t`Last Name`}
-                  value={member.lastName}
-                  onChange={(e) => updateMember(index, 'lastName', e)}
-                  placeholder={t`Sharma`}
-                  fullWidth
-                />
-              </StyledField>
-              <StyledField>
-                <TextInput
-                  label={t`Email`}
-                  value={member.email}
-                  onChange={(e) => updateMember(index, 'email', e)}
-                  placeholder={t`rahul@example.com`}
-                  fullWidth
-                />
-              </StyledField>
-              <StyledField>
-                <Select
-                  dropdownId={`achare-team-role-${index}`}
-                  label={t`Role`}
-                  value={member.role}
-                  onChange={(e) => updateMember(index, 'role', e)}
-                  options={ROLE_OPTIONS}
-                  fullWidth
-                />
-              </StyledField>
-              {members.length > 1 && (
-                <StyledRemoveButton onClick={() => removeMember(index)}>
-                  <IconTrash size={16} />
-                </StyledRemoveButton>
-              )}
+              <TextInput
+                value={member.firstName}
+                onChange={(value) => updateMember(index, 'firstName', value)}
+                placeholder={t`Rahul`}
+                aria-label={t`First name`}
+                fullWidth
+                disabled={isNavigating}
+              />
+              <TextInput
+                value={member.lastName}
+                onChange={(value) => updateMember(index, 'lastName', value)}
+                placeholder={t`Sharma`}
+                aria-label={t`Last name`}
+                fullWidth
+                disabled={isNavigating}
+              />
+              <TextInput
+                type="email"
+                value={member.email}
+                onChange={(value) => updateMember(index, 'email', value)}
+                placeholder={t`rahul@example.com`}
+                aria-label={t`Email`}
+                fullWidth
+                disabled={isNavigating}
+              />
+              <Select
+                dropdownId={`achare-team-role-${index}`}
+                value={member.role}
+                onChange={(value) => updateMember(index, 'role', value)}
+                options={ROLE_OPTIONS}
+                fullWidth
+              />
+              <StyledRemoveButton
+                type="button"
+                onClick={() => removeMember(index)}
+                disabled={isNavigating || members.length <= 1}
+                aria-label={t`Remove team member`}
+              >
+                <IconTrash size={14} />
+              </StyledRemoveButton>
             </StyledMemberRow>
           ))}
 
-          <StyledAddButton onClick={addMember}>
-            <IconPlus size={16} />
-            {t`Add another`}
+          <StyledAddButton
+            type="button"
+            onClick={addMember}
+            disabled={isNavigating}
+          >
+            <IconPlus size={14} />
+            {t`Add another person`}
           </StyledAddButton>
-        </StyledContent>
-      </OnboardingStepAnimatedItem>
+        </StyledMemberGrid>
 
-      <OnboardingStepAnimatedItem index={3}>
-        <MainButton
-          title={t`Continue`}
-          onClick={handleContinue}
-          disabled={isNavigating}
-          fullWidth
-        />
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+        <AchareNote
+          tone="info"
+          icon={
+            <IconInfoCircle
+              size={14}
+              color={themeCssVariables.font.color.tertiary}
+            />
+          }
+        >
+          {t`Recruiters only see the requirements and candidates assigned to them. Admins see everything.`}
+        </AchareNote>
+      </AchareFieldGroup>
+    </AchareOnboardingShell>
   );
 };

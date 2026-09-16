@@ -8,6 +8,8 @@ import { AttendanceDayWorkspaceEntity } from 'src/modules/hr/standard-objects/at
 import { AttendanceCorrectionWorkspaceEntity } from 'src/modules/hr/standard-objects/attendanceCorrection.workspace-entity';
 import { RosterAssignmentWorkspaceEntity } from 'src/modules/hr/standard-objects/rosterAssignment.workspace-entity';
 import { ShiftWorkspaceEntity } from 'src/modules/hr/standard-objects/shift.workspace-entity';
+import { CompanySettingsWorkspaceEntity } from 'src/modules/hr/standard-objects/companySettings.workspace-entity';
+import { LocationService } from 'src/modules/hr/services/location.service';
 
 export enum AttendanceEventType {
   CHECK_IN = 'CHECK_IN',
@@ -33,6 +35,12 @@ export enum AttendanceCorrectionStatus {
   REJECTED = 'REJECTED',
 }
 
+export enum RemoteCheckInApprovalStatus {
+  APPROVED = 'APPROVED',
+  PENDING = 'PENDING',
+  REJECTED = 'REJECTED',
+}
+
 @Injectable()
 export class AttendanceService {
   private readonly logger = new Logger(AttendanceService.name);
@@ -40,12 +48,37 @@ export class AttendanceService {
   constructor(
     private readonly workspaceOrmManager: WorkspaceOrmManager,
     private readonly workspaceEventEmitter: WorkspaceEventEmitter,
+    private readonly locationService: LocationService,
   ) {}
+
+  private async getCompanySettings(
+    workspaceId: string,
+  ): Promise<CompanySettingsWorkspaceEntity | null> {
+    return this.workspaceOrmManager.executeInWorkspaceContext(
+      async () => {
+        const settingsRepository =
+          this.workspaceOrmManager.getRepository<CompanySettingsWorkspaceEntity>(
+            'companySettings',
+            { shouldBypassPermissionChecks: true },
+          );
+
+        const settings = await settingsRepository.find({
+          where: { isActive: true },
+          take: 1,
+        });
+
+        return settings[0] || null;
+      },
+      buildSystemAuthContext(workspaceId),
+    );
+  }
 
   async checkIn(
     employeeId: string,
     workspaceId: string,
     timestamp?: Date,
+    latitude?: number,
+    longitude?: number,
   ): Promise<AttendanceEventWorkspaceEntity> {
     return this.workspaceOrmManager.executeInWorkspaceContext(
       async () => {
@@ -73,11 +106,46 @@ export class AttendanceService {
         });
 
         if (existingEvent) {
-          const eventDate = this.getStartOfDay(
-            new Date(existingEvent.timestamp || existingEvent.createdAt),
-          );
+          const eventTs = new Date(existingEvent.timestamp || existingEvent.createdAt);
+          const eventDate = this.getStartOfDay(eventTs);
           if (eventDate.getTime() === workDate.getTime()) {
             throw new Error('Already checked in today');
+          }
+        }
+
+        const companySettings = await this.getCompanySettings(workspaceId);
+        const requireGeolocation = companySettings?.requireGeolocationForCheckIn ?? true;
+        const allowRemote = companySettings?.allowRemoteCheckIn ?? true;
+
+        let isRemote = false;
+        let approvalStatus: string | null = null;
+        let locationName: string | null = null;
+
+        if (requireGeolocation) {
+          if (latitude == null || longitude == null) {
+            throw new Error('Geolocation is required for clock-in');
+          }
+
+          const nearest = await this.locationService.findNearestLocation(
+            latitude,
+            longitude,
+            workspaceId,
+          );
+
+          if (nearest) {
+            locationName = nearest.location.name;
+            isRemote = false;
+            approvalStatus = null;
+          } else {
+            isRemote = true;
+            locationName = 'Remote';
+            approvalStatus = allowRemote
+              ? RemoteCheckInApprovalStatus.PENDING
+              : null;
+
+            if (!allowRemote) {
+              throw new Error('Remote clock-in is not allowed');
+            }
           }
         }
 
@@ -85,7 +153,12 @@ export class AttendanceService {
           employeeId,
           eventType: AttendanceEventType.CHECK_IN,
           timestamp: checkInTime,
-          source: 'MANUAL',
+          source: 'SELF_SERVICE',
+          latitude: latitude || null,
+          longitude: longitude || null,
+          locationName,
+          isRemote,
+          approvalStatus,
         } as Partial<AttendanceEventWorkspaceEntity>)) as unknown as AttendanceEventWorkspaceEntity;
 
         let attendanceDay = await dayRepository.findOne({
@@ -97,18 +170,22 @@ export class AttendanceService {
             employeeId,
             workDate,
             firstCheckIn: checkInTime,
-            status: AttendanceStatus.PRESENT,
+            status: isRemote && approvalStatus === RemoteCheckInApprovalStatus.PENDING
+              ? AttendanceStatus.WORK_FROM_HOME
+              : AttendanceStatus.PRESENT,
+            hasRemoteCheckIn: isRemote,
           } as Partial<AttendanceDayWorkspaceEntity>)) as unknown as AttendanceDayWorkspaceEntity;
         } else {
           await dayRepository.save({
             ...attendanceDay,
             firstCheckIn: attendanceDay.firstCheckIn || checkInTime,
+            hasRemoteCheckIn: attendanceDay.hasRemoteCheckIn || isRemote,
           } as Partial<AttendanceDayWorkspaceEntity>);
         }
 
         this.workspaceEventEmitter.emitCustomBatchEvent(
           'attendance_checkedIn',
-          [{ employeeId, timestamp: checkInTime, workspaceId }],
+          [{ employeeId, timestamp: checkInTime, workspaceId, isRemote }],
           workspaceId,
         );
 
@@ -122,6 +199,8 @@ export class AttendanceService {
     employeeId: string,
     workspaceId: string,
     timestamp?: Date,
+    latitude?: number,
+    longitude?: number,
   ): Promise<AttendanceEventWorkspaceEntity> {
     return this.workspaceOrmManager.executeInWorkspaceContext(
       async () => {
@@ -140,11 +219,25 @@ export class AttendanceService {
         const checkOutTime = timestamp || new Date();
         const workDate = this.getStartOfDay(checkOutTime);
 
+        let locationName: string | null = null;
+        if (latitude != null && longitude != null) {
+          const nearest = await this.locationService.findNearestLocation(
+            latitude,
+            longitude,
+            workspaceId,
+          );
+          locationName = nearest?.location.name || 'Remote';
+        }
+
         const event = (await eventRepository.save({
           employeeId,
           eventType: AttendanceEventType.CHECK_OUT,
           timestamp: checkOutTime,
-          source: 'MANUAL',
+          source: 'SELF_SERVICE',
+          latitude: latitude || null,
+          longitude: longitude || null,
+          locationName,
+          isRemote: false,
         } as Partial<AttendanceEventWorkspaceEntity>)) as unknown as AttendanceEventWorkspaceEntity;
 
         const attendanceDay = await dayRepository.findOne({
@@ -174,6 +267,109 @@ export class AttendanceService {
         );
 
         return event;
+      },
+      buildSystemAuthContext(workspaceId),
+    );
+  }
+
+  async approveRemoteCheckIn(
+    eventId: string,
+    approved: boolean,
+    reviewerId: string,
+    workspaceId: string,
+  ): Promise<AttendanceEventWorkspaceEntity> {
+    return this.workspaceOrmManager.executeInWorkspaceContext(
+      async () => {
+        const eventRepository =
+          this.workspaceOrmManager.getRepository<AttendanceEventWorkspaceEntity>(
+            'attendanceEvent',
+            { shouldBypassPermissionChecks: true },
+          );
+
+        const dayRepository =
+          this.workspaceOrmManager.getRepository<AttendanceDayWorkspaceEntity>(
+            'attendanceDay',
+            { shouldBypassPermissionChecks: true },
+          );
+
+        const event = await eventRepository.findOne({
+          where: { id: eventId },
+        });
+
+        if (!event) {
+          throw new Error('Attendance event not found');
+        }
+
+        if (event.approvalStatus !== RemoteCheckInApprovalStatus.PENDING) {
+          throw new Error('This check-in is not pending approval');
+        }
+
+        const newStatus = approved
+          ? RemoteCheckInApprovalStatus.APPROVED
+          : RemoteCheckInApprovalStatus.REJECTED;
+
+        const updated = (await eventRepository.save({
+          ...event,
+          approvalStatus: newStatus,
+        } as Partial<AttendanceEventWorkspaceEntity>)) as unknown as AttendanceEventWorkspaceEntity;
+
+        if (event.timestamp) {
+          const workDate = this.getStartOfDay(new Date(event.timestamp));
+
+          if (approved) {
+            await dayRepository.save({
+              employeeId: event.employeeId,
+              workDate,
+              status: AttendanceStatus.PRESENT,
+            } as Partial<AttendanceDayWorkspaceEntity>);
+          } else {
+            await dayRepository.save({
+              employeeId: event.employeeId,
+              workDate,
+              status: AttendanceStatus.ABSENT,
+            } as Partial<AttendanceDayWorkspaceEntity>);
+          }
+        }
+
+        this.workspaceEventEmitter.emitCustomBatchEvent(
+          'attendance_remoteCheckInReviewed',
+          [
+            {
+              eventId,
+              employeeId: event.employeeId,
+              approved,
+              reviewerId,
+              workspaceId,
+            },
+          ],
+          workspaceId,
+        );
+
+        return updated;
+      },
+      buildSystemAuthContext(workspaceId),
+    );
+  }
+
+  async getPendingRemoteCheckIns(
+    workspaceId: string,
+  ): Promise<AttendanceEventWorkspaceEntity[]> {
+    return this.workspaceOrmManager.executeInWorkspaceContext(
+      async () => {
+        const eventRepository =
+          this.workspaceOrmManager.getRepository<AttendanceEventWorkspaceEntity>(
+            'attendanceEvent',
+            { shouldBypassPermissionChecks: true },
+          );
+
+        return eventRepository.find({
+          where: {
+            eventType: AttendanceEventType.CHECK_IN,
+            isRemote: true,
+            approvalStatus: RemoteCheckInApprovalStatus.PENDING,
+          },
+          order: { createdAt: 'DESC' },
+        });
       },
       buildSystemAuthContext(workspaceId),
     );
@@ -260,22 +456,35 @@ export class AttendanceService {
           });
         }
 
+        const companySettings = await this.getCompanySettings(workspaceId);
+        const graceMinutes = companySettings?.graceMinutes ?? shift?.graceMinutes ?? 15;
+
+        const hasRemoteCheckIn = checkIns.some((e) => e.isRemote);
+        const hasPendingRemote = checkIns.some(
+          (e) => e.isRemote && e.approvalStatus === RemoteCheckInApprovalStatus.PENDING,
+        );
+
         let status = AttendanceStatus.ABSENT;
         if (firstCheckIn) {
-          status = AttendanceStatus.PRESENT;
+          if (hasPendingRemote) {
+            status = AttendanceStatus.WORK_FROM_HOME;
+          } else {
+            status = AttendanceStatus.PRESENT;
+          }
         }
 
-        let lateMinutes = 0;
-        if (firstCheckIn && shift?.startTime) {
+        const timingMode = companySettings?.timingMode || 'FIXED';
+
+        if (timingMode === 'FIXED' && firstCheckIn && shift?.startTime) {
           const [hours, minutes] = shift.startTime.split(':').map(Number);
           const shiftStart = new Date(workDate);
           shiftStart.setHours(hours, minutes, 0, 0);
 
           if (firstCheckIn > shiftStart) {
-            lateMinutes = Math.round(
+            const lateMinutes = Math.round(
               (firstCheckIn.getTime() - shiftStart.getTime()) / 60000,
             );
-            if (lateMinutes > 60) {
+            if (lateMinutes > graceMinutes && status !== AttendanceStatus.WORK_FROM_HOME) {
               status = AttendanceStatus.LATE;
             }
           }
@@ -292,8 +501,8 @@ export class AttendanceService {
             firstCheckIn,
             lastCheckOut,
             workedMinutes,
-            lateMinutes,
             shiftId: roster?.shiftId || null,
+            hasRemoteCheckIn,
           } as Partial<AttendanceDayWorkspaceEntity>)) as unknown as AttendanceDayWorkspaceEntity;
         } else {
           attendanceDay = (await dayRepository.save({
@@ -303,8 +512,8 @@ export class AttendanceService {
             firstCheckIn,
             lastCheckOut,
             workedMinutes,
-            lateMinutes,
             shiftId: roster?.shiftId || null,
+            hasRemoteCheckIn,
           } as Partial<AttendanceDayWorkspaceEntity>)) as unknown as AttendanceDayWorkspaceEntity;
         }
 

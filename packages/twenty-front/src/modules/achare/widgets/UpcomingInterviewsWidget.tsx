@@ -1,13 +1,15 @@
+import { useMemo } from 'react';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
 import {
   IconCalendarEvent,
   IconChevronRight,
-  IconVideo,
   IconDatabase,
   IconAlertTriangle,
 } from 'twenty-ui/icon';
+import { CoreObjectNameSingular } from 'twenty-shared/types';
+import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -121,45 +123,49 @@ const StyledRoundBadge = styled.div`
   color: ${themeCssVariables.font.color.secondary};
 `;
 
-interface InterviewItem {
-  id: string;
-  candidateName: string;
-  jobTitle: string;
-  round: string;
-  scheduledTime: string;
-}
+const formatTime = (dateString: string) => {
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  } catch {
+    return dateString;
+  }
+};
 
-const DEFAULT_INTERVIEWS: InterviewItem[] = [
-  {
-    id: '1',
-    candidateName: 'Priya Sharma',
-    jobTitle: 'Senior Full Stack Engineer',
-    round: 'Technical Round 2',
-    scheduledTime: 'Today, 2:30 PM',
-  },
-  {
-    id: '2',
-    candidateName: 'Marcus Vance',
-    jobTitle: 'Lead Product Designer',
-    round: 'Portfolio Review',
-    scheduledTime: 'Today, 4:00 PM',
-  },
-  {
-    id: '3',
-    candidateName: 'Ananya Roy',
-    jobTitle: 'Talent Acquisition Partner',
-    round: 'HR Cultural Fit',
-    scheduledTime: 'Tomorrow, 11:00 AM',
-  },
-];
-
-interface UpcomingInterviewsWidgetProps {
-  loading?: boolean;
-  error?: boolean;
-}
-
-export const UpcomingInterviewsWidget = ({ loading, error }: UpcomingInterviewsWidgetProps) => {
+export const UpcomingInterviewsWidget = () => {
   const navigate = useNavigate();
+
+  const { records: interviews, loading, error } = useFindManyRecords({
+    objectNameSingular: 'interview' as CoreObjectNameSingular,
+    recordGqlFields: {
+      id: true,
+      startingAt: true,
+      interviewStage: true,
+      candidate: { id: true, firstName: true, lastName: true },
+      requirement: { id: true, jobTitle: true },
+    },
+    orderBy: [{ startingAt: 'AscNullsFirst' }],
+    limit: 5,
+  });
+
+  const items = useMemo(() => {
+    return (interviews as any[]).map((interview) => {
+      const firstName = interview.candidate?.firstName || '';
+      const lastName = interview.candidate?.lastName || '';
+      const candidateName = [firstName, lastName].filter(Boolean).join(' ') || 'Unknown Candidate';
+      const jobTitle = interview.requirement?.jobTitle || 'Open Position';
+      const stage = interview.interviewStage || 'ROUND_1';
+      const roundLabel = stage.replace('ROUND_', 'Round ');
+
+      return {
+        id: interview.id,
+        candidateName,
+        jobTitle,
+        round: roundLabel,
+        scheduledTime: interview.startingAt ? formatTime(interview.startingAt) : 'TBD',
+      };
+    });
+  }, [interviews]);
 
   return (
     <StyledCard>
@@ -183,14 +189,14 @@ export const UpcomingInterviewsWidget = ({ loading, error }: UpcomingInterviewsW
           <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
           <StyledEmptyText>Unable to load interviews</StyledEmptyText>
         </StyledEmptyState>
-      ) : DEFAULT_INTERVIEWS.length === 0 ? (
+      ) : items.length === 0 ? (
         <StyledEmptyState>
           <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
           <StyledEmptyText>No upcoming interviews</StyledEmptyText>
         </StyledEmptyState>
       ) : (
         <StyledList>
-          {DEFAULT_INTERVIEWS.map((interview) => (
+          {items.map((interview) => (
             <StyledItem key={interview.id}>
               <StyledItemLeft>
                 <StyledCandidateName>{interview.candidateName}</StyledCandidateName>

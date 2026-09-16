@@ -134,10 +134,10 @@ export const AdminDashboard = () => {
     <StyledContainer>
       <StyledHeader>
         <StyledGreeting>
-          {getGreeting()}, {firstName} 👋
+          {getGreeting()}, {firstName}!
         </StyledGreeting>
         <StyledGreetingSub>
-          {t`Here's an overview of your company today.`}
+          {t`Here's your work overview for today.`}
         </StyledGreetingSub>
       </StyledHeader>
 

@@ -36,7 +36,6 @@ import { getObjectColorWithFallback } from '@/object-metadata/utils/getObjectCol
 import { useFilteredObjectMetadataItems } from '@/object-metadata/hooks/useFilteredObjectMetadataItems';
 import { useAchareEnabledFeatures } from '@/workspace-feature/hooks/useAchareEnabledFeatures';
 import { NavigationDrawerItem } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerItem';
-import { NavigationDrawerAnimatedCollapseWrapper } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerAnimatedCollapseWrapper';
 import { NavigationDrawerSection } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerSection';
 import { NavigationDrawerSectionTitle } from '@/ui/navigation/navigation-drawer/components/NavigationDrawerSectionTitle';
 import { AnimatedExpandableContainer } from 'twenty-ui/layout';
@@ -408,17 +407,16 @@ export const AchareNavigationContent = () => {
 
         {/* Product Modules */}
         {visibleModules.map((module) => (
-          <NavigationDrawerAnimatedCollapseWrapper key={module.key}>
-            <ModuleSection
-              module={module}
-              isDrawerExpanded={isDrawerExpanded}
-              isItemActive={isItemActive}
-              resolveItemObjectMetadata={resolveItemObjectMetadata}
-              getIcon={getIcon}
-              navigate={navigate}
-              isMobile={isMobile}
-            />
-          </NavigationDrawerAnimatedCollapseWrapper>
+          <ModuleSection
+            key={module.key}
+            module={module}
+            isDrawerExpanded={isDrawerExpanded}
+            isItemActive={isItemActive}
+            resolveItemObjectMetadata={resolveItemObjectMetadata}
+            getIcon={getIcon}
+            navigate={navigate}
+            isMobile={isMobile}
+          />
         ))}
       </StyledContainer>
     </NavigationDrawerSection>

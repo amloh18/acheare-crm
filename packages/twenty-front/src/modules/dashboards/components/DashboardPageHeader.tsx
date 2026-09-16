@@ -81,31 +81,6 @@ export const DashboardPageHeader = ({
         onClick={onOpenCreateDialog}
       />
       {workspaceSurface.type === 'main' && <SidePanelToggleButton />}
-      <OptionsDropdownMenu dropdownPlacement="bottom-end">
-        <MenuItem
-          LeftIcon={IconPencil}
-          text={t`Edit layout`}
-          onClick={onEnterEditMode}
-        />
-        <MenuItem
-          LeftIcon={IconPlus}
-          text={t`Add widget`}
-          onClick={onAddWidget}
-        />
-        <MenuItem
-          LeftIcon={IconCopy}
-          text={t`Duplicate dashboard`}
-          onClick={onDuplicate}
-        />
-        {canDelete && (
-          <MenuItem
-            LeftIcon={IconTrash}
-            text={t`Delete dashboard`}
-            accent="danger"
-            onClick={onDelete}
-          />
-        )}
-      </OptionsDropdownMenu>
     </StyledActionButtons>
   );
 

@@ -4,6 +4,7 @@ import { I18nProvider } from '@lingui/react';
 import { render, screen } from '@testing-library/react';
 import { Provider as JotaiProvider } from 'jotai';
 import { type ReactNode } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { SOURCE_LOCALE } from 'twenty-shared/translations';
 
 import { onboardingConfigState } from '@/client-config/states/onboardingConfigState';
@@ -39,13 +40,21 @@ const onboardingConfig: OnboardingConfig = {
   installAppsCreditsRewardPerApp: 1,
 };
 
-const Wrapper = ({ children }: { children: ReactNode }) => (
+const Wrapper = ({
+  children,
+  initialPath = '/onboarding/create-profile',
+}: {
+  children: ReactNode;
+  initialPath?: string;
+}) => (
   <MockedProvider mocks={[]}>
     <JotaiProvider store={jotaiStore}>
       <SnackBarComponentInstanceContext.Provider
         value={{ instanceId: 'snack-bar-manager' }}
       >
-        <I18nProvider i18n={i18n}>{children}</I18nProvider>
+        <I18nProvider i18n={i18n}>
+          <MemoryRouter initialEntries={[initialPath]}>{children}</MemoryRouter>
+        </I18nProvider>
       </SnackBarComponentInstanceContext.Provider>
     </JotaiProvider>
   </MockedProvider>
@@ -75,6 +84,18 @@ describe('OnboardingStepLayout', () => {
     jotaiStore.set(onboardingConfigState.atom, null);
 
     render(<OnboardingStepLayout />, { wrapper: Wrapper });
+
+    expect(screen.queryByText('free credits')).not.toBeInTheDocument();
+  });
+
+  it('should hide the shared header on Achare steps, which render their own chrome', () => {
+    jotaiStore.set(onboardingConfigState.atom, onboardingConfig);
+
+    render(<OnboardingStepLayout />, {
+      wrapper: ({ children }) => (
+        <Wrapper initialPath="/acheare/recruitment">{children}</Wrapper>
+      ),
+    });
 
     expect(screen.queryByText('free credits')).not.toBeInTheDocument();
   });

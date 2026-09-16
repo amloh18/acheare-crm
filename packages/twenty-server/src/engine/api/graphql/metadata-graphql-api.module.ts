@@ -18,6 +18,9 @@ import { DataloaderService } from 'src/engine/dataloaders/dataloader.service';
 import { MetadataEngineModule } from 'src/engine/metadata-modules/metadata-engine.module';
 import { WorkspaceCacheService } from 'src/engine/workspace-cache/services/workspace-cache.service';
 import { WorkspaceCacheModule } from 'src/engine/workspace-cache/workspace-cache.module';
+import { HrModule } from 'src/modules/hr/hr.module';
+import { FinanceModule } from 'src/modules/finance/finance.module';
+import { RecruitmentModule } from 'src/modules/recruitment/recruitment.module';
 
 @Module({
   imports: [
@@ -43,6 +46,9 @@ import { WorkspaceCacheModule } from 'src/engine/workspace-cache/workspace-cache
       ],
     }),
     MetadataEngineModule,
+    HrModule,
+    FinanceModule,
+    RecruitmentModule,
   ],
 })
 export class MetadataGraphQLApiModule {}

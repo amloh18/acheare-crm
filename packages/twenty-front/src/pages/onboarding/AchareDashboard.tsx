@@ -1,83 +1,72 @@
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
-import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
+import { AchareFieldGroup } from '@/onboarding/components/AchareFieldGroup';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
+import {
+  AchareSelectableCard,
+  AchareSelectableCardGroup,
+} from '@/onboarding/components/AchareSelectableCard';
 import { useCompleteAchareDashboardSetupMutation } from '@/onboarding/hooks/useCompleteAchareDashboardSetupMutation';
+import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
-import { IconCheck } from 'twenty-ui/icon';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
-import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
-import { useCallback, useState } from 'react';
-import { MainButton } from 'twenty-ui/input';
-import { themeCssVariables } from 'twenty-ui/theme-constants';
+import { useCallback, useMemo, useState } from 'react';
 
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${themeCssVariables.spacing[4]};
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  width: 100%;
-`;
+type DashboardOption = {
+  value: string;
+  name: string;
+  description: string;
+};
 
-const StyledDashboardCard = styled.div`
-  align-items: center;
-  background: ${themeCssVariables.background.secondary};
-  border-radius: ${themeCssVariables.border.radius.md};
-  display: flex;
-  gap: ${themeCssVariables.spacing[3]};
-  padding: ${themeCssVariables.spacing[4]};
-`;
+const DASHBOARD_OPTIONS: DashboardOption[] = [
+  {
+    value: 'Management',
+    name: 'Management Dashboard',
+    description:
+      'Overview of clients, deals, requirements, employees and payroll status.',
+  },
+  {
+    value: 'BDE',
+    name: 'BDE Dashboard',
+    description: 'Clients, deals, requirements, payments and follow-ups.',
+  },
+  {
+    value: 'HR',
+    name: 'HR Dashboard',
+    description:
+      'Open requirements, candidate pipeline, interviews, employees, attendance and payroll.',
+  },
+  {
+    value: 'Recruiter',
+    name: 'Recruiter Dashboard',
+    description:
+      'Assigned requirements, candidates, submissions and interviews.',
+  },
+];
 
-const StyledCheckIcon = styled.div`
-  align-items: center;
-  background: ${themeCssVariables.background.transparent.success};
-  border-radius: 50%;
-  display: flex;
-  height: 24px;
-  justify-content: center;
-  width: 24px;
-`;
+const DEFAULT_SELECTION = DASHBOARD_OPTIONS.map((option) => option.value);
 
-const StyledDashboardName = styled.div`
-  color: ${themeCssVariables.font.color.primary};
-  font-size: ${themeCssVariables.font.size.md};
-  font-weight: ${themeCssVariables.font.weight.medium};
-`;
-
-const StyledDashboardDescription = styled.div`
-  color: ${themeCssVariables.font.color.secondary};
-  font-size: ${themeCssVariables.font.size.sm};
-`;
-
+/**
+ * Dashboard provisioning step.
+ *
+ * The cards used to be a read-only list with a tick on each one, which implied
+ * the user had chosen them. They are real toggles now, and the selection is
+ * what actually gets provisioned.
+ */
 export const AchareDashboard = () => {
   const { t } = useLingui();
   const setNextOnboardingStatus = useSetNextOnboardingStatus();
   const [completeDashboardSetup] = useCompleteAchareDashboardSetupMutation();
   const { enqueueErrorSnackBar } = useSnackBar();
   const [isNavigating, setIsNavigating] = useState(false);
+  const [selected, setSelected] = useState<string[]>(DEFAULT_SELECTION);
 
-  const dashboards = [
-    {
-      name: t`Management Dashboard`,
-      description: t`Overview of clients, deals, requirements, employees, and payroll status.`,
-    },
-    {
-      name: t`BDE Dashboard`,
-      description: t`Clients, deals, requirements, payments, and follow-ups.`,
-    },
-    {
-      name: t`HR Dashboard`,
-      description: t`Open requirements, candidate pipeline, interviews, employees, attendance, and payroll.`,
-    },
-    {
-      name: t`Recruiter Dashboard`,
-      description: t`Assigned requirements, candidates, submissions, and interviews.`,
-    },
-  ];
+  const toggleDashboard = useCallback((value: string) => {
+    setSelected((previous) =>
+      previous.includes(value)
+        ? previous.filter((candidate) => candidate !== value)
+        : [...previous, value],
+    );
+  }, []);
 
   const handleContinue = useCallback(async () => {
     setIsNavigating(true);
@@ -86,7 +75,11 @@ export const AchareDashboard = () => {
         variables: {
           input: {
             provisionDefaults: true,
-            dashboardTypes: ['Management', 'BDE', 'HR', 'Recruiter'],
+            // Keep the canonical order so provisioning is deterministic
+            // regardless of the order the user toggled the cards.
+            dashboardTypes: DASHBOARD_OPTIONS.filter((option) =>
+              selected.includes(option.value),
+            ).map((option) => option.value),
           },
         },
       });
@@ -97,49 +90,47 @@ export const AchareDashboard = () => {
         apolloError: CombinedGraphQLErrors.is(error) ? error : undefined,
       });
     }
-  }, [completeDashboardSetup, setNextOnboardingStatus, enqueueErrorSnackBar]);
+  }, [
+    selected,
+    completeDashboardSetup,
+    setNextOnboardingStatus,
+    enqueueErrorSnackBar,
+  ]);
+
+  const selectedCount = useMemo(() => selected.length, [selected]);
 
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>
-            {t`Dashboard Setup`}
-          </StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`We'll provision dashboards for each role in your agency.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
-
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledContent>
-          {dashboards.map((dashboard) => (
-            <StyledDashboardCard key={dashboard.name}>
-              <StyledCheckIcon>
-                <IconCheck size={14} color={themeCssVariables.font.color.primary} />
-              </StyledCheckIcon>
-              <div>
-                <StyledDashboardName>{dashboard.name}</StyledDashboardName>
-                <StyledDashboardDescription>
-                  {dashboard.description}
-                </StyledDashboardDescription>
-              </div>
-            </StyledDashboardCard>
+    <AchareOnboardingShell
+      title={t`Which dashboards do you need?`}
+      subtitle={t`Achare creates one dashboard per role, so each person opens straight to the numbers that matter to them.`}
+      onContinue={handleContinue}
+      isLoading={isNavigating}
+      isContinueDisabled={selectedCount === 0}
+      footnote={t`Dashboards are built from the modules you enabled. You can add, rename or remove them later.`}
+    >
+      <AchareFieldGroup
+        label={t`Pick the dashboards to create`}
+        hint={t`You can turn any of these off and add your own later.`}
+        counter={t`${selectedCount} of ${DASHBOARD_OPTIONS.length} selected`}
+        error={
+          selectedCount === 0
+            ? t`Select at least one dashboard, or skip this step.`
+            : undefined
+        }
+      >
+        <AchareSelectableCardGroup>
+          {DASHBOARD_OPTIONS.map((option) => (
+            <AchareSelectableCard
+              key={option.value}
+              title={option.name}
+              description={option.description}
+              isSelected={selected.includes(option.value)}
+              onClick={() => toggleDashboard(option.value)}
+              disabled={isNavigating}
+            />
           ))}
-        </StyledContent>
-      </OnboardingStepAnimatedItem>
-
-      <OnboardingStepAnimatedItem index={3}>
-        <MainButton
-          title={t`Continue`}
-          onClick={handleContinue}
-          disabled={isNavigating}
-          fullWidth
-        />
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+        </AchareSelectableCardGroup>
+      </AchareFieldGroup>
+    </AchareOnboardingShell>
   );
 };

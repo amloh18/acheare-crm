@@ -194,7 +194,9 @@ export const PageLayoutTabsRenderer = () => {
     workspaceSurface.type !== 'side-panel' &&
     !isMobile;
 
-  const tabList = (sortedTabs.length > 1 || isPageLayoutInEditMode) && (
+  const isDashboard = currentPageLayout.type === PageLayoutType.DASHBOARD;
+
+  const tabList = !isDashboard && (sortedTabs.length > 1 || isPageLayoutInEditMode) && (
     <PageLayoutTabList
       className="page-layout-tab-list-print-hidden"
       presentation={

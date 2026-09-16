@@ -1,7 +1,10 @@
+import { useMemo } from 'react';
 import { styled } from '@linaria/react';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { useNavigate } from 'react-router-dom';
 import { IconBriefcase, IconChevronRight, IconDatabase, IconAlertTriangle } from 'twenty-ui/icon';
+import { CoreObjectNameSingular } from 'twenty-shared/types';
+import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
 
 const StyledCard = styled.div`
   background: ${themeCssVariables.background.primary};
@@ -126,52 +129,31 @@ const StyledPriority = styled.span<{ priority: string }>`
     priority === 'HIGH' ? '#ef4444' : priority === 'MEDIUM' ? '#f59e0b' : '#10b981'};
 `;
 
-interface JobItem {
-  id: string;
-  title: string;
-  location: string;
-  applicants: number;
-  priority: 'HIGH' | 'MEDIUM' | 'LOW';
-}
-
-const DEFAULT_JOBS: JobItem[] = [
-  {
-    id: '1',
-    title: 'Senior Full Stack Engineer',
-    location: 'Bangalore / Hybrid',
-    applicants: 18,
-    priority: 'HIGH',
-  },
-  {
-    id: '2',
-    title: 'Lead Product Designer',
-    location: 'Remote',
-    applicants: 12,
-    priority: 'HIGH',
-  },
-  {
-    id: '3',
-    title: 'Enterprise Account Executive',
-    location: 'Mumbai',
-    applicants: 9,
-    priority: 'MEDIUM',
-  },
-  {
-    id: '4',
-    title: 'Talent Acquisition Specialist',
-    location: 'Bangalore',
-    applicants: 14,
-    priority: 'MEDIUM',
-  },
-];
-
-interface OpenJobsWidgetProps {
-  loading?: boolean;
-  error?: boolean;
-}
-
-export const OpenJobsWidget = ({ loading, error }: OpenJobsWidgetProps) => {
+export const OpenJobsWidget = () => {
   const navigate = useNavigate();
+
+  const { records: requirements, loading, error } = useFindManyRecords({
+    objectNameSingular: 'requirement' as CoreObjectNameSingular,
+    recordGqlFields: {
+      id: true,
+      jobTitle: true,
+      location: true,
+      status: true,
+      numberOfOpenings: true,
+      priority: true,
+    },
+    filter: { status: { eq: 'OPEN' } },
+  });
+
+  const jobs = useMemo(() => {
+    return (requirements as any[]).slice(0, 5).map((req) => ({
+      id: req.id,
+      title: req.jobTitle || 'Untitled Position',
+      location: req.location || 'Remote',
+      applicants: req.numberOfOpenings || 0,
+      priority: (req.priority || 'MEDIUM') as 'HIGH' | 'MEDIUM' | 'LOW',
+    }));
+  }, [requirements]);
 
   return (
     <StyledCard>
@@ -195,14 +177,14 @@ export const OpenJobsWidget = ({ loading, error }: OpenJobsWidgetProps) => {
           <StyledEmptyIcon><IconAlertTriangle size={20} /></StyledEmptyIcon>
           <StyledEmptyText>Unable to load jobs</StyledEmptyText>
         </StyledEmptyState>
-      ) : DEFAULT_JOBS.length === 0 ? (
+      ) : jobs.length === 0 ? (
         <StyledEmptyState>
           <StyledEmptyIcon><IconDatabase size={20} /></StyledEmptyIcon>
           <StyledEmptyText>No open positions</StyledEmptyText>
         </StyledEmptyState>
       ) : (
         <StyledList>
-          {DEFAULT_JOBS.map((job) => (
+          {jobs.map((job) => (
             <StyledItem key={job.id} onClick={() => navigate('/objects/requirements')}>
               <StyledItemLeft>
                 <StyledJobTitle>{job.title}</StyledJobTitle>
@@ -214,7 +196,7 @@ export const OpenJobsWidget = ({ loading, error }: OpenJobsWidgetProps) => {
               </StyledItemLeft>
               <StyledItemRight>
                 <StyledApplicantBadge>
-                  {job.applicants} applicants
+                  {job.applicants} openings
                 </StyledApplicantBadge>
               </StyledItemRight>
             </StyledItem>

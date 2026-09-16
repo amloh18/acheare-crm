@@ -2478,6 +2478,9 @@ export const STANDARD_OBJECTS = {
       workDateIndex: {
         universalIdentifier: '121ce378-a5ff-46af-8365-8b570a2e4f8d',
       },
+      searchVectorGinIndex: {
+        universalIdentifier: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+      },
     },
     views: {
       allAttendanceDays: buildStandardObjectIndexView({
@@ -2855,6 +2858,9 @@ export const STANDARD_OBJECTS = {
       },
       periodIdIndex: {
         universalIdentifier: 'fd7b563c-7275-43d9-8242-90c5ec1cacfc',
+      },
+      searchVectorGinIndex: {
+        universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
       },
     },
     views: {

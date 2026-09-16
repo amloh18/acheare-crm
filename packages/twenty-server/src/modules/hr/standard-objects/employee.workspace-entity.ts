@@ -28,6 +28,8 @@ export class EmployeeWorkspaceEntity extends BaseWorkspaceEntity {
   joiningDate: Date | null;
   exitDate: Date | null;
   workLocation: string | null;
+  timingModeOverride: string | null;
+  flexibleHoursOverride: number | null;
 
   person: EntityRelation<PersonWorkspaceEntity>;
   personId: string | null;

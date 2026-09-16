@@ -18,6 +18,7 @@ import { type RequirementWorkspaceEntity } from 'src/modules/recruitment/standar
 import { type TaskTargetWorkspaceEntity } from 'src/modules/task/standard-objects/task-target.workspace-entity';
 import { type TimelineActivityWorkspaceEntity } from 'src/modules/timeline/standard-objects/timeline-activity.workspace-entity';
 import { type WorkspaceMemberWorkspaceEntity } from 'src/modules/workspace-member/standard-objects/workspace-member.workspace-entity';
+import { type InvoiceWorkspaceEntity } from 'src/modules/hr/standard-objects/invoice.workspace-entity';
 
 export class CompanyWorkspaceEntity {
   id: string;
@@ -50,6 +51,7 @@ export class CompanyWorkspaceEntity {
   opportunities: EntityRelation<OpportunityWorkspaceEntity[]>;
   requirements: EntityRelation<RequirementWorkspaceEntity[]>;
   interviews: EntityRelation<InterviewWorkspaceEntity[]>;
+  invoices: EntityRelation<InvoiceWorkspaceEntity[]> | null;
   attachments: EntityRelation<AttachmentWorkspaceEntity[]>;
   timelineActivities: EntityRelation<TimelineActivityWorkspaceEntity[]>;
 }

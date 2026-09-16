@@ -2,8 +2,14 @@ import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
 import { useContext } from 'react';
 import { TopBar } from '@/ui/layout/top-bar/components/TopBar';
-import { Button } from 'twenty-ui/input';
-import { IconPencil, IconPlus } from 'twenty-ui/icon';
+import { OptionsDropdownMenu } from '@/ui/layout/dropdown/components/OptionsDropdownMenu';
+import { MenuItem } from 'twenty-ui/navigation';
+import {
+  IconPencil,
+  IconPlus,
+  IconCopy,
+  IconTrash,
+} from 'twenty-ui/icon';
 import { ThemeContext, themeCssVariables } from 'twenty-ui/theme-constants';
 import {
   DashboardViewTab,
@@ -14,12 +20,16 @@ type DashboardViewBarProps = {
   dashboards: DashboardViewItem[];
   activeDashboardId: string;
   isEditMode: boolean;
+  canDelete: boolean;
   onSelectDashboard: (dashboardId: string) => void;
   onOpenCreateDialog: () => void;
   onOpenRenameDialog: (dashboard: DashboardViewItem) => void;
   onDuplicated: (newDashboardId: string) => void;
   onDeleted: () => void;
   onEnterEditMode: () => void;
+  onAddWidget: () => void;
+  onDuplicate: () => void;
+  onDelete: () => void;
 };
 
 const StyledTabsWrapper = styled.div`
@@ -96,12 +106,16 @@ export const DashboardViewBar = ({
   dashboards,
   activeDashboardId,
   isEditMode,
+  canDelete,
   onSelectDashboard,
   onOpenCreateDialog,
   onOpenRenameDialog,
   onDuplicated,
   onDeleted,
   onEnterEditMode,
+  onAddWidget,
+  onDuplicate,
+  onDelete,
 }: DashboardViewBarProps) => {
   const { theme } = useContext(ThemeContext);
   const { t } = useLingui();
@@ -141,13 +155,31 @@ export const DashboardViewBar = ({
               {t`Editing Layout`}
             </StyledEditBadge>
           ) : (
-            <Button
-              variant="secondary"
-              size="small"
-              Icon={IconPencil}
-              title={t`Edit`}
-              onClick={onEnterEditMode}
-            />
+            <OptionsDropdownMenu dropdownPlacement="bottom-end">
+              <MenuItem
+                LeftIcon={IconPencil}
+                text={t`Edit layout`}
+                onClick={onEnterEditMode}
+              />
+              <MenuItem
+                LeftIcon={IconPlus}
+                text={t`Add widget`}
+                onClick={onAddWidget}
+              />
+              <MenuItem
+                LeftIcon={IconCopy}
+                text={t`Duplicate dashboard`}
+                onClick={onDuplicate}
+              />
+              {canDelete && (
+                <MenuItem
+                  LeftIcon={IconTrash}
+                  text={t`Delete dashboard`}
+                  accent="danger"
+                  onClick={onDelete}
+                />
+              )}
+            </OptionsDropdownMenu>
           )}
         </StyledRightActions>
       }

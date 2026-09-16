@@ -8,6 +8,11 @@ export const CHECK_IN = gql`
       eventType
       timestamp
       source
+      latitude
+      longitude
+      locationName
+      isRemote
+      approvalStatus
     }
   }
 `;
