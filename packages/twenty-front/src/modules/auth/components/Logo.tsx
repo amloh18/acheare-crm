@@ -61,7 +61,7 @@ export const Logo = ({
   const { redirectToDefaultDomain } = useRedirectToDefaultDomain();
   // ACHEARE white-label: default login logo points at the ACHEARE placeholder icon
   // (was: /images/icons/android/android-launchericon-192-192.png — Twenty's PWA icon).
-  const defaultPrimaryLogoUrl = `${window.location.origin}/images/icons/acheare/icon-192x192.png`;
+  const defaultPrimaryLogoUrl = `${window.location.origin}/images/integrations/logo.png`;
 
   const primaryLogoUrl = getImageAbsoluteURI({
     imageUrl: primaryLogo ?? defaultPrimaryLogoUrl,

@@ -145,6 +145,11 @@ export const AchareFeatureSelection = () => {
         refetchQueries: [{ query: GetWorkspaceFeatureConfigurationDocument }],
         awaitRefetchQueries: true,
       });
+
+      // Small delay to ensure the server-side feature configuration is fully
+      // propagated before the next step list is computed.
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
       setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
     } catch (error) {
       setIsNavigating(false);

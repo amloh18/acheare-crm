@@ -46,7 +46,7 @@ export const OnboardingImportPreviewSyncBadge = () => {
         size={theme.icon.size.md}
         color={themeCssVariables.font.color.tertiary}
       />
-      <StyledTwentyLogo src="/images/integrations/acheare-logo.png" alt="Achare" />
+      <StyledTwentyLogo src="/images/integrations/logo.png" alt="Achare" />
     </StyledBadge>
   );
 };

@@ -200,7 +200,7 @@ export const AchareOnboardingShell = ({
             <OnboardingStepAnimatedItem index={0}>
               <StyledBrandMark>
                 <StyledBrandLogo
-                  src="/images/integrations/acheare-logo.png"
+                  src="/images/integrations/logo.png"
                   alt="Achare"
                 />
               </StyledBrandMark>

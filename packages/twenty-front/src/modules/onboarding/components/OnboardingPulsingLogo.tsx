@@ -23,5 +23,5 @@ const StyledLogo = styled.img`
 `;
 
 export const OnboardingPulsingLogo = () => (
-  <StyledLogo src="/images/integrations/acheare-logo.png" alt="Achare" />
+  <StyledLogo src="/images/integrations/logo.png" alt="Achare" />
 );

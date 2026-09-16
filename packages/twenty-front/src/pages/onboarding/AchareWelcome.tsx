@@ -51,6 +51,7 @@ export const AchareWelcome = () => {
       );
       setNextOnboardingStatus({ stepHistoryEffect: 'leaveUnchanged' });
     } catch {
+      // Reset the navigating state so the button becomes clickable again.
       setIsNavigating(false);
     }
   }, [startOnboarding, setCurrentUser, setNextOnboardingStatus]);
@@ -73,14 +74,14 @@ export const AchareWelcome = () => {
   return (
     <AchareOnboardingShell
       title={t`Welcome to Achare`}
-      subtitle={t`Let's set your workspace up the way your agency actually works. It takes about five minutes, and every answer can be changed later.`}
+      subtitle={t`Let's get your workspace ready. This takes about 5 minutes, and you can change anything later.`}
       onContinue={handleGetStarted}
       continueLabel={t`Get started`}
       onSkip={handleDoThisLater}
       skipLabel={t`I'll do this later`}
       isLoading={isNavigating}
       hideBack
-      footnote={t`You can stop at any point — your progress is saved and you will pick up where you left off.`}
+      footnote={t`You can stop at any point — your progress is saved.`}
     >
       <AchareNote
         tone="info"

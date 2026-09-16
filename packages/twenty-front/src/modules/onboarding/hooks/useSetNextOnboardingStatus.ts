@@ -86,7 +86,13 @@ const getNextOnboardingStatus = ({
   const currentOnboardingStatus = currentUser?.onboardingStatus;
 
   // Workspace activation hands over to the Achare wizard.
+  // CreateProfile comes first, then ACHARE_WELCOME.
   if (currentOnboardingStatus === OnboardingStatus.WORKSPACE_ACTIVATION) {
+    return OnboardingStatus.PROFILE_CREATION;
+  }
+
+  // After profile creation, continue to Achare onboarding.
+  if (currentOnboardingStatus === OnboardingStatus.PROFILE_CREATION) {
     return OnboardingStatus.ACHARE_WELCOME;
   }
 

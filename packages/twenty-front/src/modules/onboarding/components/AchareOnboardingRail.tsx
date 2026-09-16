@@ -264,7 +264,7 @@ export const AchareOnboardingRail = () => {
     <StyledRail aria-label={t`Setup progress`}>
       <StyledBrand>
         <StyledBrandMark>
-          <StyledBrandLogo src="/images/integrations/acheare-logo.png" alt="Achare" />
+          <StyledBrandLogo src="/images/integrations/logo.png" alt="Achare" />
         </StyledBrandMark>
         <StyledBrandText>
           <StyledBrandName>{t`Workspace setup`}</StyledBrandName>

@@ -1,20 +1,13 @@
 import { currentUserState } from '@/auth/states/currentUserState';
 import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMemberState';
 import { currentWorkspaceMembersState } from '@/auth/states/currentWorkspaceMembersState';
+import { AchareOnboardingShell } from '@/onboarding/components/AchareOnboardingShell';
 import { OnboardingProfilePictureUploader } from '@/onboarding/components/OnboardingProfilePictureUploader';
-import { OnboardingStepAnimatedItem } from '@/onboarding/components/OnboardingStepAnimatedItem';
-import { StyledOnboardingStepHeading } from '@/onboarding/components/StyledOnboardingStepHeading';
-import { StyledOnboardingStepPage } from '@/onboarding/components/StyledOnboardingStepPage';
-import { StyledOnboardingStepSubtitle } from '@/onboarding/components/StyledOnboardingStepSubtitle';
-import { StyledOnboardingStepTitle } from '@/onboarding/components/StyledOnboardingStepTitle';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
 import { usePrefetchInviteSuggestions } from '@/onboarding/hooks/usePrefetchInviteSuggestions';
 import { useSetNextOnboardingStatus } from '@/onboarding/hooks/useSetNextOnboardingStatus';
 import { useUpdateWorkspaceMemberSettings } from '@/settings/profile/hooks/useUpdateWorkspaceMemberSettings';
-import { PageFocusId } from '@/types/PageFocusId';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { TextInput } from '@/ui/input/components/TextInput';
-import { useHotkeysOnFocusedElement } from '@/ui/utilities/hotkey/hooks/useHotkeysOnFocusedElement';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
@@ -25,29 +18,25 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import { Key } from 'ts-key-enum';
 import { isDefined } from 'twenty-shared/utils';
-import { MainButton } from 'twenty-ui/input';
-import { MOBILE_VIEWPORT, themeCssVariables } from 'twenty-ui/theme-constants';
+import { themeCssVariables } from 'twenty-ui/theme-constants';
 import { z } from 'zod';
 
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${themeCssVariables.spacing[8]};
+  gap: ${themeCssVariables.spacing[6]};
   max-width: 100%;
-  padding-bottom: ${themeCssVariables.spacing[4]};
-  width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
+  width: 100%;
 `;
 
 const StyledNameRow = styled.div`
   align-items: flex-end;
   display: flex;
-  gap: ${themeCssVariables.spacing[2]};
+  gap: ${themeCssVariables.spacing[3]};
   width: 100%;
 
-  @media (max-width: ${MOBILE_VIEWPORT}px) {
-    align-items: stretch;
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -57,14 +46,15 @@ const StyledNameField = styled.div`
   min-width: 0;
 `;
 
-const StyledButtonContainer = styled.div`
+const StyledProfileSection = styled.div`
+  align-items: center;
   display: flex;
-  max-width: 100%;
-  width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
+  gap: ${themeCssVariables.spacing[4]};
+  margin-bottom: ${themeCssVariables.spacing[2]};
 `;
 
-const firstNameErrorMessage = msg`First name can not be empty`;
-const lastNameErrorMessage = msg`Last name can not be empty`;
+const firstNameErrorMessage = msg`First name is required`;
+const lastNameErrorMessage = msg`Last name is required`;
 
 const validationSchema = z.object({
   firstName: z.string().min(1, {
@@ -176,123 +166,84 @@ export const CreateProfile = () => {
     ],
   );
 
-  const [isEditingMode, setIsEditingMode] = useState(false);
-
-  const handleEnter = () => {
-    if (isEditingMode) {
-      handleSubmit(onSubmit)();
-    }
-  };
-
-  useHotkeysOnFocusedElement({
-    keys: Key.Enter,
-    callback: handleEnter,
-    focusId: PageFocusId.CreateProfile,
-    dependencies: [handleEnter],
-  });
-
   return (
-    <StyledOnboardingStepPage>
-      <StyledOnboardingStepHeading>
-        <OnboardingStepAnimatedItem index={0}>
-          <StyledOnboardingStepTitle>{t`Create profile`}</StyledOnboardingStepTitle>
-        </OnboardingStepAnimatedItem>
-        <OnboardingStepAnimatedItem index={1}>
-          <StyledOnboardingStepSubtitle>
-            {t`How you'll appear to teammates and agents.`}
-          </StyledOnboardingStepSubtitle>
-        </OnboardingStepAnimatedItem>
-      </StyledOnboardingStepHeading>
+    <AchareOnboardingShell
+      title={t`Your profile`}
+      subtitle={t`This is how your team will see you.`}
+      onContinue={handleSubmit(onSubmit)}
+      isLoading={isNavigating}
+      isContinueDisabled={!isValid || isSubmitting}
+      hideBack
+      footnote={t`You can update your profile anytime from Settings.`}
+    >
+      <StyledForm>
+        <StyledProfileSection>
+          {isDefined(currentWorkspaceMember?.id) && (
+            <OnboardingProfilePictureUploader
+              workspaceMemberId={currentWorkspaceMember.id}
+            />
+          )}
+        </StyledProfileSection>
 
-      <OnboardingStepAnimatedItem index={2}>
-        <StyledForm>
-          <StyledNameRow>
-            {isDefined(currentWorkspaceMember?.id) && (
-              <OnboardingProfilePictureUploader
-                workspaceMemberId={currentWorkspaceMember.id}
-              />
-            )}
-            <StyledNameField>
-              <Controller
-                name="firstName"
-                control={control}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <TextInput
-                    autoFocus
-                    label={t`First Name`}
-                    value={value}
-                    onFocus={() => setIsEditingMode(true)}
-                    onBlur={() => {
-                      onBlur();
-                      setIsEditingMode(false);
-                    }}
-                    onChange={onChange}
-                    placeholder={t`Tim`}
-                    error={error?.message}
-                    fullWidth
-                  />
-                )}
-              />
-            </StyledNameField>
-            <StyledNameField>
-              <Controller
-                name="lastName"
-                control={control}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <TextInput
-                    label={t`Last name`}
-                    value={value}
-                    onFocus={() => setIsEditingMode(true)}
-                    onBlur={() => {
-                      onBlur();
-                      setIsEditingMode(false);
-                    }}
-                    onChange={onChange}
-                    placeholder={t`Apple`}
-                    error={error?.message}
-                    fullWidth
-                  />
-                )}
-              />
-            </StyledNameField>
-          </StyledNameRow>
-          <Controller
-            name="jobTitle"
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                label={t`Job Title`}
-                value={value}
-                onFocus={() => setIsEditingMode(true)}
-                onBlur={() => {
-                  onBlur();
-                  setIsEditingMode(false);
-                }}
-                onChange={onChange}
-                placeholder={t`Head of Partnerships`}
-                fullWidth
-              />
-            )}
-          />
-        </StyledForm>
-      </OnboardingStepAnimatedItem>
+        <StyledNameRow>
+          <StyledNameField>
+            <Controller
+              name="firstName"
+              control={control}
+              render={({
+                field: { onChange, onBlur, value },
+                fieldState: { error },
+              }) => (
+                <TextInput
+                  autoFocus
+                  label={t`First name`}
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  placeholder={t`John`}
+                  error={error?.message}
+                  fullWidth
+                />
+              )}
+            />
+          </StyledNameField>
+          <StyledNameField>
+            <Controller
+              name="lastName"
+              control={control}
+              render={({
+                field: { onChange, onBlur, value },
+                fieldState: { error },
+              }) => (
+                <TextInput
+                  label={t`Last name`}
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  placeholder={t`Smith`}
+                  error={error?.message}
+                  fullWidth
+                />
+              )}
+            />
+          </StyledNameField>
+        </StyledNameRow>
 
-      <OnboardingStepAnimatedItem index={3}>
-        <StyledButtonContainer>
-          <MainButton
-            title={t`Continue`}
-            onClick={handleSubmit(onSubmit)}
-            disabled={!isValid || isSubmitting || isNavigating}
-            fullWidth
-          />
-        </StyledButtonContainer>
-      </OnboardingStepAnimatedItem>
-    </StyledOnboardingStepPage>
+        <Controller
+          name="jobTitle"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              label={t`Job title`}
+              value={value}
+              onBlur={onBlur}
+              onChange={onChange}
+              placeholder={t`e.g. Recruitment Manager`}
+              fullWidth
+            />
+          )}
+        />
+      </StyledForm>
+    </AchareOnboardingShell>
   );
 };
